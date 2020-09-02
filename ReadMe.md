@@ -3,6 +3,7 @@ CampusNavigation
 Required steps to work with the project:
 
 1: Install VSCode, NodeJS/npm & ionic CLI tools:
+  --GitHub or Sourcetree
   --VSCode: https://code.visualstudio.com/Download
   --NodeJS/npm:  https://nodejs.org/en/
   --Ionic: run the following using CMD: `npm install -g @ionic/cli`

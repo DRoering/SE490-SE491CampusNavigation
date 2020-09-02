@@ -1,0 +1,7 @@
+{
+  "name": "CampusNavigation",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

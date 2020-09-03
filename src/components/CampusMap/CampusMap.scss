@@ -1,0 +1,16 @@
+#campus-map {
+  width: 100%;
+  height: 100%;
+}
+
+.leaflet-control-attribution {
+  background: #fff0;
+}
+
+.leaflet-right .leaflet-control {
+  float: none;
+}
+
+.leaflet-control-attribution .leaflet-control #a {
+  display: none;
+}

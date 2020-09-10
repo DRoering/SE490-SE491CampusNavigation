@@ -10,11 +10,11 @@ module.exports = {
   //turn off for javascript files
   overrides: [
     {
-      files: ['*.js'],
+      files: ["*.js"],
       rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-      },
-    },
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
   ],
   settings: {
     react: {
@@ -27,7 +27,7 @@ module.exports = {
     'plugin:prettier/recommended', // Turns off all rules that are unnecessary or might conflict with Prettier.
   ],
   rules: {
-    'prettier/prettier': 'error', // runs prettier as eslint rule
+    "prettier/prettier": "error", // runs prettier as eslint rule
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
   },

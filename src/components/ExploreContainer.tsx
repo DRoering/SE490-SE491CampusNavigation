@@ -1,5 +1,5 @@
-import React from 'react';
-import './ExploreContainer.css';
+import React from "react";
+import "./ExploreContainer.css";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ContainerProps {}
@@ -9,7 +9,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     <div className="container">
       <strong>Ready to create an app?</strong>
       <p>
-        Start with Ionic{' '}
+        Start with Ionic{" "}
         <a
           target="_blank"
           rel="noopener noreferrer"

@@ -1,23 +1,28 @@
 {
-  "name": "CampusNavigation",
+  "name": "campusnavigation",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@capacitor/core": "2.4.0",
     "@ionic/react": "^5.0.7",
+    "@ionic/react-hooks": "0.0.8",
     "@ionic/react-router": "^5.0.7",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.0.3",
     "@types/jest": "^24.0.25",
+    "@types/leaflet": "^1.5.17",
     "@types/node": "^12.12.24",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/react-router": "^5.1.4",
     "@types/react-router-dom": "^5.1.3",
     "ionicons": "^5.0.0",
+    "leaflet": "^1.7.1",
+    "moment": "^2.27.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-leaflet": "^2.7.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.3",
@@ -26,6 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint --ext js,ts,tsx src --fix",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,14 +52,21 @@
   },
   "devDependencies": {
     "@capacitor/cli": "2.4.0",
+    "@types/react-leaflet": "^2.5.2",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "node-sass": "^4.14.1",
     "prettier": "^2.1.1"
   },
   "description": "An Ionic project",
   "husky": {
     "hooks": {
-        "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {

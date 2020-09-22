@@ -1,6 +1,14 @@
 import React from "react";
 import { Building } from "../../DataProviders";
-import { IonCard, IonCardContent, IonLabel, IonList } from "@ionic/react";
+import {
+  IonCard,
+  IonCardContent,
+  IonCol,
+  IonGrid,
+  IonLabel,
+  IonList,
+  IonRow,
+} from "@ionic/react";
 
 interface BuildingListProps {
   buildings: Building[];
@@ -14,9 +22,20 @@ export const BuildingList: React.FC<BuildingListProps> = (
       {props.buildings.map((building) => (
         <IonCard key={building.id}>
           <IonCardContent>
-            <IonLabel>{building.Name}</IonLabel>
-            <IonLabel>{building.Abbreviation}</IonLabel>
-            <IonLabel>{building.Services}</IonLabel>
+            <IonGrid>
+              <IonRow>
+                <IonCol size="12">
+                  <IonLabel>
+                    {`${building.Name} (${building.Abbreviation})`}
+                  </IonLabel>
+                </IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol>
+                  <IonLabel>{building.Services}</IonLabel>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
           </IonCardContent>
         </IonCard>
       ))}

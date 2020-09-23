@@ -1,4 +1,4 @@
-import { IonPage } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import { BuildingList } from "../../components/BuildingList";
 import { useFakeBuilding } from "../../DataProviders";
@@ -8,7 +8,9 @@ export const Buildings: React.FC = () => {
 
   return (
     <IonPage>
-      <BuildingList buildings={buildings} />
+      <IonContent>
+        <BuildingList buildings={buildings} />
+      </IonContent>
     </IonPage>
   );
 };

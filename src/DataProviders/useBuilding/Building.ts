@@ -1,18 +1,16 @@
 import { Moment } from "moment";
+import { CommonProperties } from "../../Reuseable";
 
 export interface ParkingLot {
-  Type: string;
-  Designation: string;
-  Permit: boolean;
-  Rate?: number;
-  Hours: Moment;
+  type: string;
+  designation: string;
+  permit: boolean;
+  rate?: number;
+  hours: Moment;
 }
 
-export interface Building {
-  id: number;
-  Name: string;
-  Abbreviation: string;
-  Services: string[];
-  NearestLot: ParkingLot;
-  Hours: Moment;
+export interface Building extends CommonProperties {
+  abbreviation: string;
+  services: string[];
+  nearestLot: ParkingLot;
 }

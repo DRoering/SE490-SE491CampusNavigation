@@ -1,11 +1,13 @@
 import { Moment } from "moment";
-import { Location, Hours } from "./";
 
 export interface CommonProperties {
-  id: number;
-  name: number;
-  location: Location;
   accessibility?: string;
-  hours?: Hours;
+  building?: string;
+  coordinates: [number, number] | L.LatLng;
+  hours?: { open: Moment; close: Moment };
+  id: number;
   meetingTime?: Moment;
+  name: string;
+  room?: string;
+  virtual?: boolean;
 }

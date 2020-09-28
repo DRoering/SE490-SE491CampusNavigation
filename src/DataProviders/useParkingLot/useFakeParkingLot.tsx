@@ -1,51 +1,41 @@
 import moment, { Moment } from "moment";
-import { ParkingLot, Building, StudentLot } from "./Parking";
+import { ParkingLot } from "./Parking";
 
 const parkingLots: ParkingLot[] = [];
-
-const getBuilding = (): Building => {
-  return {
-    id: 1,
-    Abbreviation: "",
-    Name: "",
-    Services: "",
-    Hours: moment(),
-  };
-};
 
 const getHours = (): Moment => {
   return moment();
 };
 
 const getLotType = (): string => {
-  const Types: string[] = [];
-  let lotType: string = Types[0];
+  const types: string[] = [];
+  let lotType: string = types[0];
 
   for (let i = 0; i < 6; i++) {
-    Types.push();
-    if (Types[i] === lotType) {
-      lotType = Types[i];
+    types.push();
+    if (types[i] === lotType) {
+      lotType = types[i];
     }
   }
   return lotType;
 };
 
 const getRate = (): number[] => {
-  const LotRates: number[] = [];
+  const lotRates: number[] = [];
   const rate: number[] = [];
   for (let i = 0; i < rate.length; i++) {
-    LotRates.push(rate[i]);
+    lotRates.push(rate[i]);
   }
-  return LotRates;
+  return lotRates;
 };
 
 for (let i = 0; i < 15; i++) {
   parkingLots.push({
-    Type: getLotType(),
-    Designation: "",
-    Permit: true,
-    Rate: getRate(),
-    Hours: getHours(),
+    type: getLotType(),
+    designation: "",
+    permit: true,
+    rate: getRate(),
+    hours: getHours(),
   });
 }
 

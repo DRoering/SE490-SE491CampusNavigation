@@ -1,22 +1,17 @@
 import { Moment } from "moment";
 
 export interface ParkingLot {
-  Type: string;
-  Designation: string;
-  Permit: boolean;
-  Rate?: number[];
-  Hours: Moment;
+  type: string;
+  designation: string;
+  permit: boolean;
+  rate?: number[];
+  hours: Moment;
 }
 
 export interface Building {
   id: number;
-  Name: string;
-  Abbreviation: string;
-  Services: string;
-  Hours: Moment;
-}
-
-export class StudentLot {
-  residenceDes = "A1, A2, A3, C, E, K/O, 4th Avenue Parking Ramp, Stateview";
-  commuterDes = "K, M, N, 4th Avenue Parking Ramp, V";
+  name: string;
+  abbreviation: string;
+  services: string;
+  hours: Moment;
 }

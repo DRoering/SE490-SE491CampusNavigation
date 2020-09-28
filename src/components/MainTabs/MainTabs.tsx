@@ -7,7 +7,7 @@ import {
   IonLabel,
   IonRouterOutlet,
 } from "@ionic/react";
-import { map, informationCircle, calendarOutline } from "ionicons/icons";
+import { map, business, calendarOutline } from "ionicons/icons";
 import { Route, Redirect } from "react-router";
 import { CampusMap, Events, Buildings } from "../../pages";
 import { useFakeBuilding } from "../../DataProviders";
@@ -25,7 +25,7 @@ export const MainTabs: React.FC = () => {
           exact={true}
         />
         <Route
-          path="/:tab(Home)"
+          path="/:tab(BuildingList)"
           render={() => <Buildings buildings={buildings} />}
           exact={true}
         />
@@ -38,9 +38,9 @@ export const MainTabs: React.FC = () => {
           <IonLabel>Map</IonLabel>
         </IonTabButton>
 
-        <IonTabButton tab="Home" href="/Home">
-          <IonIcon icon={informationCircle} />
-          <IonLabel>Information</IonLabel>
+        <IonTabButton tab="BuildingList" href="/BuildingList">
+          <IonIcon icon={business} />
+          <IonLabel>Buildings</IonLabel>
         </IonTabButton>
 
         <IonTabButton tab="Events" href="/Events">

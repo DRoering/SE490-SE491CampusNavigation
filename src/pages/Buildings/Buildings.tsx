@@ -1,15 +1,17 @@
 import { IonContent, IonPage } from "@ionic/react";
-import React from "react";
+import React, { useState } from "react";
 import { BuildingList } from "../../components/BuildingList";
-import { useFakeBuilding } from "../../DataProviders";
+import { Building, useFakeBuilding } from "../../DataProviders";
 
-export const Buildings: React.FC = () => {
-  const buildings = useFakeBuilding();
+interface BuildingsProps {
+  buildings: Building[];
+}
 
+export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
   return (
     <IonPage>
       <IonContent>
-        <BuildingList buildings={buildings} />
+        <BuildingList buildings={props.buildings} />
       </IonContent>
     </IonPage>
   );

@@ -26,13 +26,13 @@ export const BuildingList: React.FC<BuildingListProps> = (
               <IonRow>
                 <IonCol size="12">
                   <IonLabel>
-                    {`${building.Name} (${building.Abbreviation})`}
+                    {`${building.name} (${building.abbreviation})`}
                   </IonLabel>
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol>
-                  <IonLabel>{building.Services}</IonLabel>
+                  <IonLabel>{building.services}</IonLabel>
                 </IonCol>
               </IonRow>
             </IonGrid>

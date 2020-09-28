@@ -1,2 +1,2 @@
-export * from "./Event";
+export * from "./CampusEvent";
 export { useFakeEvent } from "./useFakeEvent";

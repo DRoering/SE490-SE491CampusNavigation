@@ -1,8 +1,7 @@
-import moment from "moment";
-import { Moment } from "moment";
-import { Event } from "./Event";
+import moment, { Moment } from "moment";
+import { CampusEvent } from "./CampusEvent";
 
-const events: Event[] = [];
+const events: CampusEvent[] = [];
 
 const getThemes = (): string[] => {
   const themes: string[] = [];
@@ -30,12 +29,16 @@ const getHours = (): Moment => {
 
 for (let i = 1; i < 11; i++) {
   events.push({
+    accessibility: "",
+    building: "",
+    coordinates: [0, 0],
+    id: i,
     name: "Event " + i,
     theme: getThemes(),
     category: getCategories(),
     description: "Test Description",
-    freeStuff: true,
-    openToPublic: true,
+    freeStuff: i < 6,
+    openToPublic: i < 8,
     meetingTime: getHours(),
     host: "SCSU",
     upcoming: true,
@@ -44,6 +47,6 @@ for (let i = 1; i < 11; i++) {
   });
 }
 
-export const useFakeEvent = (): Event[] => {
+export const useFakeEvent = (): CampusEvent[] => {
   return events;
 };

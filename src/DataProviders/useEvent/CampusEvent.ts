@@ -1,7 +1,7 @@
 import { Moment } from "moment";
+import { CommonProperties } from "../../Reuseable";
 
-export interface Event {
-  name: string;
+export interface Event extends CommonProperties {
   theme: string[];
   category: string[];
   description: string;

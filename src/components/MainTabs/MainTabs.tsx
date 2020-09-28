@@ -7,9 +7,9 @@ import {
   IonLabel,
   IonRouterOutlet,
 } from "@ionic/react";
-import { map, informationCircle } from "ionicons/icons";
+import { map, informationCircle, calendarOutline } from "ionicons/icons";
 import { Route, Redirect } from "react-router";
-import { Home, CampusMap } from "../../pages";
+import { Home, CampusMap, Events } from "../../pages";
 
 export const MainTabs: React.FC = () => {
   return (
@@ -17,6 +17,7 @@ export const MainTabs: React.FC = () => {
       <IonRouterOutlet>
         <Route path="/:tab(Map)" render={() => <CampusMap />} exact={true} />
         <Route path="/:tab(Home)" render={() => <Home />} exact={true} />
+        <Route path="/:tab(Events)" render={() => <Events />} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />
       </IonRouterOutlet>
 
@@ -29,6 +30,11 @@ export const MainTabs: React.FC = () => {
         <IonTabButton tab="Home" href="/Home">
           <IonIcon icon={informationCircle} />
           <IonLabel>Information</IonLabel>
+        </IonTabButton>
+
+        <IonTabButton tab="Events" href="/Events">
+          <IonIcon icon={calendarOutline} />
+          <IonLabel>Events</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

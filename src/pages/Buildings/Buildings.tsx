@@ -1,7 +1,7 @@
 import { IonContent, IonPage } from "@ionic/react";
-import React, { useState } from "react";
+import React from "react";
 import { BuildingList } from "../../components/BuildingList";
-import { Building, useFakeBuilding } from "../../DataProviders";
+import { Building } from "../../DataProviders";
 
 interface BuildingsProps {
   buildings: Building[];

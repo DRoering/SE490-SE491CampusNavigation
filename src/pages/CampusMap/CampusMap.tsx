@@ -5,13 +5,14 @@ import { Building } from "../../DataProviders";
 
 interface CampusMapProps {
   buildings: Building[];
+  showName: boolean;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   return (
     <IonPage>
       <IonContent>
-        <MapContent buildings={props.buildings} />
+        <MapContent buildings={props.buildings} showName={props.showName} />
       </IonContent>
     </IonPage>
   );

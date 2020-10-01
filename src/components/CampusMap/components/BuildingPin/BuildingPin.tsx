@@ -1,5 +1,5 @@
 import React from "react";
-import { Marker, Popup } from "react-leaflet";
+import { Marker, Popup, Tooltip } from "react-leaflet";
 import { Building } from "../../../../DataProviders";
 import L from "leaflet";
 import { IonLabel } from "@ionic/react";
@@ -7,6 +7,7 @@ import "./BuildingPin.scss";
 
 interface BuildingPinProps {
   buildings: Building[];
+  showName: boolean;
 }
 
 export const BuildingPin: React.FC<BuildingPinProps> = (
@@ -34,6 +35,15 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
               )} - ${building.hours?.close.format("hh:mm a")}`}
             </p>
           </Popup>
+          <Tooltip
+            className="tooltip"
+            direction="bottom"
+            offset={[0, 5]}
+            opacity={1}
+            permanent={props.showName}
+          >
+            <span>{building.name}</span>
+          </Tooltip>
         </Marker>
       ))}
     </>

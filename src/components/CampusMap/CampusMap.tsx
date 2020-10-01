@@ -8,6 +8,7 @@ import { BuildingPin } from "./components";
 
 interface CampusMapProps {
   buildings: Building[];
+  showName: boolean;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -34,7 +35,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <BuildingPin buildings={props.buildings} />
+      <BuildingPin buildings={props.buildings} showName={props.showName} />
     </Map>
   );
 

@@ -14,6 +14,7 @@ import { useFakeBuilding } from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
   const [buildings, setBuildings] = useState(useFakeBuilding());
+  const [showName, setShowName] = useState(true);
 
   return (
     <IonTabs>
@@ -21,7 +22,7 @@ export const MainTabs: React.FC = () => {
         <Route path="/:tab(Events)" render={() => <Events />} exact={true} />
         <Route
           path="/:tab(Map)"
-          render={() => <CampusMap buildings={buildings} />}
+          render={() => <CampusMap buildings={buildings} showName={showName} />}
           exact={true}
         />
         <Route

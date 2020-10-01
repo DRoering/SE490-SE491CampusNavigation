@@ -12,6 +12,7 @@ import {
 
 interface BuildingListProps {
   buildings: Building[];
+  openDetails: (d: Building) => void;
 }
 
 export const BuildingList: React.FC<BuildingListProps> = (
@@ -20,7 +21,7 @@ export const BuildingList: React.FC<BuildingListProps> = (
   return (
     <IonList>
       {props.buildings.map((building) => (
-        <IonCard key={building.id}>
+        <IonCard key={building.id} onClick={() => props.openDetails(building)}>
           <IonCardContent>
             <IonGrid>
               <IonRow>

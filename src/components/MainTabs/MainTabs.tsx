@@ -16,6 +16,14 @@ export const MainTabs: React.FC = () => {
   const [buildings, setBuildings] = useState(useFakeBuilding());
   const [showName, setShowName] = useState(true);
 
+  const toggleName = () => {
+    console.log("resetName called");
+    setShowName(false);
+    return setTimeout(() => {
+      setShowName(true);
+    });
+  };
+
   return (
     <IonTabs>
       <IonRouterOutlet>
@@ -34,7 +42,7 @@ export const MainTabs: React.FC = () => {
       </IonRouterOutlet>
 
       <IonTabBar slot="bottom">
-        <IonTabButton tab="Map" href="/Map">
+        <IonTabButton tab="Map" href="/Map" onClick={toggleName}>
           <IonIcon icon={map} />
           <IonLabel>Map</IonLabel>
         </IonTabButton>

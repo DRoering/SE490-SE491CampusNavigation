@@ -36,7 +36,7 @@ export const BuildingList: React.FC<BuildingListProps> = (
                   <p id="info">
                     {`Hours: ${building.hours?.open.format(
                       "hh:mm a"
-                    )} - ${building.hours?.close.format("hh:mm a")}`}
+                    )} - ${building.hours?.close?.format("hh:mm a")}`}
                   </p>
                 </IonCol>
               </IonRow>

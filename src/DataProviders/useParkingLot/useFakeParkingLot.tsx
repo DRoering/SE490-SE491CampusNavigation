@@ -53,7 +53,7 @@ for (let i = 0; i < 15; i++) {
   parkingLots.push({
     id: i,
     type: "Student",
-    name: "Lot A",
+    name: `Lot A ${i}`,
     coordinates: getLocation(),
     designation: "AA",
     permit: true,

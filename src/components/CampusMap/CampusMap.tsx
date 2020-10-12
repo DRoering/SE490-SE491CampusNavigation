@@ -22,10 +22,6 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     iconUrl: "assets/mapIcons/businessIcon.png",
     iconSize: [25, 25],
   });
-  const parkingLotIcon = L.icon({
-    iconUrl: "assets/mapIcons/car-outline.png",
-    iconSize: [25, 25],
-  });
 
   useEffect(() => {
     console.debug("resetSize Called");

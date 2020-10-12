@@ -1,5 +1,5 @@
 import React from "react";
-import { IonApp } from "@ionic/react";
+import { IonApp, isPlatform, setupConfig } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { MainTabs } from "./components";
 
@@ -22,12 +22,18 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <MainTabs />
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  setupConfig({
+    mode: isPlatform("ios") ? "ios" : "md",
+  });
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <MainTabs />
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;

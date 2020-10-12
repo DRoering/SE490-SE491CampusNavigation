@@ -24,7 +24,12 @@ export const ParkingLotPin: React.FC<ParkingLotPinProps> = (
           key={parkingLot.id}
           position={parkingLot.coordinates}
           icon={parkingLotIcon}
-        />
+        >
+          <Popup id="parking-lot-popup">
+            <IonLabel>{parkingLot.name}</IonLabel>
+            <IonLabel>{parkingLot.designation}</IonLabel>
+          </Popup>
+        </Marker>
       ))}
     </>
   );

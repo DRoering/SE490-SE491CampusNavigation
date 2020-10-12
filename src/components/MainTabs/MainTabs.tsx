@@ -7,13 +7,15 @@ import {
   IonLabel,
   IonRouterOutlet,
 } from "@ionic/react";
-import { map, informationCircle } from "ionicons/icons";
+import { map, informationCircle, briefcase } from "ionicons/icons";
 import { Route, Redirect } from "react-router";
 import { Buildings, CampusMap } from "../../pages";
 import { useFakeBuilding } from "../../DataProviders";
-
+import { OrganizationList } from "../OrganizationList";
+import { useFakeOrganization } from "../../DataProviders";
 export const MainTabs: React.FC = () => {
   const [buildings, setBuildings] = useState(useFakeBuilding());
+  const [organization, setOrganization] = useState(useFakeOrganization());
 
   return (
     <IonTabs>
@@ -28,6 +30,11 @@ export const MainTabs: React.FC = () => {
           render={() => <Buildings buildings={buildings} />}
           exact={true}
         />
+        <Route
+          path="/:tab(Organizations)"
+          render={() => <OrganizationList organization={organization} />}
+          exact={true}
+        />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />
       </IonRouterOutlet>
 
@@ -40,6 +47,11 @@ export const MainTabs: React.FC = () => {
         <IonTabButton tab="Home" href="/Home">
           <IonIcon icon={informationCircle} />
           <IonLabel>Information</IonLabel>
+        </IonTabButton>
+
+        <IonTabButton tab="Organizations" href="/Organizations">
+          <IonIcon icon={briefcase} />
+          <IonLabel>Organization</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

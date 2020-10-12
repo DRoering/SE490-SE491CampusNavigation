@@ -6,6 +6,7 @@ import "./CampusMap.scss";
 import { Building } from "../../DataProviders";
 import { ParkingLot } from "../../DataProviders/useParkingLot";
 import { BuildingPin } from "./components";
+import { ParkingLotPin } from "./components/ParkingLotPin";
 
 interface CampusMapProps {
   buildings: Building[];
@@ -53,13 +54,8 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           icon={buildingIcon}
         ></Marker>
       ))}
-      {props.parkingLots.map((parkingLots) => (
-        <Marker
-          key={parkingLots.id}
-          position={parkingLots.coordinates}
-          icon={parkingLotIcon}
-        />
-      ))}
+      <ParkingLotPin parkingLots={props.parkingLots} />
+      ))
     </Map>
   );
 

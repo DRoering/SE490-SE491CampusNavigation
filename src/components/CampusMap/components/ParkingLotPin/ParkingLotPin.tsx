@@ -1,7 +1,7 @@
 import React from "react";
 import "./ParkingLotPin.scss";
 import { ParkingLot } from "../../../../DataProviders/useParkingLot";
-import { Marker, Popup, Tooltip } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { IonLabel } from "@ionic/react";
 

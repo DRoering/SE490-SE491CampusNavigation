@@ -10,8 +10,7 @@ import {
 import { map, business, calendarOutline, carOutline } from "ionicons/icons";
 import { Route, Redirect } from "react-router";
 import { CampusMap, Events, Buildings, ParkingLots } from "../../pages";
-import { useFakeBuilding } from "../../DataProviders";
-import { useFakeParking } from "../../DataProviders/useParkingLot";
+import { useFakeBuilding, useFakeParking } from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
   const [buildings, setBuildings] = useState(useFakeBuilding());

@@ -3,15 +3,13 @@ import { Map, TileLayer, Marker } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
-import { Building } from "../../DataProviders";
-import { ParkingLot } from "../../DataProviders/useParkingLot";
-import { BuildingPin } from "./components";
-import { ParkingLotPin } from "./components";
+import { Building, Lot } from "../../DataProviders";
+import { BuildingPin, ParkingLotPin } from "./components";
 
 interface CampusMapProps {
   buildings: Building[];
   showName: boolean;
-  parkingLots: ParkingLot[];
+  parkingLots: Lot[];
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {

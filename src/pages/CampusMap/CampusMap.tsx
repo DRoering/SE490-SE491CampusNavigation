@@ -1,13 +1,12 @@
 import React from "react";
 import { IonPage, IonContent } from "@ionic/react";
 import { CampusMap as MapContent } from "../../components";
-import { Building } from "../../DataProviders";
-import { ParkingLot } from "../../DataProviders/useParkingLot";
+import { Building, Lot } from "../../DataProviders";
 
 interface CampusMapProps {
   buildings: Building[];
   showName: boolean;
-  parkingLots: ParkingLot[];
+  parkingLots: Lot[];
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {

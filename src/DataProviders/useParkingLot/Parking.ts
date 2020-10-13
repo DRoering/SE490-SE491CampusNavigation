@@ -1,6 +1,6 @@
 import { CommonProperties } from "../../Reuseable";
 
-export interface ParkingLot extends CommonProperties {
+export interface Lot extends CommonProperties {
   type: string;
   designation: string;
   permit: boolean;

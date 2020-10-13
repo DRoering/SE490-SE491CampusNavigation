@@ -1,12 +1,12 @@
 import React from "react";
 import "./ParkingLotPin.scss";
-import { ParkingLot } from "../../../../DataProviders/useParkingLot";
+import { Lot } from "../../../../DataProviders";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { IonLabel } from "@ionic/react";
 
 interface ParkingLotPinProps {
-  parkingLots: ParkingLot[];
+  parkingLots: Lot[];
 }
 
 export const ParkingLotPin: React.FC<ParkingLotPinProps> = (

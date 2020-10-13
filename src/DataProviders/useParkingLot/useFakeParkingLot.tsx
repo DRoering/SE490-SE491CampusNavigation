@@ -1,8 +1,8 @@
 import moment, { Moment } from "moment";
-import { ParkingLot } from "./Parking";
+import { Lot } from "./Parking";
 import L from "leaflet";
 
-const parkingLots: ParkingLot[] = [];
+const parkingLots: Lot[] = [];
 
 enum Bounds {
   minLat = 45.543198,
@@ -62,6 +62,6 @@ for (let i = 0; i < 15; i++) {
   });
 }
 
-export const useFakeParking = (): ParkingLot[] => {
+export const useFakeParking = (): Lot[] => {
   return parkingLots;
 };

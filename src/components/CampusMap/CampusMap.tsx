@@ -6,7 +6,7 @@ import "./CampusMap.scss";
 import { Building } from "../../DataProviders";
 import { ParkingLot } from "../../DataProviders/useParkingLot";
 import { BuildingPin } from "./components";
-import { ParkingLotPin } from "./components/ParkingLotPin";
+import { ParkingLotPin } from "./components";
 
 interface CampusMapProps {
   buildings: Building[];

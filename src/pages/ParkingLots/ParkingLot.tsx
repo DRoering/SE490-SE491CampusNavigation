@@ -1,10 +1,10 @@
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
-import { ParkingLotList } from "../../components/ParkingLotList/ParkingLotList";
-import { ParkingLot } from "../../DataProviders/useParkingLot/index";
+import { ParkingLotList } from "../../components";
+import { Lot } from "../../DataProviders";
 
 interface ParkingLotProps {
-  parkingLots: ParkingLot[];
+  parkingLots: Lot[];
 }
 
 export const ParkingLots: React.FC<ParkingLotProps> = (

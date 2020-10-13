@@ -1,1 +1,1 @@
-export * from "../../pages/ParkingLots/ParkingLot";
+export { ParkingLots } from "./ParkingLot";

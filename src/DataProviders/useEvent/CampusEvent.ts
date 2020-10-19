@@ -1,4 +1,3 @@
-import { Moment } from "moment";
 import { CommonProperties } from "../../Reuseable";
 
 export interface CampusEvent extends CommonProperties {

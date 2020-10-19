@@ -23,26 +23,25 @@ export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
         <IonCard
           key={event.id}
           onClick={() => props.clickEvent()}
-          class="item-text-wrap"
+          className="item-text-wrap"
         >
           <IonCardContent>
             <IonImg src="assets/mapIcons/calendar.png" />
             <IonGrid>
               <IonRow>
                 <IonCol size="12">
-                  <IonLabel>{`${event.name}`}</IonLabel>
-                </IonCol>
-              </IonRow>
-              <IonRow>
-                <IonCol>
-                  <IonLabel>Host: {event.host}</IonLabel>
-                  <p id="info">
-                    Description: {`${event.description}`} <br />
+                  <IonLabel>
+                    {`${event.name} - `}{" "}
                     {`Hours:
                     ${event?.hours?.open?.format(
                       "hh:mm"
                     )} - ${event?.hours?.close?.format("hh:mm")}`}
-                  </p>
+                  </IonLabel>
+                </IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol>
+                  <p id="info"></p>
                 </IonCol>
               </IonRow>
             </IonGrid>

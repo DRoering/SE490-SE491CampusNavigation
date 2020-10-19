@@ -32,7 +32,7 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
             <p id="info">
               {`Hours: ${building.hours?.open.format(
                 "hh:mm a"
-              )} - ${building.hours?.close.format("hh:mm a")}`}
+              )} - ${building.hours?.close?.format("hh:mm a")}`}
             </p>
           </Popup>
           <Tooltip

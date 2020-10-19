@@ -7,13 +7,14 @@ import {
   IonLabel,
   IonRouterOutlet,
 } from "@ionic/react";
-import { map, business, calendarOutline } from "ionicons/icons";
+import { map, business, calendarOutline, carOutline } from "ionicons/icons";
 import { Route, Redirect } from "react-router";
-import { CampusMap, Events, Buildings } from "../../pages";
-import { useFakeBuilding } from "../../DataProviders";
+import { CampusMap, Events, Buildings, ParkingLots } from "../../pages";
+import { useFakeBuilding, useFakeParking } from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
   const [buildings, setBuildings] = useState(useFakeBuilding());
+  const [parkingLots, setParkingLots] = useState(useFakeParking());
   const [showName, setShowName] = useState(true);
 
   const toggleName = () => {
@@ -30,12 +31,23 @@ export const MainTabs: React.FC = () => {
         <Route path="/:tab(Events)" render={() => <Events />} exact={true} />
         <Route
           path="/:tab(Map)"
-          render={() => <CampusMap buildings={buildings} showName={showName} />}
+          render={() => (
+            <CampusMap
+              buildings={buildings}
+              showName={showName}
+              parkingLots={parkingLots}
+            />
+          )}
           exact={true}
         />
         <Route
           path="/:tab(BuildingList)"
           render={() => <Buildings buildings={buildings} />}
+          exact={true}
+        />
+        <Route
+          path="/:tab(ParkingLotList)"
+          render={() => <ParkingLots parkingLots={parkingLots} />}
           exact={true}
         />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />
@@ -55,6 +67,11 @@ export const MainTabs: React.FC = () => {
         <IonTabButton tab="Events" href="/Events">
           <IonIcon icon={calendarOutline} />
           <IonLabel>Events</IonLabel>
+        </IonTabButton>
+
+        <IonTabButton tab="ParkingList" href="/ParkingLotList">
+          <IonIcon icon={carOutline} />
+          <IonLabel>Parking Lots</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

@@ -1,20 +1,25 @@
 import React, { useEffect } from "react";
-import { Map, TileLayer } from "react-leaflet";
+import { Map, TileLayer, Marker } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
-import { Building } from "../../DataProviders";
-import { BuildingPin } from "./components";
+import { Building, Lot } from "../../DataProviders";
+import { BuildingPin, ParkingLotPin } from "./components";
 
 interface CampusMapProps {
   buildings: Building[];
   showName: boolean;
+  parkingLots: Lot[];
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const position = L.latLng([45.5511, -94.1515]);
   const minimumZoom = 8;
   const zoom = 16;
+  const buildingIcon = L.icon({
+    iconUrl: "assets/mapIcons/businessIcon.png",
+    iconSize: [25, 25],
+  });
 
   useEffect(() => {
     console.debug("resetSize Called");
@@ -36,6 +41,15 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       <BuildingPin buildings={props.buildings} showName={props.showName} />
+      {props.buildings.map((building) => (
+        <Marker
+          key={building.id}
+          position={building.coordinates}
+          icon={buildingIcon}
+        ></Marker>
+      ))}
+      <ParkingLotPin parkingLots={props.parkingLots} />
+      ))
     </Map>
   );
 

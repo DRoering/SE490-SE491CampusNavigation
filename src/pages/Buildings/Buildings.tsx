@@ -22,7 +22,12 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
         <BuildingList buildings={props.buildings} openDetails={openDetails} />
       </IonContent>
       {buildingDetails && (
-        <IonModal isOpen={showModal}>
+        <IonModal
+          isOpen={showModal}
+          cssClass="item-modal"
+          swipeToClose={true}
+          onDidDismiss={() => setShowModal(false)}
+        >
           <BuildingModal
             building={buildingDetails}
             close={() => setShowModal(false)}

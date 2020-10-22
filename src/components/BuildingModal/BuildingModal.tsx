@@ -1,17 +1,7 @@
-import {
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
-import { closeCircle } from "ionicons/icons";
+import { IonContent, IonItem, IonLabel, IonList } from "@ionic/react";
 import React from "react";
 import { Building } from "../../DataProviders";
+import { ModalHeader } from "../";
 
 interface BuildingModalProps {
   building: Building;
@@ -23,14 +13,7 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
 ) => {
   return (
     <>
-      <IonToolbar>
-        <IonButtons slot="start">
-          <IonButton onClick={props.close}>
-            <IonIcon icon={closeCircle} slot="icon-only" />
-          </IonButton>
-        </IonButtons>
-        <IonTitle>{props.building.name}</IonTitle>
-      </IonToolbar>
+      <ModalHeader close={props.close} title={props.building.name} />
       <IonContent>
         <IonList>
           <IonItem>

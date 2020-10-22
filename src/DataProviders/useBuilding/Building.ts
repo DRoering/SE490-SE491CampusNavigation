@@ -11,6 +11,7 @@ export interface ParkingLot {
 
 export interface Building extends CommonProperties {
   abbreviation: string;
-  services: string[];
-  nearestLot: ParkingLot;
+  services?: string[];
+  nearestLot?: ParkingLot;
+  img: string;
 }

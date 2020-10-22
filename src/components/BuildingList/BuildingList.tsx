@@ -6,7 +6,6 @@ import {
   IonCol,
   IonGrid,
   IonLabel,
-  IonList,
   IonRow,
 } from "@ionic/react";
 
@@ -19,27 +18,20 @@ export const BuildingList: React.FC<BuildingListProps> = (
   props: BuildingListProps
 ) => {
   return (
-    <IonList>
-      {props.buildings.map((building) => (
-        <IonCard key={building.id} onClick={() => props.openDetails(building)}>
-          <IonCardContent>
-            <IonGrid>
-              <IonRow>
-                <IonCol size="12">
-                  <IonLabel>
-                    {`${building.name} (${building.abbreviation})`}
-                  </IonLabel>
-                </IonCol>
-              </IonRow>
-              <IonRow>
-                <IonCol>
-                  <IonLabel>{building.services}</IonLabel>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
-          </IonCardContent>
-        </IonCard>
-      ))}
-    </IonList>
+    <IonGrid>
+      <IonRow>
+        {props.buildings.map((building) => (
+          <IonCol key={building.id} size="4" sizeXs="6">
+            <IonCard onClick={() => props.openDetails(building)}>
+              <img ion-img-cache="true" src={building.img} />
+              <IonCardContent>
+                <IonLabel>{`${building.name} (${building.abbreviation})`}</IonLabel>
+                <IonLabel>{building.services}</IonLabel>
+              </IonCardContent>
+            </IonCard>
+          </IonCol>
+        ))}
+      </IonRow>
+    </IonGrid>
   );
 };

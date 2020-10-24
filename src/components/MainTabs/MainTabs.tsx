@@ -9,10 +9,8 @@ import {
 } from "@ionic/react";
 import { map, informationCircle, briefcase } from "ionicons/icons";
 import { Route, Redirect } from "react-router";
-import { Buildings, CampusMap } from "../../pages";
-import { useFakeBuilding } from "../../DataProviders";
-import { OrganizationList } from "../OrganizationList";
-import { useFakeOrganization } from "../../DataProviders";
+import { Buildings, CampusMap, Organizations } from "../../pages";
+import { useFakeBuilding, useFakeOrganization } from "../../DataProviders";
 export const MainTabs: React.FC = () => {
   const [buildings, setBuildings] = useState(useFakeBuilding());
   const [organization, setOrganization] = useState(useFakeOrganization());
@@ -32,7 +30,7 @@ export const MainTabs: React.FC = () => {
         />
         <Route
           path="/:tab(Organizations)"
-          render={() => <OrganizationList organization={organization} />}
+          render={() => <Organizations organization={organization} />}
           exact={true}
         />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />

@@ -20,23 +20,23 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
 ) => {
   return (
     <IonList>
-      {props.organization.map((organization) => (
-        <IonCard key={organization.name}>
+      {props.organization.map((organizations) => (
+        <IonCard key={organizations.id}>
           <IonCardContent>
             <IonGrid>
               <IonRow>
                 <IonCol size="15">
-                  <IonLabel>{organization.id}</IonLabel>
-                </IonCol>
-              </IonRow>
-              <IonRow>
-                <IonCol size="15">
-                  <IonLabel>{organization.communication}</IonLabel>
+                  <IonLabel>{organizations.name}</IonLabel>
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol>
-                  <IonLabel>{organization.Officers}</IonLabel>
+                  <IonLabel>{organizations.communication}</IonLabel>
+                </IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol>
+                  <IonLabel>{organizations.Officers}</IonLabel>
                 </IonCol>
               </IonRow>
             </IonGrid>

@@ -7,7 +7,7 @@ interface OrganizationListProps {
   organization: Organization[];
 }
 
-export const organizations: React.FC<OrganizationListProps> = (
+export const Organizations: React.FC<OrganizationListProps> = (
   props: OrganizationListProps
 ) => {
   return (

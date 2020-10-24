@@ -21,7 +21,7 @@ const getOrganization = (): Organization => {
   };
 };
 
-for (let i = 0; i <= 15; i++) {
+for (let i = 1; i <= 15; i++) {
   organizations.push({
     id: i,
     name: `Organization Name ${i}`,

@@ -6,44 +6,32 @@ import {
   IonCol,
   IonGrid,
   IonLabel,
-  IonList,
   IonRow,
 } from "@ionic/react";
 
 interface BuildingListProps {
   buildings: Building[];
+  openDetails: (d: Building) => void;
 }
 
 export const BuildingList: React.FC<BuildingListProps> = (
   props: BuildingListProps
 ) => {
   return (
-    <IonList>
-      {props.buildings.map((building) => (
-        <IonCard key={building.id}>
-          <IonCardContent>
-            <IonGrid>
-              <IonRow>
-                <IonCol size="12">
-                  <IonLabel>
-                    {`${building.name} (${building.abbreviation})`}
-                  </IonLabel>
-                </IonCol>
-              </IonRow>
-              <IonRow>
-                <IonCol>
-                  <IonLabel>{building.services}</IonLabel>
-                  <p id="info">
-                    {`Hours: ${building.hours?.open.format(
-                      "hh:mm a"
-                    )} - ${building.hours?.close?.format("hh:mm a")}`}
-                  </p>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
-          </IonCardContent>
-        </IonCard>
-      ))}
-    </IonList>
+    <IonGrid>
+      <IonRow>
+        {props.buildings.map((building) => (
+          <IonCol key={building.id} size="4" sizeXs="6">
+            <IonCard onClick={() => props.openDetails(building)}>
+              <img ion-img-cache="true" src={building.img} />
+              <IonCardContent>
+                <IonLabel>{`${building.name} (${building.abbreviation})`}</IonLabel>
+                <IonLabel>{building.services}</IonLabel>
+              </IonCardContent>
+            </IonCard>
+          </IonCol>
+        ))}
+      </IonRow>
+    </IonGrid>
   );
 };

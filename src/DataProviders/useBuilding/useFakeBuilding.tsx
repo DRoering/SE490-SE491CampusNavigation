@@ -7,7 +7,7 @@ const buildings: Building[] = [
     id: 0,
     name: "Administrative Services",
     abbreviation: "AS",
-    hours: [
+    buildingHours: [
       { open: 630, close: 1730 },
       { open: 630, close: 1730 },
       { open: 630, close: 1730 },
@@ -23,7 +23,7 @@ const buildings: Building[] = [
     id: 1,
     name: "Atwood Memorial Center",
     abbreviation: "AMC",
-    hours: [
+    buildingHours: [
       { open: 700, close: 1830 },
       { open: 700, close: 1830 },
       { open: 700, close: 1830 },
@@ -39,7 +39,7 @@ const buildings: Building[] = [
     id: 2,
     name: "Brown Hall",
     abbreviation: "BH",
-    hours: [
+    buildingHours: [
       { open: 700, close: 1830 },
       { open: 700, close: 1830 },
       { open: 700, close: 1830 },
@@ -55,7 +55,7 @@ const buildings: Building[] = [
     id: 3,
     name: "ISELF",
     abbreviation: "ISELF",
-    hours: [
+    buildingHours: [
       { open: 700, close: 1830 },
       { open: 700, close: 1830 },
       { open: 700, close: 1830 },
@@ -77,8 +77,8 @@ const isOpen = (building: Building) => {
 
   if (building.hours) {
     building.isOpen = currentDay.isBetween(
-      building.hours[day].close,
-      building.hours[day].open,
+      building.buildingHours[day].close,
+      building.buildingHours[day].open,
       "hours"
     );
   }

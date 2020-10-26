@@ -30,9 +30,7 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
           <Popup id="building-popup">
             <IonLabel id="name">{building.name}</IonLabel>
             <p id="info">
-              {`Hours: ${building.hours?.open.format(
-                "hh:mm a"
-              )} - ${building.hours?.close?.format("hh:mm a")}`}
+              {building.isOpen && <img src="assets/mapIcons/open.png" />}
             </p>
           </Popup>
           <Tooltip

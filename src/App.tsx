@@ -22,6 +22,8 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
+import "./App.scss";
+
 const App: React.FC = () => {
   setupConfig({
     mode: isPlatform("ios") ? "ios" : "md",

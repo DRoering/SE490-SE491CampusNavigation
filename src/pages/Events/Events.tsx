@@ -29,7 +29,7 @@ export const Events: React.FC = () => {
 
       <IonContent>
         <EventList clickEvent={toggleModal} events={fakeEvent} />
-        <IonModal isOpen={showModal}>
+        <IonModal cssClass="item-modal" isOpen={showModal}>
           <EventModal closeAction={toggleModal} />
         </IonModal>
       </IonContent>

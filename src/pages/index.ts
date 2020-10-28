@@ -1,3 +1,3 @@
 export * from "./CampusMap";
 export * from "./Buildings";
-export * from "./Organization";
+export * from "./Organizations";

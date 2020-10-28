@@ -2,7 +2,7 @@ import { Moment } from "moment";
 import { CommonProperties } from "../../Reuseable";
 
 export interface Organization extends CommonProperties {
-  Officers: string;
+  officers: string;
   meetingTime: Moment;
   communication: string;
   application: string;

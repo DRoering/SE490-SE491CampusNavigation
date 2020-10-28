@@ -1,7 +1,7 @@
 import React from "react";
 import { IonPage, IonContent } from "@ionic/react";
 import { Organization } from "../../DataProviders";
-import { OrganizationList } from "../../components/OrganizationList";
+import { OrganizationList } from "../../components";
 
 interface OrganizationListProps {
   organization: Organization[];

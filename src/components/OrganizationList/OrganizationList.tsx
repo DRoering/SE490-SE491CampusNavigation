@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   IonCard,
   IonCardContent,
@@ -9,7 +8,7 @@ import {
   IonList,
   IonRow,
 } from "@ionic/react";
-import { Organization } from "../../DataProviders/useOrganization/Organization";
+import { Organization } from "../../DataProviders";
 
 interface OrganizationListProps {
   organization: Organization[];
@@ -36,7 +35,7 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
               </IonRow>
               <IonRow>
                 <IonCol>
-                  <IonLabel>{organizations.Officers}</IonLabel>
+                  <IonLabel>{organizations.officers}</IonLabel>
                 </IonCol>
               </IonRow>
             </IonGrid>

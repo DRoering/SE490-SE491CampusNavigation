@@ -1,31 +1,25 @@
-import moment, { Moment } from "moment";
-import { ParkingLot } from "..";
+import moment from "moment";
 import { Organization } from "./Organization";
-import L, { Bounds } from "leaflet";
-import { useEffect, useState } from "react";
-import React from "react";
-import { Building } from "../useBuilding";
-import { useFakeBuilding } from "../useBuilding/useFakeBuilding";
 
-const organizations: Organization[] = [];
+const organization: Organization[] = [];
 
-const getOrganization = (): Organization => {
-  return {
-    Officers: "officerName",
-    meetingTime: moment(),
-    communication: "communicationtype",
-    application: "fillAplication",
-    id: 2346,
-    name: "orgName",
-    coordinates: [8754, 790],
-  };
-};
+//const getOrganization = (): Organization => {
+// return {
+//   Officers: "officerName",
+//   meetingTime: moment(),
+//   communication: "communicationtype",
+//  application: "fillAplication",
+//   id: 2346,
+//   name: "orgName",
+//   coordinates: [8754, 790],
+//  };
+//};
 
-for (let i = 1; i <= 15; i++) {
-  organizations.push({
+for (let i = 1; i <= 12; i++) {
+  organization.push({
     id: i,
     name: `Organization Name ${i}`,
-    Officers: "officerName",
+    officers: "officerName",
     meetingTime: moment(),
     communication: "communicationtype",
     application: "fillAplication",
@@ -33,5 +27,5 @@ for (let i = 1; i <= 15; i++) {
   });
 }
 export const useFakeOrganization = (): Organization[] => {
-  return organizations;
+  return organization;
 };

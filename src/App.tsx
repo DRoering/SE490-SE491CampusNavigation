@@ -26,7 +26,7 @@ import "./App.scss";
 
 const App: React.FC = () => {
   setupConfig({
-    mode: isPlatform("ios") ? "ios" : "md",
+    mode: isPlatform("android") ? "md" : "ios",
   });
 
   return (

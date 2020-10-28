@@ -23,7 +23,7 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
           parkingLots={props.parkingLots}
           clickEvent={toggleModal}
         />
-        <IonModal isOpen={showModal}>
+        <IonModal cssClass="item-modal" isOpen={showModal} swipeToClose={true}>
           <ParkingLotModal
             parkingLot={props.parkingLots}
             closeAction={toggleModal}

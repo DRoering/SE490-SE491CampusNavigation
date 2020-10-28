@@ -24,7 +24,7 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
           <IonCardContent>
             <IonGrid>
               <IonRow>
-                <IonCol size="15">
+                <IonCol size="12">
                   <IonLabel>{organizations.name}</IonLabel>
                 </IonCol>
               </IonRow>

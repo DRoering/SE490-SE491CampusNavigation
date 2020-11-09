@@ -7,13 +7,27 @@ import {
   IonLabel,
   IonRouterOutlet,
 } from "@ionic/react";
-import { map, business, calendarOutline, carOutline } from "ionicons/icons";
+import {
+  map,
+  informationCircle,
+  briefcase,
+  business,
+  calendarOutline,
+  carOutline,
+} from "ionicons/icons";
 import { Route, Redirect } from "react-router";
-import { CampusMap, Events, Buildings, ParkingLots } from "../../pages";
+import {
+  Buildings,
+  CampusMap,
+  Organizations,
+  Events,
+  ParkingLots,
+} from "../../pages";
 import {
   useFakeBuilding,
   useFakeParking,
   useFakeEvent,
+  useFakeOrganization,
 } from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
@@ -21,6 +35,7 @@ export const MainTabs: React.FC = () => {
   const [parkingLots, setParkingLots] = useState(useFakeParking());
   const [events, setEvents] = useState(useFakeEvent());
   const [showName, setShowName] = useState(true);
+  const [organization, setOrganization] = useState(useFakeOrganization());
 
   const toggleName = () => {
     console.log("resetName called");
@@ -52,6 +67,11 @@ export const MainTabs: React.FC = () => {
           exact={true}
         />
         <Route
+          path="/:tab(Organizations)"
+          render={() => <Organizations organization={organization} />}
+          exact={true}
+        />
+        <Route
           path="/:tab(ParkingLotList)"
           render={() => <ParkingLots parkingLots={parkingLots} />}
           exact={true}
@@ -78,6 +98,11 @@ export const MainTabs: React.FC = () => {
         <IonTabButton tab="ParkingList" href="/ParkingLotList">
           <IonIcon icon={carOutline} />
           <IonLabel>Parking Lots</IonLabel>
+        </IonTabButton>
+
+        <IonTabButton tab="Organizations" href="/Organizations">
+          <IonIcon icon={briefcase} />
+          <IonLabel>Organization</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

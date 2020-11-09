@@ -1,1 +1,1 @@
-export { CampusMap } from "./CampusMap";
+export * from "../CampusMap";

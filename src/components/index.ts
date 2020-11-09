@@ -5,4 +5,5 @@ export * from "./EventList";
 export * from "./ParkingLotList";
 export * from "./EventModal";
 export * from "./MainTabs";
+export * from "./OrganizationList";
 export * from "./ModalHeader";

@@ -10,14 +10,11 @@ import {
 import { map, business, calendarOutline, carOutline } from "ionicons/icons";
 import { Route, Redirect } from "react-router";
 import { CampusMap, Events, Buildings, ParkingLots } from "../../pages";
-import {
-  useFakeBuilding,
-  useFakeParking,
-  useFakeEvent,
-} from "../../DataProviders";
+import { useFakeParking, useFakeEvent } from "../../DataProviders";
+import { useBuilding } from "../../DataProviders/useBuilding/useBuilding";
 
 export const MainTabs: React.FC = () => {
-  const [buildings, setBuildings] = useState(useFakeBuilding());
+  const buildings = useBuilding();
   const [parkingLots, setParkingLots] = useState(useFakeParking());
   const [events, setEvents] = useState(useFakeEvent());
   const [showName, setShowName] = useState(true);

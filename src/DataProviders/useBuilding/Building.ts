@@ -18,6 +18,8 @@ export interface Building extends CommonProperties {
   abbreviation: string;
   services?: string[];
   nearestLot?: ParkingLot;
-  img: string;
+  imgUrl: string;
   buildingHours: DailyHours[];
+  latitude: number;
+  longitude: number;
 }

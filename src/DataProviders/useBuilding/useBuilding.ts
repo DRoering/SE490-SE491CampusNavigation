@@ -3,6 +3,7 @@ import { Building } from "./Building";
 import { Strings } from "../";
 import { useEffect, useState } from "react";
 import { Moment } from "moment";
+import L from "leaflet";
 
 interface ApiResponse {
   id: string;
@@ -19,7 +20,10 @@ const getBuildings = (setBuildings: (b: Building[]) => void) => {
       const rawItems: Building[] = [];
 
       response.data.records.forEach((record) => {
-        console.log(record.fields !== {});
+        const lat = record.fields.latitude;
+        const lon = record.fields.longitude;
+
+        if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
         rawItems.push(record.fields);
       });
 

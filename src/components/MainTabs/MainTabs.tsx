@@ -25,6 +25,7 @@ export const MainTabs: React.FC = () => {
     return setTimeout(() => {
       setShowName(true);
     });
+    console.log(buildings);
   };
 
   return (

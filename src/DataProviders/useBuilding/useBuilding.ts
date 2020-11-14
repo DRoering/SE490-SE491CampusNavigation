@@ -40,6 +40,8 @@ export const useBuilding = (): Building[] => {
 
   useEffect(() => {
     getBuildings(setBuildings);
+
+    console.log("useBuilding effect called");
   }, []);
 
   return buildings;

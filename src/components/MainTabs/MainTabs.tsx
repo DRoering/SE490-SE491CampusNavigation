@@ -15,10 +15,11 @@ import {
   useFakeParking,
   useFakeEvent,
 } from "../../DataProviders";
+import { useParkingLot } from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
   const [buildings, setBuildings] = useState(useFakeBuilding());
-  const [parkingLots, setParkingLots] = useState(useFakeParking());
+  const [parkingLots, setParkingLots] = useState(useParkingLot());
   const [events, setEvents] = useState(useFakeEvent());
   const [showName, setShowName] = useState(true);
 
@@ -28,6 +29,11 @@ export const MainTabs: React.FC = () => {
     return setTimeout(() => {
       setShowName(true);
     });
+  };
+
+  const parkingLot = () => {
+    console.log(parkingLots);
+    setParkingLots(parkingLots);
   };
 
   return (

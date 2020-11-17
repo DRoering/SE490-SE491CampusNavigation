@@ -21,29 +21,32 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
 
   return (
     <>
-      {props.buildings.map((building) => (
-        <Marker
-          key={building.id}
-          position={building.coordinates}
-          icon={buildingIcon}
-        >
-          <Popup id="building-popup">
-            <IonLabel id="name">{building.name}</IonLabel>
-            <p id="info">
-              {building.isOpen && <img src="assets/mapIcons/open.png" />}
-            </p>
-          </Popup>
-          <Tooltip
-            className="tooltip"
-            direction="bottom"
-            offset={[0, 5]}
-            opacity={1}
-            permanent={props.showName}
-          >
-            <span>{building.name}</span>
-          </Tooltip>
-        </Marker>
-      ))}
+      {props.buildings.map(
+        (building) =>
+          building.coordinates && (
+            <Marker
+              key={building.id}
+              position={building.coordinates}
+              icon={buildingIcon}
+            >
+              <Popup id="building-popup">
+                <IonLabel id="name">{building.name}</IonLabel>
+                <p id="info">
+                  {building.isOpen && <img src="assets/mapIcons/open.png" />}
+                </p>
+              </Popup>
+              <Tooltip
+                className="tooltip"
+                direction="bottom"
+                offset={[0, 5]}
+                opacity={1}
+                permanent={props.showName}
+              >
+                <span>{building.name}</span>
+              </Tooltip>
+            </Marker>
+          )
+      )}
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Strings } from "../";
+import { Strings } from "..";
 import { get } from "../HTTPProvider";
-import { Lot } from "../useParkingLot";
+import { Lot } from ".";
 
 const { apiUrl, apiKey } = Strings;
 const [error, setError] = useState(false);

@@ -1,4 +1,4 @@
-import { EventModal, EventList } from "../../components";
+import { EventModal, EventList, HeaderBar } from "../../components";
 import {
   IonHeader,
   IonPage,
@@ -21,12 +21,7 @@ export const Events: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Upcoming Events</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
+      <HeaderBar />
       <IonContent>
         <EventList clickEvent={toggleModal} events={fakeEvent} />
         <IonModal cssClass="item-modal" isOpen={showModal}>

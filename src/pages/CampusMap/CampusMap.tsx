@@ -1,6 +1,6 @@
 import React from "react";
 import { IonPage, IonContent } from "@ionic/react";
-import { CampusMap as MapContent } from "../../components";
+import { CampusMap as MapContent, HeaderBar } from "../../components";
 import { Building, Lot, CampusEvent } from "../../DataProviders";
 
 interface CampusMapProps {
@@ -13,6 +13,7 @@ interface CampusMapProps {
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   return (
     <IonPage>
+      <HeaderBar />
       <IonContent>
         <MapContent
           buildings={props.buildings}

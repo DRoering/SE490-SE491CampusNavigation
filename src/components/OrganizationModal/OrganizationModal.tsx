@@ -8,7 +8,7 @@ interface OrganizationModalProps {
   close: () => void;
 }
 
-export const BuildingModal: React.FC<OrganizationModalProps> = (
+export const OrganizationModal: React.FC<OrganizationModalProps> = (
   props: OrganizationModalProps
 ) => {
   return (

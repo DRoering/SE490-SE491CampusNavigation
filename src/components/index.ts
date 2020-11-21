@@ -3,6 +3,7 @@ export * from "./BuildingModal";
 export * from "./CampusMap";
 export * from "./EventList";
 export * from "./ParkingLotList";
+export * from "./ParkingLotModal";
 export * from "./EventModal";
 export * from "./MainTabs";
 export * from "./OrganizationList";

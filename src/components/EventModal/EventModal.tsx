@@ -1,16 +1,10 @@
+import { IonContent, IonItem, IonList } from "@ionic/react";
+import { CampusEvent } from "../../DataProviders";
+import { ModalHeader } from "../";
 import React from "react";
-import {
-  IonHeader,
-  IonContent,
-  IonToolbar,
-  IonTitle,
-  IonItem,
-  IonButtons,
-  IonButton,
-  IonIcon,
-} from "@ionic/react";
 
 interface EventModalProps {
+  event: CampusEvent;
   closeAction: () => void;
 }
 
@@ -19,19 +13,12 @@ export const EventModal: React.FC<EventModalProps> = (
 ) => {
   return (
     <>
-      <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>Event Details</IonTitle>
-          <IonButtons slot="end">
-            <IonButton onClick={() => props.closeAction()}>
-              <IonIcon name="Close" slot="icon-only"></IonIcon>
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <IonItem>Description: Test Description</IonItem>
-        <IonItem>Host: SCSU</IonItem>
+      <ModalHeader close={props.closeAction} title="Event Details" />
+      <IonContent>
+        <IonList>
+          <IonItem>Description: Test Description</IonItem>
+          <IonItem>Host: SCSU</IonItem>
+        </IonList>
       </IonContent>
     </>
   );

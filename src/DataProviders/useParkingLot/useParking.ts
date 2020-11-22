@@ -4,18 +4,19 @@ import { get } from "../HTTPProvider";
 import { Lot } from ".";
 
 const { apiUrl, apiKey } = Strings;
-const [error, setError] = useState(false);
 
 const getParkingLots = (setParkingLots: (l: Lot[]) => void) => {
-  get<Lot[]>(`${apiUrl}Parking%20Lots`, { apiKey })
+  get(`${apiUrl}Parking%20Lots/`, {
+    api_key: apiKey,
+  })
     .then((response) => {
       console.log(response);
-      const data = response.data;
-
+      const data: Lot[] = [];
       setParkingLots(data);
     })
-    .catch((error) => setError(error));
-  console.log(error);
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const useParkingLot = (): Lot[] => {
@@ -23,7 +24,7 @@ export const useParkingLot = (): Lot[] => {
 
   useEffect(() => {
     getParkingLots(setParkingLots);
-  }, [parkingLots]);
+  }, []);
 
   return parkingLots;
 };

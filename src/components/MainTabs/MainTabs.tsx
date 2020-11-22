@@ -10,12 +10,13 @@ import {
 import { map, business, calendarOutline, carOutline } from "ionicons/icons";
 import { Route, Redirect } from "react-router";
 import { CampusMap, Events, Buildings, ParkingLots } from "../../pages";
-import { useFakeParking, useFakeEvent } from "../../DataProviders";
-import { useBuilding } from "../../DataProviders/useBuilding/useBuilding";
+import { useFakeEvent } from "../../DataProviders";
+import { useBuilding } from "../../DataProviders";
+import { useParkingLot } from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
   const buildings = useBuilding();
-  const [parkingLots, setParkingLots] = useState(useFakeParking());
+  const parkingLots = useParkingLot();
   const [events, setEvents] = useState(useFakeEvent());
   const [showName, setShowName] = useState(true);
 
@@ -25,11 +26,6 @@ export const MainTabs: React.FC = () => {
     return setTimeout(() => {
       setShowName(true);
     });
-  };
-
-  const parkingLot = () => {
-    console.log(parkingLots);
-    setParkingLots(parkingLots);
   };
 
   return (

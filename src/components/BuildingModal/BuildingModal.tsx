@@ -16,7 +16,7 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
       <ModalHeader close={props.close} title={props.building.name} />
       <IonContent>
         <IonCard>
-          <img ion-img-cache="true" src={props.building.img} />
+          <img ion-img-cache="true" src={props.building.imgUrl} />
         </IonCard>
         <IonList>
           <IonItem>

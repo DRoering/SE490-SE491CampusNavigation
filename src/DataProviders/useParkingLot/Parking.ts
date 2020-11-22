@@ -5,4 +5,6 @@ export interface Lot extends CommonProperties {
   designation: string;
   permit: boolean;
   rate?: number[];
+  longitude: number;
+  latitude: number;
 }

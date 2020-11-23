@@ -7,4 +7,6 @@ export * from "./HeaderBar";
 export * from "./MainTabs";
 export * from "./ModalHeader";
 export * from "./OrganizationList";
+export * from "./OrganizationModal";
 export * from "./ParkingLotList";
+export * from "./ParkingLotModal";

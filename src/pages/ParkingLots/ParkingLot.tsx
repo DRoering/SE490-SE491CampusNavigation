@@ -1,6 +1,6 @@
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
-import { ParkingLotList } from "../../components";
+import { HeaderBar, ParkingLotList } from "../../components";
 import { Lot } from "../../DataProviders";
 
 interface ParkingLotProps {
@@ -12,6 +12,7 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
 ) => {
   return (
     <IonPage>
+      <HeaderBar />
       <IonContent>
         <ParkingLotList parkingLots={props.parkingLots} />
       </IonContent>

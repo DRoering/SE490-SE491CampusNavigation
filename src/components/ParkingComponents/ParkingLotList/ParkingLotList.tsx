@@ -1,5 +1,5 @@
 import React from "react";
-import { Lot } from "../../DataProviders";
+import { Lot } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,
@@ -12,6 +12,7 @@ import {
 
 interface ParkingLotProps {
   parkingLots: Lot[];
+  clickEvent: () => void;
 }
 
 export const ParkingLotList: React.FC<ParkingLotProps> = (
@@ -20,7 +21,7 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
   return (
     <IonList>
       {props.parkingLots.map((parkingLots) => (
-        <IonCard key={parkingLots.id}>
+        <IonCard key={parkingLots.id} onClick={() => props.clickEvent()}>
           <IonCardContent>
             <IonGrid>
               <IonRow>

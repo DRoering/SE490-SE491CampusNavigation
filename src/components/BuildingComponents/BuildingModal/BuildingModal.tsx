@@ -1,7 +1,7 @@
 import { IonCard, IonContent, IonItem, IonLabel, IonList } from "@ionic/react";
 import React from "react";
-import { Building } from "../../DataProviders";
-import { ModalHeader } from "../";
+import { Building } from "../../../DataProviders";
+import { ModalHeader } from "../../";
 
 interface BuildingModalProps {
   building: Building;

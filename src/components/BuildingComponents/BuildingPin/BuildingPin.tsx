@@ -1,6 +1,6 @@
 import React from "react";
 import { Marker, Popup, Tooltip } from "react-leaflet";
-import { Building } from "../../../../DataProviders";
+import { Building } from "../../../DataProviders";
 import L from "leaflet";
 import { IonLabel } from "@ionic/react";
 import "./BuildingPin.scss";

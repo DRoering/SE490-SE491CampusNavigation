@@ -20,6 +20,4 @@ export interface Building extends CommonProperties {
   nearestLot?: ParkingLot;
   imgUrl: string;
   buildingHours: DailyHours[];
-  latitude: number;
-  longitude: number;
 }

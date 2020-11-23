@@ -6,6 +6,8 @@ export interface CommonProperties {
   coordinates: [number, number] | L.LatLng;
   hours?: { open: Moment; close?: Moment };
   id: number;
+  latitude: number;
+  longitude: number;
   name: string;
   room?: string;
   virtual?: boolean;

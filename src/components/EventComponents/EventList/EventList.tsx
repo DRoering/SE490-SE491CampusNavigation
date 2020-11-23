@@ -9,7 +9,7 @@ import {
   IonImg,
 } from "@ionic/react";
 import React from "react";
-import { CampusEvent } from "../../DataProviders";
+import { CampusEvent } from "../../../DataProviders";
 
 interface EventListProps {
   events: CampusEvent[];

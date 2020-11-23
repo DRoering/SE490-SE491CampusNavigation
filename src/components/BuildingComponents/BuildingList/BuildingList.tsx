@@ -1,5 +1,5 @@
 import React from "react";
-import { Building } from "../../DataProviders";
+import { Building } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,

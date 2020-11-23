@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonTabs,
   IonTabBar,
@@ -7,18 +7,34 @@ import {
   IonLabel,
   IonRouterOutlet,
 } from "@ionic/react";
-import { map, business, calendarOutline, carOutline } from "ionicons/icons";
+import {
+  map,
+  briefcase,
+  business,
+  calendarOutline,
+  carOutline,
+} from "ionicons/icons";
 import { Route, Redirect } from "react-router";
-import { CampusMap, Events, Buildings, ParkingLots } from "../../pages";
-import { useFakeEvent } from "../../DataProviders";
-import { useBuilding } from "../../DataProviders";
-import { useParkingLot } from "../../DataProviders";
+import {
+  Buildings,
+  CampusMap,
+  Organizations,
+  Events,
+  ParkingLots,
+} from "../../pages";
+import {
+  useBuilding,
+  useParkingLot,
+  useFakeEvent,
+  useFakeOrganization,
+} from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
   const buildings = useBuilding();
   const parkingLots = useParkingLot();
   const [events, setEvents] = useState(useFakeEvent());
   const [showName, setShowName] = useState(true);
+  const [organizations, setOrganization] = useState(useFakeOrganization());
 
   const toggleName = () => {
     console.log("resetName called");
@@ -27,6 +43,12 @@ export const MainTabs: React.FC = () => {
       setShowName(true);
     });
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      toggleName();
+    });
+  }, []);
 
   return (
     <IonTabs>
@@ -40,6 +62,7 @@ export const MainTabs: React.FC = () => {
               showName={showName}
               parkingLots={parkingLots}
               events={events}
+              organizations={organizations}
             />
           )}
           exact={true}
@@ -47,6 +70,11 @@ export const MainTabs: React.FC = () => {
         <Route
           path="/:tab(BuildingList)"
           render={() => <Buildings buildings={buildings} />}
+          exact={true}
+        />
+        <Route
+          path="/:tab(Organizations)"
+          render={() => <Organizations organization={organizations} />}
           exact={true}
         />
         <Route
@@ -76,6 +104,11 @@ export const MainTabs: React.FC = () => {
         <IonTabButton tab="ParkingList" href="/ParkingLotList">
           <IonIcon icon={carOutline} />
           <IonLabel>Parking Lots</IonLabel>
+        </IonTabButton>
+
+        <IonTabButton tab="Organizations" href="/Organizations">
+          <IonIcon icon={briefcase} />
+          <IonLabel>Organization</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

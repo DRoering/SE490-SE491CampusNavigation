@@ -9,19 +9,21 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
+import { Lot } from "../../DataProviders";
 
-interface EventModalProps {
+interface ParkingLotProps {
+  parkingLot: Lot[];
   closeAction: () => void;
 }
 
-export const EventModal: React.FC<EventModalProps> = (
-  props: EventModalProps
+export const ParkingLotModal: React.FC<ParkingLotProps> = (
+  props: ParkingLotProps
 ) => {
   return (
     <>
       <IonHeader>
         <IonToolbar color="primary">
-          <IonTitle>Event Details</IonTitle>
+          <IonTitle>Parking Lot Details</IonTitle>
           <IonButtons slot="end">
             <IonButton onClick={() => props.closeAction()}>
               <IonIcon name="Close" slot="icon-only"></IonIcon>
@@ -30,9 +32,9 @@ export const EventModal: React.FC<EventModalProps> = (
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonItem>Description: Test Description</IonItem>
-        <IonItem>Host: SCSU</IonItem>
+        <IonItem>Student Lot</IonItem>
+        <IonItem>Lot A</IonItem>
       </IonContent>
     </>
   );
-}; // IonItems are temporary - Working to import specific array details (host, description)
+};

@@ -19,23 +19,34 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showBuildings, setShowBuildings] = useState(true);
   const [showEvents, setShowEvents] = useState(false);
   const [showParking, setShowParking] = useState(false);
+  const [showOrganization, setShowOrganization] = useState(false);
 
   const buildings = () => {
     setShowBuildings(true);
     setShowEvents(false);
     setShowParking(false);
+    setShowOrganization(false);
   };
 
   const events = () => {
     setShowBuildings(false);
     setShowEvents(true);
     setShowParking(false);
+    setShowOrganization(false);
   };
 
   const parking = () => {
     setShowBuildings(false);
     setShowEvents(false);
     setShowParking(true);
+    setShowOrganization(false);
+  };
+
+  const organization = () => {
+    setShowBuildings(false);
+    setShowEvents(false);
+    setShowParking(false);
+    setShowOrganization(true);
   };
 
   return (
@@ -46,12 +57,13 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           showBuildings={buildings}
           showEvents={events}
           showParking={parking}
+          showOrgs={organization}
         />
         <MapContent
           buildings={showBuildings && props.buildings}
           events={showEvents && props.events}
           parkingLots={showParking && props.parkingLots}
-          organizations={props.organizations}
+          organizations={showOrganization && props.organizations}
           showName={props.showName}
         />
       </IonContent>

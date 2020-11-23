@@ -1,11 +1,18 @@
 import React from "react";
 import { IonFab, IonFabButton, IonFabList, IonIcon } from "@ionic/react";
-import { business, calendar, car, chevronDown } from "ionicons/icons";
+import {
+  briefcase,
+  business,
+  calendar,
+  car,
+  chevronDown,
+} from "ionicons/icons";
 
 interface PinFilterProps {
   showBuildings: () => void;
   showEvents: () => void;
   showParking: () => void;
+  showOrgs: () => void;
 }
 
 export const PinFilter: React.FC<PinFilterProps> = (props: PinFilterProps) => (
@@ -22,6 +29,9 @@ export const PinFilter: React.FC<PinFilterProps> = (props: PinFilterProps) => (
       </IonFabButton>
       <IonFabButton onClick={props.showParking}>
         <IonIcon icon={car} />
+      </IonFabButton>
+      <IonFabButton onClick={props.showOrgs}>
+        <IonIcon icon={briefcase} />
       </IonFabButton>
     </IonFabList>
   </IonFab>

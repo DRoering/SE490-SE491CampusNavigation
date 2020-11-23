@@ -8,5 +8,4 @@ export interface Organization extends CommonProperties {
   application: string;
   id: number;
   name: string;
-  coordinates: [number, number];
 }

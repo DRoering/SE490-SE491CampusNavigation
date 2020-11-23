@@ -33,7 +33,7 @@ export const ParkingLotPin: React.FC<ParkingLotPinProps> = (
   return (
     <>
       {validParkingLots &&
-        props.parkingLots.map((parkingLot) => (
+        validParkingLots.map((parkingLot) => (
           <Marker
             key={parkingLot.id}
             position={parkingLot.coordinates}

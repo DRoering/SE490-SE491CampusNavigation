@@ -1,12 +1,5 @@
 import { EventModal, EventList, HeaderBar } from "../../components";
-import {
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonContent,
-  IonModal,
-} from "@ionic/react";
+import { IonPage, IonContent, IonModal } from "@ionic/react";
 import React, { useState } from "react";
 import { useFakeEvent } from "../../DataProviders";
 

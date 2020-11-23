@@ -1,5 +1,5 @@
 import React from "react";
-import { Lot } from "../../DataProviders";
+import { Lot } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,

@@ -1,6 +1,6 @@
 import { IonContent, IonItem, IonList } from "@ionic/react";
-import { CampusEvent } from "../../DataProviders";
-import { ModalHeader } from "../";
+import { CampusEvent } from "../../../DataProviders";
+import { ModalHeader } from "../..";
 import React from "react";
 
 interface EventModalProps {

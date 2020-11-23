@@ -7,7 +7,7 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
-import { Organization } from "../../DataProviders";
+import { Organization } from "../../../DataProviders";
 
 interface OrganizationListProps {
   organization: Organization[];

@@ -3,10 +3,16 @@ import { Map, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
-import { Building, Lot, CampusEvent } from "../../DataProviders";
-import { BuildingPin, ParkingLotPin, EventPin } from "./components";
+import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
+import {
+  BuildingPin,
+  ParkingLotPin,
+  EventPin,
+  OrganizationPin,
+} from "./components";
 
 interface CampusMapProps {
+  organizations: Organization[];
   buildings: Building[];
   showName: boolean;
   parkingLots: Lot[];
@@ -39,6 +45,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       />
       <BuildingPin buildings={props.buildings} showName={props.showName} />
       <ParkingLotPin parkingLots={props.parkingLots} />
+      <OrganizationPin organization={props.organizations} />
       <EventPin events={props.events}></EventPin>
       ))
     </Map>

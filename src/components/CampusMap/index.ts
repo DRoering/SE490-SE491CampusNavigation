@@ -1,1 +1,3 @@
-export * from "../CampusMap";
+import { CampusMap } from "../../pages";
+
+export { CampusMap } from "./CampusMap";

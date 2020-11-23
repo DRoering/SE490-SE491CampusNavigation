@@ -35,7 +35,7 @@ export const MainTabs: React.FC = () => {
   const [parkingLots, setParkingLots] = useState(useFakeParking());
   const [events, setEvents] = useState(useFakeEvent());
   const [showName, setShowName] = useState(true);
-  const [organization, setOrganization] = useState(useFakeOrganization());
+  const [organizations, setOrganization] = useState(useFakeOrganization());
 
   const toggleName = () => {
     console.log("resetName called");
@@ -57,6 +57,7 @@ export const MainTabs: React.FC = () => {
               showName={showName}
               parkingLots={parkingLots}
               events={events}
+              organizations={organizations}
             />
           )}
           exact={true}
@@ -68,7 +69,7 @@ export const MainTabs: React.FC = () => {
         />
         <Route
           path="/:tab(Organizations)"
-          render={() => <Organizations organization={organization} />}
+          render={() => <Organizations organization={organizations} />}
           exact={true}
         />
         <Route

@@ -9,7 +9,6 @@ import {
 } from "@ionic/react";
 import {
   map,
-  informationCircle,
   briefcase,
   business,
   calendarOutline,

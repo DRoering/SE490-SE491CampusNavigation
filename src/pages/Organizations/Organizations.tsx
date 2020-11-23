@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { IonPage, IonContent, IonModal } from "@ionic/react";
 import { Organization } from "../../DataProviders";
-import { OrganizationList, OrganizationModal } from "../../components";
+import {
+  OrganizationList,
+  OrganizationModal,
+  HeaderBar,
+} from "../../components";
 
 interface OrganizationListProps {
   organization: Organization[];
@@ -21,6 +25,7 @@ export const Organizations: React.FC<OrganizationListProps> = (
 
   return (
     <IonPage>
+      <HeaderBar />
       <IonContent>
         <OrganizationList
           organization={props.organization}

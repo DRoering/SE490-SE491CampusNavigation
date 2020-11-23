@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonTabs,
   IonTabBar,
@@ -9,7 +9,6 @@ import {
 } from "@ionic/react";
 import {
   map,
-  informationCircle,
   briefcase,
   business,
   calendarOutline,
@@ -44,6 +43,12 @@ export const MainTabs: React.FC = () => {
       setShowName(true);
     });
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      toggleName();
+    });
+  }, []);
 
   return (
     <IonTabs>

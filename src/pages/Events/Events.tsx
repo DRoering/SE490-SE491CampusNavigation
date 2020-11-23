@@ -1,12 +1,5 @@
-import { EventModal, EventList } from "../../components";
-import {
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonContent,
-  IonModal,
-} from "@ionic/react";
+import { EventModal, EventList, HeaderBar } from "../../components";
+import { IonPage, IonContent, IonModal } from "@ionic/react";
 import React, { useState } from "react";
 import { useFakeEvent } from "../../DataProviders";
 
@@ -21,15 +14,10 @@ export const Events: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Upcoming Events</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-
+      <HeaderBar />
       <IonContent>
         <EventList clickEvent={toggleModal} events={fakeEvent} />
-        <IonModal cssClass="item-modal" isOpen={showModal}>
+        <IonModal cssClass="item-modal" isOpen={showModal} swipeToClose={true}>
           <EventModal closeAction={toggleModal} />
         </IonModal>
       </IonContent>

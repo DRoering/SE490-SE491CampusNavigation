@@ -1,5 +1,5 @@
 import React from "react";
-import { Organization } from "../../../../DataProviders";
+import { Organization } from "../../../DataProviders";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { IonLabel } from "@ionic/react";

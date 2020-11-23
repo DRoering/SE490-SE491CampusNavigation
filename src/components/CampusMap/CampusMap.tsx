@@ -4,13 +4,13 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
 import { Building, Lot, CampusEvent } from "../../DataProviders";
-import { BuildingPin, ParkingLotPin, EventPin } from "./components";
+import { BuildingPin, ParkingLotPin, EventPin } from "../";
 
 interface CampusMapProps {
-  buildings: Building[];
+  buildings: Building[] | false;
+  events: CampusEvent[] | false;
+  parkingLots: Lot[] | false;
   showName: boolean;
-  parkingLots: Lot[];
-  events: CampusEvent[];
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -37,10 +37,11 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <BuildingPin buildings={props.buildings} showName={props.showName} />
-      <ParkingLotPin parkingLots={props.parkingLots} />
-      <EventPin events={props.events}></EventPin>
-      ))
+      {props.buildings && (
+        <BuildingPin buildings={props.buildings} showName={props.showName} />
+      )}
+      {props.events && <EventPin events={props.events} />}
+      {props.parkingLots && <ParkingLotPin parkingLots={props.parkingLots} />}
     </Map>
   );
 

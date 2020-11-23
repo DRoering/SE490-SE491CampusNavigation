@@ -1,7 +1,7 @@
 import { IonContent, IonItem, IonLabel, IonList } from "@ionic/react";
 import React from "react";
-import { Organization } from "../../DataProviders";
-import { ModalHeader } from "../";
+import { Organization } from "../../../DataProviders";
+import { ModalHeader } from "../..";
 
 interface OrganizationModalProps {
   organization: Organization;

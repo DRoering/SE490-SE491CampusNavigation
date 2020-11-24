@@ -24,17 +24,17 @@ import {
 } from "../../pages";
 import {
   useBuilding,
-  useFakeParking,
-  useFakeEvent,
+  useParkingLot,
+  useEvent,
   useFakeOrganization,
 } from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
   const buildings = useBuilding();
-  const [parkingLots, setParkingLots] = useState(useFakeParking());
-  const [events, setEvents] = useState(useFakeEvent());
+  const parkingLots = useParkingLot();
+  const events = useEvent();
   const [showName, setShowName] = useState(true);
-  const [organization, setOrganization] = useState(useFakeOrganization());
+  const [organizations, setOrganization] = useState(useFakeOrganization());
 
   const toggleName = () => {
     console.log("resetName called");
@@ -53,7 +53,11 @@ export const MainTabs: React.FC = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Route path="/:tab(Events)" render={() => <Events />} exact={true} />
+        <Route
+          path="/:tab(Events)"
+          render={() => <Events events={events} />}
+          exact={true}
+        />
         <Route
           path="/:tab(Map)"
           render={() => (
@@ -62,6 +66,7 @@ export const MainTabs: React.FC = () => {
               showName={showName}
               parkingLots={parkingLots}
               events={events}
+              organizations={organizations}
             />
           )}
           exact={true}
@@ -73,7 +78,7 @@ export const MainTabs: React.FC = () => {
         />
         <Route
           path="/:tab(Organizations)"
-          render={() => <Organizations organization={organization} />}
+          render={() => <Organizations organization={organizations} />}
           exact={true}
         />
         <Route

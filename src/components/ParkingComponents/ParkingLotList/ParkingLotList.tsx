@@ -6,7 +6,6 @@ import {
   IonCol,
   IonGrid,
   IonLabel,
-  IonList,
   IonRow,
 } from "@ionic/react";
 
@@ -19,25 +18,19 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
   props: ParkingLotProps
 ) => {
   return (
-    <IonList>
-      {props.parkingLots.map((parkingLots) => (
-        <IonCard key={parkingLots.id} onClick={() => props.clickEvent()}>
-          <IonCardContent>
-            <IonGrid>
-              <IonRow>
-                <IonCol size="8">
-                  <IonLabel>{parkingLots.name}</IonLabel>
-                </IonCol>
-              </IonRow>
-              <IonRow>
-                <IonCol>
-                  <IonLabel>{parkingLots.designation}</IonLabel>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
-          </IonCardContent>
-        </IonCard>
-      ))}
-    </IonList>
+    <IonGrid>
+      <IonRow>
+        {props.parkingLots.map((parkingLots) => (
+          <IonCol key={parkingLots.id}>
+            <IonCard>
+              <IonCardContent>
+                <IonLabel>{parkingLots.name}</IonLabel>
+                <IonLabel>{parkingLots.designation}</IonLabel>
+              </IonCardContent>
+            </IonCard>
+          </IonCol>
+        ))}
+      </IonRow>
+    </IonGrid>
   );
 };

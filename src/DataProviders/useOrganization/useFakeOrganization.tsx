@@ -1,24 +1,18 @@
 import moment from "moment";
 import { Organization } from "./Organization";
+import { Strings } from "../";
+import { useEffect, useState } from "react";
+import { Moment } from "moment";
+import L from "leaflet";
+import { get } from "../HTTPProvider";
+import { BuildingList } from "../../components";
 
 const organization: Organization[] = [];
-
-//const getOrganization = (): Organization => {
-// return {
-//   Officers: "officerName",
-//   meetingTime: moment(),
-//   communication: "communicationtype",
-//  application: "fillAplication",
-//   id: 2346,
-//   name: "orgName",
-//   coordinates: [8754, 790],
-//  };
-//};
 
 for (let i = 1; i <= 12; i++) {
   organization.push({
     id: i,
-    name: `Organization Name ${i}`,
+    name: `${i}`,
     officers: "officerName",
     meetingTime: moment(),
     communication: "communicationtype",

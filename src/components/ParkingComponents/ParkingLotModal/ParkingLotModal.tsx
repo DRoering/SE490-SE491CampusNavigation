@@ -9,7 +9,7 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
-import { Lot } from "../../DataProviders";
+import { Lot } from "../../../DataProviders";
 
 interface ParkingLotProps {
   parkingLot: Lot[];

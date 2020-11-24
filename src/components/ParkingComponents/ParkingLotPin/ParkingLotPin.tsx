@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import "./ParkingLotPin.scss";
-import { Lot } from "../../../../DataProviders";
+import { Lot } from "../../../DataProviders";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { IonLabel } from "@ionic/react";

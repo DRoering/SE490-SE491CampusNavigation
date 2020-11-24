@@ -1,26 +1,40 @@
 import { EventModal, EventList, HeaderBar } from "../../components";
 import { IonPage, IonContent, IonModal } from "@ionic/react";
 import React, { useState } from "react";
-import { useFakeEvent } from "../../DataProviders";
+import { CampusEvent } from "../../DataProviders";
 
-const fakeEvent = useFakeEvent();
+interface EventProps {
+  events: CampusEvent[];
+}
 
-export const Events: React.FC = () => {
+export const Events: React.FC<EventProps> = (props: EventProps) => {
+  const [eventDetails, setEventDetails] = useState<CampusEvent>();
   const [showModal, setShowModal] = useState(false);
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
+  const openDetails = (e: CampusEvent) => {
+    setEventDetails(e);
+    setShowModal(true);
   };
 
   return (
     <IonPage>
       <HeaderBar />
       <IonContent>
-        <EventList clickEvent={toggleModal} events={fakeEvent} />
-        <IonModal cssClass="item-modal" isOpen={showModal} swipeToClose={true}>
-          <EventModal closeAction={toggleModal} />
-        </IonModal>
+        <EventList events={props.events} clickEvent={openDetails} />
       </IonContent>
+      {eventDetails && (
+        <IonModal
+          isOpen={showModal}
+          cssClass="item-modal"
+          swipeToClose={true}
+          onDidDismiss={() => setShowModal(false)}
+        >
+          <EventModal
+            event={eventDetails}
+            closeAction={() => setShowModal(false)}
+          />
+        </IonModal>
+      )}
     </IonPage>
   );
 };

@@ -1,4 +1,4 @@
-import { IonContent, IonItem, IonList } from "@ionic/react";
+import { IonContent, IonItem, IonLabel, IonList } from "@ionic/react";
 import { CampusEvent } from "../../../DataProviders";
 import { ModalHeader } from "../..";
 import React from "react";
@@ -16,10 +16,14 @@ export const EventModal: React.FC<EventModalProps> = (
       <ModalHeader close={props.closeAction} title="Event Details" />
       <IonContent>
         <IonList>
-          <IonItem>Description: Test Description</IonItem>
-          <IonItem>Host: SCSU</IonItem>
+          <IonItem>
+            <IonLabel>Description: {props.event.description}</IonLabel>
+          </IonItem>
+          <IonItem>
+            <IonLabel>Host: {props.event.host}</IonLabel>
+          </IonItem>
         </IonList>
       </IonContent>
     </>
   );
-}; // IonItems are temporary - Working to import specific array details (host, description)
+};

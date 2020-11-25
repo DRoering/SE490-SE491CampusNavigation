@@ -9,10 +9,10 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
-import { Lot } from "../../DataProviders";
+import { Lot } from "../../../DataProviders";
 
 interface ParkingLotProps {
-  parkingLot: Lot[];
+  parkingLot: Lot;
   closeAction: () => void;
 }
 
@@ -32,8 +32,8 @@ export const ParkingLotModal: React.FC<ParkingLotProps> = (
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonItem>Student Lot</IonItem>
-        <IonItem>Lot A</IonItem>
+        <IonItem>{props.parkingLot.type}</IonItem>
+        <IonItem>{props.parkingLot.designation}</IonItem>
       </IonContent>
     </>
   );

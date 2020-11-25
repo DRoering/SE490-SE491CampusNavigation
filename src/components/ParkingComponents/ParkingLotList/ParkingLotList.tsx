@@ -11,7 +11,7 @@ import {
 
 interface ParkingLotProps {
   parkingLots: Lot[];
-  clickEvent: () => void;
+  openDetails: (p: Lot) => void;
 }
 
 export const ParkingLotList: React.FC<ParkingLotProps> = (
@@ -22,7 +22,7 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
       <IonRow>
         {props.parkingLots.map((parkingLots) => (
           <IonCol key={parkingLots.id}>
-            <IonCard>
+            <IonCard onClick={() => props.openDetails(parkingLots)}>
               <IonCardContent>
                 <IonLabel>{parkingLots.name}</IonLabel>
                 <IonLabel>{parkingLots.designation}</IonLabel>

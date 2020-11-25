@@ -25,14 +25,14 @@ import {
 import {
   useBuilding,
   useParkingLot,
-  useFakeEvent,
+  useEvent,
   useFakeOrganization,
 } from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
   const buildings = useBuilding();
   const parkingLots = useParkingLot();
-  const [events, setEvents] = useState(useFakeEvent());
+  const events = useEvent();
   const [showName, setShowName] = useState(true);
   const [organizations, setOrganization] = useState(useFakeOrganization());
 
@@ -53,7 +53,11 @@ export const MainTabs: React.FC = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Route path="/:tab(Events)" render={() => <Events />} exact={true} />
+        <Route
+          path="/:tab(Events)"
+          render={() => <Events events={events} />}
+          exact={true}
+        />
         <Route
           path="/:tab(Map)"
           render={() => (

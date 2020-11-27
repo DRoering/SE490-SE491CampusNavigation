@@ -1,6 +1,6 @@
 import moment from "moment";
 import { Organization } from "./Organization";
-import { Strings } from "../";
+import { Strings } from "..";
 import { useEffect, useState } from "react";
 import { Moment } from "moment";
 import L from "leaflet";
@@ -56,7 +56,7 @@ const getOrganizations = (setOrganizations: (e: Organization[]) => void) => {
     });
 };
 
-export const useFakeOrganization = (): Organization[] => {
+export const useOrganization = (): Organization[] => {
   const [organization, setOrganization] = useState<Organization[]>([]);
 
   useEffect(() => {

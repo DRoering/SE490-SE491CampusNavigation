@@ -26,15 +26,15 @@ import {
   useBuilding,
   useParkingLot,
   useEvent,
-  useFakeOrganization,
+  useOrganization,
 } from "../../DataProviders";
 
 export const MainTabs: React.FC = () => {
   const buildings = useBuilding();
   const parkingLots = useParkingLot();
   const events = useEvent();
+  const organizations = useOrganization();
   const [showName, setShowName] = useState(true);
-  const [organizations, setOrganization] = useState(useFakeOrganization);
 
   const toggleName = () => {
     console.log("resetName called");

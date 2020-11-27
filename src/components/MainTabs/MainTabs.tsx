@@ -34,7 +34,7 @@ export const MainTabs: React.FC = () => {
   const parkingLots = useParkingLot();
   const events = useEvent();
   const [showName, setShowName] = useState(true);
-  const [organizations, setOrganization] = useState(useFakeOrganization());
+  const [organizations, setOrganization] = useState(useFakeOrganization);
 
   const toggleName = () => {
     console.log("resetName called");

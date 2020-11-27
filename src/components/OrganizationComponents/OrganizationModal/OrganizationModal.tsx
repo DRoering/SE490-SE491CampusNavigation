@@ -17,7 +17,7 @@ export const OrganizationModal: React.FC<OrganizationModalProps> = (
       <IonContent>
         <IonList>
           <IonItem>
-            <IonLabel>{props.organization.building}</IonLabel>
+            <IonLabel>Location:{props.organization.building}</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>

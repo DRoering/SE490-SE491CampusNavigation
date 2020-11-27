@@ -32,20 +32,49 @@ const getLong = () => {
 const getLocation = (): L.LatLng => {
   return L.latLng([getLat(), getLong()]);
 };
+const { apiUrl, apiKey } = Strings;
 
-for (let i = 1; i <= 12; i++) {
-  organization.push({
-    id: i,
-    name: `${i}`,
-    officers: "officerName",
-    meetingTime: moment(),
-    communication: "communicationtype",
-    application: "fillAplication",
-    coordinates: getLocation(),
-    latitude: getLat(),
-    longitude: getLong(),
-  });
-}
+const getOrganizations = (setOrganizations: (e: Organization[]) => void) => {
+  get<{ records: ApiResponse[] }>(`${apiUrl}Organization/`, { api_key: apiKey })
+    .then((response) => {
+      console.log("Response from API: ", response);
+      const organizationData: Organization[] = [];
+
+      response.data.records.forEach((record) => {
+        const lat = record.fields.latitude;
+        const lon = record.fields.longitude;
+
+        if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
+        organizationData.push(record.fields);
+      });
+
+      console.log(organizationData);
+      setOrganizations(organizationData);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export const useFakeOrganization = (): Organization[] => {
+  const [organization, setOrganization] = useState<Organization[]>([]);
+
+  useEffect(() => {
+    getOrganizations(setOrganization);
+  }, []);
+
   return organization;
 };
+//for (let i = 1; i <= 12; i++) {
+//  organization.push({
+//    id: i,
+//    name: `${i}`,
+//    officers: "officerName",
+//    meetingTime: moment(),
+//   communication: "communicationtype",
+//    application: "fillAplication",
+//    coordinates: getLocation(),
+//    latitude: getLat(),
+//    longitude: getLong(),
+// });
+//}

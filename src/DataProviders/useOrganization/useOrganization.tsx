@@ -35,7 +35,9 @@ const getLocation = (): L.LatLng => {
 const { apiUrl, apiKey } = Strings;
 
 const getOrganizations = (setOrganizations: (e: Organization[]) => void) => {
-  get<{ records: ApiResponse[] }>(`${apiUrl}Organization/`, { api_key: apiKey })
+  get<{ records: ApiResponse[] }>(`${apiUrl}Organizations/`, {
+    api_key: apiKey,
+  })
     .then((response) => {
       console.log("Response from API: ", response);
       const organizationData: Organization[] = [];
@@ -57,13 +59,13 @@ const getOrganizations = (setOrganizations: (e: Organization[]) => void) => {
 };
 
 export const useOrganization = (): Organization[] => {
-  const [organization, setOrganization] = useState<Organization[]>([]);
+  const [organizations, setOrganization] = useState<Organization[]>([]);
 
   useEffect(() => {
     getOrganizations(setOrganization);
   }, []);
 
-  return organization;
+  return organizations;
 };
 //for (let i = 1; i <= 12; i++) {
 //  organization.push({

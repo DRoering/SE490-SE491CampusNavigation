@@ -78,7 +78,7 @@ export const MainTabs: React.FC = () => {
         />
         <Route
           path="/:tab(Organizations)"
-          render={() => <Organizations organization={organizations} />}
+          render={() => <Organizations organizations={organizations} />}
           exact={true}
         />
         <Route

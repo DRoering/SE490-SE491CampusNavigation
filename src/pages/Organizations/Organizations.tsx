@@ -8,7 +8,7 @@ import {
 } from "../../components";
 
 interface OrganizationListProps {
-  organization: Organization[];
+  organizations: Organization[];
 }
 
 export const Organizations: React.FC<OrganizationListProps> = (
@@ -28,7 +28,7 @@ export const Organizations: React.FC<OrganizationListProps> = (
       <HeaderBar />
       <IonContent>
         <OrganizationList
-          organization={props.organization}
+          organizations={props.organizations}
           openModal={openModal}
         />
       </IonContent>
@@ -39,7 +39,10 @@ export const Organizations: React.FC<OrganizationListProps> = (
           swipeToClose={true}
           onDidDismiss={closeModal}
         >
-          <OrganizationModal organization={org} close={closeModal} />
+          <OrganizationModal
+            organization={org}
+            close={() => setShowModal(false)}
+          />
         </IonModal>
       )}
     </IonPage>

@@ -1,2 +1,2 @@
 export * from "./Building";
-export { useFakeBuilding } from "./useFakeBuilding";
+export * from "./useBuilding";

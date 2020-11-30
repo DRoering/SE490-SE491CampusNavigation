@@ -10,7 +10,7 @@ import {
 import { Organization } from "../../../DataProviders";
 
 interface OrganizationListProps {
-  organization: Organization[];
+  organizations: Organization[];
   openModal: (o: Organization) => void;
 }
 
@@ -20,7 +20,7 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
   return (
     <IonGrid>
       <IonRow>
-        {props.organization.map((organization) => (
+        {props.organizations.map((organization) => (
           <IonCol key={organization.id} sizeXs="6">
             <IonCard onClick={() => props.openModal(organization)}>
               <IonCardContent>

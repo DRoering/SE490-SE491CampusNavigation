@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Marker, Popup, Tooltip } from "react-leaflet";
 import { Building } from "../../../DataProviders";
 import L from "leaflet";
@@ -10,9 +10,22 @@ interface BuildingPinProps {
   showName: boolean;
 }
 
+const filterBuildings = (buildings: Building[]) => {
+  const validBuildings: Building[] = [];
+  buildings.forEach((building) => {
+    if (building.coordinates) validBuildings.push(building);
+  });
+  console.log(validBuildings);
+  return validBuildings;
+};
+
 export const BuildingPin: React.FC<BuildingPinProps> = (
   props: BuildingPinProps
 ) => {
+  const validBuildings = useMemo(() => {
+    console.log("BuildingPin memo called");
+    return filterBuildings(props.buildings);
+  }, [props.buildings]);
   const buildingIcon = L.icon({
     iconUrl: "assets/mapIcons/businessIcon.png",
     iconSize: [25, 25],
@@ -21,7 +34,7 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
 
   return (
     <>
-      {props.buildings.map((building) => (
+      {validBuildings.map((building) => (
         <Marker
           key={building.id}
           position={building.coordinates}

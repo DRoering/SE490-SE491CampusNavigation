@@ -49,18 +49,18 @@ const getLong = () => {
   return Math.random() * (Bounds.maxLong - Bounds.minLong) + Bounds.minLong;
 };
 
-for (let i = 0; i < 15; i++) {
-  parkingLots.push({
-    id: i,
-    type: "Student",
-    name: `Lot A ${i}`,
-    coordinates: getLocation(),
-    designation: "AA",
-    permit: true,
-    rate: getRate(),
-    hours: getHours(),
-  });
-}
+// for (let i = 0; i < 15; i++) {
+//   parkingLots.push({
+//     id: i,
+//     type: "Student",
+//     name: `Lot A ${i}`,
+//     coordinates: getLocation(),
+//     designation: "AA",
+//     permit: true,
+//     rate: getRate(),
+//     hours: getHours(),
+//   });
+// }
 
 export const useFakeParking = (): Lot[] => {
   return parkingLots;

@@ -23,7 +23,7 @@ export const BuildingList: React.FC<BuildingListProps> = (
         {props.buildings.map((building) => (
           <IonCol key={building.id} size="4" sizeXs="6">
             <IonCard onClick={() => props.openDetails(building)}>
-              <img ion-img-cache="true" src={building.img} />
+              <img ion-img-cache="true" src={building.imgUrl} />
               <IonCardContent>
                 <IonLabel>{`${building.name} (${building.abbreviation})`}</IonLabel>
                 <IonLabel>{building.services}</IonLabel>

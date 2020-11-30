@@ -21,7 +21,11 @@ export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
         {props.events.map((event) => (
           <IonCol key={event.id} size="4" sizeXs="6">
             <IonCard onClick={() => props.clickEvent(event)}>
-              <img ion-img-cache="true" src={"assets/mapIcons/calendar.png"} />
+              <img
+                ion-img-cache="true"
+                src={"assets/mapIcons/calendar.png"}
+                alt=""
+              />
               <IonCardContent>
                 <IonLabel>
                   {" "}

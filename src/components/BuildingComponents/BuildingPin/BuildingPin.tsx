@@ -43,7 +43,7 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
           <Popup id="building-popup">
             <IonLabel id="name">{building.name}</IonLabel>
             <p id="info">
-              {building.isOpen && <img src="assets/mapIcons/open.png" />}
+              {building.isOpen && <img src="assets/mapIcons/open.png" alt="" />}
             </p>
           </Popup>
           <Tooltip

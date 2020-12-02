@@ -1,6 +1,4 @@
-import { get } from "../HTTPProvider";
-import { Building } from "./Building";
-import { Strings } from "../";
+import { Strings, get, Building } from "..";
 import { useEffect, useState } from "react";
 import { Moment } from "moment";
 import L from "leaflet";

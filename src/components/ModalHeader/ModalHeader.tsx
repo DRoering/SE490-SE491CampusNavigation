@@ -10,7 +10,7 @@ import { closeCircle } from "ionicons/icons";
 import "./ModalHeader.scss";
 
 interface ModalHeaderProps {
-  title: string;
+  title?: string;
   close: () => void;
 }
 
@@ -24,7 +24,7 @@ export const ModalHeader: React.FC<ModalHeaderProps> = (
           <IonIcon icon={closeCircle} slot="icon-only" />
         </IonButton>
       </IonButtons>
-      <IonTitle>{props.title}</IonTitle>
+      {props.title && <IonTitle>{props.title}</IonTitle>}
     </IonToolbar>
   );
 };

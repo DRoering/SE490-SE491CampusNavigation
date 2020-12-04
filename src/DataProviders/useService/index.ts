@@ -1,2 +1,2 @@
 export * from "./Service";
-export { useSerices } from "./useServices";
+export { useServices } from "./useServices";

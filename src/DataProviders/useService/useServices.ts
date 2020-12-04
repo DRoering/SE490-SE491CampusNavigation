@@ -4,8 +4,9 @@ import { Strings, get, Service } from "..";
 
 interface Params {
   api_key?: string;
+  filterByFormula: string;
   maxRecords: number;
-  filterByFormula: (id: number) => string;
+  sort?: string;
 }
 
 interface ApiResponse {
@@ -16,27 +17,36 @@ interface ApiResponse {
 
 const { apiUrl, apiKey } = Strings;
 
+const sortString = "&sort[0][field]=serviceId&sort[0][direction]=asc";
+
 const getServices = (setServices: (s: Service[]) => void, params: Params) => {
-  get<ApiResponse>(`${apiUrl}BuildingServices/`, params)
+  get<{ records: ApiResponse[] }>(`${apiUrl}BuildingServices`, params)
     .then((response) => {
       console.log("Building response: ", response);
-      const rawItems = response.data;
+      const rawItems: Service[] = [];
+
+      response.data.records.forEach((record) => {
+        rawItems.push(record.fields);
+      });
+
+      setServices(rawItems);
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
-export const useService = (params: Params): [Service[], boolean] => {
+export const useServices = (params: Params): [Service[], boolean] => {
   const [services, setServices] = useState<Service[]>([]);
+
+  console.log(params);
 
   useEffect(() => {
     let cancel = false;
     if (!cancel)
       getServices(setServices, {
-        ...params,
         api_key: apiKey,
-        filterByFormula: (id) => `Find("${id}"%2C+Buildings)`,
+        ...params,
       });
 
     return () => {

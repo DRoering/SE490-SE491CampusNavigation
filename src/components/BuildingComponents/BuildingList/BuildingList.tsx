@@ -29,8 +29,7 @@ export const BuildingList: React.FC<BuildingListProps> = (
                 alt={building.name}
               />
               <IonCardContent>
-                <IonLabel>{`${building.name} (${building.abbreviation})`}</IonLabel>
-                <IonLabel>{building.services}</IonLabel>
+                <IonLabel id="card-title">{`${building.name} (${building.abbreviation})`}</IonLabel>
               </IonCardContent>
             </IonCard>
           </IonCol>

@@ -1,13 +1,19 @@
+import { Moment } from "moment";
 import { CommonProperties } from "../../Reuseable";
 
 export interface CampusEvent extends CommonProperties {
-  theme: string[];
+  additionalInfo: string;
   category: string[];
-  description: string;
+  description?: string;
   freeStuff: boolean;
-  openToPublic: boolean;
+  endDate: Moment;
   host: string;
-  upcoming: boolean;
-  virtualLink: string;
+  hostUrl?: string;
+  isPublic: boolean;
   password: string;
+  rsvpLink?: string;
+  startDate: Moment;
+  theme: string[];
+  upcoming: boolean;
+  virtualLink?: string;
 }

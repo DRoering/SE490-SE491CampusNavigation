@@ -4,6 +4,7 @@ import { Strings } from "../";
 import { useEffect, useState } from "react";
 import { Moment } from "moment";
 import L from "leaflet";
+import moment from "moment";
 
 interface ApiResponse {
   id: string;
@@ -22,8 +23,14 @@ const getEvents = (setEvents: (e: CampusEvent[]) => void) => {
       response.data.records.forEach((record) => {
         const lat = record.fields.latitude;
         const lon = record.fields.longitude;
+        const sD = record.fields.startDate;
+        const eD = record.fields.endDate;
 
         if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
+        record.fields.startDate = moment(sD);
+        record.fields.endDate = moment(eD);
+
+        console.log(record.fields.startDate.isValid());
         eventData.push(record.fields);
       });
 

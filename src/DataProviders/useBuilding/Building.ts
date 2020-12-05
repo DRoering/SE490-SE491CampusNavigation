@@ -1,4 +1,5 @@
 import { Moment } from "moment";
+import { Service } from "..";
 import { CommonProperties } from "../../Reuseable";
 
 interface DailyHours {
@@ -16,10 +17,9 @@ export interface ParkingLot {
 
 export interface Building extends CommonProperties {
   abbreviation: string;
-  description?: string;
   directions?: string;
   parking?: string;
   nearestLot?: ParkingLot;
-  imgUrl: string;
   buildingHours: DailyHours[];
+  services?: Service[];
 }

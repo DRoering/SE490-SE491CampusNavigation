@@ -8,6 +8,7 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { CampusEvent } from "../../../DataProviders";
+import "./EventList.scss";
 
 interface EventListProps {
   events: CampusEvent[];
@@ -23,18 +24,11 @@ export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
             <IonCard onClick={() => props.clickEvent(event)}>
               <img
                 ion-img-cache="true"
-                src={"assets/mapIcons/calendar.png"}
-                alt=""
+                src={`assets/images/events/${event.imgUrl}.png`}
+                alt="Event"
               />
               <IonCardContent>
-                <IonLabel>
-                  {" "}
-                  {`${event.name} - `}{" "}
-                  {`Hours: 
-                  ${event.hours?.open?.format(
-                    "hh:mm"
-                  )} - ${event?.hours?.close?.format("hh:mm")}`}
-                </IonLabel>
+                <IonLabel id="card-title">{event.name}</IonLabel>
               </IonCardContent>
             </IonCard>
           </IonCol>

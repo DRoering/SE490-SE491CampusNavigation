@@ -4,6 +4,7 @@ export interface CommonProperties {
   accessibility?: string;
   building?: string;
   coordinates: [number, number] | L.LatLng;
+  description?: string;
   hours?: { open: Moment; close?: Moment };
   id: number;
   latitude: number;
@@ -12,4 +13,5 @@ export interface CommonProperties {
   room?: string;
   virtual?: boolean;
   isOpen?: boolean;
+  imgUrl?: string;
 }

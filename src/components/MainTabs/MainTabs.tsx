@@ -89,7 +89,7 @@ export const MainTabs: React.FC = () => {
         <Route exact path="/" render={() => <Redirect to="/Map" />} />
       </IonRouterOutlet>
 
-      <IonTabBar slot="bottom">
+      <IonTabBar slot="bottom" color="primary">
         <IonTabButton tab="Map" href="/Map" onClick={toggleName}>
           <IonIcon icon={map} />
           <IonLabel>Map</IonLabel>

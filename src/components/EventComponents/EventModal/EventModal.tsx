@@ -22,13 +22,13 @@ export const EventModal: React.FC<EventModalProps> = (
 ) => {
   return (
     <>
-      <ModalHeader close={props.closeAction} title="Event Details" />
+      <ModalHeader close={props.closeAction} title={"Event Details"} />
       <IonContent>
         <IonItem className="app-fonts" id="item-info">
           <IonLabel className="ion-text-wrap" id="title">
             {props.event.name}
           </IonLabel>
-          {props.event.rsvpLink && (
+          {props.event.rsvpLink ? (
             <IonButton
               href={props.event.rsvpLink}
               target="_blank"
@@ -37,6 +37,8 @@ export const EventModal: React.FC<EventModalProps> = (
             >
               <IonLabel className="app-fonts">RSVP to Event</IonLabel>
             </IonButton>
+          ) : (
+            <IonLabel className="app-fonts">RSVP not required</IonLabel>
           )}
         </IonItem>
         <IonCard id="img-card">
@@ -51,7 +53,7 @@ export const EventModal: React.FC<EventModalProps> = (
             <IonLabel id={`is-${props.event.isPublic ? "open" : "closed"}`}>
               {props.event.isPublic
                 ? "Open to the public"
-                : "Closedto the public"}
+                : "Closed to the public"}
             </IonLabel>
           </IonItem>
           <IonItem className="app-fonts" id="item-info">

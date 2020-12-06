@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { Strings } from "..";
-import { get } from "../HTTPProvider";
-import { Lot } from ".";
+import { Strings, get, Lot } from "..";
 import { Moment } from "moment";
 import L from "leaflet";
 
@@ -26,6 +24,12 @@ const getParkingLots = (setParkingLots: (l: Lot[]) => void) => {
         const lon = record.fields.longitude;
 
         if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
+
+        rawItems.sort((a: Lot, b: Lot) => {
+          if (a.id < b.id) return -1;
+          return 1;
+        });
+
         rawItems.push(record.fields);
       });
 

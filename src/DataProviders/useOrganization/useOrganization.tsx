@@ -1,5 +1,4 @@
-import { Organization } from "./";
-import { Strings, get } from "..";
+import { Organization, Strings, get } from "..";
 import { useEffect, useState } from "react";
 import { Moment } from "moment";
 import L from "leaflet";
@@ -18,18 +17,23 @@ const getOrganizations = (setOrganizations: (e: Organization[]) => void) => {
   })
     .then((response) => {
       console.log("Response from API: ", response);
-      const organizationData: Organization[] = [];
+      const orgData: Organization[] = [];
 
       response.data.records.forEach((record) => {
         const lat = record.fields.latitude;
         const lon = record.fields.longitude;
 
         if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
-        organizationData.push(record.fields);
+        orgData.push(record.fields);
       });
 
-      console.log(organizationData);
-      setOrganizations(organizationData);
+      orgData.sort((a: Organization, b: Organization) => {
+        if (a.id < b.id) return -1;
+        return 1;
+      });
+
+      console.log(orgData);
+      setOrganizations(orgData);
     })
     .catch((error) => {
       console.log(error);

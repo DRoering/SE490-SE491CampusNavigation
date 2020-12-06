@@ -21,8 +21,6 @@ const getBuildings = (setBuildings: (b: Building[]) => void) => {
         const lat = record.fields.latitude;
         const lon = record.fields.longitude;
 
-        console.log(typeof lat === "number", typeof lon === "number");
-
         if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
         rawItems.push(record.fields);
       });

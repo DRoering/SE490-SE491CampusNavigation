@@ -30,8 +30,12 @@ const getEvents = (setEvents: (e: CampusEvent[]) => void) => {
         record.fields.startDate = moment(sD);
         record.fields.endDate = moment(eD);
 
-        console.log(record.fields.startDate.isValid());
         eventData.push(record.fields);
+      });
+
+      eventData.sort((a: CampusEvent, b: CampusEvent) => {
+        if (a.id < b.id) return -1;
+        return 1;
       });
 
       console.log(eventData);

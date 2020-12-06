@@ -18,3 +18,8 @@ $fonts: (
 .app-fonts {
   font-family: $fonts !important;
 }
+
+#title {
+  font-weight: 600;
+  font-size: large;
+}

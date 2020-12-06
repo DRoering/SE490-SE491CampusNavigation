@@ -34,8 +34,11 @@ const getEvents = (setEvents: (e: CampusEvent[]) => void) => {
       });
 
       eventData.sort((a: CampusEvent, b: CampusEvent) => {
-        if (a.id < b.id) return -1;
-        return 1;
+        const aDate = a.startDate;
+        const bDate = b.startDate;
+        if (aDate.isBefore(bDate)) return -1;
+        if (bDate.isBefore(aDate)) return 1;
+        return 0;
       });
 
       console.log(eventData);

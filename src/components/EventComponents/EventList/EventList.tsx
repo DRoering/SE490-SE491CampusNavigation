@@ -6,6 +6,7 @@ import {
   IonGrid,
   IonRow,
 } from "@ionic/react";
+import moment from "moment";
 import React from "react";
 import { CampusEvent } from "../../../DataProviders";
 import "./EventList.scss";
@@ -15,11 +16,27 @@ interface EventListProps {
   clickEvent: (e: CampusEvent) => void;
 }
 
+const currentDate = moment();
+
+console.log(currentDate);
+
+const filterEvents = (e: CampusEvent[]) => {
+  const currentEvents: CampusEvent[] = [];
+
+  e.forEach((event) => {
+    if (!event.startDate.isBefore(currentDate)) currentEvents.push(event);
+  });
+
+  return currentEvents;
+};
+
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
+  const validEvents = filterEvents(props.events);
+
   return (
     <IonGrid>
       <IonRow>
-        {props.events.map((event) => (
+        {validEvents.map((event) => (
           <IonCol key={event.id} size="4" sizeXs="6">
             <IonCard onClick={() => props.clickEvent(event)}>
               <img

@@ -46,7 +46,7 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
               {building.isOpen && <img src="assets/mapIcons/open.png" alt="" />}
             </p>
           </Popup>
-          <Tooltip
+          {/* <Tooltip
             className="tooltip"
             direction="bottom"
             offset={[0, 5]}
@@ -54,7 +54,7 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
             permanent={props.showName}
           >
             <span>{building.name}</span>
-          </Tooltip>
+          </Tooltip> */}
         </Marker>
       ))}
     </>

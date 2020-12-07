@@ -5,6 +5,7 @@ import { Building } from "../../DataProviders";
 
 interface BuildingsProps {
   buildings: Building[];
+  setPosition: (c: L.LatLng) => void;
 }
 
 export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
@@ -32,6 +33,10 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
           <BuildingModal
             building={buildingDetails}
             close={() => setShowModal(false)}
+            setPosition={(c: L.LatLng) => {
+              props.setPosition(c);
+              setShowModal(false);
+            }}
           />
         </IonModal>
       )}

@@ -13,6 +13,7 @@ interface CampusMapProps {
   parkingLots: Lot[];
   events: CampusEvent[];
   organizations: Organization[];
+  position: { c: L.LatLng; z: number };
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -65,6 +66,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           parkingLots={showParking && props.parkingLots}
           organizations={showOrganization && props.organizations}
           showName={props.showName}
+          position={props.position}
         />
       </IonContent>
     </IonPage>

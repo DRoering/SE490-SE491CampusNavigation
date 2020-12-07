@@ -13,12 +13,11 @@ interface CampusMapProps {
   parkingLots: Lot[] | false;
   organizations: Organization[] | false;
   showName: boolean;
+  position: { c: L.LatLng; z: number };
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
-  const position = L.latLng([45.5511, -94.1515]);
   const minimumZoom = 8;
-  const zoom = 16;
 
   useEffect(() => {
     console.debug("resetSize Called");
@@ -30,8 +29,8 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const map = (
     <Map
       key={minimumZoom}
-      center={position}
-      zoom={zoom}
+      center={props.position.c}
+      zoom={props.position.z}
       minZoom={minimumZoom}
       id="campus-map"
     >

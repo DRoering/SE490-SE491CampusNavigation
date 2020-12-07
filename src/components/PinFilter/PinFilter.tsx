@@ -30,9 +30,9 @@ export const PinFilter: React.FC<PinFilterProps> = (props: PinFilterProps) => (
       <IonFabButton onClick={props.showParking}>
         <IonIcon icon={car} />
       </IonFabButton>
-      <IonFabButton onClick={props.showOrgs}>
+      {/* <IonFabButton onClick={props.showOrgs}>
         <IonIcon icon={briefcase} />
-      </IonFabButton>
+      </IonFabButton> */}
     </IonFabList>
   </IonFab>
 );

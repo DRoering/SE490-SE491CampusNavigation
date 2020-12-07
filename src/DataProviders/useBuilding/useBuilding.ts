@@ -1,6 +1,4 @@
-import { get } from "../HTTPProvider";
-import { Building } from "./Building";
-import { Strings } from "../";
+import { Strings, get, Building } from "..";
 import { useEffect, useState } from "react";
 import { Moment } from "moment";
 import L from "leaflet";
@@ -23,10 +21,13 @@ const getBuildings = (setBuildings: (b: Building[]) => void) => {
         const lat = record.fields.latitude;
         const lon = record.fields.longitude;
 
-        console.log(typeof lat === "number", typeof lon === "number");
-
         if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
         rawItems.push(record.fields);
+      });
+
+      rawItems.sort((a: Building, b: Building) => {
+        if (a.id < b.id) return -1;
+        return 1;
       });
 
       console.log(rawItems);

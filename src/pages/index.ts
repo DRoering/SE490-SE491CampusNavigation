@@ -1,2 +1,5 @@
 export * from "./CampusMap";
-export * from "./Home";
+export * from "./Events";
+export * from "./Buildings";
+export * from "./Organizations";
+export * from "./ParkingLots";

@@ -1,0 +1,16 @@
+.building-popup {
+  width: auto;
+  height: auto;
+}
+
+.leaflet-tooltip-bottom::before {
+  border: none;
+}
+
+.tooltip {
+  background: transparent;
+  border: 0px;
+  margin: 0px;
+  box-shadow: none;
+  font-weight: bold;
+}

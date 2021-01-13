@@ -3,11 +3,21 @@ import { Map, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
+import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
+import { BuildingPin, ParkingLotPin, EventPin } from "../";
+import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 
-export const CampusMap: React.FC = () => {
-  const position = L.latLng([45.5511, -94.1515]);
+interface CampusMapProps {
+  buildings: Building[] | false;
+  events: CampusEvent[] | false;
+  parkingLots: Lot[] | false;
+  organizations: Organization[] | false;
+  showName: boolean;
+  position: { c: L.LatLng; z: number };
+}
+
+export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const minimumZoom = 8;
-  const zoom = 16;
 
   useEffect(() => {
     console.debug("resetSize Called");
@@ -19,8 +29,8 @@ export const CampusMap: React.FC = () => {
   const map = (
     <Map
       key={minimumZoom}
-      center={position}
-      zoom={zoom}
+      center={props.position.c}
+      zoom={props.position.z}
       minZoom={minimumZoom}
       id="campus-map"
     >
@@ -28,6 +38,14 @@ export const CampusMap: React.FC = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
+      {props.buildings && (
+        <BuildingPin buildings={props.buildings} showName={props.showName} />
+      )}
+      {props.events && <EventPin events={props.events} />}
+      {props.parkingLots && <ParkingLotPin parkingLots={props.parkingLots} />}
+      {props.organizations && (
+        <OrganizationPin organization={props.organizations} />
+      )}
     </Map>
   );
 

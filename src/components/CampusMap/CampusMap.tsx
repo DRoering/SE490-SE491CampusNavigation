@@ -7,6 +7,7 @@ import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
+import { CenterUserMap } from "./Components/CenterUserMap";
 
 interface CampusMapProps {
   buildings: Building[] | false;
@@ -32,7 +33,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       key={minimumZoom}
       center={props.position.c}
       zoom={props.position.z}
-      minZoom={minimumZoom}
+      //minZoom={minimumZoom}
       id="campus-map"
     >
       <TileLayer

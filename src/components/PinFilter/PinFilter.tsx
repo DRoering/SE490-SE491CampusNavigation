@@ -1,12 +1,6 @@
 import React from "react";
 import { IonFab, IonFabButton, IonFabList, IonIcon } from "@ionic/react";
-import {
-  briefcase,
-  business,
-  calendar,
-  car,
-  chevronDown,
-} from "ionicons/icons";
+import { business, calendar, car, chevronDown } from "ionicons/icons";
 
 interface PinFilterProps {
   showBuildings: () => void;

@@ -7,7 +7,6 @@ import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
-import { CenterUserMap } from "./Components/CenterUserMap";
 
 interface CampusMapProps {
   buildings: Building[] | false;
@@ -16,6 +15,7 @@ interface CampusMapProps {
   organizations: Organization[] | false;
   showName: boolean;
   position: { c: L.LatLng; z: number };
+  userPosition: { c: L.LatLng; r: number };
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -48,7 +48,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       {props.organizations && (
         <OrganizationPin organization={props.organizations} />
       )}
-      <UserLocation />
+      {props.userPosition && <UserLocation userPosition={props.userPosition} />}
     </Map>
   );
 

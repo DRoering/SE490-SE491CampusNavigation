@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { IonPage, IonContent } from "@ionic/react";
+import {
+  IonPage,
+  IonContent,
+  IonFab,
+  IonFabButton,
+  IonIcon,
+} from "@ionic/react";
 import {
   CampusMap as MapContent,
   HeaderBar,
   PinFilter,
 } from "../../components";
-import { CenterUserMap } from "../../components/CampusMap/Components/CenterUserMap";
 import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
-import { UserLocation } from "../../components/CampusMap/Components";
-import { count } from "console";
-import { Geolocation } from "@ionic-native/geolocation";
 import L from "leaflet";
+import { Geolocation } from "@ionic-native/geolocation";
+import { navigateCircleOutline } from "ionicons/icons";
 
 interface CampusMapProps {
   buildings: Building[];
@@ -19,6 +23,7 @@ interface CampusMapProps {
   events: CampusEvent[];
   organizations: Organization[];
   position: { c: L.LatLng; z: number };
+  centerUser: (c: L.LatLng, z: number) => void;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -26,9 +31,23 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showEvents, setShowEvents] = useState(false);
   const [showParking, setShowParking] = useState(false);
   const [showOrganization, setShowOrganization] = useState(false);
-  const [showUserlocation, setshowUserlocation] = useState<L.LatLng>(
-    L.latLng([0, 0])
-  );
+  const [userLocation, setUserLocation] = useState({
+    c: L.latLng([0, 0]),
+    r: 0,
+  });
+  const locate = async () => {
+    const locale = await Geolocation.getCurrentPosition();
+
+    setUserLocation({
+      c: L.latLng([locale.coords.latitude, locale.coords.longitude]),
+      r: locale.coords.heading,
+    });
+  };
+
+  const centerUser = () => {
+    if (!(userLocation.c === L.latLng([0, 0])))
+      props.centerUser(userLocation.c, userLocation.r);
+  };
 
   const buildings = () => {
     setShowBuildings(true);
@@ -57,35 +76,36 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     setShowParking(false);
     setShowOrganization(true);
   };
-  const centerUserMap = () => {
-    const locate = async () => {
-      const locale = await Geolocation.getCurrentPosition();
 
-      setshowUserlocation(
-        L.latLng([locale.coords.latitude, locale.coords.longitude])
-      );
-    };
-    return (
-      <IonPage>
-        <HeaderBar />
-        <IonContent>
-          <PinFilter
-            showBuildings={buildings}
-            showEvents={events}
-            showParking={parking}
-            showOrgs={organization}
-          />
-          <CenterUserMap showUserlocation={centerUserMap} />
-          <MapContent
-            buildings={showBuildings && props.buildings}
-            events={showEvents && props.events}
-            parkingLots={showParking && props.parkingLots}
-            organizations={showOrganization && props.organizations}
-            showName={props.showName}
-            position={props.position}
-          />
-        </IonContent>
-      </IonPage>
-    );
-  };
+  useEffect(() => {
+    locate();
+  }, []);
+
+  return (
+    <IonPage>
+      <HeaderBar />
+      <IonContent>
+        <PinFilter
+          showBuildings={buildings}
+          showEvents={events}
+          showParking={parking}
+          showOrgs={organization}
+        />
+        <IonFab horizontal="end" vertical="bottom" slot="fixed">
+          <IonFabButton color="dark" onClick={centerUser}>
+            <IonIcon icon={navigateCircleOutline} />
+          </IonFabButton>
+        </IonFab>
+        <MapContent
+          buildings={showBuildings && props.buildings}
+          events={showEvents && props.events}
+          parkingLots={showParking && props.parkingLots}
+          organizations={showOrganization && props.organizations}
+          showName={props.showName}
+          position={props.position}
+          userPosition={userLocation}
+        />
+      </IonContent>
+    </IonPage>
+  );
 };

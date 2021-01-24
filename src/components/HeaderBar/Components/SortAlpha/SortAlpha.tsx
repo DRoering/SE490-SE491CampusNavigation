@@ -1,6 +1,6 @@
 import React from "react";
 import Moment from "moment";
-import { CommonProperties } from "../../../Reuseable";
+import { CommonProperties } from "../../../../Reuseable";
 
 interface ArrayListProps<T> extends CommonProperties {
   tabArray: Array<T>[];

@@ -2,7 +2,7 @@ import { IonButton, IonPopover } from "@ionic/react";
 import React, { useState } from "react";
 import { IonIcon } from "@ionic/react";
 import { funnel } from "ionicons/icons";
-import { SortPopover } from "./SortPopover";
+import { SortPopover } from "../SortPopover";
 
 export const SortMenu: React.FC = () => {
   const [popoverState, setPopoverState] = useState({
@@ -22,6 +22,7 @@ export const SortMenu: React.FC = () => {
         <SortPopover />
       </IonPopover>
       <IonButton
+        slot="end"
         onClick={(e: any) => {
           e.persist();
           setPopoverState({ showPopoverState: true, event: e });

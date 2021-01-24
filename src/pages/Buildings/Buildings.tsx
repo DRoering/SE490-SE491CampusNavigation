@@ -1,7 +1,6 @@
 import { IonContent, IonModal, IonPage } from "@ionic/react";
 import React, { useState } from "react";
 import { BuildingList, BuildingModal, HeaderBar } from "../../components";
-import { SortMenu } from "../../components/SortMenuComponents";
 import { Building } from "../../DataProviders";
 
 interface BuildingsProps {
@@ -21,7 +20,6 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
   return (
     <IonPage>
       <HeaderBar />
-      <SortMenu />
       <IonContent>
         <BuildingList buildings={props.buildings} openDetails={openDetails} />
       </IonContent>

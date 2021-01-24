@@ -2,6 +2,7 @@ import React from "react";
 import { IonHeader, IonToolbar } from "@ionic/react";
 import { Strings } from "../../DataProviders";
 import "./HeaderBar.scss";
+import { SortMenu } from "./Components";
 
 export const HeaderBar: React.FC = () => (
   <IonHeader>
@@ -14,6 +15,7 @@ export const HeaderBar: React.FC = () => (
           slot="start"
         />
       </a>
+      <SortMenu />
     </IonToolbar>
   </IonHeader>
 );

@@ -1,13 +1,14 @@
 import React, { useMemo } from "react";
 import { Marker, Popup, Tooltip } from "react-leaflet";
-import { Building } from "../../../DataProviders";
+import { Building, CampusEvent, Lot } from "../../../DataProviders";
 import L from "leaflet";
-import { IonLabel } from "@ionic/react";
+import { IonButton, IonLabel } from "@ionic/react";
 import "./BuildingPin.scss";
 
 interface BuildingPinProps {
   buildings: Building[];
   showName: boolean;
+  openDetails: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
 }
 
 const filterBuildings = (buildings: Building[]) => {
@@ -45,6 +46,14 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
             <p id="info">
               {building.isOpen && <img src="assets/mapIcons/open.png" alt="" />}
             </p>
+            <IonButton
+              expand="block"
+              onClick={() =>
+                props.openDetails({ b: building, e: undefined, p: undefined })
+              }
+            >
+              <IonLabel>Open Details</IonLabel>
+            </IonButton>
           </Popup>
           {/* <Tooltip
             className="tooltip"

@@ -5,10 +5,14 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
+  IonModal,
 } from "@ionic/react";
 import {
+  BuildingModal,
   CampusMap as MapContent,
+  EventModal,
   HeaderBar,
+  ParkingLotModal,
   PinFilter,
 } from "../../components";
 import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
@@ -31,6 +35,12 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showEvents, setShowEvents] = useState(false);
   const [showParking, setShowParking] = useState(false);
   const [showOrganization, setShowOrganization] = useState(false);
+  const [itemDetails, setItemDetails] = useState<{
+    b?: Building;
+    e?: CampusEvent;
+    p?: Lot;
+  }>();
+  const [showModal, setShowModal] = useState(false);
   const [userLocation, setUserLocation] = useState({
     c: L.latLng([0, 0]),
     r: 0,
@@ -42,11 +52,18 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       c: L.latLng([locale.coords.latitude, locale.coords.longitude]),
       r: locale.coords.heading,
     });
+
+    console.log(locale);
   };
 
   const centerUser = () => {
     if (!(userLocation.c === L.latLng([0, 0])))
       props.centerUser(userLocation.c, userLocation.r);
+  };
+
+  const openDetails = (i: { b?: Building; e?: CampusEvent; p?: Lot }) => {
+    setItemDetails(i);
+    setShowModal(true);
   };
 
   const buildings = () => {
@@ -104,8 +121,36 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           showName={props.showName}
           position={props.position}
           userPosition={userLocation}
+          openDetails={openDetails}
         />
       </IonContent>
+      {itemDetails && (
+        <IonModal
+          isOpen={showModal}
+          cssClass="item-modal"
+          swipeToClose={true}
+          onDidDismiss={() => setShowModal(false)}
+        >
+          {itemDetails.b && (
+            <BuildingModal
+              building={itemDetails.b}
+              close={() => setShowModal(false)}
+            />
+          )}
+          {itemDetails.e && (
+            <EventModal
+              event={itemDetails.e}
+              closeAction={() => setShowModal(false)}
+            />
+          )}
+          {itemDetails.p && (
+            <ParkingLotModal
+              parkingLot={itemDetails.p}
+              closeAction={() => setShowModal(false)}
+            />
+          )}
+        </IonModal>
+      )}
     </IonPage>
   );
 };

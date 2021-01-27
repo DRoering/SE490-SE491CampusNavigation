@@ -1,1 +1,3 @@
-export * from "./SortAlpha";
+import { sortArrayAlpha } from "./SortAlpha";
+
+export { sortArrayAlpha } from "./SortAlpha";

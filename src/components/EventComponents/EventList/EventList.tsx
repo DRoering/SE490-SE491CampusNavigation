@@ -33,7 +33,7 @@ const filterEvents = (e: CampusEvent[]) => {
 
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
   const validEvents = filterEvents(props.events);
-  const importedSort = sortArrayAlpha(props.events);
+  //const importedSort = sortArrayAlpha(props.events);
 
   return (
     <IonGrid>

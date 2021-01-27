@@ -10,7 +10,7 @@ import moment from "moment";
 import React, { Props } from "react";
 import { CampusEvent } from "../../../DataProviders";
 import "./EventList.scss";
-import { sortArrayAlpha } from "../../HeaderBar/Components/SortAlpha";
+//import { sortArrayAlpha } from "../../HeaderBar/Components/SortAlpha";
 
 interface EventListProps {
   events: CampusEvent[];

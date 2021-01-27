@@ -8,7 +8,6 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
-import { sortArrayAlpha } from "../../HeaderBar/Components/SortAlpha";
 
 interface ParkingLotProps {
   parkingLots: Lot[];
@@ -18,8 +17,6 @@ interface ParkingLotProps {
 export const ParkingLotList: React.FC<ParkingLotProps> = (
   props: ParkingLotProps
 ) => {
-  //const sorted = sortArrayAlpha(props.parkingLots);
-
   return (
     <IonGrid>
       <IonRow>

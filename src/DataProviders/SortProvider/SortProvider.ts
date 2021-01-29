@@ -19,6 +19,8 @@ export const useSortSettings = (): [
   const useSort = useMemo<SortType>(() => {
     if (sort && SortAlgorithms.Distance.type.includes(sort))
       return SortAlgorithms.Distance;
+    if (sort && SortAlgorithms.Date.type.includes(sort))
+      return SortAlgorithms.Date;
     return SortAlgorithms.Alphabetical;
   }, [sort]);
 

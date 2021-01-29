@@ -1,7 +1,7 @@
 import { EventModal, EventList, HeaderBar } from "../../components";
 import { IonPage, IonContent, IonModal } from "@ionic/react";
 import React, { useState } from "react";
-import { CampusEvent } from "../../DataProviders";
+import { CampusEvent, useSortSettings } from "../../DataProviders";
 
 interface EventProps {
   events: CampusEvent[];
@@ -10,6 +10,7 @@ interface EventProps {
 export const Events: React.FC<EventProps> = (props: EventProps) => {
   const [eventDetails, setEventDetails] = useState<CampusEvent>();
   const [showModal, setShowModal] = useState(false);
+  const [sort, updateSort, useSort] = useSortSettings();
 
   const openDetails = (e: CampusEvent) => {
     setEventDetails(e);
@@ -20,7 +21,11 @@ export const Events: React.FC<EventProps> = (props: EventProps) => {
     <IonPage>
       <HeaderBar />
       <IonContent>
-        <EventList events={props.events} clickEvent={openDetails} />
+        <EventList
+          events={props.events}
+          clickEvent={openDetails}
+          sortAlgorithm={useSort}
+        />
       </IonContent>
       {eventDetails && (
         <IonModal

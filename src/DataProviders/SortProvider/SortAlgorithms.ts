@@ -27,8 +27,8 @@ export const SortAlgorithms = {
       a: Building | CampusEvent | Lot,
       b: Building | CampusEvent | Lot
     ): number => {
-      if (a.closerThan(b)) return 1;
-      if (b.closerThan(a)) return -1;
+      // if (a.closerThan(b)) return 1;
+      // if (b.closerThan(a)) return -1;
       return 0;
     },
   },

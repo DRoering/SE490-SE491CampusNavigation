@@ -1,1 +1,1 @@
-export { Strings } from "./Strings";
+export { Strings, ItemSortOptions } from "./Strings";

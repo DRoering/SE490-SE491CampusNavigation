@@ -1,2 +1,7 @@
 export * from "./SortAlgorithms";
-export { useSortSettings } from "./SortProvider";
+export {
+  useBuildingSort,
+  useEventSort,
+  useLotSort,
+  useOrgSort,
+} from "./SortProvider";

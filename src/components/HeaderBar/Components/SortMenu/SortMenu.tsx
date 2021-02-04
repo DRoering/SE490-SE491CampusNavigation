@@ -1,14 +1,28 @@
-import { IonButton, IonPopover } from "@ionic/react";
+import {
+  IonButton,
+  IonPopover,
+  IonLabel,
+  IonRadio,
+  IonRadioGroup,
+  IonList,
+  IonItem,
+} from "@ionic/react";
 import React, { useState } from "react";
 import { IonIcon } from "@ionic/react";
 import { funnel } from "ionicons/icons";
-import { SortPopover } from "../SortPopover";
 
-export const SortMenu: React.FC = () => {
+interface SortMenuProps {
+  sortOptions: string[];
+  currentSort: string;
+  updateSort: (u?: string) => void;
+}
+
+export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
   const [popoverState, setPopoverState] = useState({
     showPopoverState: false,
     event: undefined,
   });
+
   return (
     <>
       <IonPopover
@@ -19,7 +33,19 @@ export const SortMenu: React.FC = () => {
           setPopoverState({ showPopoverState: false, event: undefined })
         }
       >
-        <SortPopover />
+        <IonList>
+          <IonRadioGroup
+            value={props.currentSort}
+            onIonChange={(e) => props.updateSort(e.detail.value)}
+          >
+            {props.sortOptions.map((option) => (
+              <IonItem key={option}>
+                <IonLabel>{option}</IonLabel>
+                <IonRadio slot="start" value={option} />
+              </IonItem>
+            ))}
+          </IonRadioGroup>
+        </IonList>
       </IonPopover>
       <IonButton
         slot="end"

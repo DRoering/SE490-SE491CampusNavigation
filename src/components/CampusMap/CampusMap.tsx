@@ -16,6 +16,7 @@ interface CampusMapProps {
   showName: boolean;
   position: { c: L.LatLng; z: number };
   userPosition: { c: L.LatLng; r: number };
+  openDetails: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -41,10 +42,21 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       {props.buildings && (
-        <BuildingPin buildings={props.buildings} showName={props.showName} />
+        <BuildingPin
+          buildings={props.buildings}
+          showName={props.showName}
+          openDetails={props.openDetails}
+        />
       )}
-      {props.events && <EventPin events={props.events} />}
-      {props.parkingLots && <ParkingLotPin parkingLots={props.parkingLots} />}
+      {props.events && (
+        <EventPin events={props.events} openDetails={props.openDetails} />
+      )}
+      {props.parkingLots && (
+        <ParkingLotPin
+          parkingLots={props.parkingLots}
+          openDetails={props.openDetails}
+        />
+      )}
       {props.organizations && (
         <OrganizationPin organization={props.organizations} />
       )}

@@ -7,6 +7,7 @@
     "@ionic-native/core": "^5.29.0",
     "@ionic-native/geolocation": "^5.30.0",
     "@ionic-native/http": "^5.29.0",
+    "@ionic-native/native-geocoder": "^5.31.1",
     "@ionic/react": "5.0.7",
     "@ionic/react-hooks": "0.0.8",
     "@ionic/react-router": "5.0.7",

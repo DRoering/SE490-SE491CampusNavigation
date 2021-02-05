@@ -37,6 +37,7 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
         <ParkingLotList
           parkingLots={props.parkingLots}
           openDetails={openDetails}
+          sortAlgorithm={useSort}
         />
       </IonContent>
       {parkingLotDetails && (

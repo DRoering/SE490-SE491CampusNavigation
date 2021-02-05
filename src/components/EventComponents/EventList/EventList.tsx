@@ -31,13 +31,21 @@ const filterEvents = (e: CampusEvent[]) => {
   return currentEvents;
 };
 
+const reSort = (
+  events: CampusEvent[],
+  sort: (a: CampusEvent, b: CampusEvent) => number
+) => events.sort(sort);
+
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
   const validEvents = filterEvents(props.events);
+  const sortedEvents = filterEvents(
+    reSort(props.events, props.sortAlgorithm.function)
+  );
 
   return (
     <IonGrid>
       <IonRow>
-        {validEvents.map((event) => (
+        {sortedEvents.map((event) => (
           <IonCol key={event.id} size="4" sizeXs="6">
             <IonCard onClick={() => props.clickEvent(event)}>
               <img

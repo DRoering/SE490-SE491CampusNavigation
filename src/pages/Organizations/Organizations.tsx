@@ -28,13 +28,7 @@ export const Organizations: React.FC<OrganizationListProps> = (
 
   return (
     <IonPage>
-      <HeaderBar
-        sortObject={{
-          sortOptions: sortOptions,
-          currentSort: sort,
-          updateSort: updateSort,
-        }}
-      />
+      <HeaderBar />
       <IonContent>
         <OrganizationList
           organizations={props.organizations}

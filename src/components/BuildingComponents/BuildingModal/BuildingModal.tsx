@@ -17,7 +17,7 @@ import "./BuildingModal.scss";
 interface BuildingModalProps {
   building: Building;
   close: () => void;
-  setPosition: (c: L.LatLng) => void;
+  setPosition?: (c: L.LatLng) => void;
 }
 
 const getFindFormula = (id: number) => `Find("${id}",Buildings)`;
@@ -55,14 +55,16 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
             alt={`${props.building.name}`}
           />
         </IonCard>
-        <IonButton
-          disabled={!props.building.coordinates}
-          expand="block"
-          color="secondary"
-          onClick={() => props.setPosition(props.building.coordinates)}
-        >
-          View on Map
-        </IonButton>
+        {props.setPosition && (
+          <IonButton
+            disabled={!props.building.coordinates}
+            expand="block"
+            color="secondary"
+            onClick={() => props.setPosition?.(props.building.coordinates)}
+          >
+            View on Map
+          </IonButton>
+        )}
         <IonList>
           <IonItemDivider className="app-fonts" id="item-info">
             <IonLabel id="title">Description</IonLabel>

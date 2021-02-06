@@ -16,6 +16,7 @@ export interface ParkingLot {
 }
 
 export interface Building extends CommonProperties {
+  imgUrl: string | undefined;
   abbreviation: string;
   directions?: string;
   parking?: string;

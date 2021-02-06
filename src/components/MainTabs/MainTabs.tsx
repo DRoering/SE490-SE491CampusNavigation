@@ -52,8 +52,10 @@ export const MainTabs: React.FC = () => {
     });
   };
 
-  const setPosition = (c: L.LatLng) => {
-    setCoords({ c: c, z: 20 });
+  const setPosition = (c: L.LatLng, r?: number) => {
+    if (c === coords.c)
+      setCoords({ c: L.latLng([c.lat + 0.0001, c.lng]), z: 20 });
+    else setCoords({ c: c, z: 20 });
     history.push("/Map");
   };
 
@@ -81,6 +83,7 @@ export const MainTabs: React.FC = () => {
               events={events}
               organizations={organizations}
               position={coords}
+              centerUser={setPosition}
             />
           )}
           exact={true}

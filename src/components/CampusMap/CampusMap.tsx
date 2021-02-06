@@ -6,6 +6,7 @@ import "./CampusMap.scss";
 import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
+import { UserLocation } from "./Components";
 
 interface CampusMapProps {
   buildings: Building[] | false;
@@ -14,6 +15,8 @@ interface CampusMapProps {
   organizations: Organization[] | false;
   showName: boolean;
   position: { c: L.LatLng; z: number };
+  userPosition: { c: L.LatLng; r: number };
+  openDetails: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -31,7 +34,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       key={minimumZoom}
       center={props.position.c}
       zoom={props.position.z}
-      minZoom={minimumZoom}
+      //minZoom={minimumZoom}
       id="campus-map"
     >
       <TileLayer
@@ -39,13 +42,25 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       {props.buildings && (
-        <BuildingPin buildings={props.buildings} showName={props.showName} />
+        <BuildingPin
+          buildings={props.buildings}
+          showName={props.showName}
+          openDetails={props.openDetails}
+        />
       )}
-      {props.events && <EventPin events={props.events} />}
-      {props.parkingLots && <ParkingLotPin parkingLots={props.parkingLots} />}
+      {props.events && (
+        <EventPin events={props.events} openDetails={props.openDetails} />
+      )}
+      {props.parkingLots && (
+        <ParkingLotPin
+          parkingLots={props.parkingLots}
+          openDetails={props.openDetails}
+        />
+      )}
       {props.organizations && (
         <OrganizationPin organization={props.organizations} />
       )}
+      {props.userPosition && <UserLocation userPosition={props.userPosition} />}
     </Map>
   );
 

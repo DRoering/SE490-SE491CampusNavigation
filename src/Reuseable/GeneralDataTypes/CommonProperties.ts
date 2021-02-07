@@ -14,5 +14,4 @@ export interface CommonProperties {
   virtual?: boolean;
   isOpen?: boolean;
   imgUrl?: string;
-  closerThan: (user: L.LatLng) => boolean;
 }

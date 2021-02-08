@@ -54,6 +54,16 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
             >
               <IonLabel>Open Details</IonLabel>
             </IonButton>
+            <IonButton
+              expand="block"
+              onClick={() =>
+                console.log(
+                  "Navigate to : " + building.name + " " + building.coordinates
+                )
+              }
+            >
+              <IonLabel>Navigate Here</IonLabel>
+            </IonButton>
           </Popup>
           {/* <Tooltip
             className="tooltip"

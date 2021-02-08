@@ -4,7 +4,15 @@ import { Strings } from "../../DataProviders";
 import "./HeaderBar.scss";
 import { SortMenu } from "./Components";
 
-export const HeaderBar: React.FC = () => (
+interface HeaderBarProps {
+  sortObject?: {
+    sortOptions: string[];
+    currentSort: string;
+    updateSort: (u?: string) => void;
+  };
+}
+
+export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => (
   <IonHeader>
     <IonToolbar color="primary">
       <a href={Strings.scsuUrl} target="_blank" rel="noopener noreferrer">
@@ -15,7 +23,13 @@ export const HeaderBar: React.FC = () => (
           slot="start"
         />
       </a>
-      <SortMenu />
+      {props.sortObject && (
+        <SortMenu
+          sortOptions={props.sortObject.sortOptions}
+          currentSort={props.sortObject.currentSort}
+          updateSort={props.sortObject.updateSort}
+        />
+      )}
     </IonToolbar>
   </IonHeader>
 );

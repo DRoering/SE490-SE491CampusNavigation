@@ -7,14 +7,14 @@ import {
   IonRow,
 } from "@ionic/react";
 import moment from "moment";
-import React, { Props } from "react";
-import { CampusEvent } from "../../../DataProviders";
+import React from "react";
+import { CampusEvent, SortType } from "../../../DataProviders";
 import "./EventList.scss";
-import { sortArrayAlpha } from "../../HeaderBar/Components/SortAlpha";
 
 interface EventListProps {
   events: CampusEvent[];
   clickEvent: (e: CampusEvent) => void;
+  sortAlgorithm: SortType;
 }
 
 const currentDate = moment();
@@ -31,14 +31,21 @@ const filterEvents = (e: CampusEvent[]) => {
   return currentEvents;
 };
 
+const reSort = (
+  events: CampusEvent[],
+  sort: (a: CampusEvent, b: CampusEvent) => number
+) => events.sort(sort);
+
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
   const validEvents = filterEvents(props.events);
-  const importedSort = sortArrayAlpha(props.events);
+  const sortedEvents = filterEvents(
+    reSort(props.events, props.sortAlgorithm.function)
+  );
 
   return (
     <IonGrid>
       <IonRow>
-        {validEvents.map((event) => (
+        {sortedEvents.map((event) => (
           <IonCol key={event.id} size="4" sizeXs="6">
             <IonCard onClick={() => props.clickEvent(event)}>
               <img

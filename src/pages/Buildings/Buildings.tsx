@@ -1,16 +1,23 @@
 import { IonContent, IonModal, IonPage } from "@ionic/react";
 import React, { useState } from "react";
 import { BuildingList, BuildingModal, HeaderBar } from "../../components";
-import { Building } from "../../DataProviders";
+import {
+  Building,
+  useBuildingSort,
+  ItemSortOptions,
+} from "../../DataProviders";
 
 interface BuildingsProps {
   buildings: Building[];
   setPosition: (c: L.LatLng) => void;
 }
 
+const sortOptions = ItemSortOptions.buildingOptions;
+
 export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
   const [buildingDetails, setBuildingDetails] = useState<Building>();
   const [showModal, setShowModal] = useState(false);
+  const [sort, updateSort, useSort] = useBuildingSort();
 
   const openDetails = (d: Building) => {
     setBuildingDetails(d);
@@ -19,9 +26,19 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
 
   return (
     <IonPage>
-      <HeaderBar />
+      <HeaderBar
+        sortObject={{
+          sortOptions: sortOptions,
+          currentSort: sort,
+          updateSort: updateSort,
+        }}
+      />
       <IonContent>
-        <BuildingList buildings={props.buildings} openDetails={openDetails} />
+        <BuildingList
+          buildings={props.buildings}
+          openDetails={openDetails}
+          sortAlgorithm={useSort}
+        />
       </IonContent>
       {buildingDetails && (
         <IonModal

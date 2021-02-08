@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IonPage, IonContent, IonModal } from "@ionic/react";
-import { Organization } from "../../DataProviders";
+import { Organization, useOrgSort, ItemSortOptions } from "../../DataProviders";
 import {
   OrganizationList,
   OrganizationModal,
@@ -11,11 +11,14 @@ interface OrganizationListProps {
   organizations: Organization[];
 }
 
+const sortOptions = ItemSortOptions.orgOptions;
+
 export const Organizations: React.FC<OrganizationListProps> = (
   props: OrganizationListProps
 ) => {
   const [org, setOrg] = useState<Organization>();
   const [showModal, setShowModal] = useState(false);
+  const [sort, updateSort, useSort] = useOrgSort();
 
   const openModal = (o: Organization) => {
     setOrg(o);

@@ -42,7 +42,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   }>();
   const [showModal, setShowModal] = useState(false);
   const [userLocation, setUserLocation] = useState({
-    c: L.latLng([0, 0]),
+    c: L.latLng([45.551613, -94.148977]),
     r: 0,
   });
   const locate = async () => {
@@ -57,7 +57,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const centerUser = () => {
-    if (!(userLocation.c === L.latLng([0, 0])))
+    if (!(userLocation.c === L.latLng([45.551613, -94.148977])))
       props.centerUser(userLocation.c, userLocation.r);
   };
 
@@ -94,9 +94,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     setShowOrganization(true);
   };
 
-  useEffect(() => {
-    locate();
-  }, []);
+  // useEffect(() => {
+  //   locate();
+  // }, []);
 
   return (
     <IonPage>

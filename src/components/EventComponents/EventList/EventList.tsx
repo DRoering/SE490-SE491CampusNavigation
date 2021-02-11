@@ -7,10 +7,9 @@ import {
   IonRow,
 } from "@ionic/react";
 import moment from "moment";
-import React, { Props } from "react";
+import React from "react";
 import { CampusEvent } from "../../../DataProviders";
 import "./EventList.scss";
-import { sortArrayAlpha } from "../../HeaderBar/Components/SortAlpha";
 
 interface EventListProps {
   events: CampusEvent[];
@@ -33,7 +32,6 @@ const filterEvents = (e: CampusEvent[]) => {
 
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
   const validEvents = filterEvents(props.events);
-  const importedSort = sortArrayAlpha(props.events);
 
   return (
     <IonGrid>

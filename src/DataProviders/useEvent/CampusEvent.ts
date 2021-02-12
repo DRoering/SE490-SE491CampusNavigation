@@ -16,4 +16,5 @@ export interface CampusEvent extends CommonProperties {
   theme: string[];
   upcoming: boolean;
   virtualLink?: string;
+  source?: string;
 }

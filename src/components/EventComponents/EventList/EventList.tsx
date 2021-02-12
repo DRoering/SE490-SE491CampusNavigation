@@ -8,7 +8,7 @@ import {
 } from "@ionic/react";
 import moment from "moment";
 import React from "react";
-import { CampusEvent, SortType, Strings } from "../../../DataProviders";
+import { CampusEvent, SortType } from "../../../DataProviders";
 import "./EventList.scss";
 
 interface EventListProps {
@@ -16,8 +16,6 @@ interface EventListProps {
   clickEvent: (e: CampusEvent) => void;
   sortAlgorithm: SortType;
 }
-
-const { eventUrl } = Strings;
 
 const currentDate = moment();
 
@@ -52,7 +50,7 @@ export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
             <IonCard onClick={() => props.clickEvent(event)}>
               <img
                 ion-img-cache="true"
-                src={`${eventUrl}${event.imgUrl}`}
+                src={`${event.source}${event.imgUrl}`}
                 alt="Event"
               />
               <IonCardContent>

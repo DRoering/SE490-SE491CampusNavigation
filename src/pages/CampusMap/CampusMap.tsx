@@ -31,16 +31,19 @@ interface CampusMapProps {
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
-  const [showBuildings, setShowBuildings] = useState(true);
-  const [showEvents, setShowEvents] = useState(false);
-  const [showParking, setShowParking] = useState(false);
-  const [showOrganization, setShowOrganization] = useState(false);
+  const [showItems, setShowItems] = useState({
+    buildings: true,
+    events: false,
+    parking: false,
+    organization: false,
+  });
   const [itemDetails, setItemDetails] = useState<{
     b?: Building;
     e?: CampusEvent;
     p?: Lot;
   }>();
-  const [showModal, setShowModal] = useState(false);
+  const [showItemModal, setShowItemModal] = useState(false);
+  const [showNavModal, setShowNavModal] = useState(false);
   const [userLocation, setUserLocation] = useState({
     c: L.latLng([45.551613, -94.148977]),
     r: 0,
@@ -63,35 +66,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
 
   const openDetails = (i: { b?: Building; e?: CampusEvent; p?: Lot }) => {
     setItemDetails(i);
-    setShowModal(true);
-  };
-
-  const buildings = () => {
-    setShowBuildings(true);
-    setShowEvents(false);
-    setShowParking(false);
-    setShowOrganization(false);
-  };
-
-  const events = () => {
-    setShowBuildings(false);
-    setShowEvents(true);
-    setShowParking(false);
-    setShowOrganization(false);
-  };
-
-  const parking = () => {
-    setShowBuildings(false);
-    setShowEvents(false);
-    setShowParking(true);
-    setShowOrganization(false);
-  };
-
-  const organization = () => {
-    setShowBuildings(false);
-    setShowEvents(false);
-    setShowParking(false);
-    setShowOrganization(true);
+    setShowItemModal(true);
   };
 
   // useEffect(() => {
@@ -102,22 +77,17 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     <IonPage>
       <HeaderBar />
       <IonContent>
-        <PinFilter
-          showBuildings={buildings}
-          showEvents={events}
-          showParking={parking}
-          showOrgs={organization}
-        />
+        <PinFilter setShowItems={setShowItems} />
         <IonFab horizontal="end" vertical="bottom" slot="fixed">
           <IonFabButton color="dark" onClick={centerUser}>
             <IonIcon icon={navigateCircleOutline} />
           </IonFabButton>
         </IonFab>
         <MapContent
-          buildings={showBuildings && props.buildings}
-          events={showEvents && props.events}
-          parkingLots={showParking && props.parkingLots}
-          organizations={showOrganization && props.organizations}
+          buildings={showItems.buildings && props.buildings}
+          events={showItems.events && props.events}
+          parkingLots={showItems.parking && props.parkingLots}
+          organizations={showItems.organization && props.organizations}
           showName={props.showName}
           position={props.position}
           userPosition={userLocation}
@@ -126,31 +96,37 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       </IonContent>
       {itemDetails && (
         <IonModal
-          isOpen={showModal}
+          isOpen={showItemModal}
           cssClass="item-modal"
           swipeToClose={true}
-          onDidDismiss={() => setShowModal(false)}
+          onDidDismiss={() => setShowItemModal(false)}
         >
           {itemDetails.b && (
             <BuildingModal
               building={itemDetails.b}
-              close={() => setShowModal(false)}
+              close={() => setShowItemModal(false)}
             />
           )}
           {itemDetails.e && (
             <EventModal
               event={itemDetails.e}
-              closeAction={() => setShowModal(false)}
+              closeAction={() => setShowItemModal(false)}
             />
           )}
           {itemDetails.p && (
             <ParkingLotModal
               parkingLot={itemDetails.p}
-              closeAction={() => setShowModal(false)}
+              closeAction={() => setShowItemModal(false)}
             />
           )}
         </IonModal>
       )}
+      <IonModal
+        isOpen={showNavModal}
+        cssClass="nav-modal"
+        swipeToClose={true}
+        onDidDismiss={() => setShowNavModal(false)}
+      ></IonModal>
     </IonPage>
   );
 };

@@ -9,6 +9,7 @@ interface BuildingPinProps {
   buildings: Building[];
   showName: boolean;
   openDetails: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
+  openNav: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
 }
 
 const filterBuildings = (buildings: Building[]) => {
@@ -55,11 +56,10 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
               <IonLabel>Open Details</IonLabel>
             </IonButton>
             <IonButton
+              color="tertiary"
               expand="block"
               onClick={() =>
-                console.log(
-                  "Navigate to : " + building.name + " " + building.coordinates
-                )
+                props.openNav({ b: building, e: undefined, p: undefined })
               }
             >
               <IonLabel>Navigate Here</IonLabel>

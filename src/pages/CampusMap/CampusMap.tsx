@@ -6,6 +6,11 @@ import {
   IonFabButton,
   IonIcon,
   IonModal,
+  IonText,
+  IonItemDivider,
+  IonButton,
+  IonLabel,
+  IonItem,
 } from "@ionic/react";
 import {
   BuildingModal,
@@ -69,6 +74,10 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     setShowItemModal(true);
   };
 
+  const openNav = (i: { b?: Building; e?: CampusEvent; p?: Lot }) => {
+    setItemDetails(i);
+    setShowNavModal(true);
+  };
   // useEffect(() => {
   //   locate();
   // }, []);
@@ -92,6 +101,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           position={props.position}
           userPosition={userLocation}
           openDetails={openDetails}
+          openNav={openNav}
         />
       </IonContent>
       {itemDetails && (
@@ -126,7 +136,21 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         cssClass="nav-modal"
         swipeToClose={true}
         onDidDismiss={() => setShowNavModal(false)}
-      ></IonModal>
+      >
+        <IonItem>
+          <IonText placeholder="destination"></IonText>
+        </IonItem>
+        <IonItem>
+          <IonText placeholder="destination"></IonText>
+        </IonItem>
+        <IonItemDivider />
+        <IonButton onClick={() => setShowNavModal(false)}>
+          <IonLabel>Cancel</IonLabel>
+        </IonButton>
+        <IonButton>
+          <IonLabel>Navigate</IonLabel>
+        </IonButton>
+      </IonModal>
     </IonPage>
   );
 };

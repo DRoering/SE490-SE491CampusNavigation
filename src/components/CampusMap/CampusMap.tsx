@@ -17,6 +17,7 @@ interface CampusMapProps {
   position: { c: L.LatLng; z: number };
   userPosition: { c: L.LatLng; r: number };
   openDetails: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
+  openNav: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -46,6 +47,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           buildings={props.buildings}
           showName={props.showName}
           openDetails={props.openDetails}
+          openNav={props.openNav}
         />
       )}
       {props.events && (

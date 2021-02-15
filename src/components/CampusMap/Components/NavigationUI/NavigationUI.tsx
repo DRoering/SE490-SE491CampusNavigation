@@ -5,23 +5,17 @@ import {
   IonContent,
   IonToolbar,
   IonTitle,
-  IonItem,
   IonButtons,
   IonButton,
   IonIcon,
 } from "@ionic/react";
-import { Map, TileLayer } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-import "./CampusMap.scss";
 
 interface NavigationUIPopup {
-  placeroute: Route;
   closeAction: () => void;
   startNavigation: () => void;
 }
 
-export const NavigationUIModal: React.FC<NavigationUIPopup> = (
+export const NavigationUI: React.FC<NavigationUIPopup> = (
   props: NavigationUIPopup
 ) => {
   return (
@@ -39,9 +33,7 @@ export const NavigationUIModal: React.FC<NavigationUIPopup> = (
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        <IonItem>{props.placeroute.type}</IonItem>
-      </IonContent>
+      <IonContent className="ion-padding"></IonContent>
     </>
   );
 };

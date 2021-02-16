@@ -24,6 +24,7 @@ import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
 import L from "leaflet";
 import { Geolocation } from "@ionic-native/geolocation";
 import { navigateCircleOutline } from "ionicons/icons";
+import { CommonProperties } from "../../Reuseable";
 
 interface CampusMapProps {
   buildings: Building[];
@@ -42,13 +43,12 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     parking: false,
     organization: false,
   });
-  const [itemDetails, setItemDetails] = useState<{
+  const [modalDetails, setModalDetails] = useState<{
     b?: Building;
     e?: CampusEvent;
     p?: Lot;
-  }>();
-  const [showItemModal, setShowItemModal] = useState(false);
-  const [showNavModal, setShowNavModal] = useState(false);
+    open: boolean;
+  }>({ b: undefined, e: undefined, p: undefined, open: false });
   const [userLocation, setUserLocation] = useState({
     c: L.latLng([45.551613, -94.148977]),
     r: 0,
@@ -70,14 +70,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const openDetails = (i: { b?: Building; e?: CampusEvent; p?: Lot }) => {
-    setItemDetails(i);
-    setShowItemModal(true);
+    setModalDetails({ ...i, open: true });
   };
 
-  const openNav = (i: { b?: Building; e?: CampusEvent; p?: Lot }) => {
-    setItemDetails(i);
-    setShowNavModal(true);
-  };
   // useEffect(() => {
   //   locate();
   // }, []);
@@ -101,56 +96,39 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           position={props.position}
           userPosition={userLocation}
           openDetails={openDetails}
-          openNav={openNav}
         />
       </IonContent>
-      {itemDetails && (
+      {modalDetails && (
         <IonModal
-          isOpen={showItemModal}
+          isOpen={modalDetails.open}
           cssClass="item-modal"
           swipeToClose={true}
-          onDidDismiss={() => setShowItemModal(false)}
+          onDidDismiss={() => setModalDetails({ ...modalDetails, open: false })}
         >
-          {itemDetails.b && (
+          {modalDetails.b && (
             <BuildingModal
-              building={itemDetails.b}
-              close={() => setShowItemModal(false)}
+              building={modalDetails.b}
+              close={() => setModalDetails({ ...modalDetails, open: false })}
             />
           )}
-          {itemDetails.e && (
+          {modalDetails.e && (
             <EventModal
-              event={itemDetails.e}
-              closeAction={() => setShowItemModal(false)}
+              event={modalDetails.e}
+              closeAction={() =>
+                setModalDetails({ ...modalDetails, open: false })
+              }
             />
           )}
-          {itemDetails.p && (
+          {modalDetails.p && (
             <ParkingLotModal
-              parkingLot={itemDetails.p}
-              closeAction={() => setShowItemModal(false)}
+              parkingLot={modalDetails.p}
+              closeAction={() =>
+                setModalDetails({ ...modalDetails, open: false })
+              }
             />
           )}
         </IonModal>
       )}
-      <IonModal
-        isOpen={showNavModal}
-        cssClass="nav-modal"
-        swipeToClose={true}
-        onDidDismiss={() => setShowNavModal(false)}
-      >
-        <IonItem>
-          <IonText placeholder="destination"></IonText>
-        </IonItem>
-        <IonItem>
-          <IonText placeholder="destination"></IonText>
-        </IonItem>
-        <IonItemDivider />
-        <IonButton onClick={() => setShowNavModal(false)}>
-          <IonLabel>Cancel</IonLabel>
-        </IonButton>
-        <IonButton>
-          <IonLabel>Navigate</IonLabel>
-        </IonButton>
-      </IonModal>
     </IonPage>
   );
 };

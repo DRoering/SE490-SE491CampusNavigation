@@ -30,7 +30,6 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
             <IonCard onClick={() => props.openDetails(parkingLots)}>
               <IonCardContent>
                 <IonLabel>{parkingLots.name}</IonLabel>
-                <IonLabel>{parkingLots.designation}</IonLabel>
               </IonCardContent>
             </IonCard>
           </IonCol>

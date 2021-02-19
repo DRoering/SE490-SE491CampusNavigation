@@ -29,7 +29,7 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
       <IonRow>
         {sortedLots.map((parkingLots) => (
           <IonCol key={parkingLots.id}>
-            <IonCard onClick={() => props.openDetails(parkingLots)}>
+            <IonCard>
               <IonCardContent>
                 <IonGrid>
                   <IonRow>

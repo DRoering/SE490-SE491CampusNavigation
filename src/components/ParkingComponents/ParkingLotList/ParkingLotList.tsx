@@ -10,6 +10,7 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
+import "./ParkingLotList.scss";
 
 interface ParkingLotProps {
   parkingLots: Lot[];
@@ -28,13 +29,12 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
     <IonGrid>
       <IonRow>
         {sortedLots.map((parkingLots) => (
-          <IonCol key={parkingLots.id}>
+          <IonCol key={parkingLots.id} size="4" sizeXs="6">
             <IonCard>
               <IonCardContent>
                 <IonGrid>
                   <IonRow>
-                    <IonCol size="auto">
-                      {" "}
+                    <IonCol>
                       <IonItemDivider className="app-fonts" id="item-info">
                         <IonLabel id="title">Lot Name</IonLabel>
                       </IonItemDivider>

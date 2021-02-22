@@ -37,9 +37,8 @@ const reSort = (
 ) => events.sort(sort);
 
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
-  const validEvents = filterEvents(props.events);
   const sortedEvents = filterEvents(
-    reSort(props.events, props.sortAlgorithm.function)
+    reSort(filterEvents(props.events), props.sortAlgorithm.function)
   );
 
   return (

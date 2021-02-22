@@ -54,6 +54,19 @@ export const ParkingLotPin: React.FC<ParkingLotPinProps> = (
               >
                 <IonLabel>Open Details</IonLabel>
               </IonButton>
+              <IonButton
+                expand="block"
+                onClick={() =>
+                  console.log(
+                    "Navigate to : " +
+                      parkingLot.name +
+                      " " +
+                      parkingLot.coordinates
+                  )
+                }
+              >
+                <IonLabel>Navigate Here</IonLabel>
+              </IonButton>
             </Popup>
           </Marker>
         ))}

@@ -3,6 +3,8 @@ export const Strings = {
   apiKey: "keyMSO7kBfGHYMyXm",
   scsuUrl: "https://www.stcloudstate.edu",
   eventUrl: "https://huskiesconnect.stcloudstate.edu/image/",
+  feedbackId: "template_ig98ogk",
+  serviceId: "service_1gkznkd",
 };
 
 const baseOptions = ["Alpha", "Distance"];

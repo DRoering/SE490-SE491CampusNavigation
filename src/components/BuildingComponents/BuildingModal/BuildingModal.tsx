@@ -65,6 +65,19 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
             View on Map
           </IonButton>
         )}
+        <IonButton
+          expand="block"
+          onClick={() =>
+            console.log(
+              "Navigate to : " +
+                props.building.name +
+                " " +
+                props.building.coordinates
+            )
+          }
+        >
+          <IonLabel>Navigate Here</IonLabel>
+        </IonButton>
         <IonList>
           <IonItemDivider className="app-fonts" id="item-info">
             <IonLabel id="title">Description</IonLabel>

@@ -29,6 +29,7 @@ const getEvents = (setEvents: (e: CampusEvent[]) => void) => {
         if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
         record.fields.startDate = moment(sD);
         record.fields.endDate = moment(eD);
+        record.fields.hours = { open: moment(sD), close: moment(eD) };
 
         eventData.push(record.fields);
       });

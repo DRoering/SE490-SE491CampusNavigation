@@ -1,5 +1,5 @@
 import React from "react";
-import { Building } from "../../../DataProviders";
+import { Building, SortType } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,
@@ -12,15 +12,23 @@ import {
 interface BuildingListProps {
   buildings: Building[];
   openDetails: (d: Building) => void;
+  sortAlgorithm: SortType;
 }
+
+const reSort = (
+  buildings: Building[],
+  sort: (a: Building, b: Building) => number
+) => buildings.sort(sort);
 
 export const BuildingList: React.FC<BuildingListProps> = (
   props: BuildingListProps
 ) => {
+  const resortedList = reSort(props.buildings, props.sortAlgorithm.function);
+
   return (
     <IonGrid>
       <IonRow>
-        {props.buildings.map((building) => (
+        {resortedList.map((building) => (
           <IonCol key={building.id} size="4" sizeXs="6">
             <IonCard onClick={() => props.openDetails(building)}>
               <img

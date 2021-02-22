@@ -25,10 +25,10 @@ const getBuildings = (setBuildings: (b: Building[]) => void) => {
         rawItems.push(record.fields);
       });
 
-      rawItems.sort((a: Building, b: Building) => {
-        if (a.id < b.id) return -1;
-        return 1;
-      });
+      // rawItems.sort((a: Building, b: Building) => {
+      //   if (a.id < b.id) return -1;
+      //   return 1;
+      // });
 
       console.log(rawItems);
       setBuildings(rawItems);

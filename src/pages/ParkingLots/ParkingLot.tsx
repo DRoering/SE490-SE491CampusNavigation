@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { IonContent, IonModal, IonPage } from "@ionic/react";
 import { ParkingLotList, ParkingLotModal, HeaderBar } from "../../components";
-import { Lot } from "../../DataProviders";
+import { Lot, useLotSort, ItemSortOptions } from "../../DataProviders";
+import { updateShorthandPropertyAssignment } from "typescript";
 
 interface ParkingLotProps {
   parkingLots: Lot[];
@@ -12,9 +13,12 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
 ) => {
   const [showModal, setShowModal] = useState(false);
   const [parkingLotDetails, setParkingLotDetails] = useState<Lot>();
+  const [sort, updateSort, useSort] = useLotSort();
   const toggleModal = () => {
     setShowModal(!showModal);
   };
+
+  const sortOptions = ItemSortOptions.lotOptions;
 
   const openDetails = (p: Lot) => {
     setParkingLotDetails(p);
@@ -22,11 +26,18 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
   };
   return (
     <IonPage>
-      <HeaderBar />
+      <HeaderBar
+        sortObject={{
+          sortOptions: sortOptions,
+          currentSort: sort,
+          updateSort: updateSort,
+        }}
+      />
       <IonContent>
         <ParkingLotList
           parkingLots={props.parkingLots}
           openDetails={openDetails}
+          sortAlgorithm={useSort}
         />
       </IonContent>
       {parkingLotDetails && (

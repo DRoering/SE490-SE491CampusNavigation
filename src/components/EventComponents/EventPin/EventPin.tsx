@@ -44,6 +44,16 @@ export const EventPin: React.FC<EventPinProps> = (props: EventPinProps) => {
               >
                 <IonLabel>Open Details</IonLabel>
               </IonButton>
+              <IonButton
+                expand="block"
+                onClick={() =>
+                  console.log(
+                    "Navigate to : " + event.name + " " + event.coordinates
+                  )
+                }
+              >
+                <IonLabel>Navigate Here</IonLabel>
+              </IonButton>
             </Popup>
           </Marker>
         ))}

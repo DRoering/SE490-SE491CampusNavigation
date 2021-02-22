@@ -49,7 +49,7 @@ export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
             <IonCard onClick={() => props.clickEvent(event)}>
               <img
                 ion-img-cache="true"
-                src={`assets/images/events/${event.imgUrl}.png`}
+                src={`${event.source}${event.imgUrl}`}
                 alt="Event"
               />
               <IonCardContent>

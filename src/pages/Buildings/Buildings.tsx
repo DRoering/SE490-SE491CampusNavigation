@@ -1,6 +1,11 @@
-import { IonContent, IonModal, IonPage } from "@ionic/react";
+import { IonContent, IonModal, IonPage, IonSplitPane } from "@ionic/react";
 import React, { useState } from "react";
-import { BuildingList, BuildingModal, HeaderBar } from "../../components";
+import {
+  BuildingList,
+  BuildingModal,
+  HeaderBar,
+  SortMenu,
+} from "../../components";
 import {
   Building,
   useBuildingSort,
@@ -18,6 +23,9 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
   const [buildingDetails, setBuildingDetails] = useState<Building>();
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useBuildingSort();
+  const [menuState, setMenuState] = useState(false);
+
+  const openMenu = (s: boolean) => setMenuState(s);
 
   const openDetails = (d: Building) => {
     setBuildingDetails(d);
@@ -26,19 +34,20 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
 
   return (
     <IonPage>
-      <HeaderBar
-        sortObject={{
-          sortOptions: sortOptions,
-          currentSort: sort,
-          updateSort: updateSort,
-        }}
-      />
+      <HeaderBar openMenu={{ open: openMenu, currentState: menuState }} />
       <IonContent>
         <BuildingList
           buildings={props.buildings}
           openDetails={openDetails}
           sortAlgorithm={useSort}
         />
+        <IonSplitPane disabled={false} when={menuState}>
+          <SortMenu
+            sortOptions={sortOptions}
+            currentSort={sort}
+            updateSort={updateSort}
+          />
+        </IonSplitPane>
       </IonContent>
       {buildingDetails && (
         <IonModal

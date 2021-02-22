@@ -1,15 +1,11 @@
 import React from "react";
-import { IonHeader, IonToolbar } from "@ionic/react";
+import { IonButton, IonHeader, IonIcon, IonToolbar } from "@ionic/react";
 import { Strings } from "../../DataProviders";
 import "./HeaderBar.scss";
-import { SortMenu } from "./Components";
+import { menu } from "ionicons/icons";
 
 interface HeaderBarProps {
-  sortObject?: {
-    sortOptions: string[];
-    currentSort: string;
-    updateSort: (u?: string) => void;
-  };
+  openMenu?: { open: (s: boolean) => void; currentState: boolean };
 }
 
 export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => (
@@ -23,12 +19,13 @@ export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => (
           slot="start"
         />
       </a>
-      {props.sortObject && (
-        <SortMenu
-          sortOptions={props.sortObject.sortOptions}
-          currentSort={props.sortObject.currentSort}
-          updateSort={props.sortObject.updateSort}
-        />
+      {props.openMenu && (
+        <IonButton
+          slot="end"
+          onClick={() => props.openMenu?.open(!props.openMenu.currentState)}
+        >
+          <IonIcon icon={menu} />
+        </IonButton>
       )}
     </IonToolbar>
   </IonHeader>

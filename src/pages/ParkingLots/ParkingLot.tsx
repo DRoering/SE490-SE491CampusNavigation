@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { IonContent, IonModal, IonPage } from "@ionic/react";
-import { ParkingLotList, ParkingLotModal, HeaderBar } from "../../components";
+import { IonContent, IonModal, IonPage, IonSplitPane } from "@ionic/react";
+import {
+  ParkingLotList,
+  ParkingLotModal,
+  HeaderBar,
+  SortMenu,
+} from "../../components";
 import { Lot, useLotSort, ItemSortOptions } from "../../DataProviders";
-import { updateShorthandPropertyAssignment } from "typescript";
 
 interface ParkingLotProps {
   parkingLots: Lot[];
@@ -14,6 +18,10 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
   const [showModal, setShowModal] = useState(false);
   const [parkingLotDetails, setParkingLotDetails] = useState<Lot>();
   const [sort, updateSort, useSort] = useLotSort();
+  const [menuState, setMenuState] = useState(false);
+
+  const openMenu = (s: boolean) => setMenuState(s);
+
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -26,19 +34,20 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
   };
   return (
     <IonPage>
-      <HeaderBar
-        sortObject={{
-          sortOptions: sortOptions,
-          currentSort: sort,
-          updateSort: updateSort,
-        }}
-      />
+      <HeaderBar openMenu={{ open: openMenu, currentState: menuState }} />
       <IonContent>
         <ParkingLotList
           parkingLots={props.parkingLots}
           openDetails={openDetails}
           sortAlgorithm={useSort}
         />
+        <IonSplitPane disabled={false} when={menuState}>
+          <SortMenu
+            sortOptions={sortOptions}
+            currentSort={sort}
+            updateSort={updateSort}
+          />
+        </IonSplitPane>
       </IonContent>
       {parkingLotDetails && (
         <IonModal

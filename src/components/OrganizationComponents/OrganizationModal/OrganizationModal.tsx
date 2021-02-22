@@ -52,7 +52,7 @@ export const OrganizationModal: React.FC<OrganizationModalProps> = (
           rel="noopener noreferrer"
           color="primary"
           expand="block"
-          disabled={props.organization.webSite ? true : false}
+          disabled={!props.organization.webSite ? true : false}
         >
           <IonLabel>Organization Website</IonLabel>
         </IonButton>

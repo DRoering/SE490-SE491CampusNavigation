@@ -7,3 +7,4 @@ export * from "./ModalHeader";
 export * from "./OrganizationComponents";
 export * from "./ParkingComponents";
 export * from "./PinFilter";
+export * from "./SortMenu";

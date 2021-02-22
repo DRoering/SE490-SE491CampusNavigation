@@ -15,11 +15,7 @@ export const SortAlgorithms = {
     function: (
       a: Building | CampusEvent | Lot | Organization,
       b: Building | CampusEvent | Lot | Organization
-    ): number => {
-      if (a.name[0].toLowerCase() > b.name[0].toLowerCase()) return 1;
-      if (b.name[0].toLowerCase() > a.name[0].toLowerCase()) return -1;
-      return 0;
-    },
+    ): number => a.name.localeCompare(b.name),
   },
 
   Distance: {
@@ -47,6 +43,18 @@ export const SortAlgorithms = {
 
   Date: {
     type: "Date",
+    function: (
+      a: Building | CampusEvent | Lot | Organization,
+      b: Building | CampusEvent | Lot | Organization
+    ): number => {
+      if (a.hours?.open.isBefore(b.hours?.open)) return -1;
+      if (b.hours?.open.isBefore(a.hours?.open)) return 1;
+      return 0;
+    },
+  },
+
+  Open: {
+    type: "Open",
     function: (
       a: Building | CampusEvent | Lot | Organization,
       b: Building | CampusEvent | Lot | Organization

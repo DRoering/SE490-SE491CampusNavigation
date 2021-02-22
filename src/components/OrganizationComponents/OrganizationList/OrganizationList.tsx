@@ -7,11 +7,12 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
-import { Organization } from "../../../DataProviders";
+import { Organization, SortType } from "../../../DataProviders";
 
 interface OrganizationListProps {
   organizations: Organization[];
   openModal: (o: Organization) => void;
+  sortAlgorithm: SortType;
 }
 
 export const OrganizationList: React.FC<OrganizationListProps> = (

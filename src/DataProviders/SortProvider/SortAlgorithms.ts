@@ -15,11 +15,7 @@ export const SortAlgorithms = {
     function: (
       a: Building | CampusEvent | Lot | Organization,
       b: Building | CampusEvent | Lot | Organization
-    ): number => {
-      if (a.name[0].toLowerCase() > b.name[0].toLowerCase()) return 1;
-      if (b.name[0].toLowerCase() > a.name[0].toLowerCase()) return -1;
-      return 0;
-    },
+    ): number => a.name.localeCompare(b.name),
   },
 
   Distance: {

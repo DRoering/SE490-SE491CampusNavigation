@@ -21,6 +21,7 @@ import {
   Organizations,
   Events,
   ParkingLots,
+  FeedbackPage,
 } from "../../pages";
 import {
   useBuilding,
@@ -106,6 +107,11 @@ export const MainTabs: React.FC = () => {
           exact={true}
         />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />
+        <Route
+          path="/(Feedback)"
+          render={() => <FeedbackPage />}
+          exact={true}
+        />
       </IonRouterOutlet>
 
       <IonTabBar slot="bottom" color="primary">

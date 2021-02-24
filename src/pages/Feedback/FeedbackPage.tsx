@@ -8,6 +8,8 @@ import {
   IonTextarea,
   IonInput,
   IonButton,
+  IonCard,
+  IonCardContent,
 } from "@ionic/react";
 import React, { useState } from "react";
 import "./FeedbackPage.scss";
@@ -49,22 +51,22 @@ export const FeedbackPage: React.FC = () => {
             onIonChange={(e) => setEmail(e.detail.value!)}
           ></IonInput>
         </IonItem>
-        <IonItem>
+        <IonItem lines="none">
           <IonLabel position="floating">Enter Your Message Below: </IonLabel>
-          <IonTextarea
-            className="feedbackText"
-            rows={19}
-            cols={40}
-            placeholder="Message"
-            value={message}
-            onIonChange={(e) => setMessage(e.detail.value!)}
-          ></IonTextarea>
-          <IonItem>
-            <IonButton className="feedbackButton" size="large">
-              Submit
-            </IonButton>
-          </IonItem>
+          <IonCard>
+            <IonTextarea
+              className="feedbackText"
+              rows={20}
+              cols={40}
+              placeholder="Message"
+              value={message}
+              onIonChange={(e) => setMessage(e.detail.value!)}
+            ></IonTextarea>
+          </IonCard>
         </IonItem>
+        <IonButton className="feedbackButton" size="large" expand="block">
+          Submit
+        </IonButton>
       </IonContent>
     </IonPage>
   );

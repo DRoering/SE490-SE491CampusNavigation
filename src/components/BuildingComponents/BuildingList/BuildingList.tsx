@@ -20,6 +20,11 @@ const reSort = (
   sort: (a: Building, b: Building) => number
 ) => buildings.sort(sort);
 
+// const refilter = (
+//   buildings: Building[],
+//   filter: (a: Building, b: Building) => number
+// ) => buildings.filter(filter);
+
 export const BuildingList: React.FC<BuildingListProps> = (
   props: BuildingListProps
 ) => {

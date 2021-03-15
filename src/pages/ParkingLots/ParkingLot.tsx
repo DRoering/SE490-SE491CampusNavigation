@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonContent, IonModal, IonPage, IonSplitPane } from "@ionic/react";
+import { IonContent, IonModal, IonPage } from "@ionic/react";
 import {
   ParkingLotList,
   ParkingLotModal,
@@ -25,9 +25,6 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
   const [parkingLotDetails, setParkingLotDetails] = useState<Lot>();
   const [sort, updateSort, useSort] = useLotSort();
   const [filter, updateFilter, useFilter] = useBuildingFilter();
-  const [menuState, setMenuState] = useState(false);
-
-  const openMenu = (s: boolean) => setMenuState(s);
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -42,23 +39,21 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
   };
   return (
     <IonPage>
-      <HeaderBar openMenu={{ open: openMenu, currentState: menuState }} />
+      <SortMenu
+        sortOptions={sortOptions}
+        currentSort={sort}
+        updateSort={updateSort}
+        filterOptions={filterOptions}
+        currentFilter={filter}
+        updateFilter={updateFilter}
+      />
+      <HeaderBar displayButton={true} />
       <IonContent>
         <ParkingLotList
           parkingLots={props.parkingLots}
           openDetails={openDetails}
           sortAlgorithm={useSort}
         />
-        <IonSplitPane disabled={false} when={menuState}>
-          <SortMenu
-            sortOptions={sortOptions}
-            currentSort={sort}
-            updateSort={updateSort}
-            filterOptions={filterOptions}
-            currentFilter={filter}
-            updateFilter={updateFilter}
-          />
-        </IonSplitPane>
       </IonContent>
       {parkingLotDetails && (
         <IonModal

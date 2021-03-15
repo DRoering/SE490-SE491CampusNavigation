@@ -32,9 +32,6 @@ export const SortAlgorithms = {
         ? b.coordinates.distanceTo(fakeLocation)
         : 10000;
 
-      console.log("aDistance: " + aDistance);
-      console.log("bDistance: " + bDistance);
-
       if (aDistance > bDistance) return 1;
       if (bDistance > aDistance) return -1;
       return 0;

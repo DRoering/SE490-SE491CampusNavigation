@@ -27,6 +27,11 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useBuildingSort();
   const [filter, updateFilter, useFilter] = useBuildingFilter();
+  const [openFilter, setOpenFilter] = useState(false);
+
+  const filterByOpen = (f: boolean) => {
+    setOpenFilter(f);
+  };
 
   const openDetails = (d: Building) => {
     setBuildingDetails(d);
@@ -39,9 +44,7 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
         sortOptions={sortOptions}
         currentSort={sort}
         updateSort={updateSort}
-        filterOptions={filterOptions}
-        currentFilter={filter}
-        updateFilter={updateFilter}
+        filterByOpen={filterByOpen}
       />
       <HeaderBar displayButton={true} />
       <IonContent>
@@ -49,6 +52,7 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
           buildings={props.buildings}
           openDetails={openDetails}
           sortAlgorithm={useSort}
+          filterAlgorithm={openFilter ? useFilter : undefined}
         />
       </IonContent>
       {buildingDetails && (

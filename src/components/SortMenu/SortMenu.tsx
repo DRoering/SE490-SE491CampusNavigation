@@ -14,10 +14,8 @@ import { HeaderBar } from "..";
 interface SortMenuProps {
   sortOptions: string[];
   currentSort: string;
-  filterOptions: string[];
-  currentFilter: string;
   updateSort: (u?: string) => void;
-  updateFilter: (u?: string) => void;
+  filterByOpen: (a: boolean) => void;
 }
 
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
@@ -40,7 +38,10 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
             </IonRadioGroup>
             <IonItem>
               <IonLabel>Open</IonLabel>
-              <IonToggle value="open" />
+              <IonToggle
+                value="open"
+                onIonChange={(e) => props.filterByOpen(e.detail.checked)}
+              />
             </IonItem>
           </IonList>
         </IonContent>

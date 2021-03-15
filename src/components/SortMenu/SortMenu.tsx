@@ -7,8 +7,9 @@ import {
   IonList,
   IonItem,
   IonContent,
-  IonSplitPane,
+  IonHeader,
 } from "@ionic/react";
+import { HeaderBar } from "..";
 
 interface SortMenuProps {
   sortOptions: string[];
@@ -19,8 +20,9 @@ interface SortMenuProps {
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
   return (
     <>
-      <IonMenu class="sort-menu" side="start" contentId="content">
+      <IonMenu class="sort-menu" side="start" contentId="options-menu">
         <IonContent id="content">
+          <HeaderBar displayButton={false} />
           <IonList>
             <IonRadioGroup
               value={props.currentSort}
@@ -29,7 +31,7 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
               {props.sortOptions.map((option) => (
                 <IonItem key={option}>
                   <IonLabel>{option}</IonLabel>
-                  <IonRadio slot="start" value={option} />
+                  <IonRadio slot="end" value={option} />
                 </IonItem>
               ))}
             </IonRadioGroup>

@@ -1,17 +1,28 @@
 import React from "react";
-import { IonButton, IonHeader, IonIcon, IonToolbar } from "@ionic/react";
+import {
+  IonButtons,
+  IonHeader,
+  IonIcon,
+  IonMenuButton,
+  IonToolbar,
+} from "@ionic/react";
 import { Strings } from "../../DataProviders";
 import "./HeaderBar.scss";
 import { menu } from "ionicons/icons";
 
 interface HeaderBarProps {
-  openMenu?: { open: (s: boolean) => void; currentState: boolean };
+  displayButton: boolean;
 }
 
 export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => (
   <IonHeader>
     <IonToolbar color="primary">
-      <a href={Strings.scsuUrl} target="_blank" rel="noopener noreferrer">
+      <a
+        slot="start"
+        href={Strings.scsuUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           id="scsu-logo"
           src="assets/images/scsu_logo.png"
@@ -19,13 +30,14 @@ export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => (
           slot="start"
         />
       </a>
-      {props.openMenu && (
-        <IonButton
-          slot="end"
-          onClick={() => props.openMenu?.open(!props.openMenu.currentState)}
-        >
-          <IonIcon icon={menu} />
-        </IonButton>
+      {props.displayButton && (
+        <div id="options-menu" slot="end">
+          <IonButtons>
+            <IonMenuButton>
+              <IonIcon icon={menu} />
+            </IonMenuButton>
+          </IonButtons>
+        </div>
       )}
     </IonToolbar>
   </IonHeader>

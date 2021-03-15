@@ -13,10 +13,6 @@ export const FilterAlgorithms = {
     function: (a: Building): boolean => {
       const currentDate = moment();
 
-      console.log(currentDate);
-      console.log(a.hours?.close);
-      console.log(currentDate.isBetween(a.hours?.open, a.hours?.close));
-
       return currentDate.isBetween(a.hours?.open, a.hours?.close);
     },
   },

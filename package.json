@@ -11,8 +11,6 @@
     "@ionic/react": "5.0.7",
     "@ionic/react-hooks": "0.0.8",
     "@ionic/react-router": "5.0.7",
-    "@targomo/core": "^0.4.2",
-    "@targomo/leaflet": "0.0.9",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.0.3",

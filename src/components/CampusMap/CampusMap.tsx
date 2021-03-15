@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import L from "leaflet";
-import { TargomoClient } from "@targomo/core";
-import * as TargomoLeaflet from "@targomo/leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
 import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
-import { CommonProperties } from "../../Reuseable";
 import {
   IonModal,
   IonItem,
@@ -29,8 +26,6 @@ interface CampusMapProps {
   userPosition: { c: L.LatLng; r: number };
   openDetails: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
 }
-
-const client = new TargomoClient("northamerica", "GBFPRQCIA6ZIYDNLBIOP");
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showNavModal, setShowNavModal] = useState(false);

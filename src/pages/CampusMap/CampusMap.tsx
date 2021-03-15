@@ -79,7 +79,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
 
   return (
     <IonPage>
-      <HeaderBar />
+      <HeaderBar displayButton={false} />
       <IonContent>
         <PinFilter setShowItems={setShowItems} />
         <IonFab horizontal="end" vertical="bottom" slot="fixed">

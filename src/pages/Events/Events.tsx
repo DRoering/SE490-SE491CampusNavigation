@@ -1,5 +1,11 @@
 import { EventModal, EventList, HeaderBar, SortMenu } from "../../components";
-import { IonPage, IonContent, IonModal, IonSplitPane } from "@ionic/react";
+import {
+  IonPage,
+  IonContent,
+  IonModal,
+  IonSplitPane,
+  IonMenuButton,
+} from "@ionic/react";
 import React, { useState } from "react";
 import {
   CampusEvent,
@@ -30,11 +36,6 @@ export const Events: React.FC<EventProps> = (props: EventProps) => {
     <IonPage>
       <HeaderBar openMenu={{ open: openMenu, currentState: menuState }} />
       <IonContent>
-        <EventList
-          events={props.events}
-          clickEvent={openDetails}
-          sortAlgorithm={useSort}
-        />
         <IonSplitPane disabled={false} when={menuState}>
           <SortMenu
             sortOptions={sortOptions}
@@ -42,6 +43,11 @@ export const Events: React.FC<EventProps> = (props: EventProps) => {
             updateSort={updateSort}
           />
         </IonSplitPane>
+        <EventList
+          events={props.events}
+          clickEvent={openDetails}
+          sortAlgorithm={useSort}
+        />
       </IonContent>
       {eventDetails && (
         <IonModal

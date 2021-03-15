@@ -24,11 +24,11 @@ const getBuildings = (setBuildings: (b: Building[]) => void) => {
 
         record.fields.hours = {
           open: moment(
-            currentDate.format("MM-DD-YYYY") + record.fields.opening + "am",
+            currentDate.format("MM-DD-YYYY") + " " + record.fields.opening,
             "MM-DD-YYYY hh:mm A"
           ),
           close: moment(
-            currentDate.format("MM-DD-YYYY") + record.fields.closing + "am",
+            currentDate.format("MM-DD-YYYY") + " " + record.fields.closing,
             "MM-DD-YYYY hh:mm A"
           ),
         };

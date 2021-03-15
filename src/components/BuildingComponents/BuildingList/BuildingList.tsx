@@ -15,15 +15,16 @@ interface BuildingListProps {
   sortAlgorithm: SortType;
 }
 
-const reSort = (
-  buildings: Building[],
-  sort: (a: Building, b: Building) => number
-) => buildings.sort(sort);
-
+// // filter first, then perform the sort - may need to move resort inside of filter - use callback
 // const refilter = (
 //   buildings: Building[],
 //   filter: (a: Building, b: Building) => number
 // ) => buildings.filter(filter);
+
+const reSort = (
+  buildings: Building[],
+  sort: (a: Building, b: Building) => number
+) => buildings.sort(sort);
 
 export const BuildingList: React.FC<BuildingListProps> = (
   props: BuildingListProps

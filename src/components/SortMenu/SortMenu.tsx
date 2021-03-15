@@ -8,12 +8,16 @@ import {
   IonItem,
   IonContent,
   IonSplitPane,
+  IonToggle,
 } from "@ionic/react";
 
 interface SortMenuProps {
   sortOptions: string[];
   currentSort: string;
+  filterOptions: string[];
+  currentFilter: string;
   updateSort: (u?: string) => void;
+  updateFilter: (u?: string) => void;
 }
 
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
@@ -33,6 +37,10 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
                 </IonItem>
               ))}
             </IonRadioGroup>
+            <IonItem>
+              <IonLabel>Open</IonLabel>
+              <IonToggle value="open" />
+            </IonItem>
           </IonList>
         </IonContent>
       </IonMenu>

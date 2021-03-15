@@ -15,3 +15,10 @@ export const ItemSortOptions = {
   lotOptions: [...baseOptions, "Open"],
   orgOptions: [...baseOptions],
 };
+
+export const ItemFilterOptions = {
+  buildingOptions: [...baseOptions, "Open"],
+  // eventOptions: [...baseOptions, "Date"],
+  // lotOptions: [...baseOptions, "Open"],
+  // orgOptions: [...baseOptions],
+};

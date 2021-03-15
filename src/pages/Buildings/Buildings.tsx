@@ -9,8 +9,10 @@ import {
 import {
   Building,
   useBuildingSort,
+  useBuildingFilter,
   ItemSortOptions,
 } from "../../DataProviders";
+import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 
 interface BuildingsProps {
   buildings: Building[];
@@ -18,11 +20,13 @@ interface BuildingsProps {
 }
 
 const sortOptions = ItemSortOptions.buildingOptions;
+const filterOptions = ItemFilterOptions.buildingOptions;
 
 export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
   const [buildingDetails, setBuildingDetails] = useState<Building>();
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useBuildingSort();
+  const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [menuState, setMenuState] = useState(false);
 
   const openMenu = (s: boolean) => setMenuState(s);
@@ -46,6 +50,9 @@ export const Buildings: React.FC<BuildingsProps> = (props: BuildingsProps) => {
             sortOptions={sortOptions}
             currentSort={sort}
             updateSort={updateSort}
+            filterOptions={filterOptions}
+            currentFilter={filter}
+            updateFilter={updateFilter}
           />
         </IonSplitPane>
       </IonContent>

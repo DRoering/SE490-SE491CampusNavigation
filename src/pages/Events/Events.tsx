@@ -5,18 +5,22 @@ import {
   CampusEvent,
   useEventSort,
   ItemSortOptions,
+  useBuildingFilter,
 } from "../../DataProviders";
+import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 
 interface EventProps {
   events: CampusEvent[];
 }
 
 const sortOptions = ItemSortOptions.eventOptions;
+const filterOptions = ItemFilterOptions.buildingOptions;
 
 export const Events: React.FC<EventProps> = (props: EventProps) => {
   const [eventDetails, setEventDetails] = useState<CampusEvent>();
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useEventSort();
+  const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [menuState, setMenuState] = useState(false);
 
   const openMenu = (s: boolean) => setMenuState(s);
@@ -40,6 +44,9 @@ export const Events: React.FC<EventProps> = (props: EventProps) => {
             sortOptions={sortOptions}
             currentSort={sort}
             updateSort={updateSort}
+            filterOptions={filterOptions}
+            currentFilter={filter}
+            updateFilter={updateFilter}
           />
         </IonSplitPane>
       </IonContent>

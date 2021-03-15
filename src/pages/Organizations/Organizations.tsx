@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import { IonPage, IonContent, IonModal, IonSplitPane } from "@ionic/react";
-import { Organization, useOrgSort, ItemSortOptions } from "../../DataProviders";
+import {
+  Organization,
+  useOrgSort,
+  ItemSortOptions,
+  useBuildingFilter,
+} from "../../DataProviders";
 import {
   OrganizationList,
   OrganizationModal,
   HeaderBar,
   SortMenu,
 } from "../../components";
+import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 
 interface OrganizationListProps {
   organizations: Organization[];
 }
 
 const sortOptions = ItemSortOptions.orgOptions;
+const filterOptions = ItemFilterOptions.buildingOptions;
 
 export const Organizations: React.FC<OrganizationListProps> = (
   props: OrganizationListProps
@@ -20,6 +27,7 @@ export const Organizations: React.FC<OrganizationListProps> = (
   const [org, setOrg] = useState<Organization>();
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useOrgSort();
+  const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [menuState, setMenuState] = useState(false);
 
   const openMenu = (s: boolean) => setMenuState(s);
@@ -43,6 +51,9 @@ export const Organizations: React.FC<OrganizationListProps> = (
             sortOptions={sortOptions}
             currentSort={sort}
             updateSort={updateSort}
+            filterOptions={filterOptions}
+            currentFilter={filter}
+            updateFilter={updateFilter}
           />
         </IonSplitPane>
       </IonContent>

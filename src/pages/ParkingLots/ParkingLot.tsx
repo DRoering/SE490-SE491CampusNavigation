@@ -6,7 +6,13 @@ import {
   HeaderBar,
   SortMenu,
 } from "../../components";
-import { Lot, useLotSort, ItemSortOptions } from "../../DataProviders";
+import {
+  Lot,
+  useLotSort,
+  ItemSortOptions,
+  useBuildingFilter,
+} from "../../DataProviders";
+import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 
 interface ParkingLotProps {
   parkingLots: Lot[];
@@ -18,6 +24,7 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
   const [showModal, setShowModal] = useState(false);
   const [parkingLotDetails, setParkingLotDetails] = useState<Lot>();
   const [sort, updateSort, useSort] = useLotSort();
+  const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [menuState, setMenuState] = useState(false);
 
   const openMenu = (s: boolean) => setMenuState(s);
@@ -27,6 +34,7 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
   };
 
   const sortOptions = ItemSortOptions.lotOptions;
+  const filterOptions = ItemFilterOptions.buildingOptions;
 
   const openDetails = (p: Lot) => {
     setParkingLotDetails(p);
@@ -46,6 +54,9 @@ export const ParkingLots: React.FC<ParkingLotProps> = (
             sortOptions={sortOptions}
             currentSort={sort}
             updateSort={updateSort}
+            filterOptions={filterOptions}
+            currentFilter={filter}
+            updateFilter={updateFilter}
           />
         </IonSplitPane>
       </IonContent>

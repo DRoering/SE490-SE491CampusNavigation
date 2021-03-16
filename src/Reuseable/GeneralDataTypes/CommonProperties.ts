@@ -1,4 +1,5 @@
 import { Moment } from "moment";
+import { Building, CampusEvent, Lot, Organization } from "../../DataProviders";
 
 export interface CommonProperties {
   accessibility?: string;
@@ -14,4 +15,11 @@ export interface CommonProperties {
   virtual?: boolean;
   isOpen?: boolean;
   imgUrl?: string;
+}
+
+export interface ItemOptions {
+  b?: Building;
+  e?: CampusEvent;
+  p?: Lot;
+  o?: Organization;
 }

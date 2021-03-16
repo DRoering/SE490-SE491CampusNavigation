@@ -14,7 +14,6 @@ import "./ParkingLotList.scss";
 
 interface ParkingLotProps {
   parkingLots: Lot[];
-  openDetails: (p: Lot) => void;
   sortAlgorithm: SortType;
 }
 

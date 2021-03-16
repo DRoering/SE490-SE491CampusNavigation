@@ -21,6 +21,7 @@ import {
   Organizations,
   Events,
   ParkingLots,
+  AboutPage,
 } from "../../pages";
 import {
   useBuilding,
@@ -105,6 +106,7 @@ export const MainTabs: React.FC = () => {
           render={() => <ParkingLots parkingLots={parkingLots} />}
           exact={true}
         />
+        <Route path="/(AboutPage)" render={() => <AboutPage />} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />
       </IonRouterOutlet>
 

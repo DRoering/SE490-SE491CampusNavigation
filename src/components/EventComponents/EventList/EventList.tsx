@@ -9,11 +9,12 @@ import {
 import moment from "moment";
 import React from "react";
 import { CampusEvent, SortType } from "../../../DataProviders";
+import { ItemOptions } from "../../../Reuseable";
 import "./EventList.scss";
 
 interface EventListProps {
   events: CampusEvent[];
-  clickEvent: (e: CampusEvent) => void;
+  openDetails: (e: ItemOptions) => void;
   sortAlgorithm: SortType;
 }
 
@@ -46,7 +47,7 @@ export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
       <IonRow>
         {sortedEvents.map((event) => (
           <IonCol key={event.id} size="4" sizeXs="6">
-            <IonCard onClick={() => props.clickEvent(event)}>
+            <IonCard onClick={() => props.openDetails({ e: event })}>
               <img
                 ion-img-cache="true"
                 src={`${event.source}${event.imgUrl}`}

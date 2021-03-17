@@ -7,7 +7,7 @@ import {
   IonLabel,
   IonRouterOutlet,
 } from "@ionic/react";
-import { map, informationCircleOutline } from "ionicons/icons";
+import { map, informationCircleOutline, atCircleOutline } from "ionicons/icons";
 import { Route, Redirect, useHistory } from "react-router";
 import { CampusMap, ItemPage, AboutPage } from "../../pages";
 import {
@@ -97,6 +97,11 @@ export const MainTabs: React.FC = () => {
         <IonTabButton tab="Items" href="/Items">
           <IonIcon icon={informationCircleOutline} />
           <IonLabel>Information</IonLabel>
+        </IonTabButton>
+
+        <IonTabButton tab="AboutPage" href="/AboutPage">
+          <IonIcon icon={atCircleOutline} />
+          <IonLabel>About Page</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

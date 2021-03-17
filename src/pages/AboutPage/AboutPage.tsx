@@ -29,6 +29,7 @@ export const AboutPage: React.FC = () => {
       <IonContent>
         {" "}
         <IonItemDivider>About Page</IonItemDivider>
+        <IonButton href="/Feedback">Click here to provide feedback</IonButton>
       </IonContent>
     </IonPage>
   );

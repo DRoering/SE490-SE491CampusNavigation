@@ -9,7 +9,7 @@ import {
 } from "@ionic/react";
 import { map, informationCircleOutline, atCircleOutline } from "ionicons/icons";
 import { Route, Redirect, useHistory } from "react-router";
-import { CampusMap, ItemPage, AboutPage } from "../../pages";
+import { CampusMap, ItemPage, AboutPage, FeedbackPage } from "../../pages";
 import {
   useBuilding,
   useParkingLot,
@@ -86,6 +86,11 @@ export const MainTabs: React.FC = () => {
         />
         <Route path="/(AboutPage)" render={() => <AboutPage />} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />
+        <Route
+          path="/(Feedback)"
+          render={() => <FeedbackPage />}
+          exact={true}
+        />
       </IonRouterOutlet>
 
       <IonTabBar slot="bottom" color="primary">

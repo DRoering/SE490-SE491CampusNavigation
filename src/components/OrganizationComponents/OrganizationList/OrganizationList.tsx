@@ -8,10 +8,11 @@ import {
   IonRow,
 } from "@ionic/react";
 import { Organization, SortType } from "../../../DataProviders";
+import { ItemOptions } from "../../../Reuseable";
 
 interface OrganizationListProps {
   organizations: Organization[];
-  openModal: (o: Organization) => void;
+  openDetails: (o: ItemOptions) => void;
   sortAlgorithm: SortType;
 }
 
@@ -23,7 +24,7 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
       <IonRow>
         {props.organizations.map((organization) => (
           <IonCol key={organization.id} sizeXs="6">
-            <IonCard onClick={() => props.openModal(organization)}>
+            <IonCard onClick={() => props.openDetails({ o: organization })}>
               <img ion-img-cache="true" src={organization.imgUrl} />
               <IonCardContent>
                 <IonLabel>{organization.name}</IonLabel>

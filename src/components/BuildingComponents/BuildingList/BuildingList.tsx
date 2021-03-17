@@ -8,10 +8,11 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
+import { ItemOptions } from "../../../Reuseable";
 
 interface BuildingListProps {
   buildings: Building[];
-  openDetails: (d: Building) => void;
+  openDetails: (d: ItemOptions) => void;
   sortAlgorithm: SortType;
 }
 
@@ -30,7 +31,7 @@ export const BuildingList: React.FC<BuildingListProps> = (
       <IonRow>
         {resortedList.map((building) => (
           <IonCol key={building.id} size="4" sizeXs="6">
-            <IonCard onClick={() => props.openDetails(building)}>
+            <IonCard onClick={() => props.openDetails({ b: building })}>
               <img
                 ion-img-cache="true"
                 src={building.imgUrl}

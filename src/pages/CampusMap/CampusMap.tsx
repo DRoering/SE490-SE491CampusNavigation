@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   IonPage,
   IonContent,
@@ -6,11 +6,6 @@ import {
   IonFabButton,
   IonIcon,
   IonModal,
-  IonText,
-  IonItemDivider,
-  IonButton,
-  IonLabel,
-  IonItem,
 } from "@ionic/react";
 import {
   BuildingModal,
@@ -24,7 +19,6 @@ import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
 import L from "leaflet";
 import { Geolocation } from "@ionic-native/geolocation";
 import { navigateCircleOutline } from "ionicons/icons";
-import { CommonProperties } from "../../Reuseable";
 
 interface CampusMapProps {
   buildings: Building[];
@@ -79,7 +73,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
 
   return (
     <IonPage>
-      <HeaderBar />
+      <HeaderBar displayButton={false} />
       <IonContent>
         <PinFilter setShowItems={setShowItems} />
         <IonFab horizontal="end" vertical="bottom" slot="fixed">

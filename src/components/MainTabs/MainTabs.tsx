@@ -7,22 +7,9 @@ import {
   IonLabel,
   IonRouterOutlet,
 } from "@ionic/react";
-import {
-  map,
-  briefcase,
-  business,
-  calendarOutline,
-  carOutline,
-} from "ionicons/icons";
+import { map, informationCircleOutline } from "ionicons/icons";
 import { Route, Redirect, useHistory } from "react-router";
-import {
-  Buildings,
-  CampusMap,
-  Organizations,
-  Events,
-  ParkingLots,
-  AboutPage,
-} from "../../pages";
+import { CampusMap, ItemPage, AboutPage } from "../../pages";
 import {
   useBuilding,
   useParkingLot,
@@ -70,11 +57,6 @@ export const MainTabs: React.FC = () => {
     <IonTabs>
       <IonRouterOutlet>
         <Route
-          path="/:tab(Events)"
-          render={() => <Events events={events} />}
-          exact={true}
-        />
-        <Route
           path="/:tab(Map)"
           render={() => (
             <CampusMap
@@ -90,21 +72,17 @@ export const MainTabs: React.FC = () => {
           exact={true}
         />
         <Route
-          path="/:tab(BuildingList)"
+          path="/:tab(Items)"
           render={() => (
-            <Buildings buildings={buildings} setPosition={setPosition} />
+            <ItemPage
+              buildings={buildings}
+              events={events}
+              parking={parkingLots}
+              organizations={organizations}
+              setPosition={setPosition}
+            />
           )}
-          exact={true}
-        />
-        <Route
-          path="/:tab(Organizations)"
-          render={() => <Organizations organizations={organizations} />}
-          exact={true}
-        />
-        <Route
-          path="/:tab(ParkingLotList)"
-          render={() => <ParkingLots parkingLots={parkingLots} />}
-          exact={true}
+          exact
         />
         <Route path="/(AboutPage)" render={() => <AboutPage />} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />
@@ -116,24 +94,9 @@ export const MainTabs: React.FC = () => {
           <IonLabel>Map</IonLabel>
         </IonTabButton>
 
-        <IonTabButton tab="BuildingList" href="/BuildingList">
-          <IonIcon icon={business} />
-          <IonLabel>Buildings</IonLabel>
-        </IonTabButton>
-
-        <IonTabButton tab="Events" href="/Events">
-          <IonIcon icon={calendarOutline} />
-          <IonLabel>Events</IonLabel>
-        </IonTabButton>
-
-        <IonTabButton tab="ParkingList" href="/ParkingLotList">
-          <IonIcon icon={carOutline} />
-          <IonLabel>Parking Lots</IonLabel>
-        </IonTabButton>
-
-        <IonTabButton tab="Organizations" href="/Organizations">
-          <IonIcon icon={briefcase} />
-          <IonLabel>Organization</IonLabel>
+        <IonTabButton tab="Items" href="/Items">
+          <IonIcon icon={informationCircleOutline} />
+          <IonLabel>Information</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

@@ -13,7 +13,6 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import "./AboutPage.scss";
-import { menu } from "ionicons/icons";
 
 interface AboutPage {
   About: AboutPage[];

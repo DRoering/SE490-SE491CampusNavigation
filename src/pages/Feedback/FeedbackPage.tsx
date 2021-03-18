@@ -27,7 +27,7 @@ export const FeedbackPage: React.FC = () => {
 
   return (
     <IonPage>
-      <HeaderBar openMenu={{ open: openMenu, currentState: menuState }} />
+      <HeaderBar displayButton={false} />
       <IonContent>
         {" "}
         <IonItemDivider>Campus Navigation Feedback Form</IonItemDivider>

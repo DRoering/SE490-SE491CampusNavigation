@@ -7,6 +7,7 @@ import {
   IonIcon,
   IonCardContent,
   IonTextarea,
+  IonText,
 } from "@ionic/react";
 import { chevronUp, chevronDown } from "ionicons/icons";
 import React, { useRef, useState } from "react";
@@ -50,9 +51,7 @@ export const AboutCard: React.FC<AboutCardProps> = (props: AboutCardProps) => {
           </IonItem>
         </IonCardHeader>
         <IonCardContent id={`toggle-${toggleOpen()}`}>
-          <IonTextarea className="app-fonts" readonly={true}>
-            {props.information}
-          </IonTextarea>
+          <IonText className="app-fonts">{props.information}</IonText>
         </IonCardContent>
       </IonCard>
     </IonItem>

@@ -84,13 +84,13 @@ export const MainTabs: React.FC = () => {
           )}
           exact
         />
-        <Route path="/(AboutPage)" render={() => <AboutPage />} exact={true} />
-        <Route exact path="/" render={() => <Redirect to="/Map" />} />
         <Route
-          path="/(Feedback)"
-          render={() => <FeedbackPage />}
+          path="/:tab(AboutPage)"
+          render={() => <AboutPage />}
           exact={true}
         />
+        <Route path="/Feedback" render={() => <FeedbackPage />} exact={true} />
+        <Route exact path="/" render={() => <Redirect to="/Map" />} />
       </IonRouterOutlet>
 
       <IonTabBar slot="bottom" color="primary">

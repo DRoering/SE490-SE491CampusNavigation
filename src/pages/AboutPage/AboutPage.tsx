@@ -7,6 +7,9 @@ import {
   IonItem,
   IonItemDivider,
   IonButton,
+  IonTextarea,
+  IonCard,
+  IonImg,
 } from "@ionic/react";
 import React from "react";
 import "./AboutPage.scss";
@@ -21,25 +24,16 @@ export const AboutPage: React.FC = () => {
       <HeaderBar displayButton={false} />
       <IonContent>
         <IonItemDivider>
-          <IonLabel id="title">About the App</IonLabel>
+          <IonLabel id="title">St. Cloud State University</IonLabel>
         </IonItemDivider>
-        <IonItem>
-          This application was created to help students and guests navigate the
-          St. Cloud State University (SCSU) campus. Our goal is to provide
-          information about buildings, parking lots, events, and organizations
-          on campus.{" "}
-        </IonItem>
-        <IonItemDivider>
-          <IonLabel id="title">About the Team</IonLabel>
-        </IonItemDivider>
-        <IonItem>
-          Our team is composed of Software Engineering students from SCSU. This
-          application was created as part of our senior capstone project.{" "}
-        </IonItem>
-        <IonItemDivider>
-          <IonLabel id="title">About St. Cloud State University</IonLabel>
-        </IonItemDivider>
-        <IonItem>
+        <IonCard>
+          <IonImg
+            src={
+              "https://www.stcloudstate.edu/_files/images/homepage-18/video-still.jpg"
+            }
+          />
+        </IonCard>
+        <IonTextarea className="app-fonts" readonly={true}>
           At St. Cloud State, an education is about far more than an education.
           It will be an opportunity to explore ideas, seek out unique
           perspectives and embrace new challenges – all of which will help you
@@ -51,8 +45,26 @@ export const AboutPage: React.FC = () => {
           eslint-disable-next-line react/no-unescaped-entities university. We're
           on a mission to unleash ideas... unleash imagination, purpose and
           promise.
-        </IonItem>
-        <IonButton href="/Feedback">Click here to provide feedback</IonButton>
+        </IonTextarea>
+        <IonItemDivider>
+          <IonLabel id="title">The App</IonLabel>
+        </IonItemDivider>
+        <IonTextarea className="app-fonts" readonly={true}>
+          This application was created to help students and guests navigate the
+          St. Cloud State University (SCSU) campus. Our goal is to provide
+          information about buildings, parking lots, events, and organizations
+          on campus.{" "}
+        </IonTextarea>
+        <IonItemDivider>
+          <IonLabel id="title">The Team</IonLabel>
+        </IonItemDivider>
+        <IonTextarea className="app-fonts" readonly={true}>
+          Our team is composed of Software Engineering students from SCSU. This
+          application was created as part of our senior capstone project.
+        </IonTextarea>
+        <IonButton className="aboutFeedback" href="/Feedback">
+          Click here to provide feedback
+        </IonButton>
       </IonContent>
     </IonPage>
   );

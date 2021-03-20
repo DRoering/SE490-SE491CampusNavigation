@@ -8,6 +8,11 @@ import {
   IonCardContent,
   IonTextarea,
   IonText,
+  IonCardSubtitle,
+  IonButtons,
+  IonCardTitle,
+  IonCol,
+  IonRow,
 } from "@ionic/react";
 import { chevronUp, chevronDown } from "ionicons/icons";
 import React, { useRef, useState } from "react";
@@ -37,23 +42,32 @@ export const AboutCard: React.FC<AboutCardProps> = (props: AboutCardProps) => {
   };
 
   return (
-    <IonItem ref={cardRef}>
-      <IonCard>
-        <img src={props.imgUrl} />
-        <IonCardHeader>
-          <IonItem lines="none">
-            <IonLabel slot="start" id="title">
-              {props.title}
-            </IonLabel>
-            <IonButton slot="end" onClick={expandCard} fill="clear">
-              <IonIcon icon={isExpanded ? chevronUp : chevronDown} />
-            </IonButton>
-          </IonItem>
-        </IonCardHeader>
-        <IonCardContent id={`toggle-${toggleOpen()}`}>
-          <IonText className="app-fonts">{props.information}</IonText>
-        </IonCardContent>
-      </IonCard>
-    </IonItem>
+    <IonCard className="information-card" ref={cardRef}>
+      <img src={props.imgUrl} />
+      <IonCardHeader>
+        <IonRow>
+          <IonCol size="11" id="about-title">
+            <IonCardTitle className="card-title">
+              <strong>{props.title}</strong>
+            </IonCardTitle>
+          </IonCol>
+          <IonCol size="1">
+            <IonButtons>
+              <IonButton
+                size="small"
+                slot="end"
+                onClick={expandCard}
+                fill="clear"
+              >
+                <IonIcon icon={isExpanded ? chevronUp : chevronDown} />
+              </IonButton>
+            </IonButtons>
+          </IonCol>
+        </IonRow>
+      </IonCardHeader>
+      <IonCardContent id={`toggle-${toggleOpen()}`}>
+        <IonText className="app-fonts">{props.information}</IonText>
+      </IonCardContent>
+    </IonCard>
   );
 };

@@ -9,12 +9,13 @@ import {
 } from "@ionic/react";
 import { map, informationCircleOutline } from "ionicons/icons";
 import { Route, Redirect, useHistory } from "react-router";
-import { CampusMap, ItemPage } from "../../pages";
+import { CampusMap, FloorView, ItemPage } from "../../pages";
 import {
   useBuilding,
   useParkingLot,
   useEvent,
   useOrganization,
+  Building,
 } from "../../DataProviders";
 import L from "leaflet";
 
@@ -30,6 +31,7 @@ export const MainTabs: React.FC = () => {
   const organizations = useOrganization();
   const [showName, setShowName] = useState(true);
   const [coords, setCoords] = useState(defaultCoordsZoom);
+  const [building, setBuilding] = useState<Building>(buildings[0]);
   const history = useHistory();
 
   const toggleName = () => {
@@ -53,6 +55,8 @@ export const MainTabs: React.FC = () => {
     });
   }, []);
 
+  console.log(building);
+
   return (
     <IonTabs>
       <IonRouterOutlet>
@@ -67,9 +71,10 @@ export const MainTabs: React.FC = () => {
               organizations={organizations}
               position={coords}
               centerUser={setPosition}
+              setBuilding={setBuilding}
             />
           )}
-          exact={true}
+          exact
         />
         <Route
           path="/:tab(Items)"
@@ -80,8 +85,14 @@ export const MainTabs: React.FC = () => {
               parking={parkingLots}
               organizations={organizations}
               setPosition={setPosition}
+              setBuilding={setBuilding}
             />
           )}
+          exact
+        />
+        <Route
+          path="/FloorView"
+          render={() => <FloorView building={building} />}
           exact
         />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />

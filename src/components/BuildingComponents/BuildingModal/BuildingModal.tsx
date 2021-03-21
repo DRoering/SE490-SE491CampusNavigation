@@ -78,6 +78,14 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
         >
           <IonLabel>Navigate Here</IonLabel>
         </IonButton>
+        <IonButton
+          color="tertiary"
+          expand="block"
+          routerLink="/FloorView"
+          onClick={props.close}
+        >
+          <IonLabel>Interior View</IonLabel>
+        </IonButton>
         <IonList>
           <IonItemDivider className="app-fonts" id="item-info">
             <IonLabel id="title">Description</IonLabel>

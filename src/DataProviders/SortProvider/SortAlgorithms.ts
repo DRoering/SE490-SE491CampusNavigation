@@ -49,16 +49,4 @@ export const SortAlgorithms = {
       return 0;
     },
   },
-
-  Open: {
-    type: "Open",
-    function: (
-      a: Building | CampusEvent | Lot | Organization,
-      b: Building | CampusEvent | Lot | Organization
-    ): number => {
-      if (a.hours?.open.isBefore(b.hours?.open)) return -1;
-      if (b.hours?.open.isBefore(a.hours?.open)) return 1;
-      return 0;
-    },
-  },
 };

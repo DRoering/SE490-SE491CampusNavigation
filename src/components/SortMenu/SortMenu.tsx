@@ -7,7 +7,7 @@ import {
   IonList,
   IonItem,
   IonContent,
-  IonHeader,
+  IonToggle,
 } from "@ionic/react";
 import { HeaderBar } from "..";
 
@@ -15,6 +15,7 @@ interface SortMenuProps {
   sortOptions: string[];
   currentSort: string;
   updateSort: (u?: string) => void;
+  filterByOpen: (a: boolean) => void;
 }
 
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
@@ -35,6 +36,13 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
                 </IonItem>
               ))}
             </IonRadioGroup>
+            <IonItem>
+              <IonLabel>Open</IonLabel>
+              <IonToggle
+                value="open"
+                onIonChange={(e) => props.filterByOpen(e.detail.checked)}
+              />
+            </IonItem>
           </IonList>
         </IonContent>
       </IonMenu>

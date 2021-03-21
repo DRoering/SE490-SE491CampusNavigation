@@ -26,8 +26,11 @@ import {
   Lot,
   Organization,
   useBuildingSort,
+  useBuildingFilter,
 } from "../../DataProviders";
 import { ItemOptions } from "../../Reuseable";
+import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
+import "./ItemPage.scss";
 
 interface ItemPageProps {
   buildings: Building[];
@@ -40,13 +43,21 @@ interface ItemPageProps {
 
 const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
 const sortOptions = ItemSortOptions.buildingOptions;
+const filterOptions = ItemFilterOptions.buildingOptions;
 
 export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [currentItem, setCurrentItem] = useState("Buildings");
   const [modalDetails, setModalDetails] = useState<ItemOptions>();
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useBuildingSort();
+  const [filter, updateFilter, useFilter] = useBuildingFilter();
+  const [openFilter, setOpenFilter] = useState(false);
 
+  const filterByOpen = (f: boolean) => {
+    setOpenFilter(f);
+  };
+
+  const filterOptions = ItemFilterOptions.buildingOptions;
   const openDetails = (i: ItemOptions) => {
     console.log(i.b);
     if (i.b) props.setBuilding(i.b);
@@ -61,9 +72,10 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         sortOptions={sortOptions}
         currentSort={sort}
         updateSort={updateSort}
+        filterByOpen={filterByOpen}
       />
       <HeaderBar displayButton />
-      <IonItem lines="full">
+      <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment
           value={currentItem}
           onIonChange={(e) => setCurrentItem(e.detail.value || "buildings")}
@@ -81,6 +93,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             buildings={props.buildings}
             openDetails={openDetails}
             sortAlgorithm={useSort}
+            filterAlgorithm={openFilter ? useFilter : undefined}
           />
         )}
         {currentItem.includes(itemOptions[1]) && (

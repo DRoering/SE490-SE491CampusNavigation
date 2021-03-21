@@ -1,6 +1,6 @@
 import { Strings, get, Building } from "..";
 import { useEffect, useState } from "react";
-import { Moment } from "moment";
+import moment, { Moment } from "moment";
 import L from "leaflet";
 
 interface ApiResponse {
@@ -20,6 +20,18 @@ const getBuildings = (setBuildings: (b: Building[]) => void) => {
       response.data.records.forEach((record) => {
         const lat = record.fields.latitude;
         const lon = record.fields.longitude;
+        const currentDate = moment();
+
+        record.fields.hours = {
+          open: moment(
+            currentDate.format("MM-DD-YYYY") + " " + record.fields.opening,
+            "MM-DD-YYYY hh:mm A"
+          ),
+          close: moment(
+            currentDate.format("MM-DD-YYYY") + " " + record.fields.closing,
+            "MM-DD-YYYY hh:mm A"
+          ),
+        };
 
         if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
         rawItems.push(record.fields);

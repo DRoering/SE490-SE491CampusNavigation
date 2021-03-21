@@ -16,4 +16,17 @@ export const FilterAlgorithms = {
       return currentDate.isBetween(a.hours?.open, a.hours?.close);
     },
   },
+
+  Category: {
+    type: "Student",
+    function: (o: Organization): boolean => {
+      const type = o.category;
+
+      if (type.includes("student")) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
 };

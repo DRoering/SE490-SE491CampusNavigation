@@ -7,13 +7,14 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
-import { Organization, SortType } from "../../../DataProviders";
+import { FilterType, Organization, SortType } from "../../../DataProviders";
 import { ItemOptions } from "../../../Reuseable";
 
 interface OrganizationListProps {
   organizations: Organization[];
   openDetails: (o: ItemOptions) => void;
   sortAlgorithm: SortType;
+  filterAlgorithm?: FilterType;
 }
 
 export const OrganizationList: React.FC<OrganizationListProps> = (

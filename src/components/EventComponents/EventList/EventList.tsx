@@ -8,7 +8,7 @@ import {
 } from "@ionic/react";
 import moment from "moment";
 import React from "react";
-import { CampusEvent, SortType } from "../../../DataProviders";
+import { CampusEvent, FilterType, SortType } from "../../../DataProviders";
 import { ItemOptions } from "../../../Reuseable";
 import "./EventList.scss";
 

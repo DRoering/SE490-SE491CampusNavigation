@@ -13,4 +13,5 @@ export interface Organization extends CommonProperties {
   id: number;
   name: string;
   webSite?: string;
+  category: string;
 }

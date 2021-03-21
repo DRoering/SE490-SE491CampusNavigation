@@ -38,6 +38,7 @@ interface ItemPageProps {
   parking: Lot[];
   organizations: Organization[];
   setPosition: (c: L.LatLng) => void;
+  setBuilding: (b: Building) => void;
 }
 
 const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
@@ -58,6 +59,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
 
   const filterOptions = ItemFilterOptions.buildingOptions;
   const openDetails = (i: ItemOptions) => {
+    console.log(i.b);
+    if (i.b) props.setBuilding(i.b);
+
     setModalDetails(i);
     setShowModal(true);
   };

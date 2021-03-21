@@ -10,8 +10,15 @@ export const Strings = {
 const baseOptions = ["Alpha", "Distance"];
 
 export const ItemSortOptions = {
-  buildingOptions: [...baseOptions, "Open"],
+  buildingOptions: [...baseOptions],
   eventOptions: [...baseOptions, "Date"],
-  lotOptions: [...baseOptions, "Open"],
+  lotOptions: [...baseOptions],
   orgOptions: [...baseOptions],
+};
+
+export const ItemFilterOptions = {
+  buildingOptions: [...baseOptions, "Open"],
+  // eventOptions: [...baseOptions, "Date"],
+  // lotOptions: [...baseOptions, "Open"],
+  // orgOptions: [...baseOptions],
 };

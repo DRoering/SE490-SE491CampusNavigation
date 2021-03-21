@@ -1,3 +1,4 @@
+export * from "./AboutCard";
 export * from "./BuildingComponents";
 export * from "./CampusMap";
 export * from "./EventComponents";

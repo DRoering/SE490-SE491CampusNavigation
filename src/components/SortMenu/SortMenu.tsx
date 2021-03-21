@@ -8,6 +8,8 @@ import {
   IonItem,
   IonContent,
   IonToggle,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/react";
 import { HeaderBar } from "..";
 
@@ -15,8 +17,11 @@ interface SortMenuProps {
   sortOptions: string[];
   currentSort: string;
   updateSort: (u?: string) => void;
-  filterByOpen: (a: boolean) => void;
+  filterByOpen?: (a: boolean) => void;
+  filterByCategory?: (c: string[]) => void;
 }
+
+const categoryOptions = ["Student", "University Department"];
 
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
   return (
@@ -36,13 +41,37 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
                 </IonItem>
               ))}
             </IonRadioGroup>
-            <IonItem>
-              <IonLabel>Open</IonLabel>
-              <IonToggle
-                value="open"
-                onIonChange={(e) => props.filterByOpen(e.detail.checked)}
-              />
-            </IonItem>
+            {props.filterByOpen && (
+              <IonItem>
+                <IonLabel>Open</IonLabel>
+                <IonToggle
+                  value="open"
+                  onIonChange={(e) =>
+                    props.filterByOpen && props.filterByOpen(e.detail.checked)
+                  }
+                />
+              </IonItem>
+            )}
+            {props.filterByCategory && (
+              <IonItem>
+                <IonLabel>Category</IonLabel>
+                <IonSelect
+                  multiple={true}
+                  cancelText="Cancel"
+                  okText="Confirm"
+                  onIonChange={(e) =>
+                    props.filterByCategory &&
+                    props.filterByCategory(e.detail.value)
+                  }
+                >
+                  {categoryOptions.map((category) => (
+                    <IonSelectOption key={category} value={category}>
+                      {category}
+                    </IonSelectOption>
+                  ))}
+                </IonSelect>
+              </IonItem>
+            )}
           </IonList>
         </IonContent>
       </IonMenu>

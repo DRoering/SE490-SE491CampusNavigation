@@ -2,12 +2,17 @@ import L from "leaflet";
 import moment from "moment";
 import { Building, CampusEvent, Lot, Organization } from "..";
 
-export interface FilterType {
+export interface BuildingFilter {
   type: string;
   function: (a: Building) => boolean;
 }
 
-export const FilterAlgorithms = {
+export interface OrganizationFilter {
+  type: string;
+  function: (o: Organization) => boolean;
+}
+
+export const BuildingFilters = {
   Open: {
     type: "Open",
     function: (a: Building): boolean => {
@@ -16,17 +21,13 @@ export const FilterAlgorithms = {
       return currentDate.isBetween(a.hours?.open, a.hours?.close);
     },
   },
+};
 
+export const OrganizationFilters = {
   Category: {
-    type: "Student",
+    type: "Category",
     function: (o: Organization): boolean => {
-      const type = o.category;
-
-      if (type.includes("student")) {
-        return true;
-      } else {
-        return false;
-      }
+      return o.category?.includes("student organization");
     },
   },
 };

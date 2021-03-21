@@ -55,13 +55,15 @@ export const AboutPage: React.FC = () => (
               />
             </IonCol>
           ))}
-          <IonButton
-            expand="block"
-            className="about-feedback"
-            routerLink="/Feedback"
-          >
-            Click here to provide feedback
-          </IonButton>
+          <IonCol size="12">
+            <IonButton
+              expand="block"
+              className="about-feedback"
+              routerLink="/Feedback"
+            >
+              Click here to provide feedback
+            </IonButton>
+          </IonCol>
         </IonRow>
       </IonGrid>
     </IonContent>

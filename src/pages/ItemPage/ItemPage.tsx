@@ -30,6 +30,7 @@ import {
 } from "../../DataProviders";
 import { ItemOptions } from "../../Reuseable";
 import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
+import "./ItemPage.scss";
 
 interface ItemPageProps {
   buildings: Building[];
@@ -70,7 +71,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         filterByOpen={filterByOpen}
       />
       <HeaderBar displayButton />
-      <IonItem lines="full">
+      <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment
           value={currentItem}
           onIonChange={(e) => setCurrentItem(e.detail.value || "buildings")}

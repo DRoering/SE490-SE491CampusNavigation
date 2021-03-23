@@ -14,6 +14,7 @@ import {
   IonItemDivider,
   IonButton,
   IonLabel,
+  IonAlert,
 } from "@ionic/react";
 
 interface CampusMapProps {
@@ -85,28 +86,25 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   return (
     <>
       {map}
-      <IonModal
+      <IonAlert
         isOpen={showNavModal}
-        cssClass="nav-modal"
-        swipeToClose={true}
         onDidDismiss={() => setShowNavModal(false)}
-      >
-        <IonItem>
-          <IonLabel>Destination</IonLabel>
-          <IonText>{navigationItem?.name}</IonText>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Origin</IonLabel>
-          <IonText>Your Location</IonText>
-        </IonItem>
-        <IonItemDivider />
-        <IonButton onClick={() => setShowNavModal(false)}>
-          <IonLabel>Cancel</IonLabel>
-        </IonButton>
-        <IonButton>
-          <IonLabel>Navigate</IonLabel>
-        </IonButton>
-      </IonModal>
+        subHeader={`Navigate to ${navigationItem?.name}`}
+        message={"Do you want to start navigation in native maps application?"}
+        buttons={[
+          {
+            text: "Cancel",
+            role: "cancel",
+            cssClass: "secondary",
+          },
+          {
+            text: "Okay",
+            handler: () => {
+              console.log("Confirm Okay");
+            },
+          },
+        ]}
+      />
     </>
   );
 };

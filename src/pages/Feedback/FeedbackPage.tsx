@@ -16,6 +16,7 @@ import {
   IonBackButton,
 } from "@ionic/react";
 import React, { useState } from "react";
+import { Emailer } from "../../DataProviders/Emailer";
 import "./FeedbackPage.scss";
 
 interface FeedbackPage {
@@ -28,6 +29,7 @@ export const FeedbackPage: React.FC = () => {
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [message, setMessage] = useState<string>();
+  const { verifyEmail, sendFeedback } = Emailer;
 
   return (
     <IonPage>

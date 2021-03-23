@@ -4,7 +4,7 @@ export const Strings = {
   scsuUrl: "https://www.stcloudstate.edu",
   eventUrl: "https://huskiesconnect.stcloudstate.edu/image/",
   feedbackId: "template_ig98ogk",
-  serviceId: "service_1gkznkd",
+  serviceId: "service_35tsdi2",
 };
 
 const baseOptions = ["Alpha", "Distance"];

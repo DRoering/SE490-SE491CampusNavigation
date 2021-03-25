@@ -12,13 +12,14 @@ ion-textarea{
   padding-right: 5pt;
 }
 
-.aboutText{
-  font-size: 15px;
-  padding-left: 5pt;
-  padding-right: 5pt;
+#toggle-closed {
+  display: none;
 }
 
-.aboutFeedback{
-  text-align: center;
-  padding-left: 50pt;
+#toggle-open {
+  display: block;
+}
+
+#about-title {
+  text-align: left;
 }

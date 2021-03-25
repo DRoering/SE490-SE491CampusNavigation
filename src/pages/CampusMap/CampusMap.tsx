@@ -28,6 +28,7 @@ interface CampusMapProps {
   organizations: Organization[];
   position: { c: L.LatLng; z: number };
   centerUser: (c: L.LatLng, z: number) => void;
+  setBuilding: (b: Building) => void;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -64,6 +65,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const openDetails = (i: { b?: Building; e?: CampusEvent; p?: Lot }) => {
+    if (i.b) props.setBuilding(i.b);
     setModalDetails({ ...i, open: true });
   };
 

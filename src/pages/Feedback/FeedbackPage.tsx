@@ -10,6 +10,10 @@ import {
   IonButton,
   IonCard,
   IonCardContent,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
 } from "@ionic/react";
 import React, { useState } from "react";
 import "./FeedbackPage.scss";
@@ -27,9 +31,14 @@ export const FeedbackPage: React.FC = () => {
 
   return (
     <IonPage>
-      <HeaderBar displayButton={false} />
+      <IonHeader>
+        <IonToolbar color="primary">
+          <IonButtons>
+            <IonBackButton />
+          </IonButtons>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
-        {" "}
         <IonItemDivider>Campus Navigation Feedback Form</IonItemDivider>
         <IonItem>
           <IonLabel position="floating">Enter Name: </IonLabel>
@@ -38,7 +47,7 @@ export const FeedbackPage: React.FC = () => {
             value={name}
             placeholder="Name"
             required
-            onIonChange={(e) => setName(e.detail.value!)}
+            onIonChange={(e) => setName(e.detail.value || "")}
           ></IonInput>
         </IonItem>
         <IonItem>
@@ -48,7 +57,7 @@ export const FeedbackPage: React.FC = () => {
             value={email}
             placeholder="Email"
             required
-            onIonChange={(e) => setEmail(e.detail.value!)}
+            onIonChange={(e) => setEmail(e.detail.value || "")}
           ></IonInput>
         </IonItem>
         <IonItem lines="none">
@@ -60,7 +69,7 @@ export const FeedbackPage: React.FC = () => {
               cols={40}
               placeholder="Message"
               value={message}
-              onIonChange={(e) => setMessage(e.detail.value!)}
+              onIonChange={(e) => setMessage(e.detail.value || "")}
             ></IonTextarea>
           </IonCard>
         </IonItem>

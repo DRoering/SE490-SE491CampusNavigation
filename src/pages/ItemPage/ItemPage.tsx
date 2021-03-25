@@ -37,6 +37,7 @@ interface ItemPageProps {
   parking: Lot[];
   organizations: Organization[];
   setPosition: (c: L.LatLng) => void;
+  setBuilding: (b: Building) => void;
 }
 
 const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
@@ -55,6 +56,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   };
 
   const openDetails = (i: ItemOptions) => {
+    console.log(i.b);
+    if (i.b) props.setBuilding(i.b);
+
     setModalDetails(i);
     setShowModal(true);
   };
@@ -77,7 +81,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         }
       />
       <HeaderBar displayButton />
-      <IonItem lines="full">
+      <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment
           value={currentItem}
           onIonChange={(e) => updateItem(e.detail.value || "buildings")}

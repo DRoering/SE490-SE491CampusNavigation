@@ -56,7 +56,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='<a href="http://osm.org/copyright">&copy; OpenStreetMap</a> | <a href="https://www.targomo.com/developers/resources/attribution/" target="_blank">&copy; Targomo</a>'
+        attribution='<a href="http://osm.org/copyright">&copy; OpenStreetMap</a>'
       />
       {props.buildings && (
         <BuildingPin

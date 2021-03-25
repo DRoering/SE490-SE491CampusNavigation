@@ -23,3 +23,23 @@ $fonts: (
   font-weight: 600;
   font-size: large;
 }
+
+.information-card {
+  margin: 5px 5px;
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  outline: none;
+  transition: 0.2s;
+
+  .card-title {
+    background-color: #eee;
+    color: #444;
+    font-size: 95%;
+    font-weight: 600;
+    font-family: $fonts;
+    text-transform: capitalize;
+  }  
+}

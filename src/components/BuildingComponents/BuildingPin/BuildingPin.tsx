@@ -7,7 +7,7 @@ import {
   Organization,
 } from "../../../DataProviders";
 import L from "leaflet";
-import { IonButton, IonLabel } from "@ionic/react";
+import { IonButton, IonImg, IonLabel } from "@ionic/react";
 import "./BuildingPin.scss";
 
 interface BuildingPinProps {

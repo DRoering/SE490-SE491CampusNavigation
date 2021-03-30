@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Marker, Popup, Tooltip } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 import { Item, ItemOptions } from "../../../Reuseable";
 import L from "leaflet";
 import { IonButton, IonLabel } from "@ionic/react";

@@ -25,7 +25,11 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
         {props.organizations.map((organization) => (
           <IonCol key={organization.id} sizeXs="6">
             <IonCard onClick={() => props.openDetails({ o: organization })}>
-              <img ion-img-cache="true" src={organization.imgUrl} />
+              <img
+                alt="Organization"
+                ion-img-cache="true"
+                src={organization.imgUrl}
+              />
               <IonCardContent>
                 <IonLabel>{organization.name}</IonLabel>
               </IonCardContent>

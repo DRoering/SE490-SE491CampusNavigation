@@ -39,7 +39,6 @@ interface ItemPageProps {
 
 const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
 const sortOptions = ItemSortOptions.buildingOptions;
-const filterOptions = ItemFilterOptions.buildingOptions;
 
 export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [currentItem, setCurrentItem] = useState("Buildings");
@@ -50,6 +49,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [openFilter, setOpenFilter] = useState(false);
 
   const filterByOpen = (f: boolean) => {
+    updateFilter("Open");
     setOpenFilter(f);
   };
 

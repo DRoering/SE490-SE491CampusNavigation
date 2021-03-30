@@ -1,4 +1,3 @@
-import L from "leaflet";
 import moment from "moment";
 import { Item } from "../../Reuseable";
 

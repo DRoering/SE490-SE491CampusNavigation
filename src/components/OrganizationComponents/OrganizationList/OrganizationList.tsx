@@ -7,11 +7,11 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
-import { Organization, SortType } from "../../../DataProviders";
-import { ItemOptions } from "../../../Reuseable";
+import { SortType } from "../../../DataProviders";
+import { Item, ItemOptions } from "../../../Reuseable";
 
 interface OrganizationListProps {
-  organizations: Organization[];
+  organizations: Item[];
   openDetails: (o: ItemOptions) => void;
   sortAlgorithm: SortType;
 }

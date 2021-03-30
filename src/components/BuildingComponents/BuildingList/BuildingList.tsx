@@ -1,5 +1,5 @@
 import React from "react";
-import { Building, FilterType, SortType } from "../../../DataProviders";
+import { FilterType, SortType } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,
@@ -8,23 +8,21 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
-import { ItemOptions } from "../../../Reuseable";
+import { Item, ItemOptions } from "../../../Reuseable";
 
 interface BuildingListProps {
-  buildings: Building[];
+  buildings: Item[];
   openDetails: (d: ItemOptions) => void;
   sortAlgorithm: SortType;
   filterAlgorithm?: FilterType;
 }
 
 // filter first, then perform the sort - may need to move resort inside of filter - use callback
-const reFilter = (buildings: Building[], filter: (a: Building) => boolean) =>
+const reFilter = (buildings: Item[], filter: (a: Item) => boolean) =>
   buildings.filter(filter);
 
-const reSort = (
-  buildings: Building[],
-  sort: (a: Building, b: Building) => number
-) => buildings.sort(sort);
+const reSort = (buildings: Item[], sort: (a: Item, b: Item) => number) =>
+  buildings.sort(sort);
 
 export const BuildingList: React.FC<BuildingListProps> = (
   props: BuildingListProps

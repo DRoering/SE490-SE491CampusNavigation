@@ -12,10 +12,10 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { Building } from "../../DataProviders";
+import { Item } from "../../Reuseable";
 
 interface FloorViewProps {
-  building: Building;
+  building: Item;
 }
 
 const maxFloor = 3;

@@ -1,4 +1,3 @@
-import { HeaderBar } from "../../components";
 import {
   IonPage,
   IonContent,
@@ -9,7 +8,6 @@ import {
   IonInput,
   IonButton,
   IonCard,
-  IonCardContent,
   IonHeader,
   IonToolbar,
   IonButtons,
@@ -18,13 +16,7 @@ import {
 import React, { useState } from "react";
 import "./FeedbackPage.scss";
 
-interface FeedbackPage {
-  Feedback: FeedbackPage[];
-}
-
 export const FeedbackPage: React.FC = () => {
-  const [menuState, setMenuState] = useState(false);
-  const openMenu = (s: boolean) => setMenuState(s);
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [message, setMessage] = useState<string>();

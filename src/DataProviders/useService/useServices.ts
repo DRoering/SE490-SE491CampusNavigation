@@ -17,7 +17,7 @@ interface ApiResponse {
 
 const { apiUrl, apiKey } = Strings;
 
-const sortString = "&sort[0][field]=serviceId&sort[0][direction]=asc";
+//const sortString = "&sort[0][field]=serviceId&sort[0][direction]=asc";
 
 const getServices = (setServices: (s: Service[]) => void, params: Params) => {
   get<{ records: ApiResponse[] }>(`${apiUrl}BuildingServices`, params)

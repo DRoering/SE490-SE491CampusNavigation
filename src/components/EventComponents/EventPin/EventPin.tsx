@@ -1,17 +1,17 @@
 import React, { useMemo } from "react";
-import { Building, CampusEvent, Lot } from "../../../DataProviders";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { IonButton, IonLabel } from "@ionic/react";
 import "./EventPin.scss";
+import { Item, ItemOptions } from "../../../Reuseable";
 
 interface EventPinProps {
-  events: CampusEvent[];
-  openDetails: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
+  events: Item[];
+  openDetails: (i: ItemOptions) => void;
 }
 
-const filterEvents = (events: CampusEvent[]) => {
-  const validEvents: CampusEvent[] = [];
+const filterEvents = (events: Item[]) => {
+  const validEvents: Item[] = [];
   events.forEach((event) => {
     if (event.coordinates) validEvents.push(event);
   });

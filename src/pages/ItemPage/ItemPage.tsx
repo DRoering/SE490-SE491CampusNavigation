@@ -20,30 +20,25 @@ import {
   SortMenu,
 } from "../../components";
 import {
-  Building,
-  CampusEvent,
   ItemSortOptions,
-  Lot,
-  Organization,
   useBuildingSort,
   useBuildingFilter,
 } from "../../DataProviders";
-import { ItemOptions } from "../../Reuseable";
+import { Item, ItemOptions } from "../../Reuseable";
 import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 import "./ItemPage.scss";
 
 interface ItemPageProps {
-  buildings: Building[];
-  events: CampusEvent[];
-  parking: Lot[];
-  organizations: Organization[];
+  buildings: Item[];
+  events: Item[];
+  parking: Item[];
+  organizations: Item[];
   setPosition: (c: L.LatLng) => void;
-  setBuilding: (b: Building) => void;
+  setBuilding: (b: Item) => void;
 }
 
 const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
 const sortOptions = ItemSortOptions.buildingOptions;
-const filterOptions = ItemFilterOptions.buildingOptions;
 
 export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [currentItem, setCurrentItem] = useState("Buildings");
@@ -54,10 +49,10 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [openFilter, setOpenFilter] = useState(false);
 
   const filterByOpen = (f: boolean) => {
+    updateFilter("Open");
     setOpenFilter(f);
   };
 
-  const filterOptions = ItemFilterOptions.buildingOptions;
   const openDetails = (i: ItemOptions) => {
     console.log(i.b);
     if (i.b) props.setBuilding(i.b);

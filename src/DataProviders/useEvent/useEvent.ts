@@ -1,24 +1,24 @@
 import { get } from "../HTTPProvider";
-import { CampusEvent } from "./CampusEvent";
 import { Strings } from "../";
 import { useEffect, useState } from "react";
 import { Moment } from "moment";
 import L from "leaflet";
 import moment from "moment";
+import { Item } from "../../Reuseable";
 
 interface ApiResponse {
   id: string;
-  fields: CampusEvent;
+  fields: Item;
   createdTime: Moment | string;
 }
 
 const { apiUrl, apiKey } = Strings;
 
-const getEvents = (setEvents: (e: CampusEvent[]) => void) => {
+const getEvents = (setEvents: (e: Item[]) => void) => {
   get<{ records: ApiResponse[] }>(`${apiUrl}Events/`, { api_key: apiKey })
     .then((response) => {
       console.log("Response from API: ", response);
-      const eventData: CampusEvent[] = [];
+      const eventData: Item[] = [];
 
       response.data.records.forEach((record) => {
         const lat = record.fields.latitude;
@@ -34,7 +34,7 @@ const getEvents = (setEvents: (e: CampusEvent[]) => void) => {
         eventData.push(record.fields);
       });
 
-      eventData.sort((a: CampusEvent, b: CampusEvent) => {
+      eventData.sort((a: Item, b: Item) => {
         const aDate = a.startDate;
         const bDate = b.startDate;
         if (aDate.isBefore(bDate)) return -1;
@@ -50,8 +50,8 @@ const getEvents = (setEvents: (e: CampusEvent[]) => void) => {
     });
 };
 
-export const useEvent = (): CampusEvent[] => {
-  const [events, setEvents] = useState<CampusEvent[]>([]);
+export const useEvent = (): Item[] => {
+  const [events, setEvents] = useState<Item[]>([]);
 
   useEffect(() => {
     getEvents(setEvents);

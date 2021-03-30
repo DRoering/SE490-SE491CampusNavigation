@@ -10,12 +10,13 @@ import {
   IonLabel,
   IonList,
 } from "@ionic/react";
-import { Building, useServices } from "../../../DataProviders";
+import { useServices } from "../../../DataProviders";
 import { ModalHeader } from "../../";
 import "./BuildingModal.scss";
+import { Item } from "../../../Reuseable";
 
 interface BuildingModalProps {
-  building: Building;
+  building: Item;
   close: () => void;
   setPosition?: (c: L.LatLng) => void;
 }

@@ -1,28 +1,18 @@
-import { Moment } from "moment";
-import { Service } from "..";
-import { CommonProperties } from "../../Reuseable";
+//import { Lot, Service } from "..";
 
-interface DailyHours {
-  open: number;
-  close: number;
-}
+// interface DailyHours {
+//   open: number;
+//   close: number;
+// }
 
-export interface ParkingLot {
-  type: string;
-  designation: string;
-  permit: boolean;
-  rate?: number;
-  hours: Moment;
-}
-
-export interface Building extends CommonProperties {
-  opening: string;
-  closing: string;
-  imgUrl: string | undefined;
-  abbreviation: string;
-  directions?: string;
-  parking?: string;
-  nearestLot?: ParkingLot;
-  buildingHours: DailyHours[];
-  services?: Service[];
-}
+// export interface Building {
+//   opening: string;
+//   closing: string;
+//   imgUrl: string | undefined;
+//   abbreviation: string;
+//   directions?: string;
+//   parking?: string;
+//   nearestLot?: Lot;
+//   buildingHours: DailyHours[];
+//   services?: Service[];
+// }

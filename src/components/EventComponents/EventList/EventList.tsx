@@ -8,12 +8,12 @@ import {
 } from "@ionic/react";
 import moment from "moment";
 import React from "react";
-import { CampusEvent, SortType } from "../../../DataProviders";
-import { ItemOptions } from "../../../Reuseable";
+import { SortType } from "../../../DataProviders";
+import { Item, ItemOptions } from "../../../Reuseable";
 import "./EventList.scss";
 
 interface EventListProps {
-  events: CampusEvent[];
+  events: Item[];
   openDetails: (e: ItemOptions) => void;
   sortAlgorithm: SortType;
 }
@@ -22,8 +22,8 @@ const currentDate = moment();
 
 console.log(currentDate);
 
-const filterEvents = (e: CampusEvent[]) => {
-  const currentEvents: CampusEvent[] = [];
+const filterEvents = (e: Item[]) => {
+  const currentEvents: Item[] = [];
 
   e.forEach((event) => {
     if (!event.startDate.isBefore(currentDate)) currentEvents.push(event);
@@ -32,10 +32,8 @@ const filterEvents = (e: CampusEvent[]) => {
   return currentEvents;
 };
 
-const reSort = (
-  events: CampusEvent[],
-  sort: (a: CampusEvent, b: CampusEvent) => number
-) => events.sort(sort);
+const reSort = (events: Item[], sort: (a: Item, b: Item) => number) =>
+  events.sort(sort);
 
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
   const sortedEvents = filterEvents(

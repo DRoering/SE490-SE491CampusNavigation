@@ -1,21 +1,10 @@
 import React from "react";
-import {
-  IonHeader,
-  IonContent,
-  IonToolbar,
-  IonTitle,
-  IonItem,
-  IonButtons,
-  IonButton,
-  IonIcon,
-  IonItemDivider,
-  IonLabel,
-} from "@ionic/react";
-import { Lot } from "../../../DataProviders";
+import { IonContent, IonItem, IonItemDivider, IonLabel } from "@ionic/react";
 import { ModalHeader } from "../../ModalHeader";
+import { Item } from "../../../Reuseable";
 
 interface ParkingLotProps {
-  parkingLot: Lot;
+  parkingLot: Item;
   closeAction: () => void;
 }
 

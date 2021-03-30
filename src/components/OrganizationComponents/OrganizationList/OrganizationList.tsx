@@ -7,11 +7,11 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
-import { Organization, SortType } from "../../../DataProviders";
-import { ItemOptions } from "../../../Reuseable";
+import { SortType } from "../../../DataProviders";
+import { Item, ItemOptions } from "../../../Reuseable";
 
 interface OrganizationListProps {
-  organizations: Organization[];
+  organizations: Item[];
   openDetails: (o: ItemOptions) => void;
   sortAlgorithm: SortType;
 }
@@ -25,7 +25,11 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
         {props.organizations.map((organization) => (
           <IonCol key={organization.id} sizeXs="6">
             <IonCard onClick={() => props.openDetails({ o: organization })}>
-              <img ion-img-cache="true" src={organization.imgUrl} />
+              <img
+                alt="Organization"
+                ion-img-cache="true"
+                src={organization.imgUrl}
+              />
               <IonCardContent>
                 <IonLabel>{organization.name}</IonLabel>
               </IonCardContent>

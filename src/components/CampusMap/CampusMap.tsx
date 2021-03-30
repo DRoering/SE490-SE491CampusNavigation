@@ -3,36 +3,26 @@ import { Map, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
-import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
-import {
-  IonModal,
-  IonItem,
-  IonText,
-  IonItemDivider,
-  IonButton,
-  IonLabel,
-  IonAlert,
-} from "@ionic/react";
+import { IonAlert } from "@ionic/react";
+import { Item, ItemOptions } from "../../Reuseable";
 
 interface CampusMapProps {
-  buildings: Building[] | false;
-  events: CampusEvent[] | false;
-  parkingLots: Lot[] | false;
-  organizations: Organization[] | false;
+  buildings: Item[] | false;
+  events: Item[] | false;
+  parkingLots: Item[] | false;
+  organizations: Item[] | false;
   showName: boolean;
   position: { c: L.LatLng; z: number };
   userPosition: { c: L.LatLng; r: number };
-  openDetails: (i: { b?: Building; e?: CampusEvent; p?: Lot }) => void;
+  openDetails: (i: ItemOptions) => void;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showNavModal, setShowNavModal] = useState(false);
-  const [navigationItem, setNavItem] = useState<
-    Building | CampusEvent | Lot | Organization
-  >();
+  const [navigationItem, setNavItem] = useState<Item>();
   const minimumZoom = 8;
   useEffect(() => {
     console.debug("resetSize Called");
@@ -41,7 +31,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     }, 750);
   }, []);
 
-  const initiateNav = (i: Building | CampusEvent | Lot | Organization) => {
+  const initiateNav = (i: Item) => {
     console.log(i);
     setNavItem(i);
     setShowNavModal(true);

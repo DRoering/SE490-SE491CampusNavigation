@@ -12,10 +12,10 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { Building } from "../../DataProviders";
+import { Item } from "../../Reuseable";
 
 interface FloorViewProps {
-  building: Building;
+  building: Item;
 }
 
 const maxFloor = 3;
@@ -25,11 +25,11 @@ export const FloorView: React.FC<FloorViewProps> = (props: FloorViewProps) => {
   const [currentFloor, setCurrentFloor] = useState(1);
 
   const displayNextFloor = () => {
-    if (currentFloor != maxFloor) setCurrentFloor(currentFloor + 1);
+    if (currentFloor !== maxFloor) setCurrentFloor(currentFloor + 1);
   };
 
   const displayPreviousFloor = () => {
-    if (currentFloor != minFloor) setCurrentFloor(currentFloor - 1);
+    if (currentFloor !== minFloor) setCurrentFloor(currentFloor - 1);
   };
 
   return (
@@ -57,13 +57,13 @@ export const FloorView: React.FC<FloorViewProps> = (props: FloorViewProps) => {
             />
             <IonButton
               onClick={displayPreviousFloor}
-              disabled={currentFloor == minFloor}
+              disabled={currentFloor === minFloor}
             >
               <IonLabel>Down a floor</IonLabel>
             </IonButton>
             <IonButton
               onClick={displayNextFloor}
-              disabled={currentFloor == maxFloor}
+              disabled={currentFloor === maxFloor}
             >
               <IonLabel>Up a floor</IonLabel>
             </IonButton>

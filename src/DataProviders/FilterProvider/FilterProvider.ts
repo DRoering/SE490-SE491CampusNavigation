@@ -20,5 +20,5 @@ export const useBuildingFilter = (): [
     return FilterAlgorithms.Open;
   }, [filter]);
 
-  return [filter!, updateFilter, useFilter];
+  return [filter || "", updateFilter, useFilter];
 };

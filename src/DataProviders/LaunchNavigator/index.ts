@@ -1,1 +1,1 @@
-export * from "./LaunchNavigator";
+export { Navigate } from "./LaunchNavigator";

@@ -6,11 +6,12 @@ import "./CampusMap.scss";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
-import { IonAlert } from "@ionic/react";
+import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
+import { chevronDown, chevronUp } from "ionicons/icons";
 
-const latZoom = 0.000027275;
-const lonZoom = 0.00009;
+const maxFloor = 3;
+const minFloor = 0;
 
 const imageBounds = new L.LatLngBounds(
   [45.5514496, -94.151318],
@@ -32,6 +33,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showNavModal, setShowNavModal] = useState(false);
   const [imgBounds, setImgBounds] = useState(imageBounds);
   const [showFloor, setShowFloor] = useState(false);
+  const [currentFloor, setCurrentFloor] = useState(1);
   const [navigationItem, setNavItem] = useState<Item>();
   const minimumZoom = 8;
   useEffect(() => {
@@ -80,7 +82,10 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         attribution='<a href="http://osm.org/copyright">&copy; OpenStreetMap</a> | <a href="https://www.targomo.com/developers/resources/attribution/" target="_blank">&copy; Targomo</a>'
       />
       {showFloor && (
-        <ImageOverlay url="assets/floorView/ISELF_1_D.png" bounds={imgBounds} />
+        <ImageOverlay
+          url={`assets/floorView/ISELF_${currentFloor}_D.png`}
+          bounds={imgBounds}
+        />
       )}
       {props.buildings && (
         <BuildingPin
@@ -104,6 +109,24 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   return (
     <>
       {map}
+      {showFloor && (
+        <IonFab vertical="bottom" horizontal="start">
+          <IonFabButton
+            color="secondary"
+            disabled={currentFloor === maxFloor}
+            onClick={() => setCurrentFloor(currentFloor + 1)}
+          >
+            <IonIcon icon={chevronUp} />
+          </IonFabButton>
+          <IonFabButton
+            color="tertiary"
+            disabled={currentFloor === minFloor}
+            onClick={() => setCurrentFloor(currentFloor - 1)}
+          >
+            <IonIcon icon={chevronDown} />
+          </IonFabButton>
+        </IonFab>
+      )}
       <IonAlert
         isOpen={showNavModal}
         onDidDismiss={() => setShowNavModal(false)}

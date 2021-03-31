@@ -12,23 +12,22 @@ import {
   CampusMap as MapContent,
   EventModal,
   HeaderBar,
-  ParkingLotModal,
   PinFilter,
 } from "../../components";
-import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
 import L from "leaflet";
 import { Geolocation } from "@ionic-native/geolocation";
 import { navigateCircleOutline } from "ionicons/icons";
+import { Item, ItemOptions } from "../../Reuseable";
 
 interface CampusMapProps {
-  buildings: Building[];
+  buildings: Item[];
   showName: boolean;
-  parkingLots: Lot[];
-  events: CampusEvent[];
-  organizations: Organization[];
+  parkingLots: Item[];
+  events: Item[];
+  organizations: Item[];
   position: { c: L.LatLng; z: number };
   centerUser: (c: L.LatLng, z: number) => void;
-  setBuilding: (b: Building) => void;
+  setBuilding: (b: Item) => void;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -39,11 +38,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     organization: false,
   });
   const [modalDetails, setModalDetails] = useState<{
-    b?: Building;
-    e?: CampusEvent;
-    p?: Lot;
+    i: ItemOptions;
     open: boolean;
-  }>({ b: undefined, e: undefined, p: undefined, open: false });
+  }>({ i: {}, open: false });
   const [userLocation, setUserLocation] = useState({
     c: L.latLng([45.551613, -94.148977]),
     r: 0,
@@ -64,9 +61,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       props.centerUser(userLocation.c, userLocation.r);
   };
 
-  const openDetails = (i: { b?: Building; e?: CampusEvent; p?: Lot }) => {
+  const openDetails = (i: ItemOptions) => {
     if (i.b) props.setBuilding(i.b);
-    setModalDetails({ ...i, open: true });
+    setModalDetails({ i: i, open: true });
   };
 
   // useEffect(() => {
@@ -101,23 +98,15 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           swipeToClose={true}
           onDidDismiss={() => setModalDetails({ ...modalDetails, open: false })}
         >
-          {modalDetails.b && (
+          {modalDetails.i.b && (
             <BuildingModal
-              building={modalDetails.b}
+              building={modalDetails.i.b}
               close={() => setModalDetails({ ...modalDetails, open: false })}
             />
           )}
-          {modalDetails.e && (
+          {modalDetails.i.e && (
             <EventModal
-              event={modalDetails.e}
-              closeAction={() =>
-                setModalDetails({ ...modalDetails, open: false })
-              }
-            />
-          )}
-          {modalDetails.p && (
-            <ParkingLotModal
-              parkingLot={modalDetails.p}
+              event={modalDetails.i.e}
               closeAction={() =>
                 setModalDetails({ ...modalDetails, open: false })
               }

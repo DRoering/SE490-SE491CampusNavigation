@@ -1,14 +1,10 @@
 import {
-  IonItem,
   IonCard,
   IonCardHeader,
-  IonLabel,
   IonButton,
   IonIcon,
   IonCardContent,
-  IonTextarea,
   IonText,
-  IonCardSubtitle,
   IonButtons,
   IonCardTitle,
   IonCol,
@@ -43,7 +39,7 @@ export const AboutCard: React.FC<AboutCardProps> = (props: AboutCardProps) => {
 
   return (
     <IonCard className="information-card" ref={cardRef}>
-      <img src={props.imgUrl} />
+      <img alt="Generic visual for the type of card" src={props.imgUrl} />
       <IonCardHeader>
         <IonRow>
           <IonCol size="11" id="about-title">

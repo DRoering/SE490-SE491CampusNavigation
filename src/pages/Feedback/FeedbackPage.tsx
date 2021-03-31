@@ -7,7 +7,6 @@ import {
   IonTextarea,
   IonInput,
   IonButton,
-  IonCard,
   IonHeader,
   IonToolbar,
   IonButtons,

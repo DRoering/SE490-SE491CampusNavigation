@@ -1,15 +1,15 @@
 import React, { useMemo } from "react";
-import { Organization } from "../../../DataProviders";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { IonLabel } from "@ionic/react";
 import "./OrganizationPin.scss";
+import { Item } from "../../../Reuseable";
 
 interface OrganizationPinProps {
-  organization: Organization[];
+  organization: Item[];
 }
-const filterOrganization = (organization: Organization[]) => {
-  const validOrganization: Organization[] = [];
+const filterOrganization = (organization: Item[]) => {
+  const validOrganization: Item[] = [];
   organization.forEach((organization) => {
     if (organization.coordinates) validOrganization.push(organization);
   });

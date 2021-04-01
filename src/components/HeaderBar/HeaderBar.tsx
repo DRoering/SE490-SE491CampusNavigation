@@ -9,9 +9,11 @@ import {
 import { Strings } from "../../DataProviders";
 import "./HeaderBar.scss";
 import { menu } from "ionicons/icons";
+import { SearchBar } from "../SearchBar";
 
 interface HeaderBarProps {
   displayButton: boolean;
+  displaySearch: boolean;
 }
 
 export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => (

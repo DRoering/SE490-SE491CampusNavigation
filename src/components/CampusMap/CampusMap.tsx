@@ -8,20 +8,12 @@ import {
   Lot,
   CampusEvent,
   Organization,
-  Navigate,
+  NavigatorProvider,
 } from "../../DataProviders";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
-import {
-  IonModal,
-  IonItem,
-  IonText,
-  IonItemDivider,
-  IonButton,
-  IonLabel,
-  IonAlert,
-} from "@ionic/react";
+import { IonAlert } from "@ionic/react";
 
 interface CampusMapProps {
   buildings: Building[] | false;
@@ -92,25 +84,44 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   return (
     <>
       {map}
-      <IonAlert
-        isOpen={showNavModal}
-        onDidDismiss={() => setShowNavModal(false)}
-        subHeader={`Navigate to ${navigationItem?.name}`}
-        message={"Do you want to start navigation in native maps application?"}
-        buttons={[
-          {
-            text: "Cancel",
-            role: "cancel",
-            cssClass: "secondary",
-          },
-          {
-            text: "Okay",
-            handler: (Navigate) => {
-              console.log("Confirm Okay");
+      {navigationItem?.coordinates && props.userPosition.c ? (
+        <IonAlert
+          isOpen={showNavModal}
+          onDidDismiss={() => setShowNavModal(false)}
+          subHeader={`Navigate to ${navigationItem?.name}`}
+          message={
+            "Do you want to start navigation in native maps application?"
+          }
+          buttons={[
+            {
+              text: "Cancel",
+              role: "cancel",
+              cssClass: "secondary",
             },
-          },
-        ]}
-      />
+            {
+              text: "Okay",
+              handler: () => {
+                NavigatorProvider(navigationItem, props.userPosition.c);
+              },
+            },
+          ]}
+        />
+      ) : (
+        <IonAlert
+          isOpen={showNavModal}
+          onDidDismiss={() => setShowNavModal(false)}
+          subHeader={`We've ran into an issue`}
+          message={
+            "We lack information necessary to route you to this location. Please check that your location is on"
+          }
+          buttons={[
+            {
+              text: "Ok",
+              role: "cancel",
+            },
+          ]}
+        />
+      )}
     </>
   );
 };

@@ -1,1 +1,1 @@
-export { Navigate } from "./LaunchNavigator";
+export { NavigatorProvider } from "./NavigatorProvider";

@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { launchnavigator } from "uk.co.workingedge.phonegap.plugin.launchnavigator";
 
 interface LaunchNavigatorProps {
-  destination: [];
+  destination: number[];
+  userLocation: number[];
 }
 
 export const Navigate = (props: LaunchNavigatorProps) => {
@@ -13,19 +13,36 @@ export const Navigate = (props: LaunchNavigatorProps) => {
     if (isAvailable) {
       app = launchnavigator.APP.GOOGLE_MAPS;
     } else {
-      console.warn(
-        "Google Maps not available - falling back to user selection"
+      console.log(
+        "Google maps is not available -- Falling back to user selection"
       );
-      app = launchnavigator.APP.USER_SELECT;
+      app = launchnavigator.APP.APPLE_MAPS;
     }
     launchnavigator.navigate(props.destination, {
+      start: props.userLocation,
       app: app,
     });
-    console.log(props.destination);
-    console.log(app);
-    console.log("Navigate Native Maps Called");
   });
 };
+// function (
+//   isAvailable
+// ) {
+//   let app: string;
+//   if (isAvailable) {
+//     app = launchnavigator.APP.GOOGLE_MAPS;
+//   } else {
+//     console.warn(
+//       "Google Maps not available - falling back to user selection"
+//     );
+//     app = launchnavigator.APP.USER_SELECT;
+//   }
+//   launchnavigator.navigate(props.destination, {
+//     app: app,
+//   });
+//   console.log(props.destination);
+//   console.log(app);
+//   console.log("Navigate Native Maps Called");
+// });
 
 // export const Navigate = (props: LaunchNavigatorProps) => {
 //   // const [error, setError] = useState(true);
@@ -53,4 +70,4 @@ export const Navigate = (props: LaunchNavigatorProps) => {
 //       .then(() => console.log("Launched navigator"))
 //       .catch((err) => console.error("Error launching navigator: " + err));
 //   });
-// };
+// }

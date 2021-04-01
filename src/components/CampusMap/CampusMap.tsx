@@ -9,6 +9,7 @@ import { UserLocation } from "./Components";
 import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
 import { chevronDown, chevronUp } from "ionicons/icons";
+import { NavigatorProvider } from "../../DataProviders";
 
 const maxFloor = 3;
 const minFloor = 0;
@@ -127,25 +128,44 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           </IonFabButton>
         </IonFab>
       )}
-      <IonAlert
-        isOpen={showNavModal}
-        onDidDismiss={() => setShowNavModal(false)}
-        subHeader={`Navigate to ${navigationItem?.name}`}
-        message={"Do you want to start navigation in native maps application?"}
-        buttons={[
-          {
-            text: "Cancel",
-            role: "cancel",
-            cssClass: "secondary",
-          },
-          {
-            text: "Okay",
-            handler: () => {
-              console.log("Confirm Okay");
+      {navigationItem?.coordinates ? (
+        <IonAlert
+          isOpen={showNavModal}
+          onDidDismiss={() => setShowNavModal(false)}
+          subHeader={`Navigate to ${navigationItem?.name}`}
+          message={
+            "Do you want to start navigation in native maps application?"
+          }
+          buttons={[
+            {
+              text: "Cancel",
+              role: "cancel",
+              cssClass: "secondary",
             },
-          },
-        ]}
-      />
+            {
+              text: "Okay",
+              handler: () => {
+                NavigatorProvider(navigationItem);
+              },
+            },
+          ]}
+        />
+      ) : (
+        <IonAlert
+          isOpen={showNavModal}
+          onDidDismiss={() => setShowNavModal(false)}
+          subHeader={`We've ran into an issue`}
+          message={
+            "We lack information necessary to route you to this location. Please check that your location is on"
+          }
+          buttons={[
+            {
+              text: "Ok",
+              role: "cancel",
+            },
+          ]}
+        />
+      )}
     </>
   );
 };

@@ -1,13 +1,8 @@
-import { Building } from "..";
+import { Item } from "../../Reuseable";
 
-interface LaunchBrowserProps {
-  destination: Building;
-  userLocation: L.LatLng;
-}
-
-export const BrowserNavigate = (props: LaunchBrowserProps) =>
+export const BrowserNavigate = (destination: Item) =>
   window.open(
     encodeURI(
-      `http://google.com/maps/dir/?api=1&destination=${props.destination.name}`
+      `http://google.com/maps/dir/?api=1&destination=${destination.name}`
     )
   );

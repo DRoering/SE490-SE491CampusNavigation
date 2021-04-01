@@ -1,13 +1,8 @@
 import { LaunchNavigator } from "@ionic-native/launch-navigator";
-import { Building } from "..";
+import { Item } from "../../Reuseable";
 
-interface LaunchNavigatorProps {
-  destination: Building;
-  userLocation: L.LatLng;
-}
-
-export const NativeNavigate = (props: LaunchNavigatorProps) =>
-  LaunchNavigator.navigate(props.destination.name).then(
+export const NativeNavigate = (destination: Item) =>
+  LaunchNavigator.navigate(destination.name).then(
     (success) => console.log("Launched successfully"),
     (error) => console.log("Failed to launch")
   );

@@ -3,7 +3,11 @@ import { Strings } from "../";
 init("user_ZNEXkJRtpcnLiED5Emprm");
 
 export const Emailer = {
-  sendFeedback(fromEmail: string, fromName: string, message: string): void {
+  sendFeedback(
+    fromEmail: string,
+    fromName: string,
+    message: string
+  ): Promise<{ message: string }> {
     {
       const templateParams = {
         from_email: fromEmail,
@@ -11,14 +15,18 @@ export const Emailer = {
         message: message,
       };
 
-      emailjs.send(Strings.serviceId, Strings.feedbackId, templateParams).then(
-        function (response) {
-          console.log("SUCCESS!", response.status, response.text);
-        },
-        function (error) {
-          console.log("FAILED...", error);
-        }
-      );
+      return emailjs
+        .send(Strings.serviceId, Strings.feedbackId, templateParams)
+        .then(
+          function (response) {
+            console.log("SUCCESS!", response.status, response.text);
+            return Promise.resolve({ message: response.text });
+          },
+          function (error) {
+            console.log("FAILED...", error);
+            return Promise.reject({ message: error });
+          }
+        );
     }
   },
   verifyEmail(e: string): boolean {

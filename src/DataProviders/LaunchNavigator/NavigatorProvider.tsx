@@ -1,12 +1,10 @@
 import { isPlatform } from "@ionic/react";
+import { Item } from "../../Reuseable";
 import { BrowserNavigate } from "./LaunchBrowser";
 import { NativeNavigate } from "./LaunchNative";
 
-export function NavigatorProvider(
-  destination: L.LatLng,
-  userLocation: L.LatLng
-) {
+export function NavigatorProvider(destination: Item) {
   return isPlatform("hybrid")
-    ? NativeNavigate({ destination, userLocation })
-    : BrowserNavigate({ destination, userLocation });
+    ? NativeNavigate(destination)
+    : BrowserNavigate(destination);
 }

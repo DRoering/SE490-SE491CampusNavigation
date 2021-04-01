@@ -21,9 +21,9 @@ import {
   useParkingLot,
   useEvent,
   useOrganization,
-  Building,
 } from "../../DataProviders";
 import L from "leaflet";
+import { Item } from "../../Reuseable";
 
 const defaultCoordsZoom = {
   c: L.latLng([45.5511, -94.1515]),
@@ -37,7 +37,7 @@ export const MainTabs: React.FC = () => {
   const organizations = useOrganization();
   const [showName, setShowName] = useState(true);
   const [coords, setCoords] = useState(defaultCoordsZoom);
-  const [building, setBuilding] = useState<Building>(buildings[0]);
+  const [item, setItem] = useState<Item>(buildings[0]);
   const history = useHistory();
 
   const toggleName = () => {
@@ -61,7 +61,7 @@ export const MainTabs: React.FC = () => {
     });
   }, []);
 
-  console.log(building);
+  console.log(item);
 
   return (
     <IonTabs>
@@ -77,7 +77,7 @@ export const MainTabs: React.FC = () => {
               organizations={organizations}
               position={coords}
               centerUser={setPosition}
-              setBuilding={setBuilding}
+              setBuilding={setItem}
             />
           )}
           exact
@@ -91,7 +91,7 @@ export const MainTabs: React.FC = () => {
               parking={parkingLots}
               organizations={organizations}
               setPosition={setPosition}
-              setBuilding={setBuilding}
+              setBuilding={setItem}
             />
           )}
           exact
@@ -103,7 +103,7 @@ export const MainTabs: React.FC = () => {
         />
         <Route
           path="/FloorView"
-          render={() => <FloorView building={building} />}
+          render={() => <FloorView building={item} />}
           exact
         />
         <Route path="/Feedback" render={() => <FeedbackPage />} exact={true} />

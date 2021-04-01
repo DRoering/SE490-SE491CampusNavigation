@@ -1,5 +1,5 @@
 import React from "react";
-import { Lot, SortType } from "../../../DataProviders";
+import { SortType } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,
@@ -11,13 +11,14 @@ import {
   IonRow,
 } from "@ionic/react";
 import "./ParkingLotList.scss";
+import { Item } from "../../../Reuseable";
 
 interface ParkingLotProps {
-  parkingLots: Lot[];
+  parkingLots: Item[];
   sortAlgorithm: SortType;
 }
 
-const reSort = (parkingLots: Lot[], sort: (a: Lot, b: Lot) => number) =>
+const reSort = (parkingLots: Item[], sort: (a: Item, b: Item) => number) =>
   parkingLots.sort(sort);
 
 export const ParkingLotList: React.FC<ParkingLotProps> = (

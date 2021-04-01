@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  launchnavigator,
-  LaunchNavigator,
-  LaunchNavigatorOptions,
-} from "uk.co.workingedge.phonegap.plugin.launchnavigator";
+import { launchnavigator } from "uk.co.workingedge.phonegap.plugin.launchnavigator";
 
 interface LaunchNavigatorProps {
   destination: [];

@@ -3,7 +3,13 @@ import { Map, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
-import { Building, Lot, CampusEvent, Organization } from "../../DataProviders";
+import {
+  Building,
+  Lot,
+  CampusEvent,
+  Organization,
+  Navigate,
+} from "../../DataProviders";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
@@ -99,7 +105,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           },
           {
             text: "Okay",
-            handler: () => {
+            handler: (Navigate) => {
               console.log("Confirm Okay");
             },
           },

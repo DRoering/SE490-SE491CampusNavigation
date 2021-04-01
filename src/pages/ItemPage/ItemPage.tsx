@@ -27,7 +27,6 @@ import {
 import { Item, ItemOptions } from "../../Reuseable";
 import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 import "./ItemPage.scss";
-import { SearchBar } from "../../components/SearchBar";
 
 interface ItemPageProps {
   buildings: Item[];
@@ -70,7 +69,6 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         updateSort={updateSort}
         filterByOpen={filterByOpen}
       />
-      <SearchBar />
       <HeaderBar displayButton displaySearch />
       <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment

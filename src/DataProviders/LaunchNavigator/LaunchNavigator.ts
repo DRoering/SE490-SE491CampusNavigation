@@ -6,7 +6,6 @@ import {
 } from "uk.co.workingedge.phonegap.plugin.launchnavigator";
 
 interface LaunchNavigatorProps {
-  start: [];
   destination: [];
 }
 
@@ -26,6 +25,9 @@ export const Navigate = (props: LaunchNavigatorProps) => {
     launchnavigator.navigate(props.destination, {
       app: app,
     });
+    console.log(props.destination);
+    console.log(app);
+    console.log("Navigate Native Maps Called");
   });
 };
 

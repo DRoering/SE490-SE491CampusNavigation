@@ -7,6 +7,7 @@ import {
   IonSegment,
   IonSegmentButton,
   IonItem,
+  IonSearchbar,
 } from "@ionic/react";
 import {
   BuildingList,
@@ -27,6 +28,8 @@ import {
 import { Item, ItemOptions } from "../../Reuseable";
 import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 import "./ItemPage.scss";
+import { Search } from "../../DataProviders";
+import { search } from "ionicons/icons";
 
 interface ItemPageProps {
   buildings: Item[];
@@ -48,6 +51,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [sort, updateSort, useSort] = useBuildingSort();
   const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [openFilter, setOpenFilter] = useState(false);
+  const [searchText, setSearchText] = useState<string>();
 
   const filterByOpen = (f: boolean) => {
     setOpenFilter(f);
@@ -61,6 +65,10 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
     setShowModal(true);
   };
 
+  const { searchItems } = Search;
+
+  const searchedBuildings = searchItems(props.buildings);
+
   return (
     <IonPage>
       <SortMenu
@@ -70,6 +78,12 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         filterByOpen={filterByOpen}
       />
       <HeaderBar displayButton />
+      <IonSearchbar
+        inputMode="text"
+        value={searchText}
+        onIonChange={(t) => setSearchText(t.detail.value || "")}
+      />
+
       <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment
           value={currentItem}
@@ -85,7 +99,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
       <IonContent>
         {currentItem.includes(itemOptions[0]) && (
           <BuildingList
-            buildings={props.buildings}
+            buildings={searchedBuildings}
             openDetails={openDetails}
             sortAlgorithm={useSort}
             filterAlgorithm={openFilter ? useFilter : undefined}

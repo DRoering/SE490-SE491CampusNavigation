@@ -51,7 +51,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [sort, updateSort, useSort] = useBuildingSort();
   const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [openFilter, setOpenFilter] = useState(false);
-  const [searchText, setSearchText] = useState<string>();
+  const [searchText, setSearchText] = useState<string>("");
 
   const filterByOpen = (f: boolean) => {
     setOpenFilter(f);
@@ -67,7 +67,10 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
 
   const { searchItems } = Search;
 
-  const searchedBuildings = searchItems(props.buildings);
+  const searchedBuildings = searchItems(props.buildings, searchText);
+  const searchedEvents = searchItems(props.events, searchText);
+  const searchedLots = searchItems(props.parking, searchText);
+  const searchedOrgs = searchItems(props.organizations, searchText);
 
   return (
     <IonPage>
@@ -107,17 +110,17 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         )}
         {currentItem.includes(itemOptions[1]) && (
           <EventList
-            events={props.events}
+            events={searchedEvents}
             openDetails={openDetails}
             sortAlgorithm={useSort}
           />
         )}
         {currentItem.includes(itemOptions[2]) && (
-          <ParkingLotList parkingLots={props.parking} sortAlgorithm={useSort} />
+          <ParkingLotList parkingLots={searchedLots} sortAlgorithm={useSort} />
         )}
         {currentItem.includes(itemOptions[3]) && (
           <OrganizationList
-            organizations={props.organizations}
+            organizations={searchedOrgs}
             openDetails={openDetails}
             sortAlgorithm={useSort}
           />

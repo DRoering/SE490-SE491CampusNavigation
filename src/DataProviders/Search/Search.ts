@@ -5,11 +5,12 @@ export interface SearchBy {
 }
 
 export const Search = {
-  searchItems(e: Item[]): Item[] {
+  searchItems(e: Item[], criteria: string): Item[] {
     const searchedItems: Item[] = [];
-    const testSearch = "Hall";
+    //const testSearch = "Hall";
     e.forEach((item) => {
-      if (item.name.includes(testSearch)) searchedItems.push(item);
+      if (item.name.toLowerCase().includes(criteria.toLowerCase()))
+        searchedItems.push(item);
     });
     return searchedItems;
   },

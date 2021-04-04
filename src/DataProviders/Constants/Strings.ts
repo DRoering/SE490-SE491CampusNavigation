@@ -4,7 +4,7 @@ export const Strings = {
   scsuUrl: "https://www.stcloudstate.edu",
   eventUrl: "https://huskiesconnect.stcloudstate.edu/image/",
   feedbackId: "template_ig98ogk",
-  serviceId: "service_1gkznkd",
+  serviceId: "service_35tsdi2",
 };
 
 const baseOptions = ["Alpha", "Distance"];
@@ -21,4 +21,21 @@ export const ItemFilterOptions = {
   // eventOptions: [...baseOptions, "Date"],
   // lotOptions: [...baseOptions, "Open"],
   // orgOptions: [...baseOptions],
+  orgCategories: [
+    "academic focus",
+    "arts",
+    "communication",
+    "council advisory group",
+    "fraternities and sororities",
+    "graduate professional",
+    "honoraries",
+    "language and culture",
+    "political and social action",
+    "recreation and sports",
+    "religious and spiritual",
+    "service and advocacy",
+    "special interest",
+    "sport clubs",
+    "student organization",
+  ],
 };

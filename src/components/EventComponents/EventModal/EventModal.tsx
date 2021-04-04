@@ -8,12 +8,12 @@ import {
   IonLabel,
   IonList,
 } from "@ionic/react";
-import { CampusEvent } from "../../../DataProviders";
 import { ModalHeader } from "../..";
 import "./EventModal.scss";
+import { Item } from "../../../Reuseable";
 
 interface EventModalProps {
-  event: CampusEvent;
+  event: Item;
   closeAction: () => void;
 }
 

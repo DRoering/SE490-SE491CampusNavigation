@@ -20,24 +20,20 @@ import {
   SortMenu,
 } from "../../components";
 import {
-  Building,
-  CampusEvent,
+  ItemFilter,
   ItemSortOptions,
-  Lot,
-  Organization,
   useBuildingSort,
-  BuildingFilters,
-  OrganizationFilters,
 } from "../../DataProviders";
-import { ItemOptions } from "../../Reuseable";
+import { Item, ItemOptions } from "../../Reuseable";
+import "./ItemPage.scss";
 
 interface ItemPageProps {
-  buildings: Building[];
-  events: CampusEvent[];
-  parking: Lot[];
-  organizations: Organization[];
+  buildings: Item[];
+  events: Item[];
+  parking: Item[];
+  organizations: Item[];
   setPosition: (c: L.LatLng) => void;
-  setBuilding: (b: Building) => void;
+  setBuilding: (b: Item) => void;
 }
 
 const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
@@ -52,6 +48,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
 
   const filterByOpen = (f: boolean) => {
+    updateItem("Open");
     setOpenFilter(f);
   };
 
@@ -99,7 +96,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             buildings={props.buildings}
             openDetails={openDetails}
             sortAlgorithm={useSort}
-            filterAlgorithm={openFilter ? BuildingFilters.Open : undefined}
+            filterAlgorithm={
+              openFilter ? ItemFilter.BuildingFilters.Open : undefined
+            }
           />
         )}
         {currentItem.includes(itemOptions[1]) && (
@@ -119,7 +118,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             sortAlgorithm={useSort}
             categoryFilter={categoryFilter}
             filterAlgorithm={
-              categoryFilter[0] ? OrganizationFilters.Category : undefined
+              categoryFilter[0]
+                ? ItemFilter.OrganizationFilters.Category
+                : undefined
             }
           />
         )}

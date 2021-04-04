@@ -2,6 +2,7 @@ import React from "react";
 import { IonApp, isPlatform, setupConfig } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { MainTabs } from "./components";
+import { Plugins } from "@capacitor/core";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -23,12 +24,16 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 import "./App.scss";
+const { SplashScreen } = Plugins;
+SplashScreen.show({ showDuration: 5000 });
 
 const App: React.FC = () => {
   setupConfig({
     mode: isPlatform("android") ? "md" : "ios",
   });
-
+  setTimeout(() => {
+    SplashScreen.hide({ fadeOutDuration: 600 });
+  }, 1500);
   return (
     <IonApp>
       <IonReactRouter>

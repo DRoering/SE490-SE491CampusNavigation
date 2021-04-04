@@ -1,33 +1,43 @@
-import L from "leaflet";
 import moment from "moment";
-import { Building, CampusEvent, Lot, Organization } from "..";
+import { Item } from "../../Reuseable";
 
-export interface BuildingFilter {
+export interface FilterType {
   type: string;
-  function: (a: Building) => boolean;
+  function: (o: Item, categories?: string[]) => boolean;
 }
 
-export interface OrganizationFilter {
-  type: string;
-  function: (o: Organization) => boolean;
-}
+export const ItemFilter = {
+  BuildingFilters: {
+    Open: {
+      type: "Open",
+      function: (i: Item): boolean => {
+        const currentDate = moment();
 
-export const BuildingFilters = {
-  Open: {
-    type: "Open",
-    function: (a: Building): boolean => {
-      const currentDate = moment();
-
-      return currentDate.isBetween(a.hours?.open, a.hours?.close);
+        return i.isOpen || currentDate.isBetween(i.hours?.open, i.hours?.close);
+      },
     },
   },
-};
+  EventFilters: {
+    Category: {
+      type: "Category",
+      function: (i: Item): boolean => {
+        return i.category?.includes("student organization");
+      },
+    },
+  },
+  OrganizationFilters: {
+    Category: {
+      type: "Category",
+      function: (i: Item, categories?: string[]): boolean => {
+        let include = false;
 
-export const OrganizationFilters = {
-  Category: {
-    type: "Category",
-    function: (o: Organization): boolean => {
-      return o.category?.includes("student organization");
+        i.category.forEach((category) =>
+          categories?.forEach((cat) => {
+            if (cat.includes(category)) include = true;
+          })
+        );
+        return include;
+      },
     },
   },
 };

@@ -7,28 +7,25 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
-import {
-  OrganizationFilter,
-  Organization,
-  SortType,
-} from "../../../DataProviders";
-import { ItemOptions } from "../../../Reuseable";
+import { FilterType, SortType } from "../../../DataProviders";
+import { Item, ItemOptions } from "../../../Reuseable";
 
 interface OrganizationListProps {
-  organizations: Organization[];
+  organizations: Item[];
   openDetails: (o: ItemOptions) => void;
   sortAlgorithm: SortType;
   categoryFilter: string[];
-  filterAlgorithm?: OrganizationFilter;
+  filterAlgorithm?: FilterType;
 }
 
-const reFilter = (orgs: Organization[], filter: (a: Organization) => boolean) =>
-  orgs.filter(filter);
+const reFilter = (
+  orgs: Item[],
+  filter: (a: Item) => boolean,
+  categories: string[]
+) => orgs.filter(filter, categories);
 
-const reSort = (
-  orgs: Organization[],
-  sort: (a: Organization, b: Organization) => number
-) => orgs.sort(sort);
+const reSort = (orgs: Item[], sort: (a: Item, b: Item) => number) =>
+  orgs.sort(sort);
 
 export const OrganizationList: React.FC<OrganizationListProps> = (
   props: OrganizationListProps
@@ -36,7 +33,8 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
   const resortedList = props.filterAlgorithm
     ? reFilter(
         reSort(props.organizations, props.sortAlgorithm.function),
-        props.filterAlgorithm.function
+        props.filterAlgorithm.function,
+        props.categoryFilter
       )
     : reSort(props.organizations, props.sortAlgorithm.function);
 
@@ -46,7 +44,11 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
         {resortedList.map((organization) => (
           <IonCol key={organization.id} sizeXs="6">
             <IonCard onClick={() => props.openDetails({ o: organization })}>
-              <img ion-img-cache="true" src={organization.imgUrl} />
+              <img
+                alt="Organization"
+                ion-img-cache="true"
+                src={organization.imgUrl}
+              />
               <IonCardContent>
                 <IonLabel>{organization.name}</IonLabel>
               </IonCardContent>

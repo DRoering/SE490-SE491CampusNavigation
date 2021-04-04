@@ -11,6 +11,7 @@ import {
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
+import { ItemFilterOptions } from "../../DataProviders";
 import { HeaderBar } from "..";
 
 interface SortMenuProps {
@@ -20,8 +21,6 @@ interface SortMenuProps {
   filterByOpen?: (a: boolean) => void;
   filterByCategory?: (c: string[]) => void;
 }
-
-const categoryOptions = ["Student", "University Department"];
 
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
   return (
@@ -64,7 +63,7 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
                     props.filterByCategory(e.detail.value)
                   }
                 >
-                  {categoryOptions.map((category) => (
+                  {ItemFilterOptions.orgCategories.map((category) => (
                     <IonSelectOption key={category} value={category}>
                       {category}
                     </IonSelectOption>

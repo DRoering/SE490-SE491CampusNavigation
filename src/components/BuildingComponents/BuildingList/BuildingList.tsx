@@ -18,8 +18,8 @@ interface BuildingListProps {
 }
 
 // filter first, then perform the sort - may need to move resort inside of filter - use callback
-const reFilter = (buildings: Item[], filter: (a: Item) => boolean) =>
-  buildings.filter(filter);
+const reFilter = (buildings: Item[], filterF: (a: Item) => boolean) =>
+  buildings.filter(filterF);
 
 const reSort = (buildings: Item[], sort: (a: Item, b: Item) => number) =>
   buildings.sort(sort);

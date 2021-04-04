@@ -1,19 +1,51 @@
-import L from "leaflet";
 import moment from "moment";
 import { Item } from "../../Reuseable";
 
 export interface FilterType {
   type: string;
-  function: (a: Item) => boolean;
+  function: (o: Item, categories?: string[], type?: string) => boolean;
 }
 
-export const FilterAlgorithms = {
-  Open: {
-    type: "Open",
-    function: (a: Item): boolean => {
-      const currentDate = moment();
+export const ItemFilter = {
+  BuildingFilters: {
+    Open: {
+      type: "Open",
+      function: (i: Item): boolean => {
+        const currentDate = moment();
 
-      return a.isOpen || currentDate.isBetween(a.hours?.open, a.hours?.close);
+        return i.isOpen || currentDate.isBetween(i.hours?.open, i.hours?.close);
+      },
+    },
+  },
+  EventFilters: {
+    Category: {
+      type: "Category",
+      function: (i: Item): boolean => {
+        return i.category?.includes("student organization");
+      },
+    },
+  },
+  LotFilters: {
+    Type: {
+      type: "Type",
+      function: (i: Item, categories?: string[], type?: string): boolean =>
+        i.type.includes(type || ""),
+    },
+  },
+  OrganizationFilters: {
+    Category: {
+      type: "Category",
+      function: (i: Item, categories?: string[]): boolean => {
+        let include = false;
+
+        i.category &&
+          i.category.forEach((category) =>
+            categories?.forEach((cat) => {
+              if (cat.includes(category)) include = true;
+            })
+          );
+        return include;
+      },
     },
   },
 };

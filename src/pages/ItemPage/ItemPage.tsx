@@ -21,12 +21,11 @@ import {
   SortMenu,
 } from "../../components";
 import {
+  ItemFilter,
   ItemSortOptions,
   useBuildingSort,
-  useBuildingFilter,
 } from "../../DataProviders";
 import { Item, ItemOptions } from "../../Reuseable";
-import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 import "./ItemPage.scss";
 import { Search } from "../../DataProviders";
 
@@ -41,16 +40,16 @@ interface ItemPageProps {
 
 const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
 const sortOptions = ItemSortOptions.buildingOptions;
-const filterOptions = ItemFilterOptions.buildingOptions;
 
 export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [currentItem, setCurrentItem] = useState("Buildings");
   const [modalDetails, setModalDetails] = useState<ItemOptions>();
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useBuildingSort();
-  const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [openFilter, setOpenFilter] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
+  const [lotFilter, setLotFilter] = useState<string>("");
 
   const filterByOpen = (f: boolean) => {
     setOpenFilter(f);
@@ -65,6 +64,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   };
 
   const { searchItems } = Search;
+  const updateItem = (i: string) => {
+    setCurrentItem(i);
+  };
 
   return (
     <IonPage>
@@ -72,7 +74,15 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         sortOptions={sortOptions}
         currentSort={sort}
         updateSort={updateSort}
-        filterByOpen={filterByOpen}
+        filterByOpen={
+          currentItem.includes(itemOptions[0]) ? filterByOpen : undefined
+        }
+        filterByCategory={
+          currentItem.includes(itemOptions[3]) ? setCategoryFilter : undefined
+        }
+        filterByLot={
+          currentItem.includes(itemOptions[2]) ? setLotFilter : undefined
+        }
       />
       <HeaderBar displayButton />
       <IonSearchbar
@@ -84,7 +94,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
       <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment
           value={currentItem}
-          onIonChange={(e) => setCurrentItem(e.detail.value || "buildings")}
+          onIonChange={(e) => updateItem(e.detail.value || "buildings")}
         >
           {itemOptions.map((item) => (
             <IonSegmentButton key={item} value={item}>
@@ -99,7 +109,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             buildings={searchItems(props.buildings, searchText)}
             openDetails={openDetails}
             sortAlgorithm={useSort}
-            filterAlgorithm={openFilter ? useFilter : undefined}
+            filterAlgorithm={
+              openFilter ? ItemFilter.BuildingFilters.Open : undefined
+            }
           />
         )}
         {currentItem.includes(itemOptions[1]) && (
@@ -113,6 +125,8 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
           <ParkingLotList
             parkingLots={searchItems(props.parking, searchText)}
             sortAlgorithm={useSort}
+            filterAlgorithm={lotFilter ? ItemFilter.LotFilters.Type : undefined}
+            lotType={lotFilter}
           />
         )}
         {currentItem.includes(itemOptions[3]) && (
@@ -120,6 +134,12 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             organizations={searchItems(props.organizations, searchText)}
             openDetails={openDetails}
             sortAlgorithm={useSort}
+            categoryFilter={categoryFilter}
+            filterAlgorithm={
+              categoryFilter[0]
+                ? ItemFilter.OrganizationFilters.Category
+                : undefined
+            }
           />
         )}
       </IonContent>

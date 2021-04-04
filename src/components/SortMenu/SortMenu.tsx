@@ -28,7 +28,7 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
     <>
       <IonMenu class="sort-menu" side="start" contentId="options-menu">
         <IonContent id="content">
-          <HeaderBar displayButton={false} />
+          <HeaderBar displayButton={false} displaySearch={false} />
           <IonList>
             <IonRadioGroup
               value={props.currentSort}

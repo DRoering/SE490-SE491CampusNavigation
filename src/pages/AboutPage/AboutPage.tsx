@@ -42,7 +42,7 @@ const Information = [
 
 export const AboutPage: React.FC = () => (
   <IonPage>
-    <HeaderBar displayButton={false} />
+    <HeaderBar displayButton={false} displaySearch={false} />
     <IonContent>
       <IonGrid>
         <IonRow>

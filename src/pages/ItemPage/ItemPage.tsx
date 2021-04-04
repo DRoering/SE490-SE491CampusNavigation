@@ -7,6 +7,7 @@ import {
   IonSegment,
   IonSegmentButton,
   IonItem,
+  IonSearchbar,
 } from "@ionic/react";
 import {
   BuildingList,
@@ -26,6 +27,7 @@ import {
 } from "../../DataProviders";
 import { Item, ItemOptions } from "../../Reuseable";
 import "./ItemPage.scss";
+import { Search } from "../../DataProviders";
 
 interface ItemPageProps {
   buildings: Item[];
@@ -45,6 +47,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useBuildingSort();
   const [openFilter, setOpenFilter] = useState(false);
+  const [searchText, setSearchText] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
   const [lotFilter, setLotFilter] = useState<string>("");
 
@@ -60,6 +63,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
     setShowModal(true);
   };
 
+  const { searchItems } = Search;
   const updateItem = (i: string) => {
     setCurrentItem(i);
   };
@@ -81,6 +85,12 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         }
       />
       <HeaderBar displayButton />
+      <IonSearchbar
+        inputMode="text"
+        value={searchText}
+        onIonChange={(t) => setSearchText(t.detail.value || "")}
+      />
+
       <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment
           value={currentItem}
@@ -96,7 +106,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
       <IonContent>
         {currentItem.includes(itemOptions[0]) && (
           <BuildingList
-            buildings={props.buildings}
+            buildings={searchItems(props.buildings, searchText)}
             openDetails={openDetails}
             sortAlgorithm={useSort}
             filterAlgorithm={
@@ -106,14 +116,14 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         )}
         {currentItem.includes(itemOptions[1]) && (
           <EventList
-            events={props.events}
+            events={searchItems(props.events, searchText)}
             openDetails={openDetails}
             sortAlgorithm={useSort}
           />
         )}
         {currentItem.includes(itemOptions[2]) && (
           <ParkingLotList
-            parkingLots={props.parking}
+            parkingLots={searchItems(props.parking, searchText)}
             sortAlgorithm={useSort}
             filterAlgorithm={lotFilter ? ItemFilter.LotFilters.Type : undefined}
             lotType={lotFilter}
@@ -121,7 +131,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         )}
         {currentItem.includes(itemOptions[3]) && (
           <OrganizationList
-            organizations={props.organizations}
+            organizations={searchItems(props.organizations, searchText)}
             openDetails={openDetails}
             sortAlgorithm={useSort}
             categoryFilter={categoryFilter}

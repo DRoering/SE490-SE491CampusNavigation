@@ -50,7 +50,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [sort, updateSort, useSort] = useBuildingSort();
   const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [openFilter, setOpenFilter] = useState(false);
-  const [searchText, setSearchText] = useState<string>("");
+  const [searchText, setSearchText] = useState("");
 
   const filterByOpen = (f: boolean) => {
     setOpenFilter(f);

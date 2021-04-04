@@ -20,6 +20,7 @@ interface SortMenuProps {
   updateSort: (u?: string) => void;
   filterByOpen?: (a: boolean) => void;
   filterByCategory?: (c: string[]) => void;
+  filterByLot?: (c: string) => void;
 }
 
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
@@ -70,6 +71,23 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
                   ))}
                 </IonSelect>
               </IonItem>
+            )}
+            {props.filterByLot && (
+              <IonRadioGroup
+                allowEmptySelection={true}
+                onIonChange={(e) =>
+                  props.filterByLot && props.filterByLot(e.detail.value)
+                }
+              >
+                <IonItem>
+                  <IonLabel>Student</IonLabel>
+                  <IonRadio value="Student" />
+                </IonItem>
+                <IonItem>
+                  <IonLabel>Employee</IonLabel>
+                  <IonRadio value="Employee" />
+                </IonItem>
+              </IonRadioGroup>
             )}
           </IonList>
         </IonContent>

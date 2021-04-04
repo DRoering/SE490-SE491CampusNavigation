@@ -1,5 +1,5 @@
 import React from "react";
-import { SortType } from "../../../DataProviders";
+import { FilterType, SortType } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,
@@ -16,7 +16,21 @@ import { Item } from "../../../Reuseable";
 interface ParkingLotProps {
   parkingLots: Item[];
   sortAlgorithm: SortType;
+  filterAlgorithm?: FilterType;
+  lotType?: string;
 }
+
+const reFilter = (
+  parkingLots: Item[],
+  filter: (i: Item, categories?: string[], type?: string) => boolean,
+  type: string
+) => {
+  const temp: Item[] = [];
+  parkingLots.forEach((lot) => {
+    if (filter(lot, undefined, type)) temp.push(lot);
+  });
+  return temp;
+};
 
 const reSort = (parkingLots: Item[], sort: (a: Item, b: Item) => number) =>
   parkingLots.sort(sort);
@@ -24,7 +38,14 @@ const reSort = (parkingLots: Item[], sort: (a: Item, b: Item) => number) =>
 export const ParkingLotList: React.FC<ParkingLotProps> = (
   props: ParkingLotProps
 ) => {
-  const sortedLots = reSort(props.parkingLots, props.sortAlgorithm.function);
+  const sortedLots = props.filterAlgorithm
+    ? reFilter(
+        reSort(props.parkingLots, props.sortAlgorithm.function),
+        props.filterAlgorithm.function,
+        props.lotType || ""
+      )
+    : reSort(props.parkingLots, props.sortAlgorithm.function);
+
   return (
     <IonGrid>
       <IonRow>

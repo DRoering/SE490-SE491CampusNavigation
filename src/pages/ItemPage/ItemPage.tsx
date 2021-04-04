@@ -46,6 +46,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [sort, updateSort, useSort] = useBuildingSort();
   const [openFilter, setOpenFilter] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
+  const [lotFilter, setLotFilter] = useState<string>("");
 
   const filterByOpen = (f: boolean) => {
     setOpenFilter(f);
@@ -74,6 +75,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         }
         filterByCategory={
           currentItem.includes(itemOptions[3]) ? setCategoryFilter : undefined
+        }
+        filterByLot={
+          currentItem.includes(itemOptions[2]) ? setLotFilter : undefined
         }
       />
       <HeaderBar displayButton />
@@ -108,7 +112,12 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
           />
         )}
         {currentItem.includes(itemOptions[2]) && (
-          <ParkingLotList parkingLots={props.parking} sortAlgorithm={useSort} />
+          <ParkingLotList
+            parkingLots={props.parking}
+            sortAlgorithm={useSort}
+            filterAlgorithm={lotFilter ? ItemFilter.LotFilters.Type : undefined}
+            lotType={lotFilter}
+          />
         )}
         {currentItem.includes(itemOptions[3]) && (
           <OrganizationList

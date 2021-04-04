@@ -3,7 +3,7 @@ import { Item } from "../../Reuseable";
 
 export interface FilterType {
   type: string;
-  function: (o: Item, categories?: string[]) => boolean;
+  function: (o: Item, categories?: string[], type?: string) => boolean;
 }
 
 export const ItemFilter = {
@@ -23,6 +23,13 @@ export const ItemFilter = {
       function: (i: Item): boolean => {
         return i.category?.includes("student organization");
       },
+    },
+  },
+  LotFilters: {
+    Type: {
+      type: "Type",
+      function: (i: Item, categories?: string[], type?: string): boolean =>
+        i.type.includes(type || ""),
     },
   },
   OrganizationFilters: {

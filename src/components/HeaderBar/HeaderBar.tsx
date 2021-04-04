@@ -14,10 +14,11 @@ import { menu } from "ionicons/icons";
 interface HeaderBarProps {
   displayButton: boolean;
   displaySearch: boolean;
+  searchText: string;
+  setSearchText: (s: string) => void;
 }
 
 export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => {
-  const [searchText, setSearchText] = useState("");
   const [hideIcons, setHideIcons] = useState(false);
 
   return (
@@ -38,13 +39,17 @@ export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => {
             />
           </a>
         )}
-        <IonSearchbar
-          id="search-bar"
-          onIonFocus={() => setHideIcons(true)}
-          onIonBlur={() => setHideIcons(false)}
-          value={searchText}
-          // onIonChange={(e) => setSearchText(e.detail.value!)}
-        />
+        {props.setSearchText && (
+          <IonSearchbar
+            id="search-bar"
+            onIonFocus={() => setHideIcons(true)}
+            onIonBlur={() => setHideIcons(false)}
+            value={props.searchText}
+            inputMode="text"
+            onIonChange={(e) => props.setSearchText(e.detail.value || "")}
+            debounce={500}
+          />
+        )}
         {props.displayButton && !hideIcons && (
           <div id="options-menu" slot="end">
             <IonButtons>

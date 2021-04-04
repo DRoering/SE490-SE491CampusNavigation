@@ -20,13 +20,13 @@ import {
   SortMenu,
 } from "../../components";
 import {
+  ItemFilter,
   ItemSortOptions,
   useBuildingSort,
-  useBuildingFilter,
 } from "../../DataProviders";
 import { Item, ItemOptions } from "../../Reuseable";
-import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 import "./ItemPage.scss";
+import { Search } from "../../DataProviders";
 
 interface ItemPageProps {
   buildings: Item[];
@@ -45,11 +45,12 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [modalDetails, setModalDetails] = useState<ItemOptions>();
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useBuildingSort();
-  const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [openFilter, setOpenFilter] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
+  const [lotFilter, setLotFilter] = useState<string>("");
 
   const filterByOpen = (f: boolean) => {
-    updateFilter("Open");
     setOpenFilter(f);
   };
 
@@ -61,19 +62,37 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
     setShowModal(true);
   };
 
+  const { searchItems } = Search;
+  const updateItem = (i: string) => {
+    setCurrentItem(i);
+  };
+
   return (
     <IonPage>
       <SortMenu
         sortOptions={sortOptions}
         currentSort={sort}
         updateSort={updateSort}
-        filterByOpen={filterByOpen}
+        filterByOpen={
+          currentItem.includes(itemOptions[0]) ? filterByOpen : undefined
+        }
+        filterByCategory={
+          currentItem.includes(itemOptions[3]) ? setCategoryFilter : undefined
+        }
+        filterByLot={
+          currentItem.includes(itemOptions[2]) ? setLotFilter : undefined
+        }
       />
-      <HeaderBar displayButton displaySearch />
+      <HeaderBar
+        displayButton
+        displaySearch
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment
           value={currentItem}
-          onIonChange={(e) => setCurrentItem(e.detail.value || "buildings")}
+          onIonChange={(e) => updateItem(e.detail.value || "buildings")}
         >
           {itemOptions.map((item) => (
             <IonSegmentButton key={item} value={item}>
@@ -85,27 +104,56 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
       <IonContent>
         {currentItem.includes(itemOptions[0]) && (
           <BuildingList
-            buildings={props.buildings}
+            buildings={
+              searchText == " "
+                ? props.buildings
+                : searchItems(props.buildings, searchText)
+            }
             openDetails={openDetails}
             sortAlgorithm={useSort}
-            filterAlgorithm={openFilter ? useFilter : undefined}
+            filterAlgorithm={
+              openFilter ? ItemFilter.BuildingFilters.Open : undefined
+            }
           />
         )}
         {currentItem.includes(itemOptions[1]) && (
           <EventList
-            events={props.events}
+            events={
+              searchText == " "
+                ? props.events
+                : searchItems(props.events, searchText)
+            }
             openDetails={openDetails}
             sortAlgorithm={useSort}
           />
         )}
         {currentItem.includes(itemOptions[2]) && (
-          <ParkingLotList parkingLots={props.parking} sortAlgorithm={useSort} />
+          <ParkingLotList
+            parkingLots={
+              searchText == " "
+                ? props.parking
+                : searchItems(props.parking, searchText)
+            }
+            sortAlgorithm={useSort}
+            filterAlgorithm={lotFilter ? ItemFilter.LotFilters.Type : undefined}
+            lotType={lotFilter}
+          />
         )}
         {currentItem.includes(itemOptions[3]) && (
           <OrganizationList
-            organizations={props.organizations}
+            organizations={
+              searchText == " "
+                ? props.organizations
+                : searchItems(props.organizations, searchText)
+            }
             openDetails={openDetails}
             sortAlgorithm={useSort}
+            categoryFilter={categoryFilter}
+            filterAlgorithm={
+              categoryFilter[0]
+                ? ItemFilter.OrganizationFilters.Category
+                : undefined
+            }
           />
         )}
       </IonContent>

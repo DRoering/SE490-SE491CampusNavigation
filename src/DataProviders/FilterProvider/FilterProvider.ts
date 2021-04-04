@@ -1,13 +1,13 @@
 import { useStorageItem } from "@ionic/react-hooks/storage";
 import { useCallback, useMemo } from "react";
-import { FilterType, FilterAlgorithms } from "./";
+import { ItemFilter, FilterType } from "./";
 
 export const useBuildingFilter = (): [
   string,
   (u?: string) => void,
   FilterType
 ] => {
-  const [filter, setFilter] = useStorageItem("BuildingFilter", "Open");
+  const [filter, setFilter] = useStorageItem("Filter", "Buildings");
   const updateFilter = useCallback(
     (s) => {
       console.log("s: " + s);
@@ -16,9 +16,11 @@ export const useBuildingFilter = (): [
     [setFilter]
   );
 
-  const useFilter = useMemo<FilterType>(() => {
-    return FilterAlgorithms.Open;
+  const getFilter = useMemo<FilterType>(() => {
+    if (filter?.includes("Organizations"))
+      return ItemFilter.OrganizationFilters.Category;
+    return ItemFilter.BuildingFilters.Open;
   }, [filter]);
 
-  return [filter || "", updateFilter, useFilter];
+  return [filter || "", updateFilter, getFilter];
 };

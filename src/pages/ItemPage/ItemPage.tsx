@@ -20,12 +20,11 @@ import {
   SortMenu,
 } from "../../components";
 import {
+  ItemFilter,
   ItemSortOptions,
   useBuildingSort,
-  useBuildingFilter,
 } from "../../DataProviders";
 import { Item, ItemOptions } from "../../Reuseable";
-import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 import "./ItemPage.scss";
 
 interface ItemPageProps {
@@ -45,11 +44,11 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [modalDetails, setModalDetails] = useState<ItemOptions>();
   const [showModal, setShowModal] = useState(false);
   const [sort, updateSort, useSort] = useBuildingSort();
-  const [filter, updateFilter, useFilter] = useBuildingFilter();
   const [openFilter, setOpenFilter] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
+  const [lotFilter, setLotFilter] = useState<string>("");
 
   const filterByOpen = (f: boolean) => {
-    updateFilter("Open");
     setOpenFilter(f);
   };
 
@@ -61,19 +60,31 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
     setShowModal(true);
   };
 
+  const updateItem = (i: string) => {
+    setCurrentItem(i);
+  };
+
   return (
     <IonPage>
       <SortMenu
         sortOptions={sortOptions}
         currentSort={sort}
         updateSort={updateSort}
-        filterByOpen={filterByOpen}
+        filterByOpen={
+          currentItem.includes(itemOptions[0]) ? filterByOpen : undefined
+        }
+        filterByCategory={
+          currentItem.includes(itemOptions[3]) ? setCategoryFilter : undefined
+        }
+        filterByLot={
+          currentItem.includes(itemOptions[2]) ? setLotFilter : undefined
+        }
       />
       <HeaderBar displayButton />
       <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment
           value={currentItem}
-          onIonChange={(e) => setCurrentItem(e.detail.value || "buildings")}
+          onIonChange={(e) => updateItem(e.detail.value || "buildings")}
         >
           {itemOptions.map((item) => (
             <IonSegmentButton key={item} value={item}>
@@ -88,7 +99,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             buildings={props.buildings}
             openDetails={openDetails}
             sortAlgorithm={useSort}
-            filterAlgorithm={openFilter ? useFilter : undefined}
+            filterAlgorithm={
+              openFilter ? ItemFilter.BuildingFilters.Open : undefined
+            }
           />
         )}
         {currentItem.includes(itemOptions[1]) && (
@@ -99,13 +112,24 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
           />
         )}
         {currentItem.includes(itemOptions[2]) && (
-          <ParkingLotList parkingLots={props.parking} sortAlgorithm={useSort} />
+          <ParkingLotList
+            parkingLots={props.parking}
+            sortAlgorithm={useSort}
+            filterAlgorithm={lotFilter ? ItemFilter.LotFilters.Type : undefined}
+            lotType={lotFilter}
+          />
         )}
         {currentItem.includes(itemOptions[3]) && (
           <OrganizationList
             organizations={props.organizations}
             openDetails={openDetails}
             sortAlgorithm={useSort}
+            categoryFilter={categoryFilter}
+            filterAlgorithm={
+              categoryFilter[0]
+                ? ItemFilter.OrganizationFilters.Category
+                : undefined
+            }
           />
         )}
       </IonContent>

@@ -11,7 +11,7 @@ export const Search = {
     e.forEach((item) => {
       if (
         item.name.toLowerCase().includes(criteria.toLowerCase()) ||
-        item.abbreviation.toLowerCase().includes(criteria.toLowerCase())
+        item.abbreviation?.toLowerCase().includes(criteria.toLowerCase())
       )
         searchedItems.push(item);
     });

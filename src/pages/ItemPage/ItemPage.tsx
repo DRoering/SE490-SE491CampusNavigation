@@ -48,7 +48,6 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
 
   const filterByOpen = (f: boolean) => {
-    updateItem("Open");
     setOpenFilter(f);
   };
 

@@ -9,7 +9,10 @@ export const Search = {
     const searchedItems: Item[] = [];
     //const testSearch = "Hall";
     e.forEach((item) => {
-      if (item.name.toLowerCase().includes(criteria.toLowerCase()))
+      if (
+        item.name.toLowerCase().includes(criteria.toLowerCase()) ||
+        item.abbreviation.toLowerCase().includes(criteria.toLowerCase())
+      )
         searchedItems.push(item);
     });
     return searchedItems;

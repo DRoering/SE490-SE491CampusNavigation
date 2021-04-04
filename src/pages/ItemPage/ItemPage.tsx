@@ -29,7 +29,6 @@ import { Item, ItemOptions } from "../../Reuseable";
 import { ItemFilterOptions } from "../../DataProviders/Constants/Strings";
 import "./ItemPage.scss";
 import { Search } from "../../DataProviders";
-import { search } from "ionicons/icons";
 
 interface ItemPageProps {
   buildings: Item[];

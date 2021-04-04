@@ -20,9 +20,15 @@ interface OrganizationListProps {
 
 const reFilter = (
   orgs: Item[],
-  filter: (a: Item) => boolean,
+  filter: (a: Item, categories?: string[]) => boolean,
   categories: string[]
-) => orgs.filter(filter, categories);
+) => {
+  const temp: Item[] = [];
+  orgs.forEach((org) => {
+    if (filter(org, categories)) temp.push(org);
+  });
+  return temp;
+};
 
 const reSort = (orgs: Item[], sort: (a: Item, b: Item) => number) =>
   orgs.sort(sort);

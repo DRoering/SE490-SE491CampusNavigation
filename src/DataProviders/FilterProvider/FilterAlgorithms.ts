@@ -31,11 +31,12 @@ export const ItemFilter = {
       function: (i: Item, categories?: string[]): boolean => {
         let include = false;
 
-        i.category.forEach((category) =>
-          categories?.forEach((cat) => {
-            if (cat.includes(category)) include = true;
-          })
-        );
+        i.category &&
+          i.category.forEach((category) =>
+            categories?.forEach((cat) => {
+              if (cat.includes(category)) include = true;
+            })
+          );
         return include;
       },
     },

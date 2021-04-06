@@ -14,8 +14,8 @@ import { menu } from "ionicons/icons";
 interface HeaderBarProps {
   displayButton: boolean;
   displaySearch: boolean;
-  searchText: string;
-  setSearchText: (s: string) => void;
+  searchText?: string;
+  setSearchText?: (s: string) => void;
 }
 
 export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => {
@@ -46,7 +46,11 @@ export const HeaderBar: React.FC<HeaderBarProps> = (props: HeaderBarProps) => {
             onIonBlur={() => setHideIcons(false)}
             value={props.searchText}
             inputMode="text"
-            onIonChange={(e) => props.setSearchText(e.detail.value || "")}
+            onIonChange={(e) =>
+              props.setSearchText
+                ? props.setSearchText(e.detail.value || "")
+                : console.log(e.detail.value)
+            }
             debounce={500}
           />
         )}

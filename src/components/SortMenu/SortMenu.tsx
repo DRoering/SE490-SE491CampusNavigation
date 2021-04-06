@@ -56,6 +56,7 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
               <IonItem>
                 <IonLabel>Category</IonLabel>
                 <IonSelect
+                  mode="md"
                   multiple={true}
                   cancelText="Cancel"
                   okText="Confirm"

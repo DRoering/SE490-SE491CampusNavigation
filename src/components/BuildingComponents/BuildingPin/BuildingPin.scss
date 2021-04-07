@@ -1,6 +1,11 @@
-.building-popup {
-  width: auto;
-  height: auto;
+.leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
+  width: 175px !important;
+  height: auto !important;
+
+  align-items: center;
+  #name {
+    font-size: 200;
+  }
 }
 
 .leaflet-tooltip-bottom::before {

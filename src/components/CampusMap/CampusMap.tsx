@@ -57,6 +57,19 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
 
   const mapRef = useRef<Map>(null);
 
+  const shouldShowFloor = () => {
+    const tempElement = mapRef.current?.leafletElement;
+    if (
+      tempElement &&
+      imgBounds.contains(
+        tempElement.getCenter() || ([0, 0] && tempElement?.getZoom() > 16)
+      )
+    ) {
+      const temp = mapRef.current?.leafletElement.closePopup();
+      setShowFloor(true);
+    } else setShowFloor(false);
+  };
+
   const map = (
     <Map
       key={minimumZoom}
@@ -70,13 +83,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       }
       zoomSnap={0.5}
       zoomDelta={0.5}
-      onViewportChange={() => {
-        setShowFloor(
-          imgBounds.contains(
-            mapRef.current?.leafletElement.getCenter() || [0, 0]
-          )
-        );
-      }}
+      onViewportChange={shouldShowFloor}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

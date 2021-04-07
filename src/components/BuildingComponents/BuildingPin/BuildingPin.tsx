@@ -2,7 +2,14 @@ import React, { useMemo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { Item, ItemOptions } from "../../../Reuseable";
 import L from "leaflet";
-import { IonButton, IonImg, IonLabel } from "@ionic/react";
+import {
+  IonButton,
+  IonCol,
+  IonGrid,
+  IonImg,
+  IonLabel,
+  IonRow,
+} from "@ionic/react";
 import "./BuildingPin.scss";
 
 interface BuildingPinProps {
@@ -43,7 +50,9 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
           icon={buildingIcon}
         >
           <Popup id="building-popup">
-            <IonLabel id="name">{building.name}</IonLabel>
+            <IonLabel id="name" class="ion-text-overflow">
+              <strong>{building.name}</strong>
+            </IonLabel>
             <p id="info">
               {building.isOpen && <img src="assets/mapIcons/open.png" alt="" />}
             </p>

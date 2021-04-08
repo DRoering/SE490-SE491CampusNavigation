@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  IonPage,
-  IonContent,
-  IonFab,
-  IonFabButton,
-  IonIcon,
-  IonModal,
-} from "@ionic/react";
+import { IonPage, IonContent, IonModal } from "@ionic/react";
 import {
   BuildingModal,
   CampusMap as MapContent,
@@ -15,8 +8,6 @@ import {
   PinFilter,
 } from "../../components";
 import L from "leaflet";
-import { Geolocation } from "@ionic-native/geolocation";
-import { navigateCircleOutline } from "ionicons/icons";
 import { Item, ItemOptions } from "../../Reuseable";
 
 interface CampusMapProps {
@@ -41,25 +32,6 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     i: ItemOptions;
     open: boolean;
   }>({ i: {}, open: false });
-  const [userLocation, setUserLocation] = useState({
-    c: L.latLng([45.551613, -94.148977]),
-    r: 0,
-  });
-  const locate = async () => {
-    const locale = await Geolocation.getCurrentPosition();
-
-    setUserLocation({
-      c: L.latLng([locale.coords.latitude, locale.coords.longitude]),
-      r: locale.coords.heading,
-    });
-
-    console.log(locale);
-  };
-
-  const centerUser = () => {
-    if (!(userLocation.c === L.latLng([45.551613, -94.148977])))
-      props.centerUser(userLocation.c, userLocation.r);
-  };
 
   const openDetails = (i: ItemOptions) => {
     if (i.b) props.setBuilding(i.b);
@@ -75,11 +47,6 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       <HeaderBar displayButton={false} displaySearch={false} />
       <IonContent>
         <PinFilter setShowItems={setShowItems} />
-        <IonFab horizontal="end" vertical="bottom" slot="fixed">
-          <IonFabButton color="dark" onClick={centerUser}>
-            <IonIcon icon={navigateCircleOutline} />
-          </IonFabButton>
-        </IonFab>
         <MapContent
           buildings={showItems.buildings && props.buildings}
           events={showItems.events && props.events}
@@ -87,7 +54,6 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           organizations={showItems.organization && props.organizations}
           showName={props.showName}
           position={props.position}
-          userPosition={userLocation}
           openDetails={openDetails}
         />
       </IonContent>

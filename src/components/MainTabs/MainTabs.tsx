@@ -61,8 +61,6 @@ export const MainTabs: React.FC = () => {
     });
   }, []);
 
-  console.log(item);
-
   return (
     <IonTabs>
       <IonRouterOutlet>

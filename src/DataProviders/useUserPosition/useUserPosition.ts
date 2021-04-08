@@ -19,6 +19,10 @@ export const useUserPosition = (): [L.LatLng, () => void] => {
 
   useEffect(() => {
     locate();
+    // setInterval(() => {
+    //   console.log("Refreshing position");
+    //   locate();
+    // }, 100000);
   }, []);
 
   return [userLocation, locate];

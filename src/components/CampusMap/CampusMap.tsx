@@ -51,7 +51,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const updateBounds = (z: number) => {
-    if (z == 18) setImgBounds(imgBounds.pad(1));
+    if (z === 18) setImgBounds(imgBounds.pad(1));
     else setImgBounds(imageBounds);
   };
 

@@ -8,8 +8,8 @@ import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
 import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
-import { chevronDown, chevronUp } from "ionicons/icons";
-import { NavigatorProvider } from "../../DataProviders";
+import { chevronDown, chevronUp, navigateCircleOutline } from "ionicons/icons";
+import { NavigatorProvider, useUserPosition } from "../../DataProviders";
 
 const maxFloor = 3;
 const minFloor = 0;
@@ -26,7 +26,6 @@ interface CampusMapProps {
   organizations: Item[] | false;
   showName: boolean;
   position: { c: L.LatLng; z: number };
-  userPosition: { c: L.LatLng; r: number };
   openDetails: (i: ItemOptions) => void;
 }
 
@@ -36,6 +35,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showFloor, setShowFloor] = useState(false);
   const [currentFloor, setCurrentFloor] = useState(1);
   const [navigationItem, setNavItem] = useState<Item>();
+  const [location, locate] = useUserPosition();
   const minimumZoom = 8;
   useEffect(() => {
     console.debug("resetSize Called");
@@ -65,6 +65,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         tempElement.getCenter() || ([0, 0] && tempElement?.getZoom() > 16)
       )
     ) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const temp = mapRef.current?.leafletElement.closePopup();
       setShowFloor(true);
     } else setShowFloor(false);
@@ -110,13 +111,21 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       {props.organizations && (
         <OrganizationPin organization={props.organizations} />
       )}
-      {props.userPosition && <UserLocation userPosition={props.userPosition} />}
+      {location && <UserLocation userPosition={location} />}
     </Map>
   );
 
   return (
     <>
       {map}
+      <IonFab horizontal="end" vertical="bottom" slot="fixed">
+        <IonFabButton
+          color="dark"
+          onClick={() => mapRef.current?.leafletElement.panTo(location)}
+        >
+          <IonIcon icon={navigateCircleOutline} />
+        </IonFabButton>
+      </IonFab>
       {showFloor && (
         <IonFab vertical="bottom" horizontal="start">
           <IonFabButton

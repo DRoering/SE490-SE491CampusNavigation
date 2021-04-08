@@ -2,7 +2,11 @@ import { Geolocation } from "@ionic-native/geolocation";
 import L from "leaflet";
 import { useEffect, useState } from "react";
 
-export const useUserPosition = (): [L.LatLng, () => void] => {
+export const useUserPosition = (): [
+  L.LatLng,
+  () => void,
+  () => NodeJS.Timeout
+] => {
   const [userLocation, setUserLocation] = useState(
     L.latLng([45.551613, -94.148977])
   );
@@ -17,13 +21,23 @@ export const useUserPosition = (): [L.LatLng, () => void] => {
     console.log(locale);
   };
 
+  const manualRefresh = () => {
+    console.log("manual refresh started");
+    return setTimeout(() => {
+      console.log("Manual refresh occured");
+      locate();
+    }, 800);
+  };
+
   useEffect(() => {
-    locate();
+    locate().catch((error) => {
+      console.log(error);
+    });
     // setInterval(() => {
     //   console.log("Refreshing position");
     //   locate();
     // }, 100000);
   }, []);
 
-  return [userLocation, locate];
+  return [userLocation, locate, manualRefresh];
 };

@@ -5,6 +5,7 @@ export * from "./SortProvider";
 export * from "./FilterProvider";
 export * from "./useBuilding";
 export * from "./useEvent";
+export * from "./useUserPosition";
 export * from "./useOrganization";
 export * from "./useParkingLot";
 export * from "./useService";

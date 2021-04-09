@@ -1,14 +1,18 @@
 import React from "react";
 import { FilterType, SortType } from "../../../DataProviders";
 import {
+  IonButton,
   IonCard,
   IonCardContent,
   IonCol,
   IonGrid,
+  IonIcon,
   IonLabel,
   IonRow,
 } from "@ionic/react";
 import { Item, ItemOptions } from "../../../Reuseable";
+import { share } from "ionicons/icons";
+import "./BuildingList.scss";
 
 interface BuildingListProps {
   buildings: Item[];
@@ -39,6 +43,9 @@ export const BuildingList: React.FC<BuildingListProps> = (
       <IonRow>
         {resortedList.map((building) => (
           <IonCol key={building.id} size="4" sizeXs="6">
+            <IonButton fill="clear" id="share-button">
+              <IonIcon color="dark" id="ion-icon-share" icon={share}></IonIcon>
+            </IonButton>
             <IonCard onClick={() => props.openDetails({ b: building })}>
               <img
                 ion-img-cache="true"

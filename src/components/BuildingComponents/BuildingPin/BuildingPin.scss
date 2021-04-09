@@ -19,3 +19,25 @@
   box-shadow: none;
   font-weight: bold;
 }
+
+#share-button-pin {
+  flex-direction: row;
+}
+
+#navigate-button-pin {
+  flex-direction: row;
+}
+
+#ion-icon-pin {
+  size: 2%;
+}
+
+#share-col {
+  position: relative;
+  left: -7pt;
+}
+
+#share-col2 {
+  position: relative;
+  right: -7pt;
+}

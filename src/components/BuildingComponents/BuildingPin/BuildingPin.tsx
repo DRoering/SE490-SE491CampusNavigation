@@ -6,11 +6,12 @@ import {
   IonButton,
   IonCol,
   IonGrid,
-  IonImg,
+  IonIcon,
   IonLabel,
   IonRow,
 } from "@ionic/react";
 import "./BuildingPin.scss";
+import { navigateCircle, share } from "ionicons/icons";
 
 interface BuildingPinProps {
   buildings: Item[];
@@ -62,13 +63,29 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
             >
               <IonLabel>Open Details</IonLabel>
             </IonButton>
-            <IonButton
-              color="tertiary"
-              expand="block"
-              onClick={() => props.openNav(building)}
-            >
-              <IonLabel>Navigate Here</IonLabel>
-            </IonButton>
+            <IonGrid>
+              <IonRow>
+                <IonCol id="share-col" size="6">
+                  <IonButton id="share-button-pin" expand="block">
+                    <IonIcon
+                      color="dark"
+                      id="ion-icon-pin"
+                      icon={share}
+                    ></IonIcon>
+                  </IonButton>
+                </IonCol>
+                <IonCol id="share-col2" size="6">
+                  <IonButton
+                    id="navigate-button-pin"
+                    color="dark"
+                    expand="block"
+                    onClick={() => props.openNav(building)}
+                  >
+                    <IonIcon icon={navigateCircle} id="ion-icon-pin"></IonIcon>
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
           </Popup>
           {/* <Tooltip
             className="tooltip"

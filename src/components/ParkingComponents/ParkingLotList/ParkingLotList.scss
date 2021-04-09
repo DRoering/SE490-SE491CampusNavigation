@@ -6,3 +6,22 @@ ion-card{
 ion-item{
   font-size: small;
 }
+
+#card-title {
+  font-size: small;
+}
+
+#share-button {
+  right: -5pt;
+  top: -8pt;
+  position: absolute;
+  z-index: 2;
+  padding: 5pt;
+}
+
+#ion-icon-share {
+  position: absolute;
+  top: 0%;
+  padding-top: 3pt;
+  padding-left: -22pt;
+}

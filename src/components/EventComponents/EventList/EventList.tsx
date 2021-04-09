@@ -5,7 +5,10 @@ import {
   IonCol,
   IonGrid,
   IonRow,
+  IonButton,
+  IonIcon,
 } from "@ionic/react";
+import { share } from "ionicons/icons";
 import moment from "moment";
 import React from "react";
 import { SortType } from "../../../DataProviders";
@@ -45,6 +48,9 @@ export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
       <IonRow>
         {sortedEvents.map((event) => (
           <IonCol key={event.id} size="4" sizeXs="6">
+            <IonButton fill="clear" id="share-button">
+              <IonIcon color="dark" id="ion-icon-share" icon={share}></IonIcon>
+            </IonButton>
             <IonCard onClick={() => props.openDetails({ e: event })}>
               <img
                 ion-img-cache="true"

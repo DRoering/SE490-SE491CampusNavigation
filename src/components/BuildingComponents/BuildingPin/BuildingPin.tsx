@@ -65,8 +65,12 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
             </IonButton>
             <IonGrid>
               <IonRow>
-                <IonCol id="share-col" size="6">
-                  <IonButton id="share-button-pin" expand="block">
+                <IonCol class="ion-no-padding" id="share-col" size="6">
+                  <IonButton
+                    class="ion-no-margin"
+                    id="share-button-pin"
+                    expand="block"
+                  >
                     <IonIcon
                       color="dark"
                       id="ion-icon-pin"
@@ -74,8 +78,9 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
                     ></IonIcon>
                   </IonButton>
                 </IonCol>
-                <IonCol id="share-col2" size="6">
+                <IonCol class="ion-no-padding" id="share-col2" size="6">
                   <IonButton
+                    class="ion-no-margin"
                     id="navigate-button-pin"
                     color="dark"
                     expand="block"

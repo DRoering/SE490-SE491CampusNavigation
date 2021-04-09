@@ -1,9 +1,17 @@
 import React, { useMemo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { IonButton, IonLabel } from "@ionic/react";
+import {
+  IonButton,
+  IonLabel,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonIcon,
+} from "@ionic/react";
 import "./EventPin.scss";
 import { Item, ItemOptions } from "../../../Reuseable";
+import { navigateCircle, share } from "ionicons/icons";
 
 interface EventPinProps {
   events: Item[];
@@ -44,16 +52,44 @@ export const EventPin: React.FC<EventPinProps> = (props: EventPinProps) => {
               >
                 <IonLabel>Open Details</IonLabel>
               </IonButton>
-              <IonButton
-                expand="block"
-                onClick={() =>
-                  console.log(
-                    "Navigate to : " + event.name + " " + event.coordinates
-                  )
-                }
-              >
-                <IonLabel>Navigate Here</IonLabel>
-              </IonButton>
+              <IonGrid>
+                <IonRow>
+                  <IonCol class="ion-no-padding" id="share-col" size="6">
+                    <IonButton
+                      class="ion-no-margin"
+                      id="share-button-pin"
+                      expand="block"
+                    >
+                      <IonIcon
+                        color="dark"
+                        id="ion-icon-pin"
+                        icon={share}
+                      ></IonIcon>
+                    </IonButton>
+                  </IonCol>
+                  <IonCol class="ion-no-padding" id="share-col2" size="6">
+                    <IonButton
+                      class="ion-no-margin"
+                      id="navigate-button-pin"
+                      color="dark"
+                      expand="block"
+                      onClick={() =>
+                        console.log(
+                          "Navigate to : " +
+                            event.name +
+                            " " +
+                            event.coordinates
+                        )
+                      }
+                    >
+                      <IonIcon
+                        icon={navigateCircle}
+                        id="ion-icon-pin"
+                      ></IonIcon>
+                    </IonButton>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
             </Popup>
           </Marker>
         ))}

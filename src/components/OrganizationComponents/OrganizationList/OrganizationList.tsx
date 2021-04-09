@@ -1,14 +1,17 @@
 import React from "react";
 import {
+  IonButton,
   IonCard,
   IonCardContent,
   IonCol,
   IonGrid,
+  IonIcon,
   IonLabel,
   IonRow,
 } from "@ionic/react";
 import { FilterType, SortType } from "../../../DataProviders";
 import { Item, ItemOptions } from "../../../Reuseable";
+import { share } from "ionicons/icons";
 
 interface OrganizationListProps {
   organizations: Item[];
@@ -49,6 +52,9 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
       <IonRow>
         {resortedList.map((organization) => (
           <IonCol key={organization.id} sizeXs="6">
+            <IonButton fill="clear" id="share-button">
+              <IonIcon color="dark" id="ion-icon-share" icon={share}></IonIcon>
+            </IonButton>
             <IonCard onClick={() => props.openDetails({ o: organization })}>
               <img
                 alt="Organization"

@@ -9,7 +9,11 @@ import { UserLocation } from "./Components";
 import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
 import { chevronDown, chevronUp, navigateCircleOutline } from "ionicons/icons";
-import { NavigatorProvider, useUserPosition } from "../../DataProviders";
+import {
+  NavigatorProvider,
+  useFloorOverlay,
+  useUserPosition,
+} from "../../DataProviders";
 
 const maxFloor = 3;
 const minFloor = 0;
@@ -44,6 +48,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       window.dispatchEvent(new Event("resize", { bubbles: true }));
     }, 750);
   }, []);
+  useFloorOverlay();
 
   const initiateNav = (i: Item) => {
     console.log(i);

@@ -1,16 +1,16 @@
 import React, { useMemo } from "react";
 import "./ParkingLotPin.scss";
-import { Lot } from "../../../DataProviders";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { IonLabel } from "@ionic/react";
+import { IonButton, IonLabel } from "@ionic/react";
+import { Item } from "../../../Reuseable";
 
 interface ParkingLotPinProps {
-  parkingLots: Lot[];
+  parkingLots: Item[];
 }
 
-const filterParkingLots = (parkingLots: Lot[]) => {
-  const validParkingLots: Lot[] = [];
+const filterParkingLots = (parkingLots: Item[]) => {
+  const validParkingLots: Item[] = [];
   parkingLots.forEach((parkingLot) => {
     if (parkingLot.coordinates) validParkingLots.push(parkingLot);
   });
@@ -41,6 +41,19 @@ export const ParkingLotPin: React.FC<ParkingLotPinProps> = (
           >
             <Popup id="parking-lot-popup">
               <IonLabel>{parkingLot.name}</IonLabel>
+              <IonButton
+                expand="block"
+                onClick={() =>
+                  console.log(
+                    "Navigate to : " +
+                      parkingLot.name +
+                      " " +
+                      parkingLot.coordinates
+                  )
+                }
+              >
+                <IonLabel>Navigate Here</IonLabel>
+              </IonButton>
             </Popup>
           </Marker>
         ))}

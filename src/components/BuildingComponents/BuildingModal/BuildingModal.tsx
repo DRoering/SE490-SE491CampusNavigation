@@ -10,14 +10,15 @@ import {
   IonLabel,
   IonList,
 } from "@ionic/react";
-import { Building, useServices } from "../../../DataProviders";
+import { useServices } from "../../../DataProviders";
 import { ModalHeader } from "../../";
 import "./BuildingModal.scss";
+import { Item } from "../../../Reuseable";
 
 interface BuildingModalProps {
-  building: Building;
+  building: Item;
   close: () => void;
-  setPosition: (c: L.LatLng) => void;
+  setPosition?: (c: L.LatLng) => void;
 }
 
 const getFindFormula = (id: number) => `Find("${id}",Buildings)`;
@@ -55,13 +56,36 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
             alt={`${props.building.name}`}
           />
         </IonCard>
+        {props.setPosition && (
+          <IonButton
+            disabled={!props.building.coordinates}
+            expand="block"
+            color="secondary"
+            onClick={() => props.setPosition?.(props.building.coordinates)}
+          >
+            View on Map
+          </IonButton>
+        )}
         <IonButton
-          disabled={!props.building.coordinates}
           expand="block"
-          color="secondary"
-          onClick={() => props.setPosition(props.building.coordinates)}
+          onClick={() =>
+            console.log(
+              "Navigate to : " +
+                props.building.name +
+                " " +
+                props.building.coordinates
+            )
+          }
         >
-          View on Map
+          <IonLabel>Navigate Here</IonLabel>
+        </IonButton>
+        <IonButton
+          color="tertiary"
+          expand="block"
+          routerLink="/FloorView"
+          onClick={props.close}
+        >
+          <IonLabel>Interior View</IonLabel>
         </IonButton>
         <IonList>
           <IonItemDivider className="app-fonts" id="item-info">

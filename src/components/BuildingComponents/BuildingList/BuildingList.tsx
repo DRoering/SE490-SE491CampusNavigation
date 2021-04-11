@@ -1,5 +1,5 @@
 import React from "react";
-import { Building } from "../../../DataProviders";
+import { FilterType, SortType } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,
@@ -8,21 +8,38 @@ import {
   IonLabel,
   IonRow,
 } from "@ionic/react";
+import { Item, ItemOptions } from "../../../Reuseable";
 
 interface BuildingListProps {
-  buildings: Building[];
-  openDetails: (d: Building) => void;
+  buildings: Item[];
+  openDetails: (d: ItemOptions) => void;
+  sortAlgorithm: SortType;
+  filterAlgorithm?: FilterType;
 }
+
+// filter first, then perform the sort - may need to move resort inside of filter - use callback
+const reFilter = (buildings: Item[], filterF: (a: Item) => boolean) =>
+  buildings.filter(filterF);
+
+const reSort = (buildings: Item[], sort: (a: Item, b: Item) => number) =>
+  buildings.sort(sort);
 
 export const BuildingList: React.FC<BuildingListProps> = (
   props: BuildingListProps
 ) => {
+  const resortedList = props.filterAlgorithm
+    ? reFilter(
+        reSort(props.buildings, props.sortAlgorithm.function),
+        props.filterAlgorithm?.function
+      )
+    : reSort(props.buildings, props.sortAlgorithm.function);
+
   return (
     <IonGrid>
       <IonRow>
-        {props.buildings.map((building) => (
+        {resortedList.map((building) => (
           <IonCol key={building.id} size="4" sizeXs="6">
-            <IonCard onClick={() => props.openDetails(building)}>
+            <IonCard onClick={() => props.openDetails({ b: building })}>
               <img
                 ion-img-cache="true"
                 src={building.imgUrl}

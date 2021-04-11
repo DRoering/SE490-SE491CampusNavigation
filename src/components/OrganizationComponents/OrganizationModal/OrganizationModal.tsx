@@ -1,6 +1,5 @@
 import {
   IonButton,
-  IonButtons,
   IonCard,
   IonContent,
   IonItem,
@@ -9,11 +8,11 @@ import {
   IonList,
 } from "@ionic/react";
 import React from "react";
-import { Organization } from "../../../DataProviders";
 import { ModalHeader } from "../..";
+import { Item } from "../../../Reuseable";
 
 interface OrganizationModalProps {
-  organization: Organization;
+  organization: Item;
   close: () => void;
 }
 
@@ -52,7 +51,7 @@ export const OrganizationModal: React.FC<OrganizationModalProps> = (
           rel="noopener noreferrer"
           color="primary"
           expand="block"
-          disabled={props.organization.webSite ? true : false}
+          disabled={!props.organization.webSite ? true : false}
         >
           <IonLabel>Organization Website</IonLabel>
         </IonButton>

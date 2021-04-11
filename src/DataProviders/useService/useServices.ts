@@ -17,7 +17,7 @@ interface ApiResponse {
 
 const { apiUrl, apiKey } = Strings;
 
-const sortString = "&sort[0][field]=serviceId&sort[0][direction]=asc";
+//const sortString = "&sort[0][field]=serviceId&sort[0][direction]=asc";
 
 const getServices = (setServices: (s: Service[]) => void, params: Params) => {
   get<{ records: ApiResponse[] }>(`${apiUrl}BuildingServices`, params)
@@ -54,5 +54,5 @@ export const useServices = (params: Params): [Service[], boolean] => {
     };
   }, [params.maxRecords]);
 
-  return [services, params.maxRecords != services.length];
+  return [services, params.maxRecords !== services.length];
 };

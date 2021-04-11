@@ -7,20 +7,14 @@ import {
   IonLabel,
   IonRouterOutlet,
 } from "@ionic/react";
-import {
-  map,
-  briefcase,
-  business,
-  calendarOutline,
-  carOutline,
-} from "ionicons/icons";
+import { map, informationCircleOutline, atCircleOutline } from "ionicons/icons";
 import { Route, Redirect, useHistory } from "react-router";
 import {
-  Buildings,
   CampusMap,
-  Organizations,
-  Events,
-  ParkingLots,
+  ItemPage,
+  AboutPage,
+  FeedbackPage,
+  FloorView,
 } from "../../pages";
 import {
   useBuilding,
@@ -29,6 +23,7 @@ import {
   useOrganization,
 } from "../../DataProviders";
 import L from "leaflet";
+import { Item } from "../../Reuseable";
 
 const defaultCoordsZoom = {
   c: L.latLng([45.5511, -94.1515]),
@@ -42,6 +37,7 @@ export const MainTabs: React.FC = () => {
   const organizations = useOrganization();
   const [showName, setShowName] = useState(true);
   const [coords, setCoords] = useState(defaultCoordsZoom);
+  const [item, setItem] = useState<Item>(buildings[0]);
   const history = useHistory();
 
   const toggleName = () => {
@@ -52,8 +48,10 @@ export const MainTabs: React.FC = () => {
     });
   };
 
-  const setPosition = (c: L.LatLng) => {
-    setCoords({ c: c, z: 20 });
+  const setPosition = (c: L.LatLng, r?: number) => {
+    if (c === coords.c)
+      setCoords({ c: L.latLng([c.lat + 0.0001, c.lng]), z: 20 });
+    else setCoords({ c: c, z: 20 });
     history.push("/Map");
   };
 
@@ -67,11 +65,6 @@ export const MainTabs: React.FC = () => {
     <IonTabs>
       <IonRouterOutlet>
         <Route
-          path="/:tab(Events)"
-          render={() => <Events events={events} />}
-          exact={true}
-        />
-        <Route
           path="/:tab(Map)"
           render={() => (
             <CampusMap
@@ -81,27 +74,37 @@ export const MainTabs: React.FC = () => {
               events={events}
               organizations={organizations}
               position={coords}
+              centerUser={setPosition}
+              setBuilding={setItem}
             />
           )}
-          exact={true}
+          exact
         />
         <Route
-          path="/:tab(BuildingList)"
+          path="/:tab(Items)"
           render={() => (
-            <Buildings buildings={buildings} setPosition={setPosition} />
+            <ItemPage
+              buildings={buildings}
+              events={events}
+              parking={parkingLots}
+              organizations={organizations}
+              setPosition={setPosition}
+              setBuilding={setItem}
+            />
           )}
+          exact
+        />
+        <Route
+          path="/:tab(AboutPage)"
+          render={() => <AboutPage />}
           exact={true}
         />
         <Route
-          path="/:tab(Organizations)"
-          render={() => <Organizations organizations={organizations} />}
-          exact={true}
+          path="/FloorView"
+          render={() => <FloorView building={item} />}
+          exact
         />
-        <Route
-          path="/:tab(ParkingLotList)"
-          render={() => <ParkingLots parkingLots={parkingLots} />}
-          exact={true}
-        />
+        <Route path="/Feedback" render={() => <FeedbackPage />} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/Map" />} />
       </IonRouterOutlet>
 
@@ -111,24 +114,14 @@ export const MainTabs: React.FC = () => {
           <IonLabel>Map</IonLabel>
         </IonTabButton>
 
-        <IonTabButton tab="BuildingList" href="/BuildingList">
-          <IonIcon icon={business} />
-          <IonLabel>Buildings</IonLabel>
+        <IonTabButton tab="Items" href="/Items">
+          <IonIcon icon={informationCircleOutline} />
+          <IonLabel>Information</IonLabel>
         </IonTabButton>
 
-        <IonTabButton tab="Events" href="/Events">
-          <IonIcon icon={calendarOutline} />
-          <IonLabel>Events</IonLabel>
-        </IonTabButton>
-
-        <IonTabButton tab="ParkingList" href="/ParkingLotList">
-          <IonIcon icon={carOutline} />
-          <IonLabel>Parking Lots</IonLabel>
-        </IonTabButton>
-
-        <IonTabButton tab="Organizations" href="/Organizations">
-          <IonIcon icon={briefcase} />
-          <IonLabel>Organization</IonLabel>
+        <IonTabButton tab="AboutPage" href="/AboutPage">
+          <IonIcon icon={atCircleOutline} />
+          <IonLabel>About Page</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

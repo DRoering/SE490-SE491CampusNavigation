@@ -8,20 +8,22 @@ import {
 } from "@ionic/react";
 import moment from "moment";
 import React from "react";
-import { CampusEvent } from "../../../DataProviders";
+import { SortType } from "../../../DataProviders";
+import { Item, ItemOptions } from "../../../Reuseable";
 import "./EventList.scss";
 
 interface EventListProps {
-  events: CampusEvent[];
-  clickEvent: (e: CampusEvent) => void;
+  events: Item[];
+  openDetails: (e: ItemOptions) => void;
+  sortAlgorithm: SortType;
 }
 
 const currentDate = moment();
 
 console.log(currentDate);
 
-const filterEvents = (e: CampusEvent[]) => {
-  const currentEvents: CampusEvent[] = [];
+const filterEvents = (e: Item[]) => {
+  const currentEvents: Item[] = [];
 
   e.forEach((event) => {
     if (!event.startDate.isBefore(currentDate)) currentEvents.push(event);
@@ -30,18 +32,23 @@ const filterEvents = (e: CampusEvent[]) => {
   return currentEvents;
 };
 
+const reSort = (events: Item[], sort: (a: Item, b: Item) => number) =>
+  events.sort(sort);
+
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
-  const validEvents = filterEvents(props.events);
+  const sortedEvents = filterEvents(
+    reSort(filterEvents(props.events), props.sortAlgorithm.function)
+  );
 
   return (
     <IonGrid>
       <IonRow>
-        {validEvents.map((event) => (
+        {sortedEvents.map((event) => (
           <IonCol key={event.id} size="4" sizeXs="6">
-            <IonCard onClick={() => props.clickEvent(event)}>
+            <IonCard onClick={() => props.openDetails({ e: event })}>
               <img
                 ion-img-cache="true"
-                src={`assets/images/events/${event.imgUrl}.png`}
+                src={`${event.source}${event.imgUrl}`}
                 alt="Event"
               />
               <IonCardContent>

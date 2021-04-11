@@ -1,18 +1,14 @@
 import React from "react";
 import { IonFab, IonFabButton, IonFabList, IonIcon } from "@ionic/react";
-import {
-  briefcase,
-  business,
-  calendar,
-  car,
-  chevronDown,
-} from "ionicons/icons";
+import { business, calendar, car, chevronDown } from "ionicons/icons";
 
 interface PinFilterProps {
-  showBuildings: () => void;
-  showEvents: () => void;
-  showParking: () => void;
-  showOrgs: () => void;
+  setShowItems: (b: {
+    buildings: boolean;
+    events: boolean;
+    parking: boolean;
+    organization: boolean;
+  }) => void;
 }
 
 export const PinFilter: React.FC<PinFilterProps> = (props: PinFilterProps) => (
@@ -21,16 +17,52 @@ export const PinFilter: React.FC<PinFilterProps> = (props: PinFilterProps) => (
       <IonIcon icon={chevronDown} />
     </IonFabButton>
     <IonFabList side="bottom">
-      <IonFabButton onClick={props.showBuildings}>
+      <IonFabButton
+        onClick={() =>
+          props.setShowItems({
+            buildings: true,
+            events: false,
+            parking: false,
+            organization: false,
+          })
+        }
+      >
         <IonIcon icon={business} />
       </IonFabButton>
-      <IonFabButton onClick={props.showEvents}>
+      <IonFabButton
+        onClick={() =>
+          props.setShowItems({
+            buildings: false,
+            events: true,
+            parking: false,
+            organization: false,
+          })
+        }
+      >
         <IonIcon icon={calendar} />
       </IonFabButton>
-      <IonFabButton onClick={props.showParking}>
+      <IonFabButton
+        onClick={() =>
+          props.setShowItems({
+            buildings: false,
+            events: false,
+            parking: true,
+            organization: false,
+          })
+        }
+      >
         <IonIcon icon={car} />
       </IonFabButton>
-      {/* <IonFabButton onClick={props.showOrgs}>
+      {/* <IonFabButton
+        onClick={() =>
+          props.setShowItems({
+            buildings: false,
+            events: false,
+            parking: false,
+            organization: true,
+          })
+        }
+      >
         <IonIcon icon={briefcase} />
       </IonFabButton> */}
     </IonFabList>

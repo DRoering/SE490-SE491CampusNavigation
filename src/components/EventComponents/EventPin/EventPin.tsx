@@ -1,16 +1,17 @@
 import React, { useMemo } from "react";
-import { CampusEvent } from "../../../DataProviders";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { IonLabel } from "@ionic/react";
+import { IonButton, IonLabel } from "@ionic/react";
 import "./EventPin.scss";
+import { Item, ItemOptions } from "../../../Reuseable";
 
 interface EventPinProps {
-  events: CampusEvent[];
+  events: Item[];
+  openDetails: (i: ItemOptions) => void;
 }
 
-const filterEvents = (events: CampusEvent[]) => {
-  const validEvents: CampusEvent[] = [];
+const filterEvents = (events: Item[]) => {
+  const validEvents: Item[] = [];
   events.forEach((event) => {
     if (event.coordinates) validEvents.push(event);
   });
@@ -35,6 +36,24 @@ export const EventPin: React.FC<EventPinProps> = (props: EventPinProps) => {
           <Marker key={event.id} position={event.coordinates} icon={eventIcon}>
             <Popup id="event-popup">
               <IonLabel>{event.name}</IonLabel>
+              <IonButton
+                expand="block"
+                onClick={() =>
+                  props.openDetails({ b: undefined, e: event, p: undefined })
+                }
+              >
+                <IonLabel>Open Details</IonLabel>
+              </IonButton>
+              <IonButton
+                expand="block"
+                onClick={() =>
+                  console.log(
+                    "Navigate to : " + event.name + " " + event.coordinates
+                  )
+                }
+              >
+                <IonLabel>Navigate Here</IonLabel>
+              </IonButton>
             </Popup>
           </Marker>
         ))}

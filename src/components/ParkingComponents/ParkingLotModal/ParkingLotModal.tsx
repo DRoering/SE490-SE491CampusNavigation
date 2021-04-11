@@ -1,18 +1,10 @@
 import React from "react";
-import {
-  IonHeader,
-  IonContent,
-  IonToolbar,
-  IonTitle,
-  IonItem,
-  IonButtons,
-  IonButton,
-  IonIcon,
-} from "@ionic/react";
-import { Lot } from "../../../DataProviders";
+import { IonContent, IonItem, IonItemDivider, IonLabel } from "@ionic/react";
+import { ModalHeader } from "../../ModalHeader";
+import { Item } from "../../../Reuseable";
 
 interface ParkingLotProps {
-  parkingLot: Lot;
+  parkingLot: Item;
   closeAction: () => void;
 }
 
@@ -21,19 +13,25 @@ export const ParkingLotModal: React.FC<ParkingLotProps> = (
 ) => {
   return (
     <>
-      <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>Parking Lot Details</IonTitle>
-          <IonButtons slot="end">
-            <IonButton onClick={() => props.closeAction()}>
-              <IonIcon name="Close" slot="icon-only"></IonIcon>
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <IonItem>{props.parkingLot.type}</IonItem>
+      <ModalHeader
+        close={props.closeAction}
+        title={"Parking Lot Details"}
+      ></ModalHeader>
+      <IonContent className="app-fonts" id="item-info">
+        <IonItemDivider className="app-fonts" id="item-info">
+          <IonLabel id="title">Lot Name</IonLabel>
+        </IonItemDivider>
         <IonItem>{props.parkingLot.designation}</IonItem>
+        <IonItemDivider className="app-fonts" id="item-info">
+          <IonLabel id="title">Lot Type</IonLabel>
+        </IonItemDivider>
+        <IonItem>{props.parkingLot.type}</IonItem>
+        <IonItemDivider className="app-fonts" id="item-info">
+          <IonLabel id="title">Pay Rate</IonLabel>
+        </IonItemDivider>
+        <IonItem className="ion-text-wrap" id="item-info">
+          {props.parkingLot.rate}
+        </IonItem>
       </IonContent>
     </>
   );

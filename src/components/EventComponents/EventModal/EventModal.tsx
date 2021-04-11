@@ -8,12 +8,12 @@ import {
   IonLabel,
   IonList,
 } from "@ionic/react";
-import { CampusEvent } from "../../../DataProviders";
 import { ModalHeader } from "../..";
 import "./EventModal.scss";
+import { Item } from "../../../Reuseable";
 
 interface EventModalProps {
-  event: CampusEvent;
+  event: Item;
   closeAction: () => void;
 }
 
@@ -44,7 +44,7 @@ export const EventModal: React.FC<EventModalProps> = (
         <IonCard id="img-card">
           <img
             ion-img-cache="true"
-            src={`assets/images/events/${props.event.imgUrl}.png`}
+            src={`${props.event.source}${props.event.imgUrl}`}
             alt="Event"
           />
         </IonCard>

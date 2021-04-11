@@ -1,3 +1,4 @@
+export * from "./AboutCard";
 export * from "./BuildingComponents";
 export * from "./CampusMap";
 export * from "./EventComponents";
@@ -7,3 +8,4 @@ export * from "./ModalHeader";
 export * from "./OrganizationComponents";
 export * from "./ParkingComponents";
 export * from "./PinFilter";
+export * from "./SortMenu";

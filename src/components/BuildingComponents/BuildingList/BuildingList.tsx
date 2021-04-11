@@ -9,6 +9,7 @@ import {
   IonRow,
 } from "@ionic/react";
 import { Item, ItemOptions } from "../../../Reuseable";
+import { ItemListSkeleton } from "../../SkeletonText";
 
 interface BuildingListProps {
   buildings: Item[];
@@ -35,23 +36,25 @@ export const BuildingList: React.FC<BuildingListProps> = (
     : reSort(props.buildings, props.sortAlgorithm.function);
 
   return (
-    <IonGrid>
-      <IonRow>
-        {resortedList.map((building) => (
-          <IonCol key={building.id} size="4" sizeXs="6">
-            <IonCard onClick={() => props.openDetails({ b: building })}>
-              <img
-                ion-img-cache="true"
-                src={building.imgUrl}
-                alt={building.name}
-              />
-              <IonCardContent>
-                <IonLabel id="card-title">{`${building.name} (${building.abbreviation})`}</IonLabel>
-              </IonCardContent>
-            </IonCard>
-          </IonCol>
-        ))}
-      </IonRow>
-    </IonGrid>
+    <>
+      <IonGrid>
+        <IonRow>
+          {resortedList.map((building) => (
+            <IonCol key={building.id} size="4" sizeXs="6">
+              <IonCard onClick={() => props.openDetails({ b: building })}>
+                <img
+                  ion-img-cache="true"
+                  src={building.imgUrl}
+                  alt={building.name}
+                />
+                <IonCardContent>
+                  <IonLabel id="card-title">{`${building.name} (${building.abbreviation})`}</IonLabel>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+          ))}
+        </IonRow>
+      </IonGrid>
+    </>
   );
 };

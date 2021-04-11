@@ -27,6 +27,7 @@ import {
 import { Item, ItemOptions } from "../../Reuseable";
 import "./ItemPage.scss";
 import { Search } from "../../DataProviders";
+import { ItemListSkeleton } from "../../components/SkeletonText";
 
 interface ItemPageProps {
   buildings: Item[];
@@ -105,7 +106,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         {currentItem.includes(itemOptions[0]) && (
           <BuildingList
             buildings={
-              searchText == " "
+              searchText === " "
                 ? props.buildings
                 : searchItems(props.buildings, searchText)
             }

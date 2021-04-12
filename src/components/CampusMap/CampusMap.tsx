@@ -39,7 +39,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showFloor, setShowFloor] = useState(false);
   const [currentFloor, setCurrentFloor] = useState(1);
   const [navigationItem, setNavItem] = useState<Item>();
-  const [location, locate, manualRefresh] = useUserPosition();
+  const [location, manualRefresh] = useUserPosition();
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
   const minimumZoom = 8;
   useEffect(() => {
@@ -75,6 +75,10 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       const temp = mapRef.current?.leafletElement.closePopup();
       setShowFloor(true);
     } else setShowFloor(false);
+  };
+
+  const centerUser = () => {
+    const temp = mapRef.current?.leafletElement.panTo(location);
   };
 
   const map = (
@@ -127,9 +131,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       <IonFab horizontal="end" vertical="bottom" slot="fixed">
         <IonFabButton
           color="dark"
-          onClick={() => mapRef.current?.leafletElement.panTo(location)}
+          onClick={centerUser}
           onTouchStart={() =>
-            !currentTimeout && setCurrentTimeout(manualRefresh())
+            !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
           }
           onTouchEnd={() => {
             console.log("Timeout Cleared");

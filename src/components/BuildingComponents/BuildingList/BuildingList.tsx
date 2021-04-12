@@ -1,18 +1,16 @@
 import React from "react";
 import { FilterType, SortType } from "../../../DataProviders";
 import {
-  IonButton,
   IonCard,
   IonCardContent,
   IonCol,
   IonGrid,
-  IonIcon,
   IonLabel,
   IonRow,
 } from "@ionic/react";
 import { Item, ItemOptions } from "../../../Reuseable";
-import { share } from "ionicons/icons";
 import "./BuildingList.scss";
+import { ShareButton } from "../..";
 
 interface BuildingListProps {
   buildings: Item[];
@@ -43,9 +41,14 @@ export const BuildingList: React.FC<BuildingListProps> = (
       <IonRow>
         {resortedList.map((building) => (
           <IonCol key={building.id} size="4" sizeXs="6">
-            <IonButton fill="clear" id="share-button">
-              <IonIcon color="dark" id="ion-icon-share" icon={share}></IonIcon>
-            </IonButton>
+            <ShareButton
+              id="share-button"
+              class="none"
+              iconId="ion-icon-share"
+              expand={false}
+              fill={false}
+              shareItem={building}
+            />
             <IonCard onClick={() => props.openDetails({ b: building })}>
               <img
                 ion-img-cache="true"

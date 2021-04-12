@@ -11,7 +11,8 @@ import {
   IonRow,
 } from "@ionic/react";
 import { Item } from "../../../Reuseable";
-import { navigateCircle, share } from "ionicons/icons";
+import { navigateCircle } from "ionicons/icons";
+import { ShareButton } from "../..";
 
 interface ParkingLotPinProps {
   parkingLots: Item[];
@@ -48,21 +49,20 @@ export const ParkingLotPin: React.FC<ParkingLotPinProps> = (
             icon={parkingLotIcon}
           >
             <Popup id="parking-lot-popup">
-              <IonLabel>{parkingLot.name}</IonLabel>
+              <IonLabel id="name" class="ion-text-overflow">
+                <strong>{parkingLot.name}</strong>
+              </IonLabel>
               <IonGrid>
                 <IonRow>
                   <IonCol class="ion-no-padding" id="share-col" size="6">
-                    <IonButton
+                    <ShareButton
                       class="ion-no-margin"
                       id="share-button-pin"
-                      expand="block"
-                    >
-                      <IonIcon
-                        color="dark"
-                        id="ion-icon-pin"
-                        icon={share}
-                      ></IonIcon>
-                    </IonButton>
+                      iconId="ion-icon-pin"
+                      expand={true}
+                      fill={true}
+                      shareItem={parkingLot}
+                    />
                   </IonCol>
                   <IonCol class="ion-no-padding" id="share-col2" size="6">
                     <IonButton

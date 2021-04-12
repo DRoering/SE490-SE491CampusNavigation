@@ -11,7 +11,8 @@ import {
 } from "@ionic/react";
 import "./EventPin.scss";
 import { Item, ItemOptions } from "../../../Reuseable";
-import { navigateCircle, share } from "ionicons/icons";
+import { navigateCircle } from "ionicons/icons";
+import { ShareButton } from "../..";
 
 interface EventPinProps {
   events: Item[];
@@ -43,7 +44,9 @@ export const EventPin: React.FC<EventPinProps> = (props: EventPinProps) => {
         validEvents.map((event) => (
           <Marker key={event.id} position={event.coordinates} icon={eventIcon}>
             <Popup id="event-popup">
-              <IonLabel>{event.name}</IonLabel>
+              <IonLabel id="name" class="ion-text-overflow">
+                <strong>{event.name}</strong>
+              </IonLabel>
               <IonButton
                 expand="block"
                 onClick={() =>
@@ -55,17 +58,14 @@ export const EventPin: React.FC<EventPinProps> = (props: EventPinProps) => {
               <IonGrid>
                 <IonRow>
                   <IonCol class="ion-no-padding" id="share-col" size="6">
-                    <IonButton
+                    <ShareButton
                       class="ion-no-margin"
                       id="share-button-pin"
-                      expand="block"
-                    >
-                      <IonIcon
-                        color="dark"
-                        id="ion-icon-pin"
-                        icon={share}
-                      ></IonIcon>
-                    </IonButton>
+                      iconId="ion-icon-pin"
+                      expand={true}
+                      fill={true}
+                      shareItem={event}
+                    />
                   </IonCol>
                   <IonCol class="ion-no-padding" id="share-col2" size="6">
                     <IonButton

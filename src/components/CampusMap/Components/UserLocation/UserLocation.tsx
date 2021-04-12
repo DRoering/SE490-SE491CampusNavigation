@@ -3,7 +3,7 @@ import { Marker } from "react-leaflet";
 import L from "leaflet";
 
 interface UserLocationProps {
-  userPosition: { c: L.LatLng; r: number };
+  userPosition: L.LatLng;
 }
 
 export const UserLocation: React.FC<UserLocationProps> = (
@@ -15,5 +15,5 @@ export const UserLocation: React.FC<UserLocationProps> = (
     popupAnchor: [0, -7],
   });
 
-  return <Marker position={props.userPosition.c} icon={userIcon} />;
+  return <Marker position={props.userPosition} icon={userIcon} />;
 };

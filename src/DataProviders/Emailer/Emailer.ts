@@ -8,26 +8,24 @@ export const Emailer = {
     fromName: string,
     message: string
   ): Promise<{ message: string }> {
-    {
-      const templateParams = {
-        from_email: fromEmail,
-        from_name: fromName,
-        message: message,
-      };
+    const templateParams = {
+      from_email: fromEmail,
+      from_name: fromName,
+      message: message,
+    };
 
-      return emailjs
-        .send(Strings.serviceId, Strings.feedbackId, templateParams)
-        .then(
-          function (response) {
-            console.log("SUCCESS!", response.status, response.text);
-            return Promise.resolve({ message: response.text });
-          },
-          function (error) {
-            console.log("FAILED...", error);
-            return Promise.reject({ message: error });
-          }
-        );
-    }
+    return emailjs
+      .send(Strings.serviceId, Strings.feedbackId, templateParams)
+      .then(
+        function (response) {
+          console.log("SUCCESS!", response.status, response.text);
+          return Promise.resolve({ message: response.text });
+        },
+        function (error) {
+          console.log("FAILED...", error);
+          return Promise.reject({ message: error });
+        }
+      );
   },
   verifyEmail(e: string): boolean {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e);

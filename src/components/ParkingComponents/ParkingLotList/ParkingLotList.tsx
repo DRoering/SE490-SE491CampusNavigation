@@ -1,10 +1,12 @@
 import React from "react";
 import { FilterType, SortType } from "../../../DataProviders";
 import {
+  IonButton,
   IonCard,
   IonCardContent,
   IonCol,
   IonGrid,
+  IonIcon,
   IonItem,
   IonItemDivider,
   IonLabel,
@@ -12,6 +14,7 @@ import {
 } from "@ionic/react";
 import "./ParkingLotList.scss";
 import { Item } from "../../../Reuseable";
+import { share } from "ionicons/icons";
 
 interface ParkingLotProps {
   parkingLots: Item[];
@@ -51,6 +54,9 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
       <IonRow>
         {sortedLots.map((parkingLots) => (
           <IonCol key={parkingLots.id} size="4" sizeXs="6">
+            <IonButton fill="clear" id="share-button">
+              <IonIcon color="dark" id="ion-icon-share" icon={share}></IonIcon>
+            </IonButton>
             <IonCard>
               <IonCardContent>
                 <IonGrid>

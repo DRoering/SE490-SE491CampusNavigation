@@ -10,6 +10,7 @@ import moment from "moment";
 import React from "react";
 import { SortType } from "../../../DataProviders";
 import { Item, ItemOptions } from "../../../Reuseable";
+import { ShareButton } from "../../ShareButton";
 import "./EventList.scss";
 
 interface EventListProps {
@@ -45,6 +46,14 @@ export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
       <IonRow>
         {sortedEvents.map((event) => (
           <IonCol key={event.id} size="4" sizeXs="6">
+            <ShareButton
+              id="share-button"
+              class="none"
+              iconId="ion-icon-share"
+              expand={false}
+              fill={false}
+              shareItem={event}
+            />
             <IonCard onClick={() => props.openDetails({ e: event })}>
               <img
                 ion-img-cache="true"

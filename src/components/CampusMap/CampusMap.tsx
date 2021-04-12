@@ -39,7 +39,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showFloor, setShowFloor] = useState(false);
   const [currentFloor, setCurrentFloor] = useState(1);
   const [navigationItem, setNavItem] = useState<Item>();
-  const [location, locate, manualRefresh] = useUserPosition();
+  const [location, manualRefresh] = useUserPosition();
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
   const minimumZoom = 8;
   useEffect(() => {
@@ -75,6 +75,10 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       const temp = mapRef.current?.leafletElement.closePopup();
       setShowFloor(true);
     } else setShowFloor(false);
+  };
+
+  const centerUser = () => {
+    const temp = mapRef.current?.leafletElement.panTo(location);
   };
 
   const map = (
@@ -124,22 +128,24 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   return (
     <>
       {map}
-      <IonFab horizontal="end" vertical="bottom" slot="fixed">
-        <IonFabButton
-          color="dark"
-          onClick={() => mapRef.current?.leafletElement.panTo(location)}
-          onTouchStart={() =>
-            !currentTimeout && setCurrentTimeout(manualRefresh())
-          }
-          onTouchEnd={() => {
-            console.log("Timeout Cleared");
-            currentTimeout && clearTimeout(currentTimeout);
-            setCurrentTimeout(undefined);
-          }}
-        >
-          <IonIcon icon={navigateCircleOutline} />
-        </IonFabButton>
-      </IonFab>
+      {!location.equals(L.latLng([0, 0])) && (
+        <IonFab horizontal="end" vertical="bottom" slot="fixed">
+          <IonFabButton
+            color="dark"
+            onClick={centerUser}
+            onTouchStart={() =>
+              !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
+            }
+            onTouchEnd={() => {
+              console.log("Timeout Cleared");
+              currentTimeout && clearTimeout(currentTimeout);
+              setCurrentTimeout(undefined);
+            }}
+          >
+            <IonIcon icon={navigateCircleOutline} />
+          </IonFabButton>
+        </IonFab>
+      )}
       {showFloor && (
         <IonFab vertical="bottom" horizontal="start">
           <IonFabButton
@@ -164,7 +170,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           onDidDismiss={() => setShowNavModal(false)}
           subHeader={`Navigate to ${navigationItem?.name}`}
           message={
-            "Do you want to start navigation in native maps application?"
+            "Do you want to start navigation in your native maps application?"
           }
           buttons={[
             {

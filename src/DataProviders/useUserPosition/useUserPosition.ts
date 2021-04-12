@@ -4,12 +4,9 @@ import { useEffect, useState } from "react";
 
 export const useUserPosition = (): [
   L.LatLng,
-  () => void,
-  () => NodeJS.Timeout
+  (c: () => void) => NodeJS.Timeout
 ] => {
-  const [userLocation, setUserLocation] = useState(
-    L.latLng([45.551613, -94.148977])
-  );
+  const [userLocation, setUserLocation] = useState<L.LatLng>(L.latLng([0, 0]));
 
   const locate = async () => {
     const locale = await Geolocation.getCurrentPosition();
@@ -21,11 +18,11 @@ export const useUserPosition = (): [
     console.log(locale);
   };
 
-  const manualRefresh = () => {
+  const manualRefresh = (c: () => void) => {
     console.log("Manual refresh started");
     return setTimeout(() => {
       console.log("Manual refresh occured");
-      locate();
+      locate().then(() => c());
     }, 800);
   };
 
@@ -39,5 +36,5 @@ export const useUserPosition = (): [
     // }, 100000);
   }, []);
 
-  return [userLocation, locate, manualRefresh];
+  return [userLocation, manualRefresh];
 };

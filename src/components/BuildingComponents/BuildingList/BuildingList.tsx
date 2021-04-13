@@ -1,9 +1,10 @@
-import React from "react";
-import { FilterType, SortType } from "../../../DataProviders";
+import React, { useState } from "react";
+import { FilterType, SortType, useServices } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,
   IonCol,
+  IonContent,
   IonGrid,
   IonLabel,
   IonRow,
@@ -35,26 +36,40 @@ export const BuildingList: React.FC<BuildingListProps> = (
       )
     : reSort(props.buildings, props.sortAlgorithm.function);
 
+  // setTimeout(() => {
+  //   setData({
+  //     name:
+  //   })
+  // }, 5000);
+
   return (
-    <>
-      <IonGrid>
-        <IonRow>
-          {resortedList.map((building) => (
-            <IonCol key={building.id} size="4" sizeXs="6">
-              <IonCard onClick={() => props.openDetails({ b: building })}>
-                <img
-                  ion-img-cache="true"
-                  src={building.imgUrl}
-                  alt={building.name}
-                />
-                <IonCardContent>
-                  <IonLabel id="card-title">{`${building.name} (${building.abbreviation})`}</IonLabel>
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-          ))}
-        </IonRow>
-      </IonGrid>
-    </>
+    <IonContent>
+      {props.buildings.length > 0 ? (
+        <>
+          <IonGrid>
+            <IonRow>
+              {resortedList.map((building) => (
+                <IonCol key={building.id} size="4" sizeXs="6">
+                  <IonCard onClick={() => props.openDetails({ b: building })}>
+                    <img
+                      ion-img-cache="true"
+                      src={building.imgUrl}
+                      alt={building.name}
+                    />
+                    <IonCardContent>
+                      <IonLabel id="card-title">{`${building.name} (${building.abbreviation})`}</IonLabel>
+                    </IonCardContent>
+                  </IonCard>
+                </IonCol>
+              ))}
+            </IonRow>
+          </IonGrid>
+        </>
+      ) : (
+        <>
+          <ItemListSkeleton />
+        </>
+      )}
+    </IonContent>
   );
 };

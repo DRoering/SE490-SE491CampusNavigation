@@ -18,6 +18,7 @@ import {
   OrganizationModal,
   ParkingLotList,
   SortMenu,
+  ItemListSkeleton,
 } from "../../components";
 import {
   ItemFilter,
@@ -27,7 +28,6 @@ import {
 import { Item, ItemOptions } from "../../Reuseable";
 import "./ItemPage.scss";
 import { Search } from "../../DataProviders";
-import { ItemListSkeleton } from "../../components/SkeletonText";
 
 interface ItemPageProps {
   buildings: Item[];

@@ -1,6 +1,7 @@
 export * from "./Constants";
 export * from "./HTTPProvider";
 export * from "./Search";
+export * from "./ShareProvider";
 export * from "./SortProvider";
 export * from "./FilterProvider";
 export * from "./useBuilding";

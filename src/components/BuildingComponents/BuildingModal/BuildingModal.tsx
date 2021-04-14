@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonButton,
   IonCard,
@@ -27,7 +27,7 @@ const getFindFormula = (id: number) => `Find("${id}",Buildings)`;
 export const BuildingModal: React.FC<BuildingModalProps> = (
   props: BuildingModalProps
 ) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(false);
   const [results, setResults] = useState(5);
   const [services, isMaxResults] = useServices({
     maxRecords: results,
@@ -41,6 +41,12 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
     setResults(results + 5);
     (event.target as HTMLIonInfiniteScrollElement).complete();
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setData(true);
+    }, 2000);
+  });
 
   return (
     <IonContent>
@@ -233,7 +239,7 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
               <IonItemDivider id="divider">
                 <IonLabel id="title">Services</IonLabel>
               </IonItemDivider>
-              {services.length > 0 ? (
+              {services.length &&
                 services.map((service) => (
                   <IonItem
                     key={service.serviceId}
@@ -241,28 +247,20 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
                     id="service"
                   >
                     <a
-                      href={service.serviceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="service-text"
                     >
                       <IonLabel className="ion-text-wrap" id="service-name">
                         <IonSkeletonText animated />
                       </IonLabel>
                     </a>
                   </IonItem>
-                ))
-              ) : (
-                <IonItem id="service">
-                  <IonLabel className="app-fonts" id="service-item">
-                    Building Services are not available
-                  </IonLabel>
-                </IonItem>
-              )}
+                ))}
             </IonList>
           </IonContent>
         </>
       )}
-      ;
     </IonContent>
   );
 };

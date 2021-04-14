@@ -3,13 +3,14 @@ import {
   IonCard,
   IonCardContent,
   IonCol,
+  IonContent,
   IonGrid,
   IonLabel,
   IonRow,
 } from "@ionic/react";
 import { FilterType, SortType } from "../../../DataProviders";
 import { Item, ItemOptions } from "../../../Reuseable";
-import { ShareButton } from "../..";
+import { ItemListSkeleton, ShareButton } from "../..";
 
 interface OrganizationListProps {
   organizations: Item[];
@@ -46,31 +47,39 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
     : reSort(props.organizations, props.sortAlgorithm.function);
 
   return (
-    <IonGrid>
-      <IonRow>
-        {resortedList.map((organization) => (
-          <IonCol key={organization.id} sizeXs="6">
-            <ShareButton
-              id="share-button"
-              class="none"
-              iconId="ion-icon-share"
-              expand={false}
-              fill={false}
-              shareItem={organization}
-            />
-            <IonCard onClick={() => props.openDetails({ o: organization })}>
-              <img
-                alt="Organization"
-                ion-img-cache="true"
-                src={organization.imgUrl}
-              />
-              <IonCardContent>
-                <IonLabel>{organization.name}</IonLabel>
-              </IonCardContent>
-            </IonCard>
-          </IonCol>
-        ))}
-      </IonRow>
-    </IonGrid>
+    <IonContent>
+      {props.organizations[0] ? (
+        <IonGrid>
+          <IonRow>
+            {resortedList.map((organization) => (
+              <IonCol key={organization.id} sizeXs="6">
+                <ShareButton
+                  id="share-button"
+                  class="none"
+                  iconId="ion-icon-share"
+                  expand={false}
+                  fill={false}
+                  shareItem={organization}
+                />
+                <IonCard onClick={() => props.openDetails({ o: organization })}>
+                  <img
+                    alt="Organization"
+                    ion-img-cache="true"
+                    src={organization.imgUrl}
+                  />
+                  <IonCardContent>
+                    <IonLabel>{organization.name}</IonLabel>
+                  </IonCardContent>
+                </IonCard>
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
+      ) : (
+        <>
+          <ItemListSkeleton />
+        </>
+      )}
+    </IonContent>
   );
 };

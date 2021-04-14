@@ -2,8 +2,17 @@ import React, { useMemo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { Item, ItemOptions } from "../../../Reuseable";
 import L from "leaflet";
-import { IonButton, IonImg, IonLabel } from "@ionic/react";
+import {
+  IonButton,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonLabel,
+  IonRow,
+} from "@ionic/react";
 import "./BuildingPin.scss";
+import { navigateCircle } from "ionicons/icons";
+import { ShareButton } from "../../";
 
 interface BuildingPinProps {
   buildings: Item[];
@@ -42,8 +51,10 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
           position={building.coordinates}
           icon={buildingIcon}
         >
-          <Popup id="building-popup">
-            <IonLabel id="name">{building.name}</IonLabel>
+          <Popup id="map-popup">
+            <IonLabel id="name" class="ion-text-overflow">
+              <strong>{building.name}</strong>
+            </IonLabel>
             <p id="info">
               {building.isOpen && <img src="assets/mapIcons/open.png" alt="" />}
             </p>
@@ -53,13 +64,31 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
             >
               <IonLabel>Open Details</IonLabel>
             </IonButton>
-            <IonButton
-              color="tertiary"
-              expand="block"
-              onClick={() => props.openNav(building)}
-            >
-              <IonLabel>Navigate Here</IonLabel>
-            </IonButton>
+            <IonGrid>
+              <IonRow>
+                <IonCol class="ion-no-padding" id="share-col" size="6">
+                  <ShareButton
+                    class="ion-no-margin"
+                    id="share-button-pin"
+                    iconId="ion-icon-pin"
+                    expand={true}
+                    fill={true}
+                    shareItem={building}
+                  />
+                </IonCol>
+                <IonCol class="ion-no-padding" id="share-col2" size="6">
+                  <IonButton
+                    class="ion-no-margin"
+                    id="navigate-button-pin"
+                    color="tertiary"
+                    expand="block"
+                    onClick={() => props.openNav(building)}
+                  >
+                    <IonIcon icon={navigateCircle} id="ion-icon-pin"></IonIcon>
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
           </Popup>
           {/* <Tooltip
             className="tooltip"

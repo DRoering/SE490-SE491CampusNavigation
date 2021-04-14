@@ -1,9 +1,18 @@
 import React, { useMemo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { IonButton, IonLabel } from "@ionic/react";
+import {
+  IonButton,
+  IonLabel,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonIcon,
+} from "@ionic/react";
 import "./EventPin.scss";
 import { Item, ItemOptions } from "../../../Reuseable";
+import { navigateCircle } from "ionicons/icons";
+import { ShareButton } from "../..";
 
 interface EventPinProps {
   events: Item[];
@@ -35,7 +44,9 @@ export const EventPin: React.FC<EventPinProps> = (props: EventPinProps) => {
         validEvents.map((event) => (
           <Marker key={event.id} position={event.coordinates} icon={eventIcon}>
             <Popup id="event-popup">
-              <IonLabel>{event.name}</IonLabel>
+              <IonLabel id="name" class="ion-text-overflow">
+                <strong>{event.name}</strong>
+              </IonLabel>
               <IonButton
                 expand="block"
                 onClick={() =>
@@ -44,16 +55,41 @@ export const EventPin: React.FC<EventPinProps> = (props: EventPinProps) => {
               >
                 <IonLabel>Open Details</IonLabel>
               </IonButton>
-              <IonButton
-                expand="block"
-                onClick={() =>
-                  console.log(
-                    "Navigate to : " + event.name + " " + event.coordinates
-                  )
-                }
-              >
-                <IonLabel>Navigate Here</IonLabel>
-              </IonButton>
+              <IonGrid>
+                <IonRow>
+                  <IonCol class="ion-no-padding" id="share-col" size="6">
+                    <ShareButton
+                      class="ion-no-margin"
+                      id="share-button-pin"
+                      iconId="ion-icon-pin"
+                      expand={true}
+                      fill={true}
+                      shareItem={event}
+                    />
+                  </IonCol>
+                  <IonCol class="ion-no-padding" id="share-col2" size="6">
+                    <IonButton
+                      class="ion-no-margin"
+                      id="navigate-button-pin"
+                      color="dark"
+                      expand="block"
+                      onClick={() =>
+                        console.log(
+                          "Navigate to : " +
+                            event.name +
+                            " " +
+                            event.coordinates
+                        )
+                      }
+                    >
+                      <IonIcon
+                        icon={navigateCircle}
+                        id="ion-icon-pin"
+                      ></IonIcon>
+                    </IonButton>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
             </Popup>
           </Marker>
         ))}

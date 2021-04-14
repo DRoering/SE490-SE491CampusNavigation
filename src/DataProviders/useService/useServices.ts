@@ -54,5 +54,5 @@ export const useServices = (params: Params): [Service[], boolean] => {
     };
   }, [params.maxRecords]);
 
-  return [services, params.maxRecords != services.length];
+  return [services, params.maxRecords !== services.length];
 };

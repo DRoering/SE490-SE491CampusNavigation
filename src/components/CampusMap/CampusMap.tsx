@@ -8,8 +8,12 @@ import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
 import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
-import { chevronDown, chevronUp } from "ionicons/icons";
-import { NavigatorProvider } from "../../DataProviders";
+import { chevronDown, chevronUp, navigateCircleOutline } from "ionicons/icons";
+import {
+  NavigatorProvider,
+  useFloorOverlay,
+  useUserPosition,
+} from "../../DataProviders";
 
 const maxFloor = 3;
 const minFloor = 0;
@@ -26,7 +30,6 @@ interface CampusMapProps {
   organizations: Item[] | false;
   showName: boolean;
   position: { c: L.LatLng; z: number };
-  userPosition: { c: L.LatLng; r: number };
   openDetails: (i: ItemOptions) => void;
 }
 
@@ -36,6 +39,8 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [showFloor, setShowFloor] = useState(false);
   const [currentFloor, setCurrentFloor] = useState(1);
   const [navigationItem, setNavItem] = useState<Item>();
+  const [location, manualRefresh] = useUserPosition();
+  const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
   const minimumZoom = 8;
   useEffect(() => {
     console.debug("resetSize Called");
@@ -43,6 +48,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       window.dispatchEvent(new Event("resize", { bubbles: true }));
     }, 750);
   }, []);
+  useFloorOverlay();
 
   const initiateNav = (i: Item) => {
     console.log(i);
@@ -51,11 +57,29 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const updateBounds = (z: number) => {
-    if (z == 18) setImgBounds(imgBounds.pad(1));
+    if (z === 18) setImgBounds(imgBounds.pad(1));
     else setImgBounds(imageBounds);
   };
 
   const mapRef = useRef<Map>(null);
+
+  const shouldShowFloor = () => {
+    const tempElement = mapRef.current?.leafletElement;
+    if (
+      tempElement &&
+      imgBounds.contains(
+        tempElement.getCenter() || ([0, 0] && tempElement?.getZoom() > 16)
+      )
+    ) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const temp = mapRef.current?.leafletElement.closePopup();
+      setShowFloor(true);
+    } else setShowFloor(false);
+  };
+
+  const centerUser = () => {
+    const temp = mapRef.current?.leafletElement.panTo(location);
+  };
 
   const map = (
     <Map
@@ -70,13 +94,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       }
       zoomSnap={0.5}
       zoomDelta={0.5}
-      onViewportChange={() => {
-        setShowFloor(
-          imgBounds.contains(
-            mapRef.current?.leafletElement.getCenter() || [0, 0]
-          )
-        );
-      }}
+      onViewportChange={shouldShowFloor}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -103,13 +121,29 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       {props.organizations && (
         <OrganizationPin organization={props.organizations} />
       )}
-      {props.userPosition && <UserLocation userPosition={props.userPosition} />}
+      {location && <UserLocation userPosition={location} />}
     </Map>
   );
 
   return (
     <>
       {map}
+      <IonFab horizontal="end" vertical="bottom" slot="fixed">
+        <IonFabButton
+          color="dark"
+          onClick={centerUser}
+          onTouchStart={() =>
+            !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
+          }
+          onTouchEnd={() => {
+            console.log("Timeout Cleared");
+            currentTimeout && clearTimeout(currentTimeout);
+            setCurrentTimeout(undefined);
+          }}
+        >
+          <IonIcon icon={navigateCircleOutline} />
+        </IonFabButton>
+      </IonFab>
       {showFloor && (
         <IonFab vertical="bottom" horizontal="start">
           <IonFabButton

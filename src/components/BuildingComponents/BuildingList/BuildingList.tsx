@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FilterType, SortType, useServices } from "../../../DataProviders";
+import { FilterType, SortType } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,
@@ -38,10 +38,12 @@ export const BuildingList: React.FC<BuildingListProps> = (
     : reSort(props.buildings, props.sortAlgorithm.function);
 
   useEffect(() => {
-    setTimeout(() => {
-      setData(true);
-    }, 2000);
-  });
+    !props.buildings[0]
+      ? setTimeout(() => {
+          setData(true);
+        }, 2000)
+      : setData(true);
+  }, []);
 
   return (
     <IonContent>

@@ -8,7 +8,7 @@ import {
   IonContent,
 } from "@ionic/react";
 import moment from "moment";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { SortType } from "../../../DataProviders";
 import { Item, ItemOptions } from "../../../Reuseable";
 import { ItemListSkeleton } from "../../SkeletonText";
@@ -38,20 +38,13 @@ const reSort = (events: Item[], sort: (a: Item, b: Item) => number) =>
   events.sort(sort);
 
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
-  const [data, setData] = useState(false);
   const sortedEvents = filterEvents(
     reSort(filterEvents(props.events), props.sortAlgorithm.function)
   );
 
-  useEffect(() => {
-    setTimeout(() => {
-      setData(true);
-    }, 2000);
-  });
-
   return (
     <IonContent>
-      {data ? (
+      {props.events[0] ? (
         <IonGrid>
           <IonRow>
             {sortedEvents.map((event) => (

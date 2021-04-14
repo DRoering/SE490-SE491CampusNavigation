@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   IonCard,
   IonCardContent,
@@ -38,7 +38,6 @@ const reSort = (orgs: Item[], sort: (a: Item, b: Item) => number) =>
 export const OrganizationList: React.FC<OrganizationListProps> = (
   props: OrganizationListProps
 ) => {
-  const [data, setData] = useState(false);
   const resortedList = props.filterAlgorithm
     ? reFilter(
         reSort(props.organizations, props.sortAlgorithm.function),
@@ -47,15 +46,9 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
       )
     : reSort(props.organizations, props.sortAlgorithm.function);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setData(true);
-    }, 2000);
-  });
-
   return (
     <IonContent>
-      {data ? (
+      {props.organizations[0] ? (
         <IonGrid>
           <IonRow>
             {resortedList.map((organization) => (

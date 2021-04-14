@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FilterType, SortType } from "../../../DataProviders";
 import {
   IonCard,
@@ -40,7 +40,6 @@ const reSort = (parkingLots: Item[], sort: (a: Item, b: Item) => number) =>
 export const ParkingLotList: React.FC<ParkingLotProps> = (
   props: ParkingLotProps
 ) => {
-  const [data, setData] = useState(false);
   const sortedLots = props.filterAlgorithm
     ? reFilter(
         reSort(props.parkingLots, props.sortAlgorithm.function),
@@ -49,15 +48,9 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
       )
     : reSort(props.parkingLots, props.sortAlgorithm.function);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setData(true);
-    }, 2000);
-  });
-
   return (
     <IonContent>
-      {data ? (
+      {props.parkingLots[0] ? (
         <IonGrid>
           <IonRow>
             {sortedLots.map((parkingLots) => (

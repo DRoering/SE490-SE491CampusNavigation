@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FilterType, SortType, useServices } from "../../../DataProviders";
 import {
   IonCard,
@@ -29,6 +29,7 @@ const reSort = (buildings: Item[], sort: (a: Item, b: Item) => number) =>
 export const BuildingList: React.FC<BuildingListProps> = (
   props: BuildingListProps
 ) => {
+  const [data, setData] = useState(false);
   const resortedList = props.filterAlgorithm
     ? reFilter(
         reSort(props.buildings, props.sortAlgorithm.function),
@@ -36,15 +37,15 @@ export const BuildingList: React.FC<BuildingListProps> = (
       )
     : reSort(props.buildings, props.sortAlgorithm.function);
 
-  // setTimeout(() => {
-  //   setData({
-  //     name:
-  //   })
-  // }, 5000);
+  useEffect(() => {
+    setTimeout(() => {
+      setData(true);
+    }, 2000);
+  });
 
   return (
     <IonContent>
-      {props.buildings.length > 0 ? (
+      {data ? (
         <>
           <IonGrid>
             <IonRow>

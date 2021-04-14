@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import { FilterType, SortType } from "../../DataProviders";
+import React from "react";
 import {
   IonCard,
   IonCardContent,
   IonCol,
-  IonContent,
   IonGrid,
   IonLabel,
   IonRow,

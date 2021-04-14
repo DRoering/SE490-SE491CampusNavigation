@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   IonCard,
   IonCardContent,
   IonCol,
+  IonContent,
   IonGrid,
   IonLabel,
   IonRow,
 } from "@ionic/react";
 import { FilterType, SortType } from "../../../DataProviders";
 import { Item, ItemOptions } from "../../../Reuseable";
+import { ItemListSkeleton } from "../../SkeletonText";
 
 interface OrganizationListProps {
   organizations: Item[];
@@ -36,6 +38,7 @@ const reSort = (orgs: Item[], sort: (a: Item, b: Item) => number) =>
 export const OrganizationList: React.FC<OrganizationListProps> = (
   props: OrganizationListProps
 ) => {
+  const [data, setData] = useState(false);
   const resortedList = props.filterAlgorithm
     ? reFilter(
         reSort(props.organizations, props.sortAlgorithm.function),
@@ -44,24 +47,38 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
       )
     : reSort(props.organizations, props.sortAlgorithm.function);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setData(true);
+    }, 2000);
+  });
+
   return (
-    <IonGrid>
-      <IonRow>
-        {resortedList.map((organization) => (
-          <IonCol key={organization.id} sizeXs="6">
-            <IonCard onClick={() => props.openDetails({ o: organization })}>
-              <img
-                alt="Organization"
-                ion-img-cache="true"
-                src={organization.imgUrl}
-              />
-              <IonCardContent>
-                <IonLabel>{organization.name}</IonLabel>
-              </IonCardContent>
-            </IonCard>
-          </IonCol>
-        ))}
-      </IonRow>
-    </IonGrid>
+    <IonContent>
+      {data ? (
+        <IonGrid>
+          <IonRow>
+            {resortedList.map((organization) => (
+              <IonCol key={organization.id} sizeXs="6">
+                <IonCard onClick={() => props.openDetails({ o: organization })}>
+                  <img
+                    alt="Organization"
+                    ion-img-cache="true"
+                    src={organization.imgUrl}
+                  />
+                  <IonCardContent>
+                    <IonLabel>{organization.name}</IonLabel>
+                  </IonCardContent>
+                </IonCard>
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
+      ) : (
+        <>
+          <ItemListSkeleton />
+        </>
+      )}
+    </IonContent>
   );
 };

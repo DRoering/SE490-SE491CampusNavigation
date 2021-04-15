@@ -47,7 +47,7 @@ export const ShareButton: React.FC<ShareButtonProps> = (
             },
           },
           {
-            text: `Share location`,
+            text: `Share Location`,
             handler: () => {
               ShareProvider({
                 title: `${props.shareItem.type} location link`,

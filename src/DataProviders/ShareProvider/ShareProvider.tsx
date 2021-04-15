@@ -1,13 +1,4 @@
-import { Share } from "@capacitor/core";
-import { Item } from "../../Reuseable";
+import { Share, ShareOptions } from "@capacitor/core";
 
-export const ShareProvider = (shareItem: Item) =>
-  Share.share({
-    title: "Email Item...",
-    text: "More item information found in the link",
-    url: shareItem.webSite,
-    dialogTitle: "Select Sharing Method",
-  }).then(
-    (success) => console.log("Shared successfully"),
-    (error) => console.log("Failed to share")
-  );
+export const ShareProvider = (options: ShareOptions): Promise<void> =>
+  Share.share(options);

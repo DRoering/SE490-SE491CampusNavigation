@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FilterType, SortType } from "../../../DataProviders";
 import {
   IonCard,
   IonCardContent,
   IonCol,
+  IonContent,
   IonGrid,
   IonLabel,
   IonRow,
 } from "@ionic/react";
 import { Item, ItemOptions } from "../../../Reuseable";
+import { ItemListSkeleton, ShareButton } from "../../";
+import "./BuildingList.scss";
 
 interface BuildingListProps {
   buildings: Item[];
@@ -27,6 +30,7 @@ const reSort = (buildings: Item[], sort: (a: Item, b: Item) => number) =>
 export const BuildingList: React.FC<BuildingListProps> = (
   props: BuildingListProps
 ) => {
+  const [data, setData] = useState(false);
   const resortedList = props.filterAlgorithm
     ? reFilter(
         reSort(props.buildings, props.sortAlgorithm.function),
@@ -34,24 +38,50 @@ export const BuildingList: React.FC<BuildingListProps> = (
       )
     : reSort(props.buildings, props.sortAlgorithm.function);
 
+  useEffect(() => {
+    !props.buildings[0]
+      ? setTimeout(() => {
+          setData(true);
+        }, 2000)
+      : setData(true);
+  }, []);
+
   return (
-    <IonGrid>
-      <IonRow>
-        {resortedList.map((building) => (
-          <IonCol key={building.id} size="4" sizeXs="6">
-            <IonCard onClick={() => props.openDetails({ b: building })}>
-              <img
-                ion-img-cache="true"
-                src={building.imgUrl}
-                alt={building.name}
-              />
-              <IonCardContent>
-                <IonLabel id="card-title">{`${building.name} (${building.abbreviation})`}</IonLabel>
-              </IonCardContent>
-            </IonCard>
-          </IonCol>
-        ))}
-      </IonRow>
-    </IonGrid>
+    <IonContent>
+      {data ? (
+        <>
+          <IonGrid>
+            <IonRow>
+              {resortedList.map((building) => (
+                <IonCol key={building.id} size="4" sizeXs="6">
+                  <ShareButton
+                    id="share-button"
+                    class="none"
+                    iconId="ion-icon-share"
+                    expand={false}
+                    fill={false}
+                    shareItem={building}
+                  />
+                  <IonCard onClick={() => props.openDetails({ b: building })}>
+                    <img
+                      ion-img-cache="true"
+                      src={building.imgUrl}
+                      alt={building.name}
+                    />
+                    <IonCardContent>
+                      <IonLabel id="card-title">{`${building.name} (${building.abbreviation})`}</IonLabel>
+                    </IonCardContent>
+                  </IonCard>
+                </IonCol>
+              ))}
+            </IonRow>
+          </IonGrid>
+        </>
+      ) : (
+        <>
+          <ItemListSkeleton />
+        </>
+      )}
+    </IonContent>
   );
 };

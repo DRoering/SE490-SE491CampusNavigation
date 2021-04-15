@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonButton,
   IonCard,
@@ -9,6 +9,7 @@ import {
   IonItemDivider,
   IonLabel,
   IonList,
+  IonSkeletonText,
 } from "@ionic/react";
 import { useServices } from "../../../DataProviders";
 import { ModalHeader } from "../../";
@@ -26,6 +27,7 @@ const getFindFormula = (id: number) => `Find("${id}",Buildings)`;
 export const BuildingModal: React.FC<BuildingModalProps> = (
   props: BuildingModalProps
 ) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [results, setResults] = useState(5);
   const [services, isMaxResults] = useServices({
     maxRecords: results,
@@ -40,8 +42,35 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
     (event.target as HTMLIonInfiniteScrollElement).complete();
   };
 
+  useEffect(() => {
+    if (services.length === results) setIsLoading(false);
+    else if (!isMaxResults) setIsLoading(true);
+  }, [services, results]);
+
+  const ServiceSkeletons = () => {
+    const numberOfSkellys = [0, 1, 2, 3, 4];
+
+    return (
+      <>
+        {numberOfSkellys.map((numb) => (
+          <IonItem key={numb} className="app-fonts" id="service">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className="service-text"
+            >
+              <IonLabel className="ion-text-wrap" id="service-name">
+                <IonSkeletonText animated />
+              </IonLabel>
+            </a>
+          </IonItem>
+        ))}
+      </>
+    );
+  };
+
   return (
-    <>
+    <IonContent>
       <ModalHeader close={props.close} />
       <IonContent>
         <IonItem className="app-fonts" id="item-info">
@@ -142,6 +171,7 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
               </IonLabel>
             </IonItem>
           )}
+          {isLoading && <ServiceSkeletons />}
           <IonInfiniteScroll
             threshold="25px"
             onIonInfinite={(e) => loadMoreServices(e)}
@@ -151,6 +181,6 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
           </IonInfiniteScroll>
         </IonList>
       </IonContent>
-    </>
+    </IonContent>
   );
 };

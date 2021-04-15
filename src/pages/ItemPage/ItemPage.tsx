@@ -105,7 +105,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         {currentItem.includes(itemOptions[0]) && (
           <BuildingList
             buildings={
-              searchText === " "
+              searchText === ""
                 ? props.buildings
                 : searchItems(props.buildings, searchText)
             }
@@ -119,7 +119,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         {currentItem.includes(itemOptions[1]) && (
           <EventList
             events={
-              searchText === " "
+              searchText === ""
                 ? props.events
                 : searchItems(props.events, searchText)
             }
@@ -130,7 +130,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         {currentItem.includes(itemOptions[2]) && (
           <ParkingLotList
             parkingLots={
-              searchText === " "
+              searchText === ""
                 ? props.parking
                 : searchItems(props.parking, searchText)
             }
@@ -142,7 +142,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         {currentItem.includes(itemOptions[3]) && (
           <OrganizationList
             organizations={
-              searchText === " "
+              searchText === ""
                 ? props.organizations
                 : searchItems(props.organizations, searchText)
             }

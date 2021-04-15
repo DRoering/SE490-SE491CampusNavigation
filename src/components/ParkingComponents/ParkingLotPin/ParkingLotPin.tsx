@@ -2,8 +2,17 @@ import React, { useMemo } from "react";
 import "./ParkingLotPin.scss";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { IonButton, IonLabel } from "@ionic/react";
+import {
+  IonButton,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonLabel,
+  IonRow,
+} from "@ionic/react";
 import { Item } from "../../../Reuseable";
+import { navigateCircle } from "ionicons/icons";
+import { ShareButton } from "../..";
 
 interface ParkingLotPinProps {
   parkingLots: Item[];
@@ -40,20 +49,44 @@ export const ParkingLotPin: React.FC<ParkingLotPinProps> = (
             icon={parkingLotIcon}
           >
             <Popup id="parking-lot-popup">
-              <IonLabel>{parkingLot.name}</IonLabel>
-              <IonButton
-                expand="block"
-                onClick={() =>
-                  console.log(
-                    "Navigate to : " +
-                      parkingLot.name +
-                      " " +
-                      parkingLot.coordinates
-                  )
-                }
-              >
-                <IonLabel>Navigate Here</IonLabel>
-              </IonButton>
+              <IonLabel id="name" class="ion-text-overflow">
+                <strong>{parkingLot.name}</strong>
+              </IonLabel>
+              <IonGrid>
+                <IonRow>
+                  <IonCol class="ion-no-padding" id="share-col" size="6">
+                    <ShareButton
+                      class="ion-no-margin"
+                      id="share-button-pin"
+                      iconId="ion-icon-pin"
+                      expand={true}
+                      fill={true}
+                      shareItem={parkingLot}
+                    />
+                  </IonCol>
+                  <IonCol class="ion-no-padding" id="share-col2" size="6">
+                    <IonButton
+                      class="ion-no-margin"
+                      id="navigate-button-pin"
+                      color="dark"
+                      expand="block"
+                      onClick={() =>
+                        console.log(
+                          "Navigate to : " +
+                            parkingLot.name +
+                            " " +
+                            parkingLot.coordinates
+                        )
+                      }
+                    >
+                      <IonIcon
+                        icon={navigateCircle}
+                        id="ion-icon-pin"
+                      ></IonIcon>
+                    </IonButton>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
             </Popup>
           </Marker>
         ))}

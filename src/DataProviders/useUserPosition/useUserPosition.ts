@@ -19,10 +19,10 @@ export const useUserPosition = (): [
   };
 
   const manualRefresh = (c: () => void) => {
-    console.log("Manual refresh started");
+    console.log("manual refresh started");
     return setTimeout(() => {
       console.log("Manual refresh occured");
-      locate().then(() => c());
+      locate().then(c);
     }, 800);
   };
 

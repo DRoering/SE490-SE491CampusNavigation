@@ -4,6 +4,7 @@ import {
   IonCard,
   IonCardContent,
   IonCol,
+  IonContent,
   IonGrid,
   IonItem,
   IonItemDivider,
@@ -12,6 +13,7 @@ import {
 } from "@ionic/react";
 import "./ParkingLotList.scss";
 import { Item } from "../../../Reuseable";
+import { ItemListSkeleton, ShareButton } from "../../";
 
 interface ParkingLotProps {
   parkingLots: Item[];
@@ -47,37 +49,51 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
     : reSort(props.parkingLots, props.sortAlgorithm.function);
 
   return (
-    <IonGrid>
-      <IonRow>
-        {sortedLots.map((parkingLots) => (
-          <IonCol key={parkingLots.id} size="4" sizeXs="6">
-            <IonCard>
-              <IonCardContent>
-                <IonGrid>
-                  <IonRow>
-                    <IonCol>
-                      <IonItemDivider className="app-fonts" id="item-info">
-                        <IonLabel id="title">Lot Name</IonLabel>
-                      </IonItemDivider>
-                      <IonItem>{parkingLots.designation}</IonItem>
-                      <IonItemDivider className="app-fonts" id="item-info">
-                        <IonLabel id="title">Lot Type</IonLabel>
-                      </IonItemDivider>
-                      <IonItem>{parkingLots.type}</IonItem>
-                      <IonItemDivider className="app-fonts" id="item-info">
-                        <IonLabel id="title">Pay Rate</IonLabel>
-                      </IonItemDivider>
-                      <IonItem className="ion-text-wrap" id="item-info">
-                        {parkingLots.rate}
-                      </IonItem>
-                    </IonCol>
-                  </IonRow>
-                </IonGrid>
-              </IonCardContent>
-            </IonCard>
-          </IonCol>
-        ))}
-      </IonRow>
-    </IonGrid>
+    <IonContent>
+      {props.parkingLots[0] ? (
+        <IonGrid>
+          <IonRow>
+            {sortedLots.map((lot) => (
+              <IonCol key={lot.id} size="4" sizeXs="6">
+                <IonCard>
+                  <IonCardContent>
+                    <ShareButton
+                      id="share-button"
+                      class="none"
+                      iconId="ion-icon-share"
+                      expand={false}
+                      fill={false}
+                      shareItem={lot}
+                    />
+                    <IonRow>
+                      <IonCol>
+                        <IonItemDivider className="app-fonts" id="item-info">
+                          <IonLabel id="title">Lot Name</IonLabel>
+                        </IonItemDivider>
+                        <IonItem>{lot.designation}</IonItem>
+                        <IonItemDivider className="app-fonts" id="item-info">
+                          <IonLabel id="title">Lot Type</IonLabel>
+                        </IonItemDivider>
+                        <IonItem>{lot.type}</IonItem>
+                        <IonItemDivider className="app-fonts" id="item-info">
+                          <IonLabel id="title">Pay Rate</IonLabel>
+                        </IonItemDivider>
+                        <IonItem className="ion-text-wrap" id="item-info">
+                          {lot.rate}
+                        </IonItem>
+                      </IonCol>
+                    </IonRow>
+                  </IonCardContent>
+                </IonCard>
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
+      ) : (
+        <>
+          <ItemListSkeleton />
+        </>
+      )}
+    </IonContent>
   );
 };

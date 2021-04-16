@@ -18,6 +18,45 @@ export const ShareButton: React.FC<ShareButtonProps> = (
   props: ShareButtonProps
 ) => {
   const [showActionSheet, setShowActionSheet] = useState(false);
+  const getShareObject = (itemUrl: string) => ({
+    title: `Sharing ${props.shareItem.name}`,
+    text: `The following link contains information for ${props.shareItem.name}`,
+    url: itemUrl,
+    dialogTitle: `Sharing ${props.shareItem.name}`,
+  });
+  const getShareButtons = () => {
+    const buttons: { text: string; handler: () => void; role?: string }[] = [];
+    if (props.shareItem.webSite) {
+      buttons.push({
+        text: "Share Website Link",
+        handler: () => {
+          ShareProvider(getShareObject(props.shareItem.webSite || ""));
+        },
+      });
+    }
+    buttons.push(
+      ...[
+        {
+          text: `Share Location`,
+          handler: () => {
+            ShareProvider(
+              getShareObject(
+                `http://google.com/maps/dir/?api=1&destination=${props.shareItem.name}`
+              )
+            );
+          },
+        },
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler: () => {
+            console.log("Cancel clicked");
+          },
+        },
+      ]
+    );
+    return buttons;
+  };
 
   return (
     <>
@@ -33,39 +72,7 @@ export const ShareButton: React.FC<ShareButtonProps> = (
       <IonActionSheet
         isOpen={showActionSheet}
         onDidDismiss={() => setShowActionSheet(false)}
-        buttons={[
-          {
-            text: "Share Website Link",
-            handler: () => {
-              ShareProvider({
-                title: `${props.shareItem.type} website link`,
-                text: `The following link contains information for the ${props.shareItem.type}`,
-                url: props.shareItem.webSite,
-                dialogTitle: `Sharing ${props.shareItem.type} Web`,
-              });
-              console.log("Share Website Link clicked");
-            },
-          },
-          {
-            text: `Share Location`,
-            handler: () => {
-              ShareProvider({
-                title: `${props.shareItem.type} location link`,
-                text: `The following link contains navigation information for the ${props.shareItem.type}`,
-                url: `http://google.com/maps/dir/?api=1&destination=${props.shareItem.name}`,
-                dialogTitle: `Sharing ${props.shareItem.type} Location`,
-              });
-              console.log("Share Item Location clicked");
-            },
-          },
-          {
-            text: "Cancel",
-            role: "cancel",
-            handler: () => {
-              console.log("Cancel clicked");
-            },
-          },
-        ]}
+        buttons={getShareButtons()}
       ></IonActionSheet>
     </>
   );

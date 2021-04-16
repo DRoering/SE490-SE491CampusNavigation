@@ -55,7 +55,7 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
           <IonRow>
             {sortedLots.map((lot) => (
               <IonCol key={lot.id} size="4" sizeXs="6">
-                <IonCard>
+                <IonCard class="card-background">
                   <IonCardContent>
                     <ShareButton
                       id="share-button"

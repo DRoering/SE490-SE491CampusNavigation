@@ -57,7 +57,10 @@ export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
                   fill={false}
                   shareItem={event}
                 />
-                <IonCard onClick={() => props.openDetails({ e: event })}>
+                <IonCard
+                  class="card-background"
+                  onClick={() => props.openDetails({ e: event })}
+                >
                   <img
                     ion-img-cache="true"
                     src={`${event.source}${event.imgUrl}`}

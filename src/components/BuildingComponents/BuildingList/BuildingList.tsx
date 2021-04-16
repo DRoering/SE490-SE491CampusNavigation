@@ -62,7 +62,10 @@ export const BuildingList: React.FC<BuildingListProps> = (
                     fill={false}
                     shareItem={building}
                   />
-                  <IonCard onClick={() => props.openDetails({ b: building })}>
+                  <IonCard
+                    class="card-background"
+                    onClick={() => props.openDetails({ b: building })}
+                  >
                     <img
                       ion-img-cache="true"
                       src={building.imgUrl}

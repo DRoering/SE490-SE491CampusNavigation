@@ -19,6 +19,10 @@ $fonts: (
   font-family: $fonts !important;
 }
 
+.card-background{
+  box-shadow: black 0px 1px 5px;
+}
+
 #title {
   font-weight: 600;
   font-size: large;

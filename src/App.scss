@@ -21,6 +21,11 @@ $fonts: (
 
 .card-background{
   box-shadow: black 0px 1px 5px;
+  @media (prefers-color-scheme: dark) {
+    :root {
+      box-shadow: rgb(49, 48, 48) 0px 1px 5px;
+    }
+  }
 }
 
 #title {

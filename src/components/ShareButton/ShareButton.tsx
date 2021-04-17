@@ -24,13 +24,19 @@ export const ShareButton: React.FC<ShareButtonProps> = (
     url: itemUrl,
     dialogTitle: `Sharing ${props.shareItem.name}`,
   });
-  const getShareButtons = () => {
+  const getShareButtons = (): {
+    text: string;
+    handler: () => void;
+    role?: string;
+  }[] => {
     const buttons: { text: string; handler: () => void; role?: string }[] = [];
     if (props.shareItem.webSite) {
       buttons.push({
-        text: "Share Website Link",
+        text: "Share Website",
         handler: () => {
-          ShareProvider(getShareObject(props.shareItem.webSite || ""));
+          ShareProvider(
+            getShareObject(props.shareItem.webSite || "")
+          ).catch((error) => console.log(error));
         },
       });
     }
@@ -43,7 +49,7 @@ export const ShareButton: React.FC<ShareButtonProps> = (
               getShareObject(
                 `http://google.com/maps/dir/?api=1&destination=${props.shareItem.name}`
               )
-            );
+            ).catch((error) => console.log(error));
           },
         },
         {

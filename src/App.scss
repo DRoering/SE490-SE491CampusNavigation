@@ -25,6 +25,9 @@ $fonts: (
     :root {
       box-shadow: rgb(49, 48, 48) 0px 1px 5px;
     }
+    body.dark {
+      box-shadow: rgb(49, 48, 48) 0px 1px 5px;
+    }
   }
 }
 

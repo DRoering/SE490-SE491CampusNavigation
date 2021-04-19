@@ -2,16 +2,8 @@ import React, { useMemo } from "react";
 import "./ParkingLotPin.scss";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import {
-  IonButton,
-  IonCol,
-  IonGrid,
-  IonIcon,
-  IonLabel,
-  IonRow,
-} from "@ionic/react";
+import { IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
 import { Item } from "../../../Reuseable";
-import { navigateCircle } from "ionicons/icons";
 import { NavigationButton, ShareButton } from "../..";
 
 interface ParkingLotPinProps {

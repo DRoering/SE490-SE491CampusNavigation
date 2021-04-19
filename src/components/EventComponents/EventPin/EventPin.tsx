@@ -1,14 +1,7 @@
 import React, { useMemo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import {
-  IonButton,
-  IonLabel,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonIcon,
-} from "@ionic/react";
+import { IonButton, IonLabel, IonGrid, IonRow, IonCol } from "@ionic/react";
 import "./EventPin.scss";
 import { Item, ItemOptions } from "../../../Reuseable";
 import { NavigationButton, ShareButton } from "../..";

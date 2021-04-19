@@ -12,6 +12,7 @@ import {
 } from "@ionic/react";
 import { chevronUp, chevronDown } from "ionicons/icons";
 import React, { useRef, useState } from "react";
+import "./AboutCard.scss";
 
 interface AboutCardProps {
   title: string;

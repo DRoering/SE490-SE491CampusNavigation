@@ -11,3 +11,28 @@
 .feedbackText{
   font-size: large;
 }
+
+@media (prefers-color-scheme: dark) {
+  .about-feedback{
+    color: white;
+  }
+
+  .feedbackButton{
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+  }
+  
+  .feedbackLabel{
+    font-size: large;
+    color: white;
+  }
+  
+  .feedbackText{
+    font-size: large;
+    background-color: rgb(43, 42, 42);
+    color: white;
+    opacity: .25;
+  }
+}

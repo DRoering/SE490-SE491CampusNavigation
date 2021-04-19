@@ -19,6 +19,11 @@ $fonts: (
   font-family: $fonts !important;
 }
 
+.card-background{
+  box-shadow: black 0px 1px 5px;
+}
+
+
 #title {
   font-weight: 600;
   font-size: large;
@@ -74,4 +79,50 @@ $fonts: (
   margin: 0px;
   box-shadow: none;
   font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+  
+  .card-background{
+    background: rgb(43, 42, 42);
+    box-shadow: rgb(92, 91, 91) 0px 1px 5px;
+    color: white;
+  }
+
+  .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
+    width: 175px !important;
+    height: auto !important;
+    background:rgb(43, 42, 42);
+    color: white;
+    align-items: center;
+    
+  #name {
+    font-size: 200;
+  }
+  }
+
+  .leaflet-popup-tip {
+    background: rgb(43, 42, 42);
+    color: white;
+    }
+
+  .leaflet-popup-content-wrapper {
+    background: rgb(43, 42, 42);
+    color:  white;
+    opacity: 1;
+  }
+
+  .leaflet-popup-tip-container{
+    background: clear;
+    color: clear;
+  }
+
+  .searchbar-input{
+    border: black;
+    color: white;
+  }
+  .searchbar-input-container{
+    border: black;
+    color: white;
+  }
 }

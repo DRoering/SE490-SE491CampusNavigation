@@ -8,7 +8,7 @@ import {
   IonList,
 } from "@ionic/react";
 import React from "react";
-import { ModalHeader } from "../..";
+import { ModalHeader, NavigationButton } from "../..";
 import { Item } from "../../../Reuseable";
 
 interface OrganizationModalProps {
@@ -55,6 +55,7 @@ export const OrganizationModal: React.FC<OrganizationModalProps> = (
         >
           <IonLabel>Organization Website</IonLabel>
         </IonButton>
+        <NavigationButton navigationItem={props.organization} isPin={false} />
         <IonList>
           <IonItemDivider className="app-fonts" id="item-info">
             <IonLabel id="title">Description</IonLabel>

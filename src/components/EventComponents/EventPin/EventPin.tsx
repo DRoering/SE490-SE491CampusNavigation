@@ -11,8 +11,7 @@ import {
 } from "@ionic/react";
 import "./EventPin.scss";
 import { Item, ItemOptions } from "../../../Reuseable";
-import { navigateCircle } from "ionicons/icons";
-import { ShareButton } from "../..";
+import { NavigationButton, ShareButton } from "../..";
 
 interface EventPinProps {
   events: Item[];
@@ -82,10 +81,7 @@ export const EventPin: React.FC<EventPinProps> = (props: EventPinProps) => {
                         )
                       }
                     >
-                      <IonIcon
-                        icon={navigateCircle}
-                        id="ion-icon-pin"
-                      ></IonIcon>
+                      <NavigationButton navigationItem={event} isPin={true} />
                     </IonButton>
                   </IonCol>
                 </IonRow>

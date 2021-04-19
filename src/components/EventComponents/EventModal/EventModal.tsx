@@ -8,7 +8,7 @@ import {
   IonLabel,
   IonList,
 } from "@ionic/react";
-import { ModalHeader } from "../..";
+import { ModalHeader, NavigationButton } from "../..";
 import "./EventModal.scss";
 import { Item } from "../../../Reuseable";
 
@@ -61,6 +61,7 @@ export const EventModal: React.FC<EventModalProps> = (
               Starts at: {props.event.startDate.format("MM/DD/YY hh:mm a")}
             </IonLabel>
           </IonItem>
+          <NavigationButton navigationItem={props.event} isPin={false} />
           <IonItemDivider className="app-fonts" id="item-info">
             <IonLabel id="title">Description</IonLabel>
           </IonItemDivider>

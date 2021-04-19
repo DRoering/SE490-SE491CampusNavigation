@@ -142,7 +142,7 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
             </IonLabel>
           </IonItem>
         </IonList>
-        <IonList inset={true}>
+        <IonList class="building-services" inset={true}>
           <IonItemDivider id="divider">
             <IonLabel id="title">Services</IonLabel>
           </IonItemDivider>

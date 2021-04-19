@@ -61,7 +61,10 @@ export const OrganizationList: React.FC<OrganizationListProps> = (
                   fill={false}
                   shareItem={organization}
                 />
-                <IonCard onClick={() => props.openDetails({ o: organization })}>
+                <IonCard
+                  class="card-background"
+                  onClick={() => props.openDetails({ o: organization })}
+                >
                   <img
                     alt="Organization"
                     ion-img-cache="true"

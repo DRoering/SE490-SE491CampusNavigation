@@ -9,3 +9,16 @@
 .service-text{
   width: 300px;
 }
+
+@media (prefers-color-scheme: dark) {
+
+  .building-services{
+    background-color:rgb(43, 42, 42);
+    ion-item{
+      background-color:rgb(43, 42, 42);
+      background: rgb(43, 42, 42);
+    }
+  }
+
+  
+}

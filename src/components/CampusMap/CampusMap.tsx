@@ -6,7 +6,13 @@ import "./CampusMap.scss";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
-import { IonFab, IonFabButton, IonIcon, IonLoading } from "@ionic/react";
+import {
+  IonAlert,
+  IonFab,
+  IonFabButton,
+  IonIcon,
+  IonLoading,
+} from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
 import { chevronDown, chevronUp, navigateCircleOutline } from "ionicons/icons";
 import { useFloorOverlay, useUserPosition } from "../../DataProviders";
@@ -146,6 +152,20 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           <IonIcon icon={navigateCircleOutline} />
         </IonFabButton>
       </IonFab>
+      {locateError && (
+        <IonAlert
+          isOpen={locateError}
+          onDidDismiss={() => setLocateError(false)}
+          subHeader={"we encountered a problem"}
+          message={"We were unable to find your location"}
+          buttons={[
+            {
+              text: "Okay",
+              role: "cancel",
+            },
+          ]}
+        />
+      )}
       {showFloor && (
         <IonFab vertical="bottom" horizontal="start">
           <IonFabButton

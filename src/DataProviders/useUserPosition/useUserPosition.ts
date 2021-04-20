@@ -3,10 +3,10 @@ import L from "leaflet";
 import { useEffect, useState } from "react";
 
 export const useUserPosition = (): [
-  L.LatLng,
+  L.LatLng | undefined,
   (c: () => void) => NodeJS.Timeout
 ] => {
-  const [userLocation, setUserLocation] = useState<L.LatLng>(L.latLng([0, 0]));
+  const [userLocation, setUserLocation] = useState<L.LatLng>();
 
   const locate = async () => {
     const locale = await Geolocation.getCurrentPosition();

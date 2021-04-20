@@ -57,8 +57,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const updateBounds = (z: number) => {
-    if (z === 18) setImgBounds(imgBounds.pad(1));
-    else setImgBounds(imageBounds);
+    if (z === 18) {
+      if (imgBounds === imageBounds) setImgBounds(imgBounds.pad(1));
+    } else setImgBounds(imageBounds);
   };
 
   const mapRef = useRef<Map>(null);
@@ -78,7 +79,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const centerUser = () => {
-    const temp = mapRef.current?.leafletElement.panTo(location);
+    const temp = location && mapRef.current?.leafletElement.panTo(location);
   };
 
   const map = (
@@ -102,7 +103,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       />
       {showFloor && (
         <ImageOverlay
-          url={`assets/floorView/ISELF_${currentFloor}_D.png`}
+          url={`assets/floorView/ISELF_${
+            currentFloor === 1 ? "1_D" : currentFloor
+          }.png`}
           bounds={imgBounds}
         />
       )}
@@ -128,24 +131,22 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   return (
     <>
       {map}
-      {!location.equals(L.latLng([0, 0])) && (
-        <IonFab horizontal="end" vertical="bottom" slot="fixed">
-          <IonFabButton
-            color="dark"
-            onClick={centerUser}
-            onTouchStart={() =>
-              !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
-            }
-            onTouchEnd={() => {
-              console.log("Timeout Cleared");
-              currentTimeout && clearTimeout(currentTimeout);
-              setCurrentTimeout(undefined);
-            }}
-          >
-            <IonIcon icon={navigateCircleOutline} />
-          </IonFabButton>
-        </IonFab>
-      )}
+      <IonFab horizontal="end" vertical="bottom" slot="fixed">
+        <IonFabButton
+          color="dark"
+          onClick={centerUser}
+          onTouchStart={() =>
+            !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
+          }
+          onTouchEnd={() => {
+            console.log("Timeout Cleared");
+            currentTimeout && clearTimeout(currentTimeout);
+            setCurrentTimeout(undefined);
+          }}
+        >
+          <IonIcon icon={navigateCircleOutline} />
+        </IonFabButton>
+      </IonFab>
       {showFloor && (
         <IonFab vertical="bottom" horizontal="start">
           <IonFabButton

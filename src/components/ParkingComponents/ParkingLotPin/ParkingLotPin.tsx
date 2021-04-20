@@ -2,17 +2,9 @@ import React, { useMemo } from "react";
 import "./ParkingLotPin.scss";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import {
-  IonButton,
-  IonCol,
-  IonGrid,
-  IonIcon,
-  IonLabel,
-  IonRow,
-} from "@ionic/react";
+import { IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
 import { Item } from "../../../Reuseable";
-import { navigateCircle } from "ionicons/icons";
-import { ShareButton } from "../..";
+import { NavigationButton, ShareButton } from "../..";
 
 interface ParkingLotPinProps {
   parkingLots: Item[];
@@ -65,25 +57,10 @@ export const ParkingLotPin: React.FC<ParkingLotPinProps> = (
                     />
                   </IonCol>
                   <IonCol class="ion-no-padding" id="share-col2" size="6">
-                    <IonButton
-                      class="ion-no-margin"
-                      id="navigate-button-pin"
-                      color="dark"
-                      expand="block"
-                      onClick={() =>
-                        console.log(
-                          "Navigate to : " +
-                            parkingLot.name +
-                            " " +
-                            parkingLot.coordinates
-                        )
-                      }
-                    >
-                      <IonIcon
-                        icon={navigateCircle}
-                        id="ion-icon-pin"
-                      ></IonIcon>
-                    </IonButton>
+                    <NavigationButton
+                      navigationItem={parkingLot}
+                      isPin={true}
+                    />
                   </IonCol>
                 </IonRow>
               </IonGrid>

@@ -2,23 +2,15 @@ import React, { useMemo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { Item, ItemOptions } from "../../../Reuseable";
 import L from "leaflet";
-import {
-  IonButton,
-  IonCol,
-  IonGrid,
-  IonIcon,
-  IonLabel,
-  IonRow,
-} from "@ionic/react";
+import { IonButton, IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
 import "./BuildingPin.scss";
-import { navigateCircle } from "ionicons/icons";
 import { ShareButton } from "../../";
+import { NavigationButton } from "../../NavigationButton";
 
 interface BuildingPinProps {
   buildings: Item[];
   showName: boolean;
   openDetails: (i: ItemOptions) => void;
-  openNav: (t: Item) => void;
 }
 
 const filterBuildings = (buildings: Item[]) => {
@@ -77,15 +69,7 @@ export const BuildingPin: React.FC<BuildingPinProps> = (
                   />
                 </IonCol>
                 <IonCol class="ion-no-padding" id="share-col2" size="6">
-                  <IonButton
-                    class="ion-no-margin"
-                    id="navigate-button-pin"
-                    color="tertiary"
-                    expand="block"
-                    onClick={() => props.openNav(building)}
-                  >
-                    <IonIcon icon={navigateCircle} id="ion-icon-pin"></IonIcon>
-                  </IonButton>
+                  <NavigationButton navigationItem={building} isPin={true} />
                 </IonCol>
               </IonRow>
             </IonGrid>

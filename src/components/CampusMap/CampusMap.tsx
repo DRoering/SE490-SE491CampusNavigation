@@ -48,6 +48,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [location, manualRefresh] = useUserPosition();
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
   const [showLoading, setShowLoading] = useState(false);
+  const [locateError, setLocateError] = useState(false);
   const minimumZoom = 8;
   useEffect(() => {
     console.debug("resetSize Called");
@@ -144,7 +145,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           onClick={centerUser}
           onTouchStart={() =>
             !currentTimeout &&
-            setCurrentTimeout(manualRefresh(centerUser, setShowLoading))
+            setCurrentTimeout(
+              manualRefresh(centerUser, setShowLoading, setLocateError)
+            )
           }
           onTouchEnd={() => {
             console.log("Timeout Cleared");
@@ -157,7 +160,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
             onDidDismiss={() => setShowLoading(false)}
             message={"Refreshing location..."}
             duration={10000}
-          ></IonLoading>
+          />
           <IonIcon icon={navigateCircleOutline} />
         </IonFabButton>
       </IonFab>
@@ -212,6 +215,20 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           buttons={[
             {
               text: "Ok",
+              role: "cancel",
+            },
+          ]}
+        />
+      )}
+      {locateError && (
+        <IonAlert
+          isOpen={locateError}
+          onDidDismiss={() => setLocateError(false)}
+          subHeader={"We encountered a problem"}
+          message={"We were unable to find your locaiton."}
+          buttons={[
+            {
+              text: "Okay",
               role: "cancel",
             },
           ]}

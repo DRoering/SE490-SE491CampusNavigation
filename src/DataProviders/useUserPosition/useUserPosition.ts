@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 
 export const useUserPosition = (): [
   L.LatLng | undefined,
-  (c: () => void, setShowLoading: (l: boolean) => void) => NodeJS.Timeout
+  (
+    c: () => void,
+    setShowLoading: (l: boolean) => void,
+    setShowError: (e: boolean) => void
+  ) => NodeJS.Timeout
 ] => {
   const [userLocation, setUserLocation] = useState<L.LatLng>();
 
@@ -20,16 +24,19 @@ export const useUserPosition = (): [
 
   const manualRefresh = (
     c: () => void,
-    setShowLoading: (l: boolean) => void
+    setShowLoading: (l: boolean) => void,
+    setShowError: (e: boolean) => void
   ) => {
     console.log("manual refresh started");
     return setTimeout(() => {
       console.log("Manual refresh occured");
       setShowLoading(true);
-      locate().then(() => {
-        c();
-        setShowLoading(false);
-      });
+      locate()
+        .then(() => {
+          c();
+          setShowLoading(false);
+        })
+        .catch(() => setShowError(false));
     }, 800);
   };
 

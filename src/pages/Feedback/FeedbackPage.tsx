@@ -37,6 +37,9 @@ export const FeedbackPage: React.FC = () => {
           setToastMessage("Your feedback has been received.");
           setAutoDismissToast(true);
           setShowToast(true);
+          setTimeout(() => {
+            history.goBack();
+          }, 3100);
         })
         .catch(() => {
           setToastMessage("We were unsuccessful in sending your message.");
@@ -110,7 +113,7 @@ export const FeedbackPage: React.FC = () => {
       </IonContent>
       <IonToast
         isOpen={showToast}
-        onDidDismiss={() => history.goBack()}
+        onDidDismiss={() => setShowToast(false)}
         buttons={[
           {
             text: "Dismiss",

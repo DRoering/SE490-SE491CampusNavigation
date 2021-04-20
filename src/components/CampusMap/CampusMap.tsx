@@ -128,22 +128,24 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   return (
     <>
       {map}
-      <IonFab horizontal="end" vertical="bottom" slot="fixed">
-        <IonFabButton
-          color="dark"
-          onClick={centerUser}
-          onTouchStart={() =>
-            !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
-          }
-          onTouchEnd={() => {
-            console.log("Timeout Cleared");
-            currentTimeout && clearTimeout(currentTimeout);
-            setCurrentTimeout(undefined);
-          }}
-        >
-          <IonIcon icon={navigateCircleOutline} />
-        </IonFabButton>
-      </IonFab>
+      {!location.equals(L.latLng([0, 0])) && (
+        <IonFab horizontal="end" vertical="bottom" slot="fixed">
+          <IonFabButton
+            color="dark"
+            onClick={centerUser}
+            onTouchStart={() =>
+              !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
+            }
+            onTouchEnd={() => {
+              console.log("Timeout Cleared");
+              currentTimeout && clearTimeout(currentTimeout);
+              setCurrentTimeout(undefined);
+            }}
+          >
+            <IonIcon icon={navigateCircleOutline} />
+          </IonFabButton>
+        </IonFab>
+      )}
       {showFloor && (
         <IonFab vertical="bottom" horizontal="start">
           <IonFabButton
@@ -168,7 +170,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           onDidDismiss={() => setShowNavModal(false)}
           subHeader={`Navigate to ${navigationItem?.name}`}
           message={
-            "Do you want to start navigation in native maps application?"
+            "Do you want to start navigation in your native maps application?"
           }
           buttons={[
             {

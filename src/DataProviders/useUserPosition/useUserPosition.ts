@@ -6,9 +6,7 @@ export const useUserPosition = (): [
   L.LatLng,
   (c: () => void) => NodeJS.Timeout
 ] => {
-  const [userLocation, setUserLocation] = useState(
-    L.latLng([45.551613, -94.148977])
-  );
+  const [userLocation, setUserLocation] = useState<L.LatLng>(L.latLng([0, 0]));
 
   const locate = async () => {
     const locale = await Geolocation.getCurrentPosition();

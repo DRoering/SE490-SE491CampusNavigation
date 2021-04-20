@@ -13,12 +13,25 @@ export const NavigationButton: React.FC<NavigationButtonProps> = (
   props: NavigationButtonProps
 ) => {
   const [showNavModal, setShowNavModal] = useState(false);
-  const [navigationItem, setNavItem] = useState<Item>();
+  const [destination, setDestination] = useState("");
+  const [isNavigable, setIsNavigable] = useState(true);
 
-  const initiateNav = (i: Item) => {
-    console.log(i);
-    setNavItem(i);
+  const getDestination = () => {
+    if (props.navigationItem.address)
+      setDestination(props.navigationItem.address + " St Cloud");
+    else if (props.navigationItem.building)
+      setDestination(
+        "St. Cloud State University " + props.navigationItem.building
+      );
+    else if (props.navigationItem.name)
+      setDestination("St. Cloud State University " + props.navigationItem.name);
+    else return false;
+    return true;
+  };
+
+  const initiateNav = () => {
     setShowNavModal(true);
+    setIsNavigable(getDestination());
   };
 
   return (
@@ -28,7 +41,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = (
         id={props.isPin ? "navigate-button-pin" : undefined}
         color={props.isPin ? "tertiary" : undefined}
         expand="block"
-        onClick={() => initiateNav(props.navigationItem)}
+        onClick={() => initiateNav()}
       >
         {props.isPin ? (
           <IonIcon icon={navigateCircle} id="ion-icon-pin" />
@@ -36,11 +49,11 @@ export const NavigationButton: React.FC<NavigationButtonProps> = (
           <IonLabel>Navigate Here</IonLabel>
         )}
       </IonButton>
-      {navigationItem?.coordinates ? (
+      {isNavigable ? (
         <IonAlert
           isOpen={showNavModal}
           onDidDismiss={() => setShowNavModal(false)}
-          subHeader={`Navigate to ${navigationItem?.name}`}
+          subHeader={`Navigate to ${props.navigationItem.name}`}
           message={
             "Do you want to start navigation in native maps application?"
           }
@@ -53,7 +66,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = (
             {
               text: "Okay",
               handler: () => {
-                NavigatorProvider(navigationItem);
+                NavigatorProvider(destination);
               },
             },
           ]}
@@ -64,7 +77,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = (
           onDidDismiss={() => setShowNavModal(false)}
           subHeader={`We've ran into an issue`}
           message={
-            "We lack information necessary to route you to this location. Please check that your location is on"
+            "We lack information necessary to route you to this location."
           }
           buttons={[
             {

@@ -60,22 +60,7 @@ export const EventPin: React.FC<EventPinProps> = (props: EventPinProps) => {
                     />
                   </IonCol>
                   <IonCol class="ion-no-padding" id="share-col2" size="6">
-                    <IonButton
-                      class="ion-no-margin"
-                      id="navigate-button-pin"
-                      color="dark"
-                      expand="block"
-                      onClick={() =>
-                        console.log(
-                          "Navigate to : " +
-                            event.name +
-                            " " +
-                            event.coordinates
-                        )
-                      }
-                    >
-                      <NavigationButton navigationItem={event} isPin={true} />
-                    </IonButton>
+                    <NavigationButton navigationItem={event} isPin={true} />
                   </IonCol>
                 </IonRow>
               </IonGrid>

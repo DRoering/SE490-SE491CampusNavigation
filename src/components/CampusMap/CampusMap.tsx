@@ -120,6 +120,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       {map}
       <IonFab horizontal="end" vertical="bottom" slot="fixed">
         <IonFabButton
+          id="center-user"
           color="dark"
           onClick={centerUser}
           onTouchStart={() =>

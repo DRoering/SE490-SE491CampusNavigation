@@ -57,8 +57,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const updateBounds = (z: number) => {
-    if (z === 18) setImgBounds(imgBounds.pad(1));
-    else setImgBounds(imageBounds);
+    if (z === 18) {
+      if (imgBounds === imageBounds) setImgBounds(imgBounds.pad(1));
+    } else setImgBounds(imageBounds);
   };
 
   const mapRef = useRef<Map>(null);
@@ -78,7 +79,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const centerUser = () => {
-    const temp = mapRef.current?.leafletElement.panTo(location);
+    const temp = location && mapRef.current?.leafletElement.panTo(location);
   };
 
   const map = (
@@ -102,7 +103,9 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       />
       {showFloor && (
         <ImageOverlay
-          url={`assets/floorView/ISELF_${currentFloor}_D.png`}
+          url={`assets/floorView/ISELF_${
+            currentFloor === 1 ? "1_D" : currentFloor
+          }.png`}
           bounds={imgBounds}
         />
       )}
@@ -168,7 +171,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           onDidDismiss={() => setShowNavModal(false)}
           subHeader={`Navigate to ${navigationItem?.name}`}
           message={
-            "Do you want to start navigation in native maps application?"
+            "Do you want to start navigation in your native maps application?"
           }
           buttons={[
             {

@@ -16,6 +16,7 @@ import {
 import React, { useState } from "react";
 import { Emailer } from "../../DataProviders/Emailer";
 import "./FeedbackPage.scss";
+import { useHistory } from "react-router-dom";
 
 export const FeedbackPage: React.FC = () => {
   const [name, setName] = useState("");
@@ -28,6 +29,7 @@ export const FeedbackPage: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
   const [autoDismissToast, setAutoDismissToast] = useState(false);
   const { verifyEmail, sendFeedback } = Emailer;
+  const history = useHistory();
   const isAllValid = () => {
     if (isNameValid && isEmailValid && isMessageValid) {
       sendFeedback(email, name, message)
@@ -108,7 +110,7 @@ export const FeedbackPage: React.FC = () => {
       </IonContent>
       <IonToast
         isOpen={showToast}
-        onDidDismiss={() => setShowToast(false)}
+        onDidDismiss={() => history.goBack()}
         buttons={[
           {
             text: "Dismiss",

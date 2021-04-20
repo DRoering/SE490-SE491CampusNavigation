@@ -4,6 +4,7 @@ import L from "leaflet";
 import { IonLabel } from "@ionic/react";
 import "./OrganizationPin.scss";
 import { Item } from "../../../Reuseable";
+import { NavigationButton } from "../..";
 
 interface OrganizationPinProps {
   organization: Item[];
@@ -38,6 +39,7 @@ export const OrganizationPin: React.FC<OrganizationPinProps> = (
           >
             <Popup id="Organization-popup">
               <IonLabel>{organizations.name}</IonLabel>
+              <NavigationButton navigationItem={organizations} isPin={true} />
             </Popup>
           </Marker>
         ))}

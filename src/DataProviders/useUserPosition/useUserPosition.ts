@@ -36,7 +36,7 @@ export const useUserPosition = (): [
           c();
           setShowLoading(false);
         })
-        .catch(() => setShowError(false));
+        .catch(() => setShowError(true));
     }, 800);
   };
 

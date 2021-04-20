@@ -6,7 +6,13 @@ import "./CampusMap.scss";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
-import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
+import {
+  IonAlert,
+  IonFab,
+  IonFabButton,
+  IonIcon,
+  IonLoading,
+} from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
 import { chevronDown, chevronUp, navigateCircleOutline } from "ionicons/icons";
 import {
@@ -41,6 +47,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [navigationItem, setNavItem] = useState<Item>();
   const [location, manualRefresh] = useUserPosition();
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
+  const [showLoading, setShowLoading] = useState(false);
   const minimumZoom = 8;
   useEffect(() => {
     console.debug("resetSize Called");
@@ -136,7 +143,8 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           color="dark"
           onClick={centerUser}
           onTouchStart={() =>
-            !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
+            !currentTimeout &&
+            setCurrentTimeout(manualRefresh(centerUser, setShowLoading))
           }
           onTouchEnd={() => {
             console.log("Timeout Cleared");
@@ -144,6 +152,12 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
             setCurrentTimeout(undefined);
           }}
         >
+          <IonLoading
+            isOpen={showLoading}
+            onDidDismiss={() => setShowLoading(false)}
+            message={"Refreshing location..."}
+            duration={10000}
+          ></IonLoading>
           <IonIcon icon={navigateCircleOutline} />
         </IonFabButton>
       </IonFab>

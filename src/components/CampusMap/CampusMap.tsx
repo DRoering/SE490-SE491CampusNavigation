@@ -6,7 +6,13 @@ import "./CampusMap.scss";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { UserLocation } from "./Components";
-import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
+import {
+  IonAlert,
+  IonFab,
+  IonFabButton,
+  IonIcon,
+  IonLoading,
+} from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
 import { chevronDown, chevronUp, navigateCircleOutline } from "ionicons/icons";
 import { useFloorOverlay, useUserPosition } from "../../DataProviders";
@@ -35,6 +41,8 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [currentFloor, setCurrentFloor] = useState(1);
   const [location, manualRefresh] = useUserPosition();
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
+  const [showLoading, setShowLoading] = useState(false);
+  const [locateError, setLocateError] = useState(false);
   const minimumZoom = 8;
   useEffect(() => {
     console.debug("resetSize Called");
@@ -124,7 +132,10 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           color="dark"
           onClick={centerUser}
           onTouchStart={() =>
-            !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
+            !currentTimeout &&
+            setCurrentTimeout(
+              manualRefresh(centerUser, setShowLoading, setLocateError)
+            )
           }
           onTouchEnd={() => {
             console.log("Timeout Cleared");
@@ -132,9 +143,29 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
             setCurrentTimeout(undefined);
           }}
         >
+          <IonLoading
+            isOpen={showLoading}
+            onDidDismiss={() => setShowLoading(false)}
+            message={"Refreshing location..."}
+            duration={10000}
+          />
           <IonIcon icon={navigateCircleOutline} />
         </IonFabButton>
       </IonFab>
+      {locateError && (
+        <IonAlert
+          isOpen={locateError}
+          onDidDismiss={() => setLocateError(false)}
+          subHeader={"we encountered a problem"}
+          message={"We were unable to find your location"}
+          buttons={[
+            {
+              text: "Okay",
+              role: "cancel",
+            },
+          ]}
+        />
+      )}
       {showFloor && (
         <IonFab vertical="bottom" horizontal="start">
           <IonFabButton

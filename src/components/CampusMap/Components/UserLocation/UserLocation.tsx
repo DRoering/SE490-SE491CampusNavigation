@@ -15,9 +15,5 @@ export const UserLocation: React.FC<UserLocationProps> = (
     popupAnchor: [0, -7],
   });
 
-  return !props.userPosition.equals(L.latLng([0, 0])) ? (
-    <Marker position={props.userPosition} icon={userIcon} />
-  ) : (
-    <></>
-  );
+  return <Marker position={props.userPosition} icon={userIcon} />;
 };

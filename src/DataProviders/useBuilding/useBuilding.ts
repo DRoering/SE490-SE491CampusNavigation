@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import moment, { Moment } from "moment";
 import L from "leaflet";
 import { Item } from "../../Reuseable";
+import { BuildingFloor } from "../useFloorOverlay";
 
 interface ApiResponse {
   id: string;
@@ -71,7 +72,6 @@ export const useBuilding = (): Item[] => {
 
   useEffect(() => {
     getBuildings(setBuildings);
-
     console.log("useBuilding effect called");
   }, []);
 

@@ -1,0 +1,15 @@
+#floor-item {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  margin-left: -50px;
+  z-index: 1000;
+  max-width: fit-content;
+  border-radius: 8px;
+
+  #floor-label {
+    font-size: large;
+    color: white;
+    text-shadow: black;
+  }
+}

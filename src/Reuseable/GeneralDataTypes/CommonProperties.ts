@@ -1,5 +1,5 @@
 import { Moment } from "moment";
-import { Service } from "../../DataProviders";
+import { BuildingFloor, Service } from "../../DataProviders";
 
 export interface Item {
   accessibility?: string;
@@ -52,6 +52,7 @@ export interface Item {
   communication: string;
   application: string;
   webSite?: string;
+  hasFloors: boolean;
 }
 
 export interface ItemOptions {

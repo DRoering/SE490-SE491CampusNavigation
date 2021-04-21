@@ -20,7 +20,7 @@ import { NavigationButton } from "../../NavigationButton";
 interface BuildingModalProps {
   building: Item;
   close: () => void;
-  setPosition?: (c: L.LatLng) => void;
+  setPosition?: (c: L.LatLng, z?: number) => void;
 }
 
 const getFindFormula = (id: number) => `Find("${id}",Buildings)`;
@@ -97,14 +97,16 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
           </IonButton>
         )}
         <NavigationButton navigationItem={props.building} isPin={false} />
-        <IonButton
-          color="tertiary"
-          expand="block"
-          routerLink="/FloorView"
-          onClick={props.close}
-        >
-          <IonLabel>Interior View</IonLabel>
-        </IonButton>
+        {props.building.hasFloors && (
+          <IonButton
+            color="tertiary"
+            expand="block"
+            //routerLink="/FloorView"
+            onClick={() => props.setPosition?.(props.building.coordinates, 18)}
+          >
+            <IonLabel>Interior View</IonLabel>
+          </IonButton>
+        )}
         <IonList>
           <IonItemDivider className="app-fonts" id="item-info">
             <IonLabel id="title">Description</IonLabel>

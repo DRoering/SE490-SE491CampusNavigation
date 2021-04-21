@@ -12,25 +12,18 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
+import { BuildingFloor } from "../../DataProviders";
 import { Item } from "../../Reuseable";
 
 interface FloorViewProps {
   building: Item;
+  floors: BuildingFloor;
 }
 
-const maxFloor = 3;
-const minFloor = 0;
-
 export const FloorView: React.FC<FloorViewProps> = (props: FloorViewProps) => {
-  const [currentFloor, setCurrentFloor] = useState(1);
-
-  const displayNextFloor = () => {
-    if (currentFloor !== maxFloor) setCurrentFloor(currentFloor + 1);
-  };
-
-  const displayPreviousFloor = () => {
-    if (currentFloor !== minFloor) setCurrentFloor(currentFloor - 1);
-  };
+  const [currentFloor, setCurrentFloor] = useState(
+    props.floors.mainfloorposition
+  );
 
   return (
     <IonPage>
@@ -52,20 +45,18 @@ export const FloorView: React.FC<FloorViewProps> = (props: FloorViewProps) => {
                 </strong>
               </IonTitle>
             </IonItem>
-            <IonImg
-              src={`assets/floorView/${props.building.abbreviation}_${currentFloor}.png`}
-            />
+            <IonImg src={props.floors.floorimages[currentFloor].url} />
             <IonButton
-              onClick={displayPreviousFloor}
-              disabled={currentFloor === minFloor}
-            >
-              <IonLabel>Down a floor</IonLabel>
-            </IonButton>
-            <IonButton
-              onClick={displayNextFloor}
-              disabled={currentFloor === maxFloor}
+              onClick={() => setCurrentFloor(currentFloor + 1)}
+              disabled={currentFloor === props.floors.floorimages.length}
             >
               <IonLabel>Up a floor</IonLabel>
+            </IonButton>
+            <IonButton
+              onClick={() => setCurrentFloor(currentFloor - 1)}
+              disabled={currentFloor === 0}
+            >
+              <IonLabel>Down a floor</IonLabel>
             </IonButton>
           </>
         )}

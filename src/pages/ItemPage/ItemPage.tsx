@@ -33,7 +33,7 @@ interface ItemPageProps {
   events: Item[];
   parking: Item[];
   organizations: Item[];
-  setPosition: (c: L.LatLng) => void;
+  setPosition: (c: L.LatLng, z?: number) => void;
   setBuilding: (b: Item) => void;
 }
 
@@ -167,8 +167,8 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
           <BuildingModal
             building={modalDetails.b}
             close={() => setShowModal(false)}
-            setPosition={(c: L.LatLng) => {
-              props.setPosition(c);
+            setPosition={(c: L.LatLng, z?: number) => {
+              z ? props.setPosition(c, z) : props.setPosition(c);
               setShowModal(false);
             }}
           />

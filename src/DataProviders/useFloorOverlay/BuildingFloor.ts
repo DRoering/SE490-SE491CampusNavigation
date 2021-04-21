@@ -1,8 +1,10 @@
-export interface BuildingFloors {
+export interface BuildingFloor {
   name: string;
   floorimages: { id: string; url: string; filename: string }[];
   floors: number[];
   mainfloorposition: number;
-  latitude: number;
-  longitude: number;
+  topLat: number;
+  topLong: number;
+  bottomLat: number;
+  bottomLong: number;
 }

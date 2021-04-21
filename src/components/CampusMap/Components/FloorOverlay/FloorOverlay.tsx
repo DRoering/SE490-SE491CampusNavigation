@@ -26,7 +26,7 @@ export const FloorOverlay: React.FC<FloorOverlayProps> = (
   const [showFloor, setShowFloor] = useState(false);
 
   const shouldShowFloor = (z: number, c: L.LatLng) => {
-    if (originalBounds.contains(c || ([0, 0] && z > 16))) {
+    if (originalBounds.contains(c) && z > 16) {
       props.closePopup();
       setShowFloor(true);
     } else setShowFloor(false);

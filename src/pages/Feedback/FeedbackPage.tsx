@@ -16,6 +16,7 @@ import {
 import React, { useState } from "react";
 import { Emailer } from "../../DataProviders/Emailer";
 import "./FeedbackPage.scss";
+import { useHistory } from "react-router-dom";
 
 export const FeedbackPage: React.FC = () => {
   const [name, setName] = useState("");
@@ -28,6 +29,7 @@ export const FeedbackPage: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
   const [autoDismissToast, setAutoDismissToast] = useState(false);
   const { verifyEmail, sendFeedback } = Emailer;
+  const history = useHistory();
   const isAllValid = () => {
     if (isNameValid && isEmailValid && isMessageValid) {
       sendFeedback(email, name, message)
@@ -35,6 +37,9 @@ export const FeedbackPage: React.FC = () => {
           setToastMessage("Your feedback has been received.");
           setAutoDismissToast(true);
           setShowToast(true);
+          setTimeout(() => {
+            history.goBack();
+          }, 3100);
         })
         .catch(() => {
           setToastMessage("We were unsuccessful in sending your message.");

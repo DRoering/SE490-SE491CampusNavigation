@@ -15,6 +15,7 @@ import { useServices } from "../../../DataProviders";
 import { ModalHeader } from "../../";
 import "./BuildingModal.scss";
 import { Item } from "../../../Reuseable";
+import { NavigationButton } from "../../NavigationButton";
 
 interface BuildingModalProps {
   building: Item;
@@ -95,19 +96,7 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
             View on Map
           </IonButton>
         )}
-        <IonButton
-          expand="block"
-          onClick={() =>
-            console.log(
-              "Navigate to : " +
-                props.building.name +
-                " " +
-                props.building.coordinates
-            )
-          }
-        >
-          <IonLabel>Navigate Here</IonLabel>
-        </IonButton>
+        <NavigationButton navigationItem={props.building} isPin={false} />
         {props.building.hasFloors && (
           <IonButton
             color="tertiary"

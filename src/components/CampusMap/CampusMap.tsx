@@ -1,19 +1,21 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import { ImageOverlay, Map, TileLayer } from "react-leaflet";
+import { Map, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
 import { BuildingPin, ParkingLotPin, EventPin } from "../";
 import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
 import { FloorOverlay, UserLocation } from "./Components";
-import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
+import {
+  IonAlert,
+  IonFab,
+  IonFabButton,
+  IonIcon,
+  IonLoading,
+} from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
 import { navigateCircleOutline } from "ionicons/icons";
-import {
-  BuildingFloor,
-  NavigatorProvider,
-  useUserPosition,
-} from "../../DataProviders";
+import { BuildingFloor, useUserPosition } from "../../DataProviders";
 
 //45.551556, -94.151670
 interface CampusMapProps {
@@ -28,11 +30,11 @@ interface CampusMapProps {
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
-  const [showNavModal, setShowNavModal] = useState(false);
-  const [navigationItem, setNavItem] = useState<Item>();
   const [location, manualRefresh] = useUserPosition();
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
   const [isDisplaying, setIsDisplaying] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
+  const [locateError, setLocateError] = useState(false);
   const [currentOverlay, setCurrentOverlay] = useState<BuildingFloor>(
     props.floors[0]
   );
@@ -48,18 +50,11 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     }, 750);
   }, []);
 
-  const initiateNav = (i: Item) => {
-    console.log(i);
-    setNavItem(i);
-    setShowNavModal(true);
-  };
-
   const mapRef = useRef<Map>(null);
 
   const centerUser = () => {
     const temp = location && mapRef.current?.leafletElement.panTo(location);
   };
-
   const closePopup = () => {
     const temp = mapRef.current?.leafletElement.closePopup();
   };
@@ -125,7 +120,6 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           buildings={props.buildings}
           showName={props.showName}
           openDetails={props.openDetails}
-          openNav={initiateNav}
         />
       )}
       {props.events && (
@@ -144,10 +138,14 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       {map}
       <IonFab horizontal="end" vertical="bottom" slot="fixed">
         <IonFabButton
+          id="center-user"
           color="dark"
           onClick={centerUser}
           onTouchStart={() =>
-            !currentTimeout && setCurrentTimeout(manualRefresh(centerUser))
+            !currentTimeout &&
+            setCurrentTimeout(
+              manualRefresh(centerUser, setShowLoading, setLocateError)
+            )
           }
           onTouchEnd={() => {
             console.log("Timeout Cleared");
@@ -155,42 +153,24 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
             setCurrentTimeout(undefined);
           }}
         >
+          <IonLoading
+            isOpen={showLoading}
+            onDidDismiss={() => setShowLoading(false)}
+            message={"Refreshing location..."}
+            duration={10000}
+          />
           <IonIcon icon={navigateCircleOutline} />
         </IonFabButton>
       </IonFab>
-      {navigationItem?.coordinates ? (
+      {locateError && (
         <IonAlert
-          isOpen={showNavModal}
-          onDidDismiss={() => setShowNavModal(false)}
-          subHeader={`Navigate to ${navigationItem?.name}`}
-          message={
-            "Do you want to start navigation in your native maps application?"
-          }
+          isOpen={locateError}
+          onDidDismiss={() => setLocateError(false)}
+          subHeader={"we encountered a problem"}
+          message={"We were unable to find your location"}
           buttons={[
-            {
-              text: "Cancel",
-              role: "cancel",
-              cssClass: "secondary",
-            },
             {
               text: "Okay",
-              handler: () => {
-                NavigatorProvider(navigationItem);
-              },
-            },
-          ]}
-        />
-      ) : (
-        <IonAlert
-          isOpen={showNavModal}
-          onDidDismiss={() => setShowNavModal(false)}
-          subHeader={`We've ran into an issue`}
-          message={
-            "We lack information necessary to route you to this location. Please check that your location is on"
-          }
-          buttons={[
-            {
-              text: "Ok",
               role: "cancel",
             },
           ]}

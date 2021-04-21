@@ -3,6 +3,8 @@ import { BuildingFloor, Service } from "../../DataProviders";
 
 export interface Item {
   accessibility?: string;
+  address: string;
+  building: string;
   coordinates: L.LatLng;
   description?: string;
   hours: { open: Moment; close: Moment };
@@ -45,7 +47,6 @@ export interface Item {
   rate?: number[];
   advisor: string;
   president: string;
-  location: string;
   officers: string;
   meetingTime: Moment;
   communication: string;

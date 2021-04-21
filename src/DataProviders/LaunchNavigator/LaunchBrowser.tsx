@@ -1,8 +1,4 @@
-import { Item } from "../../Reuseable";
-
-export const BrowserNavigate = (destination: Item) =>
+export const BrowserNavigate = (destination: string) =>
   window.open(
-    encodeURI(
-      `http://google.com/maps/dir/?api=1&destination=${destination.name}`
-    )
+    encodeURI(`http://google.com/maps/dir/?api=1&destination=${destination}`)
   );

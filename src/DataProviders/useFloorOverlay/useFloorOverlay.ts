@@ -20,7 +20,11 @@ const getBuildingFloors = (setBuildingFloors: (s: BuildingFloor[]) => void) => {
       const rawItems: BuildingFloor[] = [];
 
       response.data.records.forEach((record) => {
-        if (record.fields.floors && record.fields.floorimages.length > 0)
+        if (
+          record.fields.floors &&
+          record.fields.floorimages.length > 0 &&
+          record.fields.floorimages[0].url
+        )
           rawItems.push(record.fields);
       });
       setBuildingFloors(rawItems);

@@ -23,24 +23,16 @@ export const FloorOverlay: React.FC<FloorOverlayProps> = (
   const [currentFloor, setCurrentFloor] = useState(
     props.buildingFloor.mainfloorposition
   );
-  const [imgBounds, setImgBounds] = useState(originalBounds);
   const [showFloor, setShowFloor] = useState(false);
 
-  const updateBounds = (z: number) => {
-    if (z === 18) {
-      if (imgBounds === originalBounds) setImgBounds(originalBounds.pad(1));
-    } else setImgBounds(originalBounds);
-  };
-
   const shouldShowFloor = (z: number, c: L.LatLng) => {
-    if (imgBounds.contains(c || ([0, 0] && z > 16))) {
+    if (originalBounds.contains(c || ([0, 0] && z > 16))) {
       props.closePopup();
       setShowFloor(true);
     } else setShowFloor(false);
   };
 
   useMemo(() => {
-    updateBounds(props.currentZoom);
     shouldShowFloor(props.currentZoom, props.center);
   }, [props.center, props.currentZoom]);
 
@@ -50,7 +42,9 @@ export const FloorOverlay: React.FC<FloorOverlayProps> = (
         <>
           <ImageOverlay
             url={props.buildingFloor.floorimages[currentFloor].url}
-            bounds={imgBounds}
+            bounds={
+              props.currentZoom === 18 ? originalBounds.pad(1) : originalBounds
+            }
           />
           <IonFab vertical="bottom" horizontal="start">
             <IonFabButton

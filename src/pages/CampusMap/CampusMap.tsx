@@ -9,6 +9,7 @@ import {
 } from "../../components";
 import L from "leaflet";
 import { Item, ItemOptions } from "../../Reuseable";
+import { useFloorOverlay } from "../../DataProviders";
 
 interface CampusMapProps {
   buildings: Item[];
@@ -32,7 +33,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     i: ItemOptions;
     open: boolean;
   }>({ i: {}, open: false });
-
+  const floors = useFloorOverlay();
   const openDetails = (i: ItemOptions) => {
     if (i.b) props.setBuilding(i.b);
     setModalDetails({ i: i, open: true });
@@ -55,6 +56,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
           showName={props.showName}
           position={props.position}
           openDetails={openDetails}
+          floors={floors}
         />
       </IonContent>
       {modalDetails && (

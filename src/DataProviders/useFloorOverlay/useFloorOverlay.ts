@@ -2,6 +2,7 @@ import { Strings, get } from "..";
 import { useEffect, useState } from "react";
 import { Moment } from "moment";
 import { BuildingFloor } from "./BuildingFloor";
+import L from "leaflet";
 
 interface ApiResponse {
   id: string;
@@ -23,9 +24,20 @@ const getBuildingFloors = (setBuildingFloors: (s: BuildingFloor[]) => void) => {
         if (
           record.fields.floors &&
           record.fields.floorimages.length > 0 &&
-          record.fields.floorimages[0].url
-        )
+          record.fields.floorimages[0].url &&
+          record.fields.mainfloorposition
+        ) {
+          const topBound = L.latLng([
+            record.fields.topLat,
+            record.fields.topLong,
+          ]);
+          const bottomBound = L.latLng([
+            record.fields.bottomLat,
+            record.fields.bottomLong,
+          ]);
+          record.fields.bounds = L.latLngBounds([topBound, bottomBound]);
           rawItems.push(record.fields);
+        }
       });
       setBuildingFloors(rawItems);
       console.log(rawItems);
@@ -42,5 +54,8 @@ export const useFloorOverlay = (): BuildingFloor[] => {
 
     console.log("useFloorOverlay effect called");
   }, []);
+
+  console.log(buildingFloors);
+
   return buildingFloors;
 };

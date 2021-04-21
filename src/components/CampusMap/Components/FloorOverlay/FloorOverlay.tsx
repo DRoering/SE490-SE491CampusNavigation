@@ -1,9 +1,10 @@
-import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
+import { IonFab, IonFabButton, IonIcon, IonItem, IonLabel } from "@ionic/react";
 import { chevronUp, chevronDown } from "ionicons/icons";
 import L from "leaflet";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { ImageOverlay } from "react-leaflet";
 import { BuildingFloor } from "../../../../DataProviders";
+import "./FloorOverlay.scss";
 
 interface FloorOverlayProps {
   buildingFloor: BuildingFloor;
@@ -16,29 +17,14 @@ export const FloorOverlay: React.FC<FloorOverlayProps> = (
   props: FloorOverlayProps
 ) => {
   const maxFloor = props.buildingFloor.floors.length;
-  const originalBounds = L.latLngBounds([
-    [props.buildingFloor.topLat, props.buildingFloor.topLong],
-    [props.buildingFloor.bottomLat, props.buildingFloor.bottomLong],
-  ]);
+  const originalBounds = props.buildingFloor.bounds;
   const [currentFloor, setCurrentFloor] = useState(
     props.buildingFloor.mainfloorposition
   );
-  const [showFloor, setShowFloor] = useState(false);
-
-  const shouldShowFloor = (z: number, c: L.LatLng) => {
-    if (originalBounds.contains(c) && z > 16) {
-      props.closePopup();
-      setShowFloor(true);
-    } else setShowFloor(false);
-  };
-
-  useMemo(() => {
-    shouldShowFloor(props.currentZoom, props.center);
-  }, [props.center, props.currentZoom]);
 
   return (
     <>
-      {showFloor && (
+      {props.buildingFloor.floorimages[currentFloor] && (
         <>
           <ImageOverlay
             url={props.buildingFloor.floorimages[currentFloor].url}
@@ -62,6 +48,9 @@ export const FloorOverlay: React.FC<FloorOverlayProps> = (
               <IonIcon icon={chevronDown} />
             </IonFabButton>
           </IonFab>
+          <IonItem id="floor-item">
+            <IonLabel id="floor-label">Floor {currentFloor}</IonLabel>
+          </IonItem>
         </>
       )}
     </>

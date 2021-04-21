@@ -7,4 +7,5 @@ export interface BuildingFloor {
   topLong: number;
   bottomLat: number;
   bottomLong: number;
+  bounds: L.LatLngBounds;
 }

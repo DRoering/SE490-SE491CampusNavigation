@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { ImageOverlay, Map, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -10,8 +10,8 @@ import { IonAlert, IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { Item, ItemOptions } from "../../Reuseable";
 import { navigateCircleOutline } from "ionicons/icons";
 import {
+  BuildingFloor,
   NavigatorProvider,
-  useFloorOverlay,
   useUserPosition,
 } from "../../DataProviders";
 
@@ -24,6 +24,7 @@ interface CampusMapProps {
   showName: boolean;
   position: { c: L.LatLng; z: number };
   openDetails: (i: ItemOptions) => void;
+  floors: BuildingFloor[];
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
@@ -31,6 +32,10 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [navigationItem, setNavItem] = useState<Item>();
   const [location, manualRefresh] = useUserPosition();
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout>();
+  const [isDisplaying, setIsDisplaying] = useState(false);
+  const [currentOverlay, setCurrentOverlay] = useState<BuildingFloor>(
+    props.floors[0]
+  );
   const [currentZoom, setCurrentZoom] = useState(props.position.z);
   const [currentCenter, setCurrentCenter] = useState<L.LatLng>(
     L.latLng([0, 0])
@@ -42,7 +47,6 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       window.dispatchEvent(new Event("resize", { bubbles: true }));
     }, 750);
   }, []);
-  const floors = useFloorOverlay();
 
   const initiateNav = (i: Item) => {
     console.log(i);
@@ -59,6 +63,28 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const closePopup = () => {
     const temp = mapRef.current?.leafletElement.closePopup();
   };
+
+  const getFloor = () => {
+    props.floors.forEach((floor) => {
+      if (floor.bounds.contains(currentCenter)) {
+        setCurrentOverlay(floor);
+        setIsDisplaying(true);
+        closePopup();
+      }
+    });
+  };
+
+  const checkFloor = () => {
+    const boundsCheck =
+      currentZoom === 18 ? currentOverlay.bounds.pad(1) : currentOverlay.bounds;
+    if (boundsCheck.contains(currentCenter) && currentZoom > 16) {
+      closePopup();
+    } else setIsDisplaying(false);
+  };
+
+  useMemo(() => {
+    isDisplaying ? checkFloor() : getFloor();
+  }, [currentZoom, currentCenter]);
 
   const map = (
     <Map
@@ -86,15 +112,14 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='<a href="http://osm.org/copyright">&copy; OpenStreetMap</a>'
       />
-      {floors.map((floor) => (
+      {isDisplaying && (
         <FloorOverlay
-          key={floor.name}
-          buildingFloor={floor}
+          buildingFloor={currentOverlay}
           currentZoom={currentZoom}
           center={currentCenter}
           closePopup={closePopup}
         />
-      ))}
+      )}
       {props.buildings && (
         <BuildingPin
           buildings={props.buildings}

@@ -60,8 +60,8 @@ export const MainTabs: React.FC = () => {
 
   const setPosition = (c: L.LatLng, r?: number) => {
     if (c === coords.c)
-      setCoords({ c: L.latLng([c.lat + 0.0001, c.lng]), z: 20 });
-    else setCoords({ c: c, z: 20 });
+      setCoords({ c: L.latLng([c.lat + 0.0001, c.lng]), z: r || 16 });
+    else setCoords({ c: c, z: r || 16 });
     history.push("/Map");
   };
 

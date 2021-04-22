@@ -100,7 +100,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       }
       onzoomlevelschange={() =>
         isDisplaying &&
-        (mapRef.current?.leafletElement.getZoom() || 0) >= 16 &&
+        (mapRef.current?.leafletElement.getZoom() || 0) >= 17 &&
         checkFloor(
           mapRef.current?.leafletElement.getCenter() || L.latLng([0, 0]),
           mapRef.current?.leafletElement.getZoom() || 0

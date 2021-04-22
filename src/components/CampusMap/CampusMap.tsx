@@ -60,6 +60,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   };
 
   const getFloor = (c: L.LatLng) =>
+    (mapRef.current?.leafletElement.getZoom() || 0) > 17 &&
     props.floors.forEach((floor) => {
       if (floor.bounds.contains(c)) {
         setCurrentOverlay(floor);
@@ -87,7 +88,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       ref={mapRef}
       zoomSnap={0.5}
       zoomDelta={0.5}
-      onViewportChanged={() =>
+      onViewportChange={() =>
         !isDisplaying
           ? getFloor(
               mapRef.current?.leafletElement.getCenter() || L.latLng([0, 0])
@@ -99,6 +100,7 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
       }
       onzoomlevelschange={() =>
         isDisplaying &&
+        (mapRef.current?.leafletElement.getZoom() || 0) >= 16 &&
         checkFloor(
           mapRef.current?.leafletElement.getCenter() || L.latLng([0, 0]),
           mapRef.current?.leafletElement.getZoom() || 0

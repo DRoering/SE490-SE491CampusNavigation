@@ -59,47 +59,49 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     const temp = mapRef.current?.leafletElement.closePopup();
   };
 
-  const getFloor = () => {
+  const getFloor = (c: L.LatLng) =>
     props.floors.forEach((floor) => {
-      if (floor.bounds.contains(currentCenter)) {
+      if (floor.bounds.contains(c)) {
         setCurrentOverlay(floor);
         setIsDisplaying(true);
         closePopup();
       }
     });
-  };
 
-  const checkFloor = () => {
+  const checkFloor = (c: L.LatLng, z: number) => {
+    setCurrentCenter(c);
+    setCurrentZoom(z);
     const boundsCheck =
-      currentZoom === 18 ? currentOverlay.bounds.pad(1) : currentOverlay.bounds;
-    if (boundsCheck.contains(currentCenter) && currentZoom > 16) {
+      z === 18 ? currentOverlay.bounds.pad(1) : currentOverlay.bounds;
+    if (boundsCheck.contains(c) && z > 16) {
       closePopup();
     } else setIsDisplaying(false);
   };
-
-  useMemo(() => {
-    isDisplaying ? checkFloor() : getFloor();
-  }, [currentZoom, currentCenter]);
 
   const map = (
     <Map
       key={minimumZoom}
       center={props.position.c}
       zoom={props.position.z}
-      //minZoom={minimumZoom}
       id="campus-map"
       ref={mapRef}
-      onzoomend={() =>
-        setCurrentZoom(mapRef.current?.leafletElement.getZoom() || -1)
-      }
       zoomSnap={0.5}
       zoomDelta={0.5}
-      onViewportChange={() =>
-        setCurrentCenter(
-          L.latLng([
-            mapRef.current?.leafletElement.getCenter().lat || 0,
-            mapRef.current?.leafletElement.getCenter().lng || 0,
-          ])
+      onViewportChanged={() =>
+        !isDisplaying
+          ? getFloor(
+              mapRef.current?.leafletElement.getCenter() || L.latLng([0, 0])
+            )
+          : checkFloor(
+              mapRef.current?.leafletElement.getCenter() || L.latLng([0, 0]),
+              mapRef.current?.leafletElement.getZoom() || 0
+            )
+      }
+      onzoomlevelschange={() =>
+        isDisplaying &&
+        checkFloor(
+          mapRef.current?.leafletElement.getCenter() || L.latLng([0, 0]),
+          mapRef.current?.leafletElement.getZoom() || 0
         )
       }
     >

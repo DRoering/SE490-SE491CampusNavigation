@@ -9,7 +9,7 @@ import {
 } from "../../components";
 import L from "leaflet";
 import { Item, ItemOptions } from "../../Reuseable";
-import { BuildingFloor } from "../../DataProviders";
+import { BuildingFloor, Search } from "../../DataProviders";
 
 interface CampusMapProps {
   buildings: Item[];
@@ -23,7 +23,10 @@ interface CampusMapProps {
   floors: BuildingFloor[];
 }
 
+const { searchItems } = Search;
+
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
+  const [searchText, setSearchText] = useState("");
   const [showItems, setShowItems] = useState({
     buildings: true,
     events: false,
@@ -45,14 +48,39 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
 
   return (
     <IonPage>
-      <HeaderBar displayButton={false} displaySearch={false} />
+      <HeaderBar
+        displayButton={false}
+        displaySearch
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       <IonContent>
         <PinFilter setShowItems={setShowItems} />
         <MapContent
-          buildings={showItems.buildings && props.buildings}
-          events={showItems.events && props.events}
-          parkingLots={showItems.parking && props.parkingLots}
-          organizations={showItems.organization && props.organizations}
+          buildings={
+            showItems.buildings &&
+            (searchText === ""
+              ? props.buildings
+              : searchItems(props.buildings, searchText))
+          }
+          events={
+            showItems.events &&
+            (searchText === ""
+              ? props.events
+              : searchItems(props.events, searchText))
+          }
+          parkingLots={
+            showItems.parking &&
+            (searchText === ""
+              ? props.parkingLots
+              : searchItems(props.parkingLots, searchText))
+          }
+          organizations={
+            showItems.organization &&
+            (searchText === ""
+              ? props.organizations
+              : searchItems(props.organizations, searchText))
+          }
           showName={props.showName}
           position={props.position}
           openDetails={openDetails}

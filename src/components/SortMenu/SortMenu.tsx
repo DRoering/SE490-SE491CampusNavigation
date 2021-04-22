@@ -13,6 +13,7 @@ import {
 } from "@ionic/react";
 import { ItemFilterOptions } from "../../DataProviders";
 import { HeaderBar } from "..";
+import "./SortMenu.scss";
 
 interface SortMenuProps {
   sortOptions: string[];
@@ -26,7 +27,7 @@ interface SortMenuProps {
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
   return (
     <>
-      <IonMenu class="sort-menu" side="start" contentId="options-menu">
+      <IonMenu side="start" class="sort-menu" contentId="options-menu">
         <IonContent id="content">
           <HeaderBar displayButton={false} displaySearch={false} />
           <IonList>

@@ -67,28 +67,8 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
     setCurrentItem(i);
   };
 
-  return (
-    <IonPage>
-      <SortMenu
-        sortOptions={sortOptions}
-        currentSort={sort}
-        updateSort={updateSort}
-        filterByOpen={
-          currentItem.includes(itemOptions[0]) ? filterByOpen : undefined
-        }
-        filterByCategory={
-          currentItem.includes(itemOptions[3]) ? setCategoryFilter : undefined
-        }
-        filterByLot={
-          currentItem.includes(itemOptions[2]) ? setLotFilter : undefined
-        }
-      />
-      <HeaderBar
-        displayButton
-        displaySearch
-        searchText={searchText}
-        setSearchText={setSearchText}
-      />
+  const SegmentFilter = (
+    <>
       <IonItem lines="full" id="option-item" className="ion-no-padding">
         <IonSegment
           value={currentItem}
@@ -157,6 +137,32 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
           />
         )}
       </IonContent>
+    </>
+  );
+
+  return (
+    <IonPage>
+      <SortMenu
+        sortOptions={sortOptions}
+        currentSort={sort}
+        updateSort={updateSort}
+        filterByOpen={
+          currentItem.includes(itemOptions[0]) ? filterByOpen : undefined
+        }
+        filterByCategory={
+          currentItem.includes(itemOptions[3]) ? setCategoryFilter : undefined
+        }
+        filterByLot={
+          currentItem.includes(itemOptions[2]) ? setLotFilter : undefined
+        }
+      />
+      <HeaderBar
+        displayButton
+        displaySearch
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
+      {SegmentFilter}
       <IonModal
         isOpen={showModal}
         cssClass="item-modal"

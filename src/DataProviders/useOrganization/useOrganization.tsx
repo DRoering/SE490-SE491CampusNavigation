@@ -25,7 +25,13 @@ const getOrganizations = (setOrganizations: (e: Item[]) => void) => {
         const lon = record.fields.longitude;
 
         if (lat && lon) record.fields.coordinates = L.latLng([lat, lon]);
-        orgData.push(record.fields);
+        orgData.push({
+          ...record.fields,
+          isOrg: true,
+          isBuilding: false,
+          isEvent: false,
+          isParking: false,
+        });
       });
 
       orgData.sort((a: Item, b: Item) => {

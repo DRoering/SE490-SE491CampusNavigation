@@ -30,8 +30,13 @@ const getParkingLots = (setParkingLots: (l: Item[]) => void) => {
           if (a.id < b.id) return -1;
           return 1;
         });
-
-        rawItems.push(record.fields);
+        rawItems.push({
+          ...record.fields,
+          isOrg: false,
+          isBuilding: false,
+          isEvent: false,
+          isParking: true,
+        });
       });
 
       // console.log("Response: ", data);

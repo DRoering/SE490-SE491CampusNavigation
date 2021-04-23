@@ -73,7 +73,7 @@ export const ShareButton: React.FC<ShareButtonProps> = (
         fill={props.fill ? "solid" : "clear"}
         onClick={() => setShowActionSheet(true)}
       >
-        <IonIcon color="dark" id={props.iconId} icon={share}></IonIcon>
+        <IonIcon color="tertiary" id={props.iconId} icon={share}></IonIcon>
       </IonButton>
       <IonActionSheet
         isOpen={showActionSheet}

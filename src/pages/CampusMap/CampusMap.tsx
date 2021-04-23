@@ -61,7 +61,10 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         setSearchText={setSearchText}
       />
       <IonContent>
-        <PinFilter setShowItems={props.setShowItems} />
+        <PinFilter
+          current={props.showItems}
+          setShowItems={props.setShowItems}
+        />
         <MapContent
           buildings={
             props.showItems.buildings &&

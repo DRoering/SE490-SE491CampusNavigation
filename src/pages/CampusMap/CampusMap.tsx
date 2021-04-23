@@ -21,18 +21,24 @@ interface CampusMapProps {
   centerUser: (c: L.LatLng, z: number) => void;
   setBuilding: (b: Item) => void;
   floors: BuildingFloor[];
+  showItems: {
+    buildings: boolean;
+    events: boolean;
+    parking: boolean;
+    organization: boolean;
+  };
+  setShowItems: (i: {
+    buildings: boolean;
+    events: boolean;
+    parking: boolean;
+    organization: boolean;
+  }) => void;
 }
 
 const { searchItems } = Search;
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
   const [searchText, setSearchText] = useState("");
-  const [showItems, setShowItems] = useState({
-    buildings: true,
-    events: false,
-    parking: false,
-    organization: false,
-  });
   const [modalDetails, setModalDetails] = useState<{
     i: ItemOptions;
     open: boolean;
@@ -55,28 +61,31 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
         setSearchText={setSearchText}
       />
       <IonContent>
-        <PinFilter current={showItems} setShowItems={setShowItems} />
+        <PinFilter
+          current={props.showItems}
+          setShowItems={props.setShowItems}
+        />
         <MapContent
           buildings={
-            showItems.buildings &&
+            props.showItems.buildings &&
             (searchText === ""
               ? props.buildings
               : searchItems(props.buildings, searchText))
           }
           events={
-            showItems.events &&
+            props.showItems.events &&
             (searchText === ""
               ? props.events
               : searchItems(props.events, searchText))
           }
           parkingLots={
-            showItems.parking &&
+            props.showItems.parking &&
             (searchText === ""
               ? props.parkingLots
               : searchItems(props.parkingLots, searchText))
           }
           organizations={
-            showItems.organization &&
+            props.showItems.organization &&
             (searchText === ""
               ? props.organizations
               : searchItems(props.organizations, searchText))

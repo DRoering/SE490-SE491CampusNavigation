@@ -12,7 +12,7 @@ import {
   IonRow,
 } from "@ionic/react";
 import "./ParkingLotList.scss";
-import { Item } from "../../../Reuseable";
+import { Item, ItemOptions } from "../../../Reuseable";
 import { ItemListSkeleton, ShareButton } from "../../";
 
 interface ParkingLotProps {
@@ -20,6 +20,7 @@ interface ParkingLotProps {
   sortAlgorithm: SortType;
   filterAlgorithm?: FilterType;
   lotType?: string;
+  openDetails: (p: ItemOptions) => void;
 }
 
 const reFilter = (
@@ -55,7 +56,10 @@ export const ParkingLotList: React.FC<ParkingLotProps> = (
           <IonRow>
             {sortedLots.map((lot) => (
               <IonCol key={lot.id} size="4" sizeXs="6">
-                <IonCard class="card-background">
+                <IonCard
+                  class="card-background"
+                  onClick={() => props.openDetails({ p: lot })}
+                >
                   <IonCardContent>
                     <ShareButton
                       id="share-button"

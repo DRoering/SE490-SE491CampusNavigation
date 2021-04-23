@@ -18,10 +18,11 @@ export const ItemFilter = {
     },
   },
   EventFilters: {
-    Category: {
-      type: "Category",
+    Expired: {
+      type: "Expired",
       function: (i: Item): boolean => {
-        return i.category?.includes("student organization");
+        const currentDate = moment();
+        return i.startDate.isBefore(currentDate);
       },
     },
   },

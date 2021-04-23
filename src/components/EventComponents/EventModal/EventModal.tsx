@@ -15,6 +15,7 @@ import { Item } from "../../../Reuseable";
 interface EventModalProps {
   event: Item;
   closeAction: () => void;
+  viewItem?: (i: Item) => void;
 }
 
 export const EventModal: React.FC<EventModalProps> = (

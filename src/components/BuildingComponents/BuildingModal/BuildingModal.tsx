@@ -21,6 +21,7 @@ interface BuildingModalProps {
   building: Item;
   close: () => void;
   setPosition?: (c: L.LatLng, z?: number) => void;
+  viewItem?: (i: Item) => void;
 }
 
 const getFindFormula = (id: number) => `Find("${id}",Buildings)`;
@@ -86,12 +87,17 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
             alt={`${props.building.name}`}
           />
         </IonCard>
-        {props.setPosition && (
+        {props.viewItem && (
           <IonButton
             disabled={!props.building.coordinates}
             expand="block"
             color="secondary"
-            onClick={() => props.setPosition?.(props.building.coordinates)}
+            onClick={() => {
+              if (props.viewItem) {
+                props.close();
+                props.viewItem(props.building);
+              }
+            }}
           >
             View on Map
           </IonButton>

@@ -19,6 +19,7 @@ export const useBuildingFilter = (): [
   const getFilter = useMemo<FilterType>(() => {
     if (filter?.includes("Organizations"))
       return ItemFilter.OrganizationFilters.Category;
+    if (filter?.includes("Event")) return ItemFilter.EventFilters.Expired;
     return ItemFilter.BuildingFilters.Open;
   }, [filter]);
 

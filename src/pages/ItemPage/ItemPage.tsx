@@ -48,7 +48,8 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [openFilter, setOpenFilter] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]);
-  const [lotFilter, setLotFilter] = useState<string>("");
+  const [lotFilter, setLotFilter] = useState("");
+  const [eventFilter, setEventFilter] = useState(false);
 
   const filterByOpen = (f: boolean) => {
     setOpenFilter(f);
@@ -81,6 +82,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
         }
         filterByLot={
           currentItem.includes(itemOptions[2]) ? setLotFilter : undefined
+        }
+        filterByExpired={
+          currentItem.includes(itemOptions[1]) ? setEventFilter : undefined
         }
       />
       <HeaderBar
@@ -125,6 +129,9 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             }
             openDetails={openDetails}
             sortAlgorithm={useSort}
+            filterAlgorithm={
+              eventFilter ? ItemFilter.EventFilters.Expired : undefined
+            }
           />
         )}
         {currentItem.includes(itemOptions[2]) && (

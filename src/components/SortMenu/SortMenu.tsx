@@ -21,6 +21,7 @@ interface SortMenuProps {
   filterByOpen?: (a: boolean) => void;
   filterByCategory?: (c: string[]) => void;
   filterByLot?: (c: string) => void;
+  filterByExpired?: (e: boolean) => void;
 }
 
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
@@ -89,6 +90,18 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
                   <IonRadio value="Employee" />
                 </IonItem>
               </IonRadioGroup>
+            )}
+            {props.filterByExpired && (
+              <IonItem>
+                <IonLabel>View old events</IonLabel>
+                <IonToggle
+                  value="expired"
+                  onIonChange={(e) =>
+                    props.filterByExpired &&
+                    props.filterByExpired(e.detail.checked)
+                  }
+                />
+              </IonItem>
             )}
           </IonList>
         </IonContent>

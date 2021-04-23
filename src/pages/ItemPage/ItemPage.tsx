@@ -7,6 +7,11 @@ import {
   IonSegment,
   IonSegmentButton,
   IonItem,
+  IonFab,
+  IonFabButton,
+  IonFabList,
+  IonIcon,
+  isPlatform,
 } from "@ionic/react";
 import {
   BuildingList,
@@ -27,6 +32,13 @@ import {
 import { Item, ItemOptions } from "../../Reuseable";
 import "./ItemPage.scss";
 import { Search } from "../../DataProviders";
+import {
+  briefcase,
+  business,
+  calendar,
+  car,
+  chevronDown,
+} from "ionicons/icons";
 
 interface ItemPageProps {
   buildings: Item[];
@@ -37,7 +49,12 @@ interface ItemPageProps {
   setBuilding: (b: Item) => void;
 }
 
-const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
+const itemOptions = [
+  { id: 0, icon: business, type: "Buildings" },
+  { id: 1, icon: calendar, type: "Events" },
+  { id: 2, icon: car, type: "Parking" },
+  { id: 3, icon: briefcase, type: "Organizations" },
+];
 const sortOptions = ItemSortOptions.buildingOptions;
 const { searchItems } = Search;
 
@@ -75,14 +92,59 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
           onIonChange={(e) => updateItem(e.detail.value || "buildings")}
         >
           {itemOptions.map((item) => (
-            <IonSegmentButton key={item} value={item}>
-              <IonLabel>{item}</IonLabel>
+            <IonSegmentButton key={item.id} value={item.type}>
+              <IonLabel>{item.type}</IonLabel>
             </IonSegmentButton>
           ))}
         </IonSegment>
       </IonItem>
+    </>
+  );
+
+  const FABFilter = (
+    <>
+      <IonFab horizontal="end" vertical="top" slot="fixed">
+        <IonFabButton color="dark">
+          <IonIcon icon={chevronDown} />
+        </IonFabButton>
+        <IonFabList side="bottom">
+          {itemOptions.map((item) => (
+            <IonFabButton key={item.id} onClick={() => updateItem(item.type)}>
+              <IonIcon icon={item.icon} />
+            </IonFabButton>
+          ))}
+        </IonFabList>
+      </IonFab>
+    </>
+  );
+
+  return (
+    <IonPage>
+      <SortMenu
+        sortOptions={sortOptions}
+        currentSort={sort}
+        updateSort={updateSort}
+        filterByOpen={
+          currentItem.includes(itemOptions[0].type) ? filterByOpen : undefined
+        }
+        filterByCategory={
+          currentItem.includes(itemOptions[3].type)
+            ? setCategoryFilter
+            : undefined
+        }
+        filterByLot={
+          currentItem.includes(itemOptions[2].type) ? setLotFilter : undefined
+        }
+      />
+      <HeaderBar
+        displayButton
+        displaySearch
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       <IonContent>
-        {currentItem.includes(itemOptions[0]) && (
+        {isPlatform("android") ? FABFilter : SegmentFilter}
+        {currentItem.includes(itemOptions[0].type) && (
           <BuildingList
             buildings={
               searchText === ""
@@ -96,7 +158,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             }
           />
         )}
-        {currentItem.includes(itemOptions[1]) && (
+        {currentItem.includes(itemOptions[1].type) && (
           <EventList
             events={
               searchText === ""
@@ -107,7 +169,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             sortAlgorithm={useSort}
           />
         )}
-        {currentItem.includes(itemOptions[2]) && (
+        {currentItem.includes(itemOptions[2].type) && (
           <ParkingLotList
             parkingLots={
               searchText === ""
@@ -119,7 +181,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             lotType={lotFilter}
           />
         )}
-        {currentItem.includes(itemOptions[3]) && (
+        {currentItem.includes(itemOptions[3].type) && (
           <OrganizationList
             organizations={
               searchText === ""
@@ -137,32 +199,6 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
           />
         )}
       </IonContent>
-    </>
-  );
-
-  return (
-    <IonPage>
-      <SortMenu
-        sortOptions={sortOptions}
-        currentSort={sort}
-        updateSort={updateSort}
-        filterByOpen={
-          currentItem.includes(itemOptions[0]) ? filterByOpen : undefined
-        }
-        filterByCategory={
-          currentItem.includes(itemOptions[3]) ? setCategoryFilter : undefined
-        }
-        filterByLot={
-          currentItem.includes(itemOptions[2]) ? setLotFilter : undefined
-        }
-      />
-      <HeaderBar
-        displayButton
-        displaySearch
-        searchText={searchText}
-        setSearchText={setSearchText}
-      />
-      {SegmentFilter}
       <IonModal
         isOpen={showModal}
         cssClass="item-modal"

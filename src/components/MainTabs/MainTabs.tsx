@@ -49,6 +49,12 @@ export const MainTabs: React.FC = () => {
   const [coords, setCoords] = useState(defaultCoordsZoom);
   const [item, setItem] = useState<Item>(buildings[0]);
   const history = useHistory();
+  const [showItems, setShowItems] = useState({
+    buildings: true,
+    events: false,
+    parking: false,
+    organization: false,
+  });
 
   const toggleName = () => {
     console.log("resetName called");
@@ -60,9 +66,19 @@ export const MainTabs: React.FC = () => {
 
   const setPosition = (c: L.LatLng, r?: number) => {
     if (c === coords.c)
-      setCoords({ c: L.latLng([c.lat + 0.0001, c.lng]), z: r || 16 });
-    else setCoords({ c: c, z: r || 16 });
+      setCoords({ c: L.latLng([c.lat + 0.0001, c.lng]), z: r || 17 });
+    else setCoords({ c: c, z: r || 17 });
     history.push("/Map");
+  };
+
+  const viewItem = (i: Item) => {
+    setPosition(i.coordinates);
+    setShowItems({
+      buildings: i.isBuilding,
+      events: i.isEvent,
+      parking: i.isParking,
+      organization: i.isOrg,
+    });
   };
 
   useEffect(() => {
@@ -87,6 +103,8 @@ export const MainTabs: React.FC = () => {
               centerUser={setPosition}
               setBuilding={setItem}
               floors={floors}
+              showItems={showItems}
+              setShowItems={setShowItems}
             />
           )}
           exact
@@ -101,6 +119,7 @@ export const MainTabs: React.FC = () => {
               organizations={organizations}
               setPosition={setPosition}
               setBuilding={setItem}
+              viewItem={viewItem}
             />
           )}
           exact

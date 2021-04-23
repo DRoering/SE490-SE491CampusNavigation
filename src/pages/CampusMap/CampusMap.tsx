@@ -21,15 +21,21 @@ interface CampusMapProps {
   centerUser: (c: L.LatLng, z: number) => void;
   setBuilding: (b: Item) => void;
   floors: BuildingFloor[];
+  showItems: {
+    buildings: boolean;
+    events: boolean;
+    parking: boolean;
+    organization: boolean;
+  };
+  setShowItems: (i: {
+    buildings: boolean;
+    events: boolean;
+    parking: boolean;
+    organization: boolean;
+  }) => void;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
-  const [showItems, setShowItems] = useState({
-    buildings: true,
-    events: false,
-    parking: false,
-    organization: false,
-  });
   const [modalDetails, setModalDetails] = useState<{
     i: ItemOptions;
     open: boolean;
@@ -47,12 +53,12 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
     <IonPage>
       <HeaderBar displayButton={false} displaySearch={false} />
       <IonContent>
-        <PinFilter setShowItems={setShowItems} />
+        <PinFilter setShowItems={props.setShowItems} />
         <MapContent
-          buildings={showItems.buildings && props.buildings}
-          events={showItems.events && props.events}
-          parkingLots={showItems.parking && props.parkingLots}
-          organizations={showItems.organization && props.organizations}
+          buildings={props.showItems.buildings && props.buildings}
+          events={props.showItems.events && props.events}
+          parkingLots={props.showItems.parking && props.parkingLots}
+          organizations={props.showItems.organization && props.organizations}
           showName={props.showName}
           position={props.position}
           openDetails={openDetails}

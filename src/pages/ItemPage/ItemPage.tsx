@@ -17,6 +17,7 @@ import {
   OrganizationList,
   OrganizationModal,
   ParkingLotList,
+  ParkingLotModal,
   SortMenu,
 } from "../../components";
 import {
@@ -35,6 +36,7 @@ interface ItemPageProps {
   organizations: Item[];
   setPosition: (c: L.LatLng, z?: number) => void;
   setBuilding: (b: Item) => void;
+  viewItem: (i: Item) => void;
 }
 
 const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
@@ -137,6 +139,7 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
             sortAlgorithm={useSort}
             filterAlgorithm={lotFilter ? ItemFilter.LotFilters.Type : undefined}
             lotType={lotFilter}
+            openDetails={openDetails}
           />
         )}
         {currentItem.includes(itemOptions[3]) && (
@@ -171,12 +174,25 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
               z ? props.setPosition(c, z) : props.setPosition(c);
               setShowModal(false);
             }}
+            viewItem={props.viewItem}
+          />
+        )}
+        {modalDetails?.p && (
+          <ParkingLotModal
+            parkingLot={modalDetails.p}
+            closeAction={() => setShowModal(false)}
+            setPosition={(c: L.LatLng, z?: number) => {
+              z ? props.setPosition(c, z) : props.setPosition(c);
+              setShowModal(false);
+            }}
+            viewItem={props.viewItem}
           />
         )}
         {modalDetails?.e && (
           <EventModal
             event={modalDetails.e}
             closeAction={() => setShowModal(false)}
+            viewItem={props.viewItem}
           />
         )}
         {modalDetails?.o && (

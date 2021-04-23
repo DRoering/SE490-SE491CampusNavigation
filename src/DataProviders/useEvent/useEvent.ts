@@ -31,7 +31,13 @@ const getEvents = (setEvents: (e: Item[]) => void) => {
         record.fields.endDate = moment(eD);
         record.fields.hours = { open: moment(sD), close: moment(eD) };
 
-        eventData.push(record.fields);
+        eventData.push({
+          ...record.fields,
+          isOrg: false,
+          isBuilding: false,
+          isEvent: true,
+          isParking: false,
+        });
       });
 
       eventData.sort((a: Item, b: Item) => {

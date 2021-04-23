@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IonMenu,
   IonLabel,
@@ -13,6 +13,7 @@ import {
 } from "@ionic/react";
 import { ItemFilterOptions } from "../../DataProviders";
 import { HeaderBar } from "..";
+import "./SortMenu.scss";
 
 interface SortMenuProps {
   sortOptions: string[];
@@ -25,9 +26,11 @@ interface SortMenuProps {
 }
 
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
   return (
     <>
-      <IonMenu class="sort-menu" side="start" contentId="options-menu">
+      <IonMenu side="start" class="sort-menu" contentId="options-menu">
         <IonContent id="content">
           <HeaderBar displayButton={false} displaySearch={false} />
           <IonList>
@@ -46,10 +49,12 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
               <IonItem>
                 <IonLabel>Open</IonLabel>
                 <IonToggle
+                  checked={isOpen}
                   value="open"
-                  onIonChange={(e) =>
-                    props.filterByOpen && props.filterByOpen(e.detail.checked)
-                  }
+                  onIonChange={(e) => {
+                    setIsOpen(e.detail.checked);
+                    props.filterByOpen && props.filterByOpen(e.detail.checked);
+                  }}
                 />
               </IonItem>
             )}
@@ -96,10 +101,12 @@ export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => {
                 <IonLabel>View old events</IonLabel>
                 <IonToggle
                   value="expired"
-                  onIonChange={(e) =>
+                  checked={isExpired}
+                  onIonChange={(e) => {
+                    setIsExpired(e.detail.checked);
                     props.filterByExpired &&
-                    props.filterByExpired(e.detail.checked)
-                  }
+                      props.filterByExpired(e.detail.checked);
+                  }}
                 />
               </IonItem>
             )}

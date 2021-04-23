@@ -9,7 +9,7 @@ import {
 } from "../../components";
 import L from "leaflet";
 import { Item, ItemOptions } from "../../Reuseable";
-import { BuildingFloor } from "../../DataProviders";
+import { BuildingFloor, Search } from "../../DataProviders";
 
 interface CampusMapProps {
   buildings: Item[];
@@ -35,7 +35,10 @@ interface CampusMapProps {
   }) => void;
 }
 
+const { searchItems } = Search;
+
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
+  const [searchText, setSearchText] = useState("");
   const [modalDetails, setModalDetails] = useState<{
     i: ItemOptions;
     open: boolean;
@@ -51,14 +54,39 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
 
   return (
     <IonPage>
-      <HeaderBar displayButton={false} displaySearch={false} />
+      <HeaderBar
+        displayButton={false}
+        displaySearch
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       <IonContent>
         <PinFilter setShowItems={props.setShowItems} />
         <MapContent
-          buildings={props.showItems.buildings && props.buildings}
-          events={props.showItems.events && props.events}
-          parkingLots={props.showItems.parking && props.parkingLots}
-          organizations={props.showItems.organization && props.organizations}
+          buildings={
+            props.showItems.buildings &&
+            (searchText === ""
+              ? props.buildings
+              : searchItems(props.buildings, searchText))
+          }
+          events={
+            props.showItems.events &&
+            (searchText === ""
+              ? props.events
+              : searchItems(props.events, searchText))
+          }
+          parkingLots={
+            props.showItems.parking &&
+            (searchText === ""
+              ? props.parkingLots
+              : searchItems(props.parkingLots, searchText))
+          }
+          organizations={
+            props.showItems.organization &&
+            (searchText === ""
+              ? props.organizations
+              : searchItems(props.organizations, searchText))
+          }
           showName={props.showName}
           position={props.position}
           openDetails={openDetails}

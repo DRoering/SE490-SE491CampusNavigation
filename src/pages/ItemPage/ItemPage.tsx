@@ -41,6 +41,7 @@ interface ItemPageProps {
 
 const itemOptions = ["Buildings", "Events", "Parking", "Organizations"];
 const sortOptions = ItemSortOptions.buildingOptions;
+const { searchItems } = Search;
 
 export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
   const [currentItem, setCurrentItem] = useState("Buildings");
@@ -64,7 +65,6 @@ export const ItemPage: React.FC<ItemPageProps> = (props: ItemPageProps) => {
     setShowModal(true);
   };
 
-  const { searchItems } = Search;
   const updateItem = (i: string) => {
     setCurrentItem(i);
   };

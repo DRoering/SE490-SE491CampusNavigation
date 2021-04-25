@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import "./ParkingLotPin.scss";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";

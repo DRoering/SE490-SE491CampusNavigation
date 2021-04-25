@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { IonLabel } from "@ionic/react";
-import "./OrganizationPin.scss";
 import { Item } from "../../../Reuseable";
 import { NavigationButton } from "../..";
 

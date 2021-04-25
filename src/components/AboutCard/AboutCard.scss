@@ -1,21 +1,15 @@
-@media (prefers-color-scheme: dark) {
-  .card-title{
-     background:  rgb(43, 42, 42);
-     color: white;
-  }
-
-  .app-fonts{
-    background:  rgb(43, 42, 42);
-    color: white;
-  }
-
-  .information-card{
-    background-color:  rgb(43, 42, 42) !important;
-    color: white;
-  }
-
-}
-
 .information-card{
   box-shadow: black 2px 3px 7px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card-title {
+    background:  rgb(43, 42, 42);
+    font-size: large;
+    color: white;
+  }
+
+  .about-info {
+    color: white;
+  }
 }

@@ -26,54 +26,30 @@ ion-textarea{
 
 @media (prefers-color-scheme: dark) {
 
-  ion-card-title.card-title.ion-inherit-color.ios.hydrated {
-    background-color: rgb(43, 42, 42);
-    color: white;
-}
-
+  ion-card-title {
+    background-color: rgb(43, 42, 42);   
+  }
 
   ion-card{
     background: rgb(43, 42, 42);
-    color: white;
     box-shadow: rgb(92, 91, 91) 0px 1px 5px;
   }
 
   #toggle-closed {
     display: none;
-    color: white;
     background: rgb(43, 42, 42);
   }
   
   #toggle-open {
-    display: block;
-    color: white;
+    display: block;  
     background: rgb(43, 42, 42);
   }
   
-  #about-title {
-    text-align: left;
-    background: rgb(43, 42, 42);
-    color: white;
-  }
-
-  ion-item{
-    font-size: large;
-    background: rgb(43, 42, 42);
-    color: white;
-  }
   
   ion-item-divider{
     padding-left: 5pt;
     padding-right: 5pt;
     background: rgb(43, 42, 42);
     color: white;
-  }
-  
-  ion-textarea{
-    padding-left: 5pt;
-    padding-right: 5pt;
-    background: rgb(43, 42, 42);
-    color: white;
-  }
-    
+  } 
 }

@@ -10,8 +10,8 @@ import { closeCircle } from "ionicons/icons";
 import "./ModalHeader.scss";
 
 interface ModalHeaderProps {
-  title?: string;
   close: () => void;
+  title?: string;
 }
 
 export const ModalHeader: React.FC<ModalHeaderProps> = (

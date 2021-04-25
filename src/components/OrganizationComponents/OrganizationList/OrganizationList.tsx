@@ -13,11 +13,11 @@ import { Item, ItemOptions } from "../../../Reuseable";
 import { ItemListSkeleton, ShareButton } from "../..";
 
 interface OrganizationListProps {
+  categoryFilter: string[];
+  filterAlgorithm?: FilterType;
   organizations: Item[];
   openDetails: (o: ItemOptions) => void;
   sortAlgorithm: SortType;
-  categoryFilter: string[];
-  filterAlgorithm?: FilterType;
 }
 
 const reFilter = (

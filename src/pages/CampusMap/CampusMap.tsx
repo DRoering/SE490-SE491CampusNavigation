@@ -9,30 +9,40 @@ import {
 } from "../../components";
 import L from "leaflet";
 import { Item, ItemOptions } from "../../Reuseable";
+import { BuildingFloor, Search } from "../../DataProviders";
 
 interface CampusMapProps {
   buildings: Item[];
-  showName: boolean;
-  parkingLots: Item[];
-  events: Item[];
-  organizations: Item[];
-  position: { c: L.LatLng; z: number };
   centerUser: (c: L.LatLng, z: number) => void;
+  events: Item[];
+  floors: BuildingFloor[];
+  organizations: Item[];
+  parkingLots: Item[];
+  position: { c: L.LatLng; z: number };
   setBuilding: (b: Item) => void;
+  showItems: {
+    buildings: boolean;
+    events: boolean;
+    parking: boolean;
+    organization: boolean;
+  };
+  showName: boolean;
+  setShowItems: (i: {
+    buildings: boolean;
+    events: boolean;
+    parking: boolean;
+    organization: boolean;
+  }) => void;
 }
 
+const { searchItems } = Search;
+
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
-  const [showItems, setShowItems] = useState({
-    buildings: true,
-    events: false,
-    parking: false,
-    organization: false,
-  });
+  const [searchText, setSearchText] = useState("");
   const [modalDetails, setModalDetails] = useState<{
     i: ItemOptions;
     open: boolean;
   }>({ i: {}, open: false });
-
   const openDetails = (i: ItemOptions) => {
     if (i.b) props.setBuilding(i.b);
     setModalDetails({ i: i, open: true });
@@ -44,17 +54,46 @@ export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {
 
   return (
     <IonPage>
-      <HeaderBar displayButton={false} displaySearch={false} />
+      <HeaderBar
+        displayButton={false}
+        displaySearch
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       <IonContent>
-        <PinFilter setShowItems={setShowItems} />
+        <PinFilter
+          current={props.showItems}
+          setShowItems={props.setShowItems}
+        />
         <MapContent
-          buildings={showItems.buildings && props.buildings}
-          events={showItems.events && props.events}
-          parkingLots={showItems.parking && props.parkingLots}
-          organizations={showItems.organization && props.organizations}
+          buildings={
+            props.showItems.buildings &&
+            (searchText === ""
+              ? props.buildings
+              : searchItems(props.buildings, searchText))
+          }
+          events={
+            props.showItems.events &&
+            (searchText === ""
+              ? props.events
+              : searchItems(props.events, searchText))
+          }
+          parkingLots={
+            props.showItems.parking &&
+            (searchText === ""
+              ? props.parkingLots
+              : searchItems(props.parkingLots, searchText))
+          }
+          organizations={
+            props.showItems.organization &&
+            (searchText === ""
+              ? props.organizations
+              : searchItems(props.organizations, searchText))
+          }
           showName={props.showName}
           position={props.position}
           openDetails={openDetails}
+          floors={props.floors}
         />
       </IonContent>
       {modalDetails && (

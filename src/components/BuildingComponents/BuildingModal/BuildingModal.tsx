@@ -12,14 +12,15 @@ import {
   IonSkeletonText,
 } from "@ionic/react";
 import { useServices } from "../../../DataProviders";
-import { ModalHeader } from "../../";
+import { ModalHeader, NavigationButton } from "../../";
 import "./BuildingModal.scss";
 import { Item } from "../../../Reuseable";
 
 interface BuildingModalProps {
   building: Item;
   close: () => void;
-  setPosition?: (c: L.LatLng) => void;
+  setPosition?: (c: L.LatLng, z?: number) => void;
+  viewItem?: (i: Item) => void;
 }
 
 const getFindFormula = (id: number) => `Find("${id}",Buildings)`;
@@ -43,9 +44,9 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
   };
 
   useEffect(() => {
-    if (services.length === results) setIsLoading(false);
-    else if (!isMaxResults) setIsLoading(true);
-  }, [services, results]);
+    if (!isMaxResults) setIsLoading(true);
+    else setIsLoading(false);
+  }, [services, results, isMaxResults]);
 
   const ServiceSkeletons = () => {
     const numberOfSkellys = [0, 1, 2, 3, 4];
@@ -85,37 +86,32 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
             alt={`${props.building.name}`}
           />
         </IonCard>
-        {props.setPosition && (
+        {props.viewItem && (
           <IonButton
             disabled={!props.building.coordinates}
             expand="block"
             color="secondary"
-            onClick={() => props.setPosition?.(props.building.coordinates)}
+            onClick={() => {
+              if (props.viewItem) {
+                props.close();
+                props.viewItem(props.building);
+              }
+            }}
           >
             View on Map
           </IonButton>
         )}
-        <IonButton
-          expand="block"
-          onClick={() =>
-            console.log(
-              "Navigate to : " +
-                props.building.name +
-                " " +
-                props.building.coordinates
-            )
-          }
-        >
-          <IonLabel>Navigate Here</IonLabel>
-        </IonButton>
-        <IonButton
-          color="tertiary"
-          expand="block"
-          routerLink="/FloorView"
-          onClick={props.close}
-        >
-          <IonLabel>Interior View</IonLabel>
-        </IonButton>
+        <NavigationButton navigationItem={props.building} isPin={false} />
+        {props.building.hasFloors && (
+          <IonButton
+            color="tertiary"
+            expand="block"
+            //routerLink="/FloorView"
+            onClick={() => props.setPosition?.(props.building.coordinates, 18)}
+          >
+            <IonLabel>Interior View</IonLabel>
+          </IonButton>
+        )}
         <IonList>
           <IonItemDivider className="app-fonts" id="item-info">
             <IonLabel id="title">Description</IonLabel>

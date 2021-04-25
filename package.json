@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.0",
     "@ionic-native/core": "^5.29.0",
     "@ionic-native/geolocation": "^5.30.0",
@@ -17,10 +16,6 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.0.3",
     "axios": "^0.21.1",
-    "cordova-plugin-actionsheet": "^2.3.3",
-    "cordova-plugin-advanced-http": "^3.1.0",
-    "cordova-plugin-dialogs": "^2.0.2",
-    "cordova-plugin-file": "^6.0.2",
     "emailjs-com": "^2.6.4",
     "ionicons": "^5.0.0",
     "leaflet": "1.6.0",

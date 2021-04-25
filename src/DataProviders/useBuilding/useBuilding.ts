@@ -71,7 +71,6 @@ export const useBuilding = (): Item[] => {
 
   useEffect(() => {
     getBuildings(setBuildings);
-
     console.log("useBuilding effect called");
   }, []);
 

@@ -21,6 +21,8 @@ import {
   useParkingLot,
   useEvent,
   useOrganization,
+  useFloorOverlay,
+  BuildingFloor,
 } from "../../DataProviders";
 import L from "leaflet";
 import { Item } from "../../Reuseable";
@@ -30,7 +32,15 @@ const defaultCoordsZoom = {
   z: 16,
 };
 
+const matchFloors = (building: string, floors: BuildingFloor[]) => {
+  floors.forEach((floor) => {
+    if (building.includes(floor.name)) return floor;
+  });
+  return floors[0];
+};
+
 export const MainTabs: React.FC = () => {
+  const floors = useFloorOverlay();
   const buildings = useBuilding();
   const parkingLots = useParkingLot();
   const events = useEvent();
@@ -39,6 +49,12 @@ export const MainTabs: React.FC = () => {
   const [coords, setCoords] = useState(defaultCoordsZoom);
   const [item, setItem] = useState<Item>(buildings[0]);
   const history = useHistory();
+  const [showItems, setShowItems] = useState({
+    buildings: true,
+    events: false,
+    parking: false,
+    organization: false,
+  });
 
   const toggleName = () => {
     console.log("resetName called");
@@ -50,9 +66,19 @@ export const MainTabs: React.FC = () => {
 
   const setPosition = (c: L.LatLng, r?: number) => {
     if (c === coords.c)
-      setCoords({ c: L.latLng([c.lat + 0.0001, c.lng]), z: 20 });
-    else setCoords({ c: c, z: 20 });
+      setCoords({ c: L.latLng([c.lat + 0.0001, c.lng]), z: r || 17 });
+    else setCoords({ c: c, z: r || 17 });
     history.push("/Map");
+  };
+
+  const viewItem = (i: Item) => {
+    setPosition(i.coordinates);
+    setShowItems({
+      buildings: i.isBuilding,
+      events: i.isEvent,
+      parking: i.isParking,
+      organization: i.isOrg,
+    });
   };
 
   useEffect(() => {
@@ -76,6 +102,9 @@ export const MainTabs: React.FC = () => {
               position={coords}
               centerUser={setPosition}
               setBuilding={setItem}
+              floors={floors}
+              showItems={showItems}
+              setShowItems={setShowItems}
             />
           )}
           exact
@@ -90,6 +119,7 @@ export const MainTabs: React.FC = () => {
               organizations={organizations}
               setPosition={setPosition}
               setBuilding={setItem}
+              viewItem={viewItem}
             />
           )}
           exact
@@ -101,7 +131,12 @@ export const MainTabs: React.FC = () => {
         />
         <Route
           path="/FloorView"
-          render={() => <FloorView building={item} />}
+          render={() => (
+            <FloorView
+              building={item}
+              floors={matchFloors(item.name, floors)}
+            />
+          )}
           exact
         />
         <Route path="/Feedback" render={() => <FeedbackPage />} exact={true} />

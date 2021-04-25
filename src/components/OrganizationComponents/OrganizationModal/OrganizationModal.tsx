@@ -8,12 +8,12 @@ import {
   IonList,
 } from "@ionic/react";
 import React from "react";
-import { ModalHeader } from "../..";
+import { ModalHeader, NavigationButton } from "../..";
 import { Item } from "../../../Reuseable";
 
 interface OrganizationModalProps {
-  organization: Item;
   close: () => void;
+  organization: Item;
 }
 
 export const OrganizationModal: React.FC<OrganizationModalProps> = (
@@ -55,13 +55,14 @@ export const OrganizationModal: React.FC<OrganizationModalProps> = (
         >
           <IonLabel>Organization Website</IonLabel>
         </IonButton>
+        <NavigationButton navigationItem={props.organization} isPin={false} />
         <IonList>
           <IonItemDivider className="app-fonts" id="item-info">
             <IonLabel id="title">Description</IonLabel>
           </IonItemDivider>
           <IonItem className="app-fonts" id="item-info" lines="full">
             <IonLabel className="ion-text-wrap">
-              {props.organization.description}
+              {props.organization.description || "Unavailable"}
             </IonLabel>
           </IonItem>
           <IonItemDivider className="app-fonts" id="item-info">
@@ -69,7 +70,7 @@ export const OrganizationModal: React.FC<OrganizationModalProps> = (
           </IonItemDivider>
           <IonItem className="app-fonts" id="item-info" lines="full">
             <IonLabel className="ion-text-wrap">
-              {props.organization.president}
+              {props.organization.president || "Unavailable"}
             </IonLabel>
           </IonItem>
           <IonItemDivider className="app-fonts" id="item-info">
@@ -77,7 +78,7 @@ export const OrganizationModal: React.FC<OrganizationModalProps> = (
           </IonItemDivider>
           <IonItem className="app-fonts" id="item-info" lines="full">
             <IonLabel className="ion-text-wrap">
-              {props.organization.advisor}
+              {props.organization.advisor || "Unavailable"}
             </IonLabel>
           </IonItem>
           <IonItemDivider className="app-fonts" id="item-info">
@@ -85,7 +86,7 @@ export const OrganizationModal: React.FC<OrganizationModalProps> = (
           </IonItemDivider>
           <IonItem className="app-fonts" id="item-info" lines="full">
             <IonLabel className="ion-text-wrap">
-              {props.organization.communication || "Communication Unknown"}
+              {props.organization.communication || "Unavailable"}
             </IonLabel>
           </IonItem>
           <IonItemDivider className="app-fonts" id="item-info">
@@ -93,7 +94,11 @@ export const OrganizationModal: React.FC<OrganizationModalProps> = (
           </IonItemDivider>
           <IonItem className="app-fonts" id="item-info" lines="full">
             <IonLabel className="ion-text-wrap">
-              {props.organization.location}
+              {props.organization.building
+                ? `${props.organization.building} ${
+                    props.organization.room || ""
+                  }`
+                : "Unavailable"}
             </IonLabel>
           </IonItem>
         </IonList>

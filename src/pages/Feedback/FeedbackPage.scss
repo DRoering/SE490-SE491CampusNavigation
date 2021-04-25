@@ -1,15 +1,19 @@
-.feedbackButton{
+.feedback-button{
   padding-top: 10px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-.feedbackLabel{
+.feedback-label{
   font-size: large;
 }
 
-.feedbackText{
+.feedback-text{
   font-size: large;
+}
+
+#input-label {
+  z-index: 1000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,22 +21,20 @@
     color: white;
   }
 
-  .feedbackButton{
+  .feedback-button{
     padding-top: 10px;
     padding-left: 5px;
     padding-right: 5px;
     color: white;
   }
   
-  .feedbackLabel{
+  .feedback-label{
     font-size: large;
     color: white;
   }
   
-  .feedbackText{
+  .feedback-text{
     font-size: large;
-    background-color: rgb(43, 42, 42);
     color: white;
-    opacity: .25;
   }
 }

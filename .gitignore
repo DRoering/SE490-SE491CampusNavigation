@@ -10,8 +10,7 @@
 
 # production
 /build
-/android/**
-*.chunk.js.*
+/android
 
 # misc
 .DS_Store

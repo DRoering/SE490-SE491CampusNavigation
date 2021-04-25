@@ -9,37 +9,31 @@ import {
 } from "@ionic/react";
 import moment from "moment";
 import React from "react";
-import { SortType } from "../../../DataProviders";
+import { FilterType, SortType } from "../../../DataProviders";
 import { Item, ItemOptions } from "../../../Reuseable";
 import { ItemListSkeleton, ShareButton } from "../../";
 import "./EventList.scss";
 
 interface EventListProps {
   events: Item[];
+  filterAlgorithm?: FilterType;
   openDetails: (e: ItemOptions) => void;
   sortAlgorithm: SortType;
 }
 
 const currentDate = moment();
 
-console.log(currentDate);
+const newEvents = (i: Item) => i.startDate.isAfter(currentDate);
 
-const filterEvents = (e: Item[]) => {
-  const currentEvents: Item[] = [];
-
-  e.forEach((event) => {
-    if (!event.startDate.isBefore(currentDate)) currentEvents.push(event);
-  });
-
-  return currentEvents;
-};
+const filterEvents = (e: Item[], f: (i: Item) => boolean) => e.filter(f);
 
 const reSort = (events: Item[], sort: (a: Item, b: Item) => number) =>
   events.sort(sort);
 
 export const EventList: React.FC<EventListProps> = (props: EventListProps) => {
   const sortedEvents = filterEvents(
-    reSort(filterEvents(props.events), props.sortAlgorithm.function)
+    reSort(props.events, props.sortAlgorithm.function),
+    props.filterAlgorithm ? props.filterAlgorithm.function : newEvents
   );
 
   return (

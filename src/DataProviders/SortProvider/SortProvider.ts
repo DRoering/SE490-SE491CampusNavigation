@@ -2,8 +2,10 @@ import { useStorageItem } from "@ionic/react-hooks/storage";
 import { useCallback, useMemo } from "react";
 import { SortType, SortAlgorithms } from "./";
 
+const defaultSort = "Alpha";
+
 export const useBuildingSort = (): [string, (u?: string) => void, SortType] => {
-  const [sort, setSort] = useStorageItem("BuildingSort", "Alpha");
+  const [sort, setSort] = useStorageItem("BuildingSort", defaultSort);
   const updateSort = useCallback(
     (s) => {
       console.log("s: " + s);
@@ -20,7 +22,7 @@ export const useBuildingSort = (): [string, (u?: string) => void, SortType] => {
     return SortAlgorithms.Alphabetical;
   }, [sort]);
 
-  return [sort!, updateSort, useSort];
+  return [sort || defaultSort, updateSort, useSort];
 };
 
 export const useEventSort = (): [string, (u?: string) => void, SortType] => {
@@ -41,7 +43,7 @@ export const useEventSort = (): [string, (u?: string) => void, SortType] => {
     return SortAlgorithms.Alphabetical;
   }, [sort]);
 
-  return [sort!, updateSort, useSort];
+  return [sort || defaultSort, updateSort, useSort];
 };
 
 export const useLotSort = (): [string, (u?: string) => void, SortType] => {
@@ -62,7 +64,7 @@ export const useLotSort = (): [string, (u?: string) => void, SortType] => {
     return SortAlgorithms.Alphabetical;
   }, [sort]);
 
-  return [sort!, updateSort, useSort];
+  return [sort || defaultSort, updateSort, useSort];
 };
 
 export const useOrgSort = (): [string, (u?: string) => void, SortType] => {
@@ -83,5 +85,5 @@ export const useOrgSort = (): [string, (u?: string) => void, SortType] => {
     return SortAlgorithms.Alphabetical;
   }, [sort]);
 
-  return [sort!, updateSort, useSort];
+  return [sort || defaultSort, updateSort, useSort];
 };

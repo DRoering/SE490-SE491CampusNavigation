@@ -1,2 +1,2 @@
 export * from "./useFloorOverlay";
-export * from "./BuildingFloors";
+export * from "./BuildingFloor";

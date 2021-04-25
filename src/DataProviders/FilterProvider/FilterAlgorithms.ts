@@ -2,8 +2,8 @@ import moment from "moment";
 import { Item } from "../../Reuseable";
 
 export interface FilterType {
-  type: string;
   function: (o: Item, categories?: string[], type?: string) => boolean;
+  type: string;
 }
 
 export const ItemFilter = {
@@ -18,10 +18,11 @@ export const ItemFilter = {
     },
   },
   EventFilters: {
-    Category: {
-      type: "Category",
+    Expired: {
+      type: "Expired",
       function: (i: Item): boolean => {
-        return i.category?.includes("student organization");
+        const currentDate = moment();
+        return i.startDate.isBefore(currentDate);
       },
     },
   },

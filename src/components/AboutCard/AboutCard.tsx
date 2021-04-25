@@ -15,9 +15,9 @@ import React, { useRef, useState } from "react";
 import "./AboutCard.scss";
 
 interface AboutCardProps {
-  title: string;
-  information: string;
   imgUrl: string;
+  information: string;
+  title: string;
 }
 
 export const AboutCard: React.FC<AboutCardProps> = (props: AboutCardProps) => {
@@ -39,7 +39,7 @@ export const AboutCard: React.FC<AboutCardProps> = (props: AboutCardProps) => {
   };
 
   return (
-    <IonCard className="information-card" ref={cardRef}>
+    <IonCard ref={cardRef}>
       <img alt="Generic visual for the type of card" src={props.imgUrl} />
       <IonCardHeader>
         <IonRow>
@@ -63,7 +63,7 @@ export const AboutCard: React.FC<AboutCardProps> = (props: AboutCardProps) => {
         </IonRow>
       </IonCardHeader>
       <IonCardContent id={`toggle-${toggleOpen()}`}>
-        <IonText className="app-fonts">{props.information}</IonText>
+        <IonText className="app-fonts about-info">{props.information}</IonText>
       </IonCardContent>
     </IonCard>
   );

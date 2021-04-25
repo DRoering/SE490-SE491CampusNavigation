@@ -14,7 +14,7 @@ import {
   IonToast,
 } from "@ionic/react";
 import React, { useState } from "react";
-import { Emailer } from "../../DataProviders/Emailer";
+import { Emailer } from "../../DataProviders";
 import "./FeedbackPage.scss";
 import { useHistory } from "react-router-dom";
 
@@ -61,10 +61,12 @@ export const FeedbackPage: React.FC = () => {
       <IonContent>
         <IonItemDivider>Campus Navigation Feedback Form</IonItemDivider>
         <IonItem>
-          <IonLabel position="floating">Enter Name: </IonLabel>
+          <IonLabel id="input-label" position="floating">
+            Enter Name:{" "}
+          </IonLabel>
           <IonInput
             inputMode="text"
-            className="feedbackText"
+            className="feedback-text"
             value={name}
             required
             onIonChange={(e) => {
@@ -74,10 +76,12 @@ export const FeedbackPage: React.FC = () => {
           ></IonInput>
         </IonItem>
         <IonItem>
-          <IonLabel position="floating">Enter Email: </IonLabel>
+          <IonLabel id="input-label" position="floating">
+            Enter Email:{" "}
+          </IonLabel>
           <IonInput
             inputMode="email"
-            className="feedbackText"
+            className="feedback-text"
             value={email}
             required
             onIonChange={(e) => {
@@ -88,11 +92,13 @@ export const FeedbackPage: React.FC = () => {
           ></IonInput>
         </IonItem>
         <IonItem lines="none">
-          <IonLabel position="floating">Enter Your Message Below: </IonLabel>
+          <IonLabel id="input-label" position="floating">
+            Enter Your Message Below:
+          </IonLabel>
           <IonTextarea
             inputMode="text"
             maxlength={500}
-            className="feedbackText"
+            className="feedback-text"
             rows={7}
             value={message}
             autoGrow={true}
@@ -104,7 +110,7 @@ export const FeedbackPage: React.FC = () => {
         </IonItem>
         <IonButton
           onClick={isAllValid}
-          className="feedbackButton"
+          className="feedback-button"
           size="large"
           expand="block"
         >

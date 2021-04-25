@@ -8,9 +8,9 @@ import "./FloorOverlay.scss";
 
 interface FloorOverlayProps {
   buildingFloor: BuildingFloor;
-  currentZoom: number;
   center: L.LatLng;
   closePopup: () => void;
+  currentZoom: number;
 }
 
 export const FloorOverlay: React.FC<FloorOverlayProps> = (

@@ -30,10 +30,10 @@ import {
   ItemFilter,
   ItemSortOptions,
   useBuildingSort,
+  Search,
 } from "../../DataProviders";
 import { Item, ItemOptions } from "../../Reuseable";
 import "./ItemPage.scss";
-import { Search } from "../../DataProviders";
 import {
   briefcase,
   business,
@@ -45,10 +45,10 @@ import {
 interface ItemPageProps {
   buildings: Item[];
   events: Item[];
-  parking: Item[];
   organizations: Item[];
-  setPosition: (c: L.LatLng, z?: number) => void;
+  parking: Item[];
   setBuilding: (b: Item) => void;
+  setPosition: (c: L.LatLng, z?: number) => void;
   viewItem: (i: Item) => void;
 }
 

@@ -7,10 +7,10 @@ import { ShareProvider } from "../../DataProviders";
 
 interface ShareButtonProps {
   class: string;
-  id: string;
-  iconId: string;
   expand: boolean;
   fill: boolean;
+  id: string;
+  iconId: string;
   shareItem: Item;
 }
 

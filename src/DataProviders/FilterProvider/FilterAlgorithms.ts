@@ -2,8 +2,8 @@ import moment from "moment";
 import { Item } from "../../Reuseable";
 
 export interface FilterType {
-  type: string;
   function: (o: Item, categories?: string[], type?: string) => boolean;
+  type: string;
 }
 
 export const ItemFilter = {

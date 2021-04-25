@@ -3,14 +3,12 @@ import { Marker, Popup } from "react-leaflet";
 import { Item, ItemOptions } from "../../../Reuseable";
 import L from "leaflet";
 import { IonButton, IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
-import "./BuildingPin.scss";
-import { ShareButton } from "../../";
-import { NavigationButton } from "../../NavigationButton";
+import { ShareButton, NavigationButton } from "../../";
 
 interface BuildingPinProps {
   buildings: Item[];
-  showName: boolean;
   openDetails: (i: ItemOptions) => void;
+  showName: boolean;
 }
 
 const filterBuildings = (buildings: Item[]) => {

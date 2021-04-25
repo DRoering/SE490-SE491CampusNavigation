@@ -13,8 +13,8 @@ import "./EventModal.scss";
 import { Item } from "../../../Reuseable";
 
 interface EventModalProps {
-  event: Item;
   closeAction: () => void;
+  event: Item;
   viewItem?: (i: Item) => void;
 }
 

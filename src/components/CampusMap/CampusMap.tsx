@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./CampusMap.scss";
-import { BuildingPin, ParkingLotPin, EventPin } from "../";
-import { OrganizationPin } from "../OrganizationComponents/OrganizationPin";
+import { BuildingPin, ParkingLotPin, EventPin, OrganizationPin } from "../";
 import { FloorOverlay, UserLocation } from "./Components";
 import {
   IonAlert,
@@ -21,12 +20,12 @@ import { BuildingFloor, useUserPosition } from "../../DataProviders";
 interface CampusMapProps {
   buildings: Item[] | false;
   events: Item[] | false;
-  parkingLots: Item[] | false;
-  organizations: Item[] | false;
-  showName: boolean;
-  position: { c: L.LatLng; z: number };
-  openDetails: (i: ItemOptions) => void;
   floors: BuildingFloor[];
+  openDetails: (i: ItemOptions) => void;
+  organizations: Item[] | false;
+  parkingLots: Item[] | false;
+  position: { c: L.LatLng; z: number };
+  showName: boolean;
 }
 
 export const CampusMap: React.FC<CampusMapProps> = (props: CampusMapProps) => {

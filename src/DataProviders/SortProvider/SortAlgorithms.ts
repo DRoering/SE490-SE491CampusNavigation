@@ -2,8 +2,8 @@ import L from "leaflet";
 import { Item } from "../../Reuseable";
 
 export interface SortType {
-  type: string;
   function: (a: Item, b: Item) => number;
+  type: string;
 }
 
 export const SortAlgorithms = {

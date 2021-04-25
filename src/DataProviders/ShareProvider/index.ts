@@ -1,1 +1,1 @@
-export * from "./ShareProvider";
+export { ShareProvider } from "./ShareProvider";

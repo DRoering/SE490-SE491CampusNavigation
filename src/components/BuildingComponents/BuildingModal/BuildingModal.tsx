@@ -12,10 +12,9 @@ import {
   IonSkeletonText,
 } from "@ionic/react";
 import { useServices } from "../../../DataProviders";
-import { ModalHeader } from "../../";
+import { ModalHeader, NavigationButton } from "../../";
 import "./BuildingModal.scss";
 import { Item } from "../../../Reuseable";
-import { NavigationButton } from "../../NavigationButton";
 
 interface BuildingModalProps {
   building: Item;
@@ -45,9 +44,9 @@ export const BuildingModal: React.FC<BuildingModalProps> = (
   };
 
   useEffect(() => {
-    if (services.length === results) setIsLoading(false);
-    else if (!isMaxResults) setIsLoading(true);
-  }, [services, results]);
+    if (!isMaxResults) setIsLoading(true);
+    else setIsLoading(false);
+  }, [services, results, isMaxResults]);
 
   const ServiceSkeletons = () => {
     const numberOfSkellys = [0, 1, 2, 3, 4];

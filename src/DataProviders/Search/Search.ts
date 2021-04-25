@@ -1,9 +1,5 @@
 import { Item } from "../../Reuseable";
 
-export interface SearchBy {
-  items: Item[];
-}
-
 export const Search = {
   searchItems(e: Item[], criteria: string): Item[] {
     const searchedItems: Item[] = [];

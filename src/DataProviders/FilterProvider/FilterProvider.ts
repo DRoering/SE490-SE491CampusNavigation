@@ -2,11 +2,7 @@ import { useStorageItem } from "@ionic/react-hooks/storage";
 import { useCallback, useMemo } from "react";
 import { ItemFilter, FilterType } from "./";
 
-export const useBuildingFilter = (): [
-  string,
-  (u?: string) => void,
-  FilterType
-] => {
+export const useItemFilter = (): [string, (u?: string) => void, FilterType] => {
   const [filter, setFilter] = useStorageItem("Filter", "Buildings");
   const updateFilter = useCallback(
     (s) => {

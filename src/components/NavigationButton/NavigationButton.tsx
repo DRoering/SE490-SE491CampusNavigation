@@ -5,8 +5,8 @@ import { NavigatorProvider } from "../../DataProviders";
 import { navigateCircle } from "ionicons/icons";
 
 interface NavigationButtonProps {
-  navigationItem: Item;
   isPin: boolean;
+  navigationItem: Item;
 }
 
 export const NavigationButton: React.FC<NavigationButtonProps> = (

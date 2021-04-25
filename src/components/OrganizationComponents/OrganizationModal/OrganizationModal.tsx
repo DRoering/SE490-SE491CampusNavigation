@@ -12,8 +12,8 @@ import { ModalHeader, NavigationButton } from "../..";
 import { Item } from "../../../Reuseable";
 
 interface OrganizationModalProps {
-  organization: Item;
   close: () => void;
+  organization: Item;
 }
 
 export const OrganizationModal: React.FC<OrganizationModalProps> = (

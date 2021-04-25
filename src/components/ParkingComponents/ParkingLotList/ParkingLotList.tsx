@@ -16,11 +16,11 @@ import { Item, ItemOptions } from "../../../Reuseable";
 import { ItemListSkeleton, ShareButton } from "../../";
 
 interface ParkingLotProps {
-  parkingLots: Item[];
-  sortAlgorithm: SortType;
   filterAlgorithm?: FilterType;
   lotType?: string;
   openDetails: (p: ItemOptions) => void;
+  parkingLots: Item[];
+  sortAlgorithm: SortType;
 }
 
 const reFilter = (

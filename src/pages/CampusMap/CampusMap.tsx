@@ -13,20 +13,20 @@ import { BuildingFloor, Search } from "../../DataProviders";
 
 interface CampusMapProps {
   buildings: Item[];
-  showName: boolean;
-  parkingLots: Item[];
-  events: Item[];
-  organizations: Item[];
-  position: { c: L.LatLng; z: number };
   centerUser: (c: L.LatLng, z: number) => void;
-  setBuilding: (b: Item) => void;
+  events: Item[];
   floors: BuildingFloor[];
+  organizations: Item[];
+  parkingLots: Item[];
+  position: { c: L.LatLng; z: number };
+  setBuilding: (b: Item) => void;
   showItems: {
     buildings: boolean;
     events: boolean;
     parking: boolean;
     organization: boolean;
   };
+  showName: boolean;
   setShowItems: (i: {
     buildings: boolean;
     events: boolean;

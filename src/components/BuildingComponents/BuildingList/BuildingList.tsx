@@ -15,9 +15,9 @@ import "./BuildingList.scss";
 
 interface BuildingListProps {
   buildings: Item[];
+  filterAlgorithm?: FilterType;
   openDetails: (d: ItemOptions) => void;
   sortAlgorithm: SortType;
-  filterAlgorithm?: FilterType;
 }
 
 // filter first, then perform the sort - may need to move resort inside of filter - use callback

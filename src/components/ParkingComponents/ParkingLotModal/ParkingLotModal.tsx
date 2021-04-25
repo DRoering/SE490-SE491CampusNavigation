@@ -10,8 +10,8 @@ import { ModalHeader, NavigationButton } from "../../";
 import { Item } from "../../../Reuseable";
 
 interface ParkingLotModalProps {
-  parkingLot: Item;
   closeAction: () => void;
+  parkingLot: Item;
   setPosition?: (c: L.LatLng, z?: number) => void;
   viewItem: (i: Item) => void;
 }

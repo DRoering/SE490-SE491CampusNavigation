@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   IonMenu,
   IonLabel,
@@ -16,13 +16,13 @@ import { HeaderBar } from "..";
 import "./SortMenu.scss";
 
 interface SortMenuProps {
-  sortOptions: string[];
   currentSort: string;
+  sortOptions: string[];
   updateSort: (u?: string) => void;
-  filterByOpen?: { filter: boolean; setFilter: (a: boolean) => void };
   filterByCategory?: { filter: string[]; setFilter: (c: string[]) => void };
-  filterByLot?: { filter: string; setFilter: (c: string) => void };
   filterByExpired?: { filter: boolean; setFilter: (e: boolean) => void };
+  filterByOpen?: { filter: boolean; setFilter: (a: boolean) => void };
+  filterByLot?: { filter: string; setFilter: (c: string) => void };
 }
 
 export const SortMenu: React.FC<SortMenuProps> = (props: SortMenuProps) => (

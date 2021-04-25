@@ -16,14 +16,12 @@ import "./EventList.scss";
 
 interface EventListProps {
   events: Item[];
+  filterAlgorithm?: FilterType;
   openDetails: (e: ItemOptions) => void;
   sortAlgorithm: SortType;
-  filterAlgorithm?: FilterType;
 }
 
 const currentDate = moment();
-
-console.log(currentDate);
 
 const newEvents = (i: Item) => i.startDate.isAfter(currentDate);
 
